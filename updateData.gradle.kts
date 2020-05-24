@@ -16,13 +16,17 @@ buildscript {
 
 tasks.register("updateData") {
     doLast {
-        val pokemonDataString = URL("https://db.pokemongohub.net/api/pokemon/150").readText()
-        val movesDataString = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/150").readText()
-        val pokemonData = parseJsonObject(pokemonDataString)
-        val movesData = parseJsonArray(movesDataString)
-        File("./src/main/resources/data/pokemon/150.json")
-            .writeText(combinePokemonData(pokemonData, movesData).toString())
+        (1..649).forEach(::downloadPokemonData)
     }
+}
+
+fun downloadPokemonData(id: Int) {
+    val pokemonDataString = URL("https://db.pokemongohub.net/api/pokemon/$id").readText()
+    val movesDataString = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/$id").readText()
+    val pokemonData = parseJsonObject(pokemonDataString)
+    val movesData = parseJsonArray(movesDataString)
+    File("./src/main/resources/data/pokemon/$id.json")
+        .writeText(combinePokemonData(pokemonData, movesData).toString())
 }
 
 fun combinePokemonData(pokemonData: JsonObject, movesData: JsonArray): JsonObject {
@@ -31,6 +35,7 @@ fun combinePokemonData(pokemonData: JsonObject, movesData: JsonArray): JsonObjec
     val pokemon = pokemonData
     return json(
         "id" to pokemon.getInt("id"),
+        "name" to pokemon.getString("name"),
         "baseAttack" to pokemon.getInt("atk"),
         "baseDefense" to pokemon.getInt("def"),
         "baseStamina" to pokemon.getInt("sta"),
