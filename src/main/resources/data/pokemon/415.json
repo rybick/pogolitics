@@ -1,0 +1,1 @@
+{"id":415,"name":"Combee","baseAttack":59,"baseDefense":83,"baseStamina":102,"types":{"primary":"bug","secondary":"flying"},"moves":{"quick":[{"id":201,"name":"Bug Bite","type":"bug","legacy":false,"exclusive":false}],"charged":[{"id":49,"name":"Bug Buzz","type":"bug","legacy":false,"exclusive":false}]}}

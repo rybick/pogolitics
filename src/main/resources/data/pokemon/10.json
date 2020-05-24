@@ -1,0 +1,1 @@
+{"id":10,"name":"Caterpie","baseAttack":55,"baseDefense":55,"baseStamina":128,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":201,"name":"Bug Bite","type":"bug","legacy":false,"exclusive":false},{"id":221,"name":"Tackle","type":"normal","legacy":false,"exclusive":false}],"charged":[{"id":133,"name":"Struggle","type":"normal","legacy":false,"exclusive":false}]}}

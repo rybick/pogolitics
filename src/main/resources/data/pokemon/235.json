@@ -1,0 +1,1 @@
+{"id":235,"name":"Smeargle","baseAttack":40,"baseDefense":83,"baseStamina":146,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":221,"name":"Tackle","type":"normal","legacy":true,"exclusive":false}],"charged":[{"id":133,"name":"Struggle","type":"normal","legacy":true,"exclusive":false}]}}

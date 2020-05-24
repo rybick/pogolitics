@@ -1,0 +1,1 @@
+{"id":374,"name":"Beldum","baseAttack":96,"baseDefense":132,"baseStamina":120,"types":{"primary":"steel","secondary":"psychic"},"moves":{"quick":[{"id":282,"name":"Take Down","type":"normal","legacy":false,"exclusive":false}],"charged":[{"id":133,"name":"Struggle","type":"normal","legacy":false,"exclusive":false}]}}

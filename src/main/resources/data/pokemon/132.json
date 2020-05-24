@@ -1,0 +1,1 @@
+{"id":132,"name":"Ditto","baseAttack":91,"baseDefense":91,"baseStamina":134,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":242,"name":"Transform","type":"normal","legacy":false,"exclusive":false}],"charged":[{"id":133,"name":"Struggle","type":"normal","legacy":false,"exclusive":false}]}}

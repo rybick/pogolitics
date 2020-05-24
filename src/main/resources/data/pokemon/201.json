@@ -1,0 +1,1 @@
+{"id":201,"name":"Unown","baseAttack":136,"baseDefense":91,"baseStamina":134,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[{"id":281,"name":"Hidden Power","type":"normal","legacy":false,"exclusive":false}],"charged":[{"id":133,"name":"Struggle","type":"normal","legacy":false,"exclusive":false}]}}
