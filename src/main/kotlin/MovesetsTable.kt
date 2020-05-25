@@ -12,13 +12,12 @@ import kotlin.Float
 import react.*
 
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
-    init {
-        state.values = props.values
-        state.sort = null
+    override fun MovesetsRState.init(props: MovesetsRProps) {
+        sort = null
     }
 
-    private val UP_ICON = "&#9653;"
-    private val DOWN_ICON = "&#9663;"
+    private val UP_ICON = "&#9652;"
+    private val DOWN_ICON = "&#9662;"
     private val SPACE = "&nbsp;"
 
     override fun RBuilder.render() {
@@ -47,10 +46,9 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                             setState {
                                 val sort = this.sort
                                 this.sort = Sort(
-                                        columnId = 1,
-                                        ascending = if (sort?.columnId == 1) !sort.ascending else false
+                                    columnId = 1,
+                                    ascending = if (sort?.columnId == 1) !sort.ascending else false
                                 )
-                                values = values.sortedBy { -it.dps * (sort?.ascendFactor ?: 1) }
                             }
                         }
                         unsafe { + ("DPS" + getIcon(state.sort, 1)) }
@@ -69,14 +67,13 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                                     columnId = 2,
                                     ascending = if (sort?.columnId == 2) !sort.ascending else false
                                 )
-                                values = values.sortedBy { -it.timeToFirstAttack * (sort?.ascendFactor ?: 1)  }
                             }
                         }
                         unsafe { +("TTFA" + getIcon(state.sort, 2)) }
                     }
                 }
             }
-            state.values.forEach {
+            sortValues(props.values, state.sort).forEach {
                 styledDiv {
                     css { +Styles.row }
                     styledDiv {
@@ -84,7 +81,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                             +Styles.cell
                             +Styles.first
                         }
-                        child(AttackComponent::class) { attrs.attack = it.fastAttack }
+                        child(AttackComponent::class) { attrs.attack = it.quickAttack }
                         +" + "
                         child(AttackComponent::class) { attrs.attack = it.chargedAttack }
                     }
@@ -98,6 +95,15 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                     }
                 }
             }
+        }
+    }
+
+    // TODO later make it prettier and more generic
+    private fun sortValues(values: List<Moveset>, sort: Sort?): List<Moveset> {
+        return when(sort?.columnId) {
+            1 -> values.sortedBy { -it.dps * sort.ascendFactor }
+            2 -> values.sortedBy { -it.timeToFirstAttack * sort.ascendFactor }
+            else -> values
         }
     }
 
@@ -147,6 +153,12 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     }
 }
 
+fun RBuilder.movesetsTable(handler: MovesetsRProps.() -> Unit): ReactElement {
+    return child(MovesetsTable::class) {
+        this.attrs(handler)
+    }
+}
+
 external interface MovesetsRProps: RProps {
     var values: List<Moveset>
 }
@@ -161,9 +173,9 @@ data class Sort(val columnId: Int, val ascending: Boolean) {
 }
 
 data class Moveset(
-        val fastAttack: Attack,
-        val chargedAttack: Attack,
-        val dps: Float,
-        val timeToFirstAttack: Float
+    val quickAttack: Attack,
+    val chargedAttack: Attack,
+    val dps: Float,
+    val timeToFirstAttack: Float
 )
 

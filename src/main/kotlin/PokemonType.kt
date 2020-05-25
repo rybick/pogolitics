@@ -105,6 +105,10 @@ enum class PokemonType() {
 
     val displayName get() = name.toLowerCase().capitalize()
 
+    companion object {
+        fun fromString(value: String): PokemonType = valueOf(value.toUpperCase())
+    }
+
     enum class Effectiveness {
         STRONG, REGULAR, WEAK, SUPER_WEAK;
     }
