@@ -17,16 +17,55 @@ buildscript {
 tasks.register("updateData") {
     doLast {
         (1..649).forEach(::downloadPokemonData)
+        downloadAttackData()
     }
 }
 
 fun downloadPokemonData(id: Int) {
-    val pokemonDataString = URL("https://db.pokemongohub.net/api/pokemon/$id").readText()
-    val movesDataString = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/$id").readText()
-    val pokemonData = parseJsonObject(pokemonDataString)
-    val movesData = parseJsonArray(movesDataString)
+    val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$id").readText().let(::parseJsonObject)
+    val movesData = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/$id").readText().let(::parseJsonArray)
     File("./src/main/resources/data/pokemon/$id.json")
         .writeText(combinePokemonData(pokemonData, movesData).toString())
+}
+
+fun downloadAttackData() {
+    downloadAttackData(
+        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/charge/with-stats"),
+        targetFile = File("./src/main/resources/data/attacks/charged.json")
+    )
+    downloadAttackData(
+        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/fast/with-stats"),
+        targetFile = File("./src/main/resources/data/attacks/quick.json")
+    )
+}
+
+fun downloadAttackData(sourceUrl: URL, targetFile: File) {
+    sourceUrl.readText()
+        .let(::parseJsonArray)
+        .let(::convertAttackData)
+        .also { targetFile.writeText(it.toString()) }
+}
+
+fun convertAttackData(attackData: JsonArray): List<JsonObject> {
+    return attackData
+        .map { it.asJsonObject() }
+        .filter {
+            (!it.isNull("pvpPower") && !it.isNull("pvpEnergy"))
+                .apply { if (!this) logger.warn("Skipping attack: " + it.getString("name")) }
+        }
+        .map { json(
+            "name" to it.getString("name"),
+            "type" to it.getString("type"),
+            "pvp" to json(
+                "power" to it.getInt("pvpPower"),
+                "energy" to it.getInt("pvpEnergy")
+            ),
+            "pve" to json(
+                "power" to it.getInt("power"),
+                "energy" to it.getInt("energy"),
+                "duration" to it.getInt("duration")
+            )
+        ) }
 }
 
 fun combinePokemonData(pokemonData: JsonObject, movesData: JsonArray): JsonObject {
@@ -76,7 +115,9 @@ fun json(vararg pairs: Pair<String, Any?>): JsonObject {
     return builder.build()
 }
 
-fun json(vararg jsons: JsonValue): JsonArray = toJsonArray(jsons.toList())
+fun json(): JsonObject = JsonValue.EMPTY_JSON_OBJECT
+
+//fun json(vararg jsons: JsonValue): JsonArray = toJsonArray(jsons.toList())
 fun parseJsonArray(s: String): JsonArray = Json.createReader(s.reader()).use { it.readArray() }
 
 fun parseJsonObject(s: String): JsonObject = Json.createReader(s.reader()).use { it.readObject() }
