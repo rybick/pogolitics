@@ -117,7 +117,6 @@ fun json(vararg pairs: Pair<String, Any?>): JsonObject {
 
 fun json(): JsonObject = JsonValue.EMPTY_JSON_OBJECT
 
-//fun json(vararg jsons: JsonValue): JsonArray = toJsonArray(jsons.toList())
 fun parseJsonArray(s: String): JsonArray = Json.createReader(s.reader()).use { it.readArray() }
 
 fun parseJsonObject(s: String): JsonObject = Json.createReader(s.reader()).use { it.readObject() }
