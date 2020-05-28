@@ -1,8 +1,13 @@
 import react.dom.*
 import kotlin.browser.document
 
-fun main(args: Array<String>) {
-    render(document.getElementById("root")) {
-        child(App::class) {}
-    }
+fun main() {
+    document.createElement("div")
+        .apply { id = "root" }
+        .also { document.body!!.appendChild(it) }
+        .also {
+            render(it) {
+                child(App::class) {}
+            }
+        }
 }
