@@ -1,16 +1,16 @@
 import MoveSetStatsCalculator.*
-import api.MoveDto
+import api.ChargedMoveDto
+import api.FastMoveDto
 import api.PokemonDto
-import kotlin.time.ExperimentalTime
+import kotlin.time.seconds
 
-@ExperimentalTime
 class MoveSetsTableDataMapper(
     private val pokemonDto: PokemonDto,
-    quickMoves: Array<MoveDto>,
-    chargedMoves: Array<MoveDto>
+    fastMoves: Array<FastMoveDto>,
+    chargedMoves: Array<ChargedMoveDto>
 ) {
-    private val quickAttacks: Map<String, MoveDto> = quickMoves.map { it.name to it }.toMap()
-    private val chargedAttacks: Map<String, MoveDto> = chargedMoves.map { it.name to it }.toMap()
+    private val quickAttacks: Map<String, FastMoveDto> = fastMoves.map { it.name to it }.toMap()
+    private val chargedAttacks: Map<String, ChargedMoveDto> = chargedMoves.map { it.name to it }.toMap()
 
     fun getData(): List<MoveSet> {
         val pokemon = mapPokemonData(pokemonDto)
@@ -38,16 +38,16 @@ class MoveSetsTableDataMapper(
         )
     }
 
-    private fun mapFastMove(moveDto: MoveDto): MoveData {
+    private fun mapFastMove(moveDto: FastMoveDto): MoveData {
         return MoveData(
             power = moveDto.pvp.power,
             energy = moveDto.pvp.energy,
-            duration = 2.pvpTurns, // TODO
+            duration = moveDto.pvp.duration.pvpTurns,
             type = PokemonType.fromString(moveDto.type)
         )
     }
 
-    private fun mapChargedMove(moveDto: MoveDto): MoveData {
+    private fun mapChargedMove(moveDto: ChargedMoveDto): MoveData {
         return MoveData(
             power = moveDto.pvp.power,
             energy = moveDto.pvp.energy,

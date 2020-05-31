@@ -9,5 +9,4 @@ private fun format(numberAsString: String, decimalPlaces: Int): String {
     return parts[0] + "." + part2.subSequence(0, decimalPlaces)
 }
 
-@ExperimentalTime
 val Int.pvpTurns get(): Duration = (0.5 * this).seconds

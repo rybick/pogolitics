@@ -1,8 +1,6 @@
 import react.dom.*
 import kotlin.browser.document
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 fun main() {
     document.createElement("div")
         .apply { id = "root" }

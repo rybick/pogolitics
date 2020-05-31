@@ -1,20 +1,19 @@
 import api.Api
-import api.MoveDto
+import api.ChargedMoveDto
+import api.FastMoveDto
 import api.PokemonDto
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import react.*
-import kotlin.time.ExperimentalTime
 
 external interface AppState : RState {
     var pokemonData: PokemonDto?
-    var fastMoves: Array<MoveDto>?
-    var chargedMoves: Array<MoveDto>?
+    var fastMoves: Array<FastMoveDto>?
+    var chargedMoves: Array<ChargedMoveDto>?
 }
 
 fun AppState.isReady() = this.pokemonData != null && this.fastMoves != null && this.chargedMoves != null
 
-@ExperimentalTime
 class App: RComponent<RProps, AppState>() {
     override fun RBuilder.render() {
         moveSetsTable {
@@ -25,7 +24,7 @@ class App: RComponent<RProps, AppState>() {
     override fun AppState.init() {
         MainScope().launch {
             val _pokemon = Api.fetchPokemon(150)
-            val _fastMoves = Api.fetchQuickMoves()
+            val _fastMoves = Api.fetchFastMoves()
             val _chargedMoves = Api.fetchChargedMoves()
             setState {
                 pokemonData = _pokemon

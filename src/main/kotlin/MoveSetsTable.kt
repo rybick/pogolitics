@@ -11,9 +11,7 @@ import styled.styledDiv
 import kotlin.Float
 import react.*
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
     override fun MovesetsRState.init(props: MovesetsRProps) {
         sort = null
@@ -156,19 +154,16 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     }
 }
 
-@ExperimentalTime
 fun RBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit): ReactElement {
     return child(MovesetsTable::class) {
         this.attrs(handler)
     }
 }
 
-@ExperimentalTime
 external interface MovesetsRProps: RProps {
     var values: List<MoveSet>
 }
 
-@ExperimentalTime
 external interface MovesetsRState: RState {
     var values: List<MoveSet>
     var sort: Sort?
@@ -178,7 +173,6 @@ data class Sort(val columnId: Int, val ascending: Boolean) {
     val ascendFactor get() = if (ascending) 1 else -1
 }
 
-@ExperimentalTime
 data class MoveSet(
     val quickAttack: Attack,
     val chargedAttack: Attack,

@@ -13,19 +13,19 @@ object Api {
             .unsafeCast<PokemonDto>()
     }
 
-    suspend fun fetchChargedMoves(): Array<MoveDto> {
+    suspend fun fetchFastMoves(): Array<FastMoveDto> {
+        return window.fetch("/data/attacks/fast.json")
+            .await()
+            .json()
+            .await()
+            .unsafeCast<Array<FastMoveDto>>()
+    }
+
+    suspend fun fetchChargedMoves(): Array<ChargedMoveDto> {
         return window.fetch("/data/attacks/charged.json")
             .await()
             .json()
             .await()
-            .unsafeCast<Array<MoveDto>>()
-    }
-
-    suspend fun fetchQuickMoves(): Array<MoveDto> {
-        return window.fetch("/data/attacks/quick.json")
-            .await()
-            .json()
-            .await()
-            .unsafeCast<Array<MoveDto>>()
+            .unsafeCast<Array<ChargedMoveDto>>()
     }
 }

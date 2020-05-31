@@ -3,10 +3,8 @@ import MoveSetStatsCalculator.MoveData
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 
-@ExperimentalTime
 class StatsCalculatorTest {
 
     @Test

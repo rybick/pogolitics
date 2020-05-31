@@ -39,6 +39,15 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-common:1.3.5")
 }
 
+tasks {
+    compileKotlinJs {
+        kotlinOptions.freeCompilerArgs = listOf("-Xopt-in=kotlin.time.ExperimentalTime")
+    }
+    compileTestKotlinJs {
+        kotlinOptions.freeCompilerArgs = listOf("-Xopt-in=kotlin.time.ExperimentalTime")
+    }
+}
+
 apply(from = "updateData.gradle.kts")
 
 kotlin.target.browser {

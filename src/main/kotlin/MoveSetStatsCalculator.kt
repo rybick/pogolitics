@@ -1,8 +1,6 @@
 import kotlin.math.ceil
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
 
-@ExperimentalTime
 class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast: MoveData, private val charged: MoveData) {
     data class PokemonData(
         val baseAttack: Int,
