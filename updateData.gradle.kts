@@ -14,11 +14,21 @@ buildscript {
     }
 }
 
-tasks.register("updateData") {
+tasks.register("updatePokemonData") {
     doLast {
         (1..649).forEach(::downloadPokemonData)
+    }
+}
+
+tasks.register("updateMovesData") {
+    doLast {
         downloadAttackData()
     }
+}
+
+tasks.register("updateData") {
+    dependsOn("updatePokemonData")
+    dependsOn("updateMovesData")
 }
 
 fun downloadPokemonData(id: Int) {
@@ -30,28 +40,53 @@ fun downloadPokemonData(id: Int) {
 
 fun downloadAttackData() {
     downloadAttackData(
-        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/charge/with-stats"),
-        targetFile = File("./src/main/resources/data/attacks/charged.json")
+        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/fast/with-stats"),
+        targetFile = File("./src/main/resources/data/attacks/fast.json"),
+        converter = ::convertFastMoveData
     )
     downloadAttackData(
-        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/fast/with-stats"),
-        targetFile = File("./src/main/resources/data/attacks/quick.json")
+        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/charge/with-stats"),
+        targetFile = File("./src/main/resources/data/attacks/charged.json"),
+        converter = ::convertChargedMoveData
     )
 }
 
-fun downloadAttackData(sourceUrl: URL, targetFile: File) {
+fun downloadAttackData(sourceUrl: URL, targetFile: File, converter: (JsonArray) -> List<JsonObject>) {
     sourceUrl.readText()
         .let(::parseJsonArray)
-        .let(::convertAttackData)
+        .let(converter)
         .also { targetFile.writeText(it.toString()) }
 }
 
-fun convertAttackData(attackData: JsonArray): List<JsonObject> {
+fun convertFastMoveData(attackData: JsonArray): List<JsonObject> {
     return attackData
         .map { it.asJsonObject() }
         .filter {
             (!it.isNull("pvpPower") && !it.isNull("pvpEnergy"))
-                .apply { if (!this) logger.warn("Skipping attack: " + it.getString("name")) }
+                .apply { if (!this) logger.warn("Skipping charged move: " + it.getString("name")) }
+        }
+        .map { json(
+            "name" to it.getString("name"),
+            "type" to it.getString("type"),
+            "pvp" to json(
+                "power" to it.getInt("pvpPower"),
+                "energy" to it.getInt("pvpEnergy"),
+                "duration" to it.getInt("pvpDuration")
+            ),
+            "pve" to json(
+                "power" to it.getInt("power"),
+                "energy" to it.getInt("energy"),
+                "duration" to it.getInt("duration")
+            )
+        ) }
+}
+
+fun convertChargedMoveData(attackData: JsonArray): List<JsonObject> {
+    return attackData
+        .map { it.asJsonObject() }
+        .filter {
+            (!it.isNull("pvpPower") && !it.isNull("pvpEnergy"))
+                .apply { if (!this) logger.warn("Skipping charged move: " + it.getString("name")) }
         }
         .map { json(
             "name" to it.getString("name"),
