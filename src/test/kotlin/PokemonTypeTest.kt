@@ -3,14 +3,14 @@ import kotlin.test.*
 class PokemonTypeTest {
     @Test
     fun against() {
-        assertEquals(PokemonType.FIGHTING.against(PokemonType.NORMAL), PokemonType.Effectiveness.STRONG)
-        assertEquals(PokemonType.FIGHTING.against(PokemonType.FIGHTING), PokemonType.Effectiveness.REGULAR)
-        assertEquals(PokemonType.FIGHTING.against(PokemonType.POISON), PokemonType.Effectiveness.WEAK)
-        assertEquals(PokemonType.FIGHTING.against(PokemonType.GHOST), PokemonType.Effectiveness.SUPER_WEAK)
+        assertEquals(PokemonType.Effectiveness.STRONG, PokemonType.FIGHTING.against(PokemonType.NORMAL))
+        assertEquals(PokemonType.Effectiveness.REGULAR, PokemonType.FIGHTING.against(PokemonType.FIGHTING))
+        assertEquals(PokemonType.Effectiveness.WEAK, PokemonType.FIGHTING.against(PokemonType.POISON))
+        assertEquals(PokemonType.Effectiveness.SUPER_WEAK, PokemonType.FIGHTING.against(PokemonType.GHOST))
     }
 
     @Test
     fun name() {
-        assertEquals(PokemonType.FIGHTING.displayName, "Fighting")
+        assertEquals("Fighting", PokemonType.FIGHTING.displayName)
     }
 }

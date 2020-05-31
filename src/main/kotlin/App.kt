@@ -37,7 +37,7 @@ class App: RComponent<RProps, AppState>() {
             Moveset(
                 quickAttack = Attack(PokemonType.fromString(quick.type), quick.name),
                 chargedAttack = Attack(PokemonType.fromString(charged.type), charged.name),
-                dps = 2.345F,
+                dps = 2.50545F,
                 timeToFirstAttack = 5.50F
             )
         }
