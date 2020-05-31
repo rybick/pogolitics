@@ -10,7 +10,10 @@ import styled.css
 import styled.styledDiv
 import kotlin.Float
 import react.*
+import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
+@ExperimentalTime
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
     override fun MovesetsRState.init(props: MovesetsRProps) {
         sort = null
@@ -91,7 +94,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                     }
                     styledDiv {
                         css { +Styles.cell }
-                        +(it.timeToFirstAttack.format(2) + "s")
+                        +(it.timeToFirstAttack.inSeconds.format(2) + "s")
                     }
                 }
             }
@@ -99,7 +102,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     }
 
     // TODO later make it prettier and more generic
-    private fun sortValues(values: List<Moveset>, sort: Sort?): List<Moveset> {
+    private fun sortValues(values: List<MoveSet>, sort: Sort?): List<MoveSet> {
         return when(sort?.columnId) {
             1 -> values.sortedBy { -it.dps * sort.ascendFactor }
             2 -> values.sortedBy { -it.timeToFirstAttack * sort.ascendFactor }
@@ -153,18 +156,21 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     }
 }
 
-fun RBuilder.movesetsTable(handler: MovesetsRProps.() -> Unit): ReactElement {
+@ExperimentalTime
+fun RBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit): ReactElement {
     return child(MovesetsTable::class) {
         this.attrs(handler)
     }
 }
 
+@ExperimentalTime
 external interface MovesetsRProps: RProps {
-    var values: List<Moveset>
+    var values: List<MoveSet>
 }
 
+@ExperimentalTime
 external interface MovesetsRState: RState {
-    var values: List<Moveset>
+    var values: List<MoveSet>
     var sort: Sort?
 }
 
@@ -172,10 +178,11 @@ data class Sort(val columnId: Int, val ascending: Boolean) {
     val ascendFactor get() = if (ascending) 1 else -1
 }
 
-data class Moveset(
+@ExperimentalTime
+data class MoveSet(
     val quickAttack: Attack,
     val chargedAttack: Attack,
     val dps: Float,
-    val timeToFirstAttack: Float
+    val timeToFirstAttack: Duration
 )
 

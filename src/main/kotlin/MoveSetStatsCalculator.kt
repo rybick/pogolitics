@@ -1,11 +1,9 @@
-import kotlin.js.Math
 import kotlin.math.ceil
-import kotlin.math.floor
 import kotlin.time.Duration
 import kotlin.time.ExperimentalTime
 
 @ExperimentalTime
-class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast: Attack, private val charged: Attack) {
+class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast: MoveData, private val charged: MoveData) {
     data class PokemonData(
         val baseAttack: Int,
         val baseDefense: Int,
@@ -19,7 +17,7 @@ class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast:
 
     data class PokemonTypes(val primary: PokemonType, val secondary: PokemonType? = null)
 
-    data class Attack constructor(val power: Int, val energy: Int, val duration: Duration, val type: PokemonType)
+    data class MoveData(val power: Int, val energy: Int, val duration: Duration, val type: PokemonType)
 
     // cache fields
     private var dps: Double? = null
@@ -63,9 +61,9 @@ class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast:
         return damage(charged) * effectiveFastAttackEnergyGain() / charged.energy
     }
 
-    private fun damage(attack: Attack): Double {
-        val stab = if (pokemon.isOfType(attack.type)) 1.2 else 1.0
-        return (0.5 * attack.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 0.5 // gamepress formula
+    private fun damage(move: MoveData): Double {
+        val stab = if (pokemon.isOfType(move.type)) 1.2 else 1.0
+        return (0.5 * move.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 0.5 // gamepress formula
         //return floor(0.5 * attack.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 1; // original formula
     }
 

@@ -1,5 +1,5 @@
 import MoveSetStatsCalculator.*
-import MoveSetStatsCalculator.Attack
+import MoveSetStatsCalculator.MoveData
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration
@@ -28,8 +28,8 @@ class StatsCalculatorTest {
                         baseStamina = 214,
                         types = PokemonTypes(PokemonType.PSYCHIC)
                     ),
-                    fast = Attack(power = 16, energy = 12, duration = 4.pvpTurns, type = PokemonType.PSYCHIC),
-                    charged = Attack(power = 90, energy = 45, duration = 1.pvpTurns, type = PokemonType.PSYCHIC)
+                    fast = MoveData(power = 16, energy = 12, duration = 4.pvpTurns, type = PokemonType.PSYCHIC),
+                    charged = MoveData(power = 90, energy = 45, duration = 1.pvpTurns, type = PokemonType.PSYCHIC)
                 ),
                 expectedDps = 28.303131250000003,
                 expectedTtfa = 8.00.seconds,
@@ -44,8 +44,8 @@ class StatsCalculatorTest {
                         baseStamina = 264,
                         types = PokemonTypes(PokemonType.STEEL)
                     ),
-                    fast = Attack(power = 3, energy = 9, duration = 2.pvpTurns, type = PokemonType.ELECTRIC),
-                    charged = Attack(power = 90, energy = 55, duration = 1.pvpTurns, type = PokemonType.ELECTRIC)
+                    fast = MoveData(power = 3, energy = 9, duration = 2.pvpTurns, type = PokemonType.ELECTRIC),
+                    charged = MoveData(power = 90, energy = 55, duration = 1.pvpTurns, type = PokemonType.ELECTRIC)
                 ),
                 expectedDps = 16.142919537815125,
                 expectedTtfa = 7.00.seconds,
@@ -60,8 +60,8 @@ class StatsCalculatorTest {
                         baseStamina = 209,
                         types = PokemonTypes(PokemonType.DRAGON, PokemonType.FLYING)
                     ),
-                    fast = Attack(power = 9, energy = 10, duration = 3.pvpTurns, type = PokemonType.DRAGON),
-                    charged = Attack(power = 110, energy = 65, duration = 1.pvpTurns, type = PokemonType.FLYING)
+                    fast = MoveData(power = 9, energy = 10, duration = 3.pvpTurns, type = PokemonType.DRAGON),
+                    charged = MoveData(power = 110, energy = 65, duration = 1.pvpTurns, type = PokemonType.FLYING)
                 ),
                 expectedDps = 22.03611096585366,
                 expectedTtfa = 10.50.seconds,

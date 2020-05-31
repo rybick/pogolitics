@@ -1,4 +1,6 @@
-class PokemonDto(
+package api
+
+data class PokemonDto(
     val id: Int,
     val name: String,
     val baseAttack: Int,
@@ -7,9 +9,9 @@ class PokemonDto(
     val types: TypesDto,
     val moves: MovesDto
 ) {
-    class TypesDto(val primary: String, val secondary: String)
+    data class TypesDto(val primary: String, val secondary: String?)
     class MovesDto(val quick: Array<MoveDto>, val charged: Array<MoveDto>)
-    class MoveDto(
+    data class MoveDto(
         val id: Int,
         val name: String,
         val type: String,

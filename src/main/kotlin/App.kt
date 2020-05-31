@@ -1,49 +1,42 @@
+import api.Api
+import api.MoveDto
+import api.PokemonDto
 import kotlinx.coroutines.MainScope
-import kotlinx.coroutines.await
 import kotlinx.coroutines.launch
 import react.*
-import kotlin.browser.window
+import kotlin.time.ExperimentalTime
 
 external interface AppState : RState {
     var pokemonData: PokemonDto?
+    var fastMoves: Array<MoveDto>?
+    var chargedMoves: Array<MoveDto>?
 }
 
+fun AppState.isReady() = this.pokemonData != null && this.fastMoves != null && this.chargedMoves != null
+
+@ExperimentalTime
 class App: RComponent<RProps, AppState>() {
     override fun RBuilder.render() {
-        movesetsTable {
-            values = state.pokemonData?.let(::getMovesets) ?: listOf()
+        moveSetsTable {
+            values = if(state.isReady()) getMoveSets(state) else listOf()
         }
     }
 
     override fun AppState.init() {
         MainScope().launch {
-            val data = fetchPokemonData(69)
+            val _pokemon = Api.fetchPokemon(150)
+            val _fastMoves = Api.fetchQuickMoves()
+            val _chargedMoves = Api.fetchChargedMoves()
             setState {
-                pokemonData = data
+                pokemonData = _pokemon
+                fastMoves = _fastMoves
+                chargedMoves = _chargedMoves
             }
         }
     }
 
-    private suspend fun fetchPokemonData(id: Int): PokemonDto {
-        return window.fetch("/data/pokemon/$id.json")
-            .await()
-            .json()
-            .await()
-            .unsafeCast<PokemonDto>()
-    }
-
-    private fun getMovesets(pokemonDto: PokemonDto): List<Moveset> {
-        return combinations(pokemonDto.moves.quick, pokemonDto.moves.charged) { quick, charged ->
-            Moveset(
-                quickAttack = Attack(PokemonType.fromString(quick.type), quick.name),
-                chargedAttack = Attack(PokemonType.fromString(charged.type), charged.name),
-                dps = 2.50545F,
-                timeToFirstAttack = 5.50F
-            )
-        }
-    }
-
-    private fun <T, U, O> combinations(arr1: Array<T>, arr2: Array<U>, mapper: (T, U) -> O): List<O> {
-        return arr1.flatMap { a1 -> arr2.map { a2 -> mapper(a1, a2) } }
+    private fun getMoveSets(state: AppState): List<MoveSet> {
+        return MoveSetsTableDataMapper(state.pokemonData!!, state.fastMoves!!, state.chargedMoves!!)
+            .getData()
     }
 }
