@@ -2,7 +2,7 @@ import MoveSetStatsCalculator.*
 import api.ChargedMoveDto
 import api.FastMoveDto
 import api.PokemonDto
-import kotlin.time.seconds
+import view.MoveSet
 
 class MoveSetsTableDataMapper(
     private val pokemonDto: PokemonDto,

@@ -20,6 +20,9 @@ dependencies {
     implementation("org.jetbrains:kotlin-react-dom:16.13.0-pre.94-kotlin-1.3.70")
     implementation(npm("react", "16.13.1"))
     implementation(npm("react-dom", "16.13.1"))
+    implementation(npm("react-router-dom", "4.3.1"))
+    implementation("org.jetbrains:kotlin-react-router-dom:4.3.1-pre.94-kotlin-1.3.70")
+
     //implementation(npm("@material-ui/core", "3.3.2"))
     //implementation(npm("@material-ui/icons", "3.0.1"))
     testImplementation(kotlin("test-js"))
