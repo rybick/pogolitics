@@ -14,7 +14,6 @@ class PokemonController(val api: Api) {
     )
 
     suspend fun get(id: Int): ModelAndView<Model, KClass<PokemonPage>> {
-//        delay(4000)
         return ModelAndView(
             view = PokemonPage::class,
             model = Model(api.fetchPokemon(id), api.fetchFastMoves(), api.fetchChargedMoves())

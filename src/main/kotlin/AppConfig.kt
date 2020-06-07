@@ -5,15 +5,10 @@ import react.RState
 import kotlin.reflect.KClass
 
 class AppConfig {
-    val api = Api
+    private val api = Api
 
-    val mainPageController = MainPageController()
-    val pokemonController = PokemonController(api)
-
-//    val routing = mapOf<String, Any>(
-//        "/" to { mainPageController.get() }
-//        //"/pokemon/:id" to { id -> pokemonController.get(id) }
-//    )
+    private val mainPageController = MainPageController()
+    private val pokemonController = PokemonController(api)
 
     val routing: List<Route<out Any>> = listOf(
         Route("/", true) { mainPageController.get() },
@@ -26,7 +21,7 @@ class AppConfig {
         val controllerMethod: suspend (IdRProps) -> ModelAndView<M, KClass<out RComponent<out PageRProps<M>, out RState>>>
     )
 
-    interface IdRProps : RProps { // TODO
+    interface IdRProps : RProps { // TODO a way to use different IN parameters per controller
         var id: Int
     }
 }
