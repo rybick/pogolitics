@@ -1,7 +1,6 @@
 package pogolitcs.view
 
 import pogolitcs.model.Attack
-import pogolitcs.model.Style
 import kotlinx.css.LinearDimension
 import kotlinx.css.height
 import kotlinx.css.margin
@@ -19,7 +18,7 @@ class AttackComponent: RComponent<AttackComponentProps, RState>() {
             styledImg {
                 css {
                     height = LinearDimension("1.5rem")
-                    margin = "0 ${Style.Margin.small}"
+                    margin = "0 ${Style.margin.small}"
                 }
                 attrs {
                     src = iconPath(props.attack.type)

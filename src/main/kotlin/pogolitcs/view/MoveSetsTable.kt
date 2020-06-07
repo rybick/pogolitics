@@ -1,6 +1,5 @@
 package pogolitcs.view
 
-import pogolitcs.model.Style
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.unsafe
@@ -122,8 +121,8 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
         val cell by css {
             display = Display.tableCell
-            padding = Style.Padding.medium
-            borderColor = Style.Colors.lightBorder
+            padding = Style.padding.medium.toString()
+            borderColor = Style.colors.lightBorder
             borderStyle = BorderStyle.solid
             borderBottomWidth = LinearDimension("1px")
             borderLeftWidth = LinearDimension("1px")
@@ -137,18 +136,19 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
 
         val row by css {
             display = Display.tableRow
-            padding = Style.Padding.small
+            padding = Style.padding.small.toString()
         }
 
         val header by css {
-            backgroundColor = Style.Colors.primary.bg
-            color = Style.Colors.primary.font
+            backgroundColor = Style.colors.primary.bg
+            color = Style.colors.primary.font
             fontWeight = FontWeight.bold
         }
 
         val table by css {
             display = Display.table
-            margin = Style.Margin.small
+            margin = Style.margin.small.toString()
+            width = 100.pct
         }
 
         val first by css {
