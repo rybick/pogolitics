@@ -1,3 +1,6 @@
+package pogolitcs.controller
+
+import pogolitcs.model.PokemonType
 import kotlin.math.ceil
 import kotlin.time.Duration
 

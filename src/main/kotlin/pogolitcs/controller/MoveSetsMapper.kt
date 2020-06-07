@@ -1,10 +1,15 @@
-import MoveSetStatsCalculator.*
-import api.ChargedMoveDto
-import api.FastMoveDto
-import api.PokemonDto
-import view.MoveSet
+package pogolitcs.controller
 
-class MoveSetsTableDataMapper(
+import pogolitcs.controller.MoveSetStatsCalculator.*
+import pogolitcs.api.ChargedMoveDto
+import pogolitcs.api.FastMoveDto
+import pogolitcs.api.PokemonDto
+import pogolitcs.model.Attack
+import pogolitcs.model.MoveSet
+import pogolitcs.model.PokemonType
+import pogolitcs.pvpTurns
+
+class MoveSetsMapper(
     private val pokemonDto: PokemonDto,
     fastMoves: Array<FastMoveDto>,
     chargedMoves: Array<ChargedMoveDto>

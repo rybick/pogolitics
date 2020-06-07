@@ -1,3 +1,5 @@
+package pogolitcs
+
 import react.dom.*
 import kotlin.browser.document
 

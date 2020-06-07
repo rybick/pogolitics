@@ -1,11 +1,11 @@
-package view
+package pogolitcs.view
 
-import Attack
-import Style
-import format
+import pogolitcs.model.Style
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.unsafe
+import pogolitcs.model.MoveSet
+import pogolitcs.format
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -13,9 +13,7 @@ import react.RState
 import styled.StyleSheet
 import styled.css
 import styled.styledDiv
-import kotlin.Float
 import react.*
-import kotlin.time.Duration
 
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
     override fun MovesetsRState.init(props: MovesetsRProps) {
@@ -170,7 +168,6 @@ external interface MovesetsRProps: RProps {
 }
 
 external interface MovesetsRState: RState {
-    var values: List<MoveSet>
     var sort: Sort?
 }
 
@@ -178,10 +175,5 @@ data class Sort(val columnId: Int, val ascending: Boolean) {
     val ascendFactor get() = if (ascending) 1 else -1
 }
 
-data class MoveSet(
-    val quickAttack: Attack,
-    val chargedAttack: Attack,
-    val dps: Float,
-    val timeToFirstAttack: Duration
-)
+
 

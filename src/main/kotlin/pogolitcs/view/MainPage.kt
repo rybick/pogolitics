@@ -1,9 +1,8 @@
-package view
+package pogolitcs.view
 
-import PageRProps
+import pogolitcs.PageRProps
 import react.RBuilder
 import react.RComponent
-import react.RProps
 import react.RState
 import react.dom.p
 

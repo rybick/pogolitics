@@ -1,3 +1,4 @@
+import pogolitcs.model.PokemonType
 import kotlin.test.*
 
 class PokemonTypeTest {

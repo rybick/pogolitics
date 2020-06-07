@@ -1,3 +1,5 @@
+package pogolitcs.controller
+
 object CPMultiplayer {
     private val map: Map<Float, Double> = mapOf(
         1F    to 0.094,

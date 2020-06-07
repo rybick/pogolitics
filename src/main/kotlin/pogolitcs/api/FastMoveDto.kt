@@ -1,4 +1,4 @@
-package api
+package pogolitcs.api
 
 data class FastMoveDto(
     val name: String,

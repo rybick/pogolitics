@@ -1,8 +1,7 @@
-package view
+package pogolitcs.view
 
-import Attack
-import Style
-import iconPath
+import pogolitcs.model.Attack
+import pogolitcs.model.Style
 import kotlinx.css.LinearDimension
 import kotlinx.css.height
 import kotlinx.css.margin

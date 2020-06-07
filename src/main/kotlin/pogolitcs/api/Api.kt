@@ -1,4 +1,4 @@
-package api
+package pogolitcs.api
 
 import kotlinx.coroutines.await
 import kotlin.browser.window
