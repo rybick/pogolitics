@@ -115,7 +115,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
 
     private fun getIcon(sort: Sort?, columnId: Int): Any? {
         if (sort != null && sort.columnId == columnId) {
-            return if (sort.ascending) UP_ICON else DOWN_ICON
+            return if (sort.ascending) DOWN_ICON else UP_ICON
         } else {
             return SPACE
         }
