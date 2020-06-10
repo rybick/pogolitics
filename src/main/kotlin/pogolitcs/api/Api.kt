@@ -1,10 +1,10 @@
 package pogolitcs.api
 
 import kotlinx.coroutines.await
+import kotlinx.coroutines.delay
 import kotlin.browser.window
 
-// TODO later think of refactoring it to be class
-object Api {
+class Api {
     suspend fun fetchPokemon(id: Int): PokemonDto {
         return window.fetch("/data/pokemon/$id.json")
             .await()

@@ -9,7 +9,7 @@ import react.RState
 import kotlin.reflect.KClass
 
 class AppConfig {
-    private val api = Api
+    private val api = Api()
 
     private val mainPageController = MainPageController()
     private val pokemonController = SinglePokemonController(api)

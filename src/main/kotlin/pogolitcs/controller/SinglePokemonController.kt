@@ -1,5 +1,9 @@
 package pogolitcs.controller
 
+import kotlinx.coroutines.Deferred
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
+import kotlinx.coroutines.coroutineScope
 import pogolitcs.ModelAndView
 import pogolitcs.api.Api
 import pogolitcs.api.ChargedMoveDto
@@ -13,16 +17,18 @@ import kotlin.reflect.KClass
 class SinglePokemonController(val api: Api) {
 
     suspend fun get(id: Int): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
-        val pokemon: PokemonDto = api.fetchPokemon(id)
-        val fastMoves: Array<FastMoveDto> = api.fetchFastMoves()
-        val chargedMoves: Array<ChargedMoveDto> = api.fetchChargedMoves() // TODO later parallelize
-        return ModelAndView(
+        return coroutineScope {
+            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(id) }
+            val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
+            val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
+            ModelAndView(
                 view = SinglePokemonPage::class,
                 model = SinglePokemonModel(
-                        pokemon = toPokemon(pokemon),
-                        moveSets = toMoveSets(pokemon, fastMoves, chargedMoves)
+                    pokemon = toPokemon(pokemon.await()),
+                    moveSets = toMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await())
                 )
-        )
+            )
+        }
     }
 
     private fun toPokemon(pokemon: PokemonDto): SinglePokemonModel.Pokemon {
