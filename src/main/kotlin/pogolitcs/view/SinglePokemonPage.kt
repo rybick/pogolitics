@@ -32,9 +32,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel>) : RComponent<Page
         }
         styledDiv {
             css { +Styles.column }
-            div {
-                +"there will be more components"
-            }
+            ivStatsWidget { ivs = IVStats(15, 10, 0) }
         }
     }
 

@@ -25,76 +25,80 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
 
     override fun RBuilder.render() {
         styledDiv {
-            css { +Styles.table }
+            css { +Styles.wrapper }
             styledDiv {
-                css {
-                    +Styles.row
-                    +Styles.header
-                }
+                css { +Styles.table }
                 styledDiv {
                     css {
-                        +Styles.cell
-                        +Styles.headerCell
-                        +Styles.first
+                        +Styles.row
+                        +Styles.header
                     }
-                    +"Moveset"
-                }
-                styledDiv {
-                    css {
-                        +Styles.cell
-                        +Styles.headerCell
-                    }
-                    attrs {
-                        onClickFunction = {
-                            setState {
-                                val sort = this.sort
-                                this.sort = Sort(
-                                    columnId = 1,
-                                    ascending = if (sort?.columnId == 1) !sort.ascending else false
-                                )
-                            }
-                        }
-                        unsafe { + ("DPS" + getIcon(state.sort, 1)) }
-                    }
-                }
-                styledDiv {
-                    css {
-                        +Styles.cell
-                        +Styles.headerCell
-                    }
-                    attrs {
-                        onClickFunction = {
-                            setState {
-                                val sort = this.sort
-                                this.sort = Sort(
-                                    columnId = 2,
-                                    ascending = if (sort?.columnId == 2) !sort.ascending else false
-                                )
-                            }
-                        }
-                        unsafe { +("TTFA" + getIcon(state.sort, 2)) }
-                    }
-                }
-            }
-            sortValues(props.values, state.sort).forEach {
-                styledDiv {
-                    css { +Styles.row }
                     styledDiv {
                         css {
                             +Styles.cell
+                            +Styles.headerCell
                             +Styles.first
                         }
-                        child(AttackComponent::class) { attrs.attack = it.quickAttack }
-                        +" + "
-                        child(AttackComponent::class) { attrs.attack = it.chargedAttack }
+                        +"Moveset"
                     }
                     styledDiv {
-                        css { +Styles.cell }
-                        +it.dps.format(2)
+                        css {
+                            +Styles.cell
+                            +Styles.headerCell
+                        }
+                        attrs {
+                            onClickFunction = {
+                                setState {
+                                    val sort = this.sort
+                                    this.sort = Sort(
+                                            columnId = 1,
+                                            ascending = if (sort?.columnId == 1) !sort.ascending else false
+                                    )
+                                }
+                            }
+                            unsafe { +("DPS" + getIcon(state.sort, 1)) }
+                        }
                     }
                     styledDiv {
-                        css { +Styles.cell }
-                        +(it.timeToFirstAttack.inSeconds.format(2) + "s")
+                        css {
+                            +Styles.cell
+                            +Styles.headerCell
+                        }
+                        attrs {
+                            onClickFunction = {
+                                setState {
+                                    val sort = this.sort
+                                    this.sort = Sort(
+                                            columnId = 2,
+                                            ascending = if (sort?.columnId == 2) !sort.ascending else false
+                                    )
+                                }
+                            }
+                            unsafe { +("TTFA" + getIcon(state.sort, 2)) }
+                        }
+                    }
+                }
+                sortValues(props.values, state.sort).forEach {
+                    styledDiv {
+                        css { +Styles.row }
+                        styledDiv {
+                            css {
+                                +Styles.cell
+                                +Styles.first
+                                +Styles.left
+                            }
+                            child(AttackComponent::class) { attrs.attack = it.quickAttack }
+                            +" + "
+                            child(AttackComponent::class) { attrs.attack = it.chargedAttack }
+                        }
+                        styledDiv {
+                            css { +Styles.cell }
+                            +it.dps.format(2)
+                        }
+                        styledDiv {
+                            css { +Styles.cell }
+                            +(it.timeToFirstAttack.inSeconds.format(2) + "s")
+                        }
                     }
                 }
             }
@@ -147,12 +151,20 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
 
         val table by css {
             display = Display.table
-            margin = Style.margin.small.toString()
             width = 100.pct
+        }
+
+        val wrapper by css {
+            display = Display.block
+            margin = Style.margin.small.toString()
         }
 
         val first by css {
             borderLeftWidth = LinearDimension("0px")
+        }
+
+        val left by css {
+            textAlign = TextAlign.left
         }
     }
 }
