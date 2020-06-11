@@ -17,12 +17,17 @@ class MoveSetsMapper(
     private val quickAttacks: Map<String, FastMoveDto> = fastMoves.map { it.name to it }.toMap()
     private val chargedAttacks: Map<String, ChargedMoveDto> = chargedMoves.map { it.name to it }.toMap()
 
-    fun getData(): List<MoveSet> {
+    fun getData(pokemonLevel: Float, pokemonAttackIv: Int): List<MoveSet> {
         val pokemon = mapPokemonData(pokemonDto)
         return combinations(pokemonDto.moves.quick, pokemonDto.moves.charged) { fast, charged ->
             val fastMove = quickAttacks[fast.name] ?: throw MissingDataException("Unknown attack: $fast.name")
             val chargedMove = chargedAttacks[charged.name] ?: throw MissingDataException("Unknown attack: $charged.name")
-            val calculator = MoveSetStatsCalculator(pokemon, mapFastMove(fastMove), mapChargedMove(chargedMove))
+            val calculator = MoveSetStatsCalculator(
+                pokemon = pokemon,
+                fast = mapFastMove(fastMove),
+                charged = mapChargedMove(chargedMove),
+                individualPokemonStats = IndividualPokemonStats(pokemonLevel, pokemonAttackIv)
+            )
             MoveSet(
                 quickAttack = Attack(PokemonType.fromString(fastMove.type), fastMove.name),
                 chargedAttack = Attack(PokemonType.fromString(chargedMove.type), chargedMove.name),

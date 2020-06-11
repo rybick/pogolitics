@@ -1,47 +1,40 @@
 package pogolitcs.view
 
+import pogolitcs.model.PokemonIndividualValues
 import react.*
 
-class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps, IVStatsWidgetRState>(props) {
+class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps, RState>(props) {
 
     override fun RBuilder.render() {
-        if (state.ivs == null) { // TODO tmp
-            state.ivs = props.ivs.copy()
-        }
         ivBar {
             name = "Attack"
-            console.log("aa", state.ivs)
-            iv = state.ivs!!.attack
-            onChange = {
-                setState { ivs!!.attack = it }
+            iv = props.ivs.attack
+            onChange = { value ->
+                props.onChange(props.ivs.apply { attack = value })
             }
         }
         ivBar {
             name = "Defense"
-            iv = state.ivs!!.defense
-            onChange = {
-                setState { ivs!!.defense = it }
+            iv = props.ivs.defense
+            onChange = { value ->
+                props.onChange(props.ivs.apply { defense = value })
             }
         }
         ivBar {
             name = "HP"
-            iv = state.ivs!!.stamina
-            onChange = {
-                setState { ivs!!.stamina = it }
+            iv = props.ivs.stamina
+            onChange = { value ->
+                setState {}
+                props.onChange(props.ivs.apply { stamina = value })
             }
         }
     }
 }
 
 external interface IVStatsWidgetRProps: RProps {
-    var ivs: IVStats;
+    var ivs: PokemonIndividualValues;
+    var onChange: (PokemonIndividualValues) -> Unit
 }
-
-external interface IVStatsWidgetRState: RState { // TODO pull it later
-    var ivs: IVStats?
-}
-
-data class IVStats(var attack:Int, var defense:Int, var stamina:Int)
 
 fun RBuilder.ivStatsWidget(handler: IVStatsWidgetRProps.() -> Unit): ReactElement {
     return child(IVStatsWidget::class) {

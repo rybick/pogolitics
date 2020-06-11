@@ -2,6 +2,7 @@ package pogolitcs
 
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import pogolitcs.model.PokemonIndividualValues
 import react.*
 import react.dom.p
 import react.router.dom.hashRouter
@@ -13,6 +14,7 @@ import kotlin.reflect.KClass
 external interface AppState : RState {
     var data: ModelAndView<*, *>?
     var url: String?
+    var ivs: PokemonIndividualValues? // TODO later
 }
 
 class App: RComponent<RProps, AppState>() {
@@ -38,8 +40,11 @@ class App: RComponent<RProps, AppState>() {
                     attrs.model = state.data!!.model as M
                 }
             } else {
+                if (state.ivs == null) { // TODO later
+                    state.ivs = PokemonIndividualValues(40.0F, 15, 15, 15)
+                }
                 MainScope().launch {
-                    val modelAndView = route.controllerMethod(props.match.params)
+                    val modelAndView = route.controllerMethod(props.match.params, state.ivs!!)
                     setState {
                         url = window.location.href
                         data = modelAndView

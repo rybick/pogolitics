@@ -2,7 +2,6 @@ package pogolitcs.controller
 
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
-import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.coroutineScope
 import pogolitcs.ModelAndView
 import pogolitcs.api.Api
@@ -10,13 +9,14 @@ import pogolitcs.api.ChargedMoveDto
 import pogolitcs.api.FastMoveDto
 import pogolitcs.api.PokemonDto
 import pogolitcs.model.MoveSet
+import pogolitcs.model.PokemonIndividualValues
 import pogolitcs.model.SinglePokemonModel
 import pogolitcs.view.SinglePokemonPage
 import kotlin.reflect.KClass
 
 class SinglePokemonController(val api: Api) {
 
-    suspend fun get(id: Int): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
+    suspend fun get(id: Int, pokemonIvs: PokemonIndividualValues): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
             val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(id) }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
@@ -25,7 +25,8 @@ class SinglePokemonController(val api: Api) {
                 view = SinglePokemonPage::class,
                 model = SinglePokemonModel(
                     pokemon = toPokemon(pokemon.await()),
-                    moveSets = toMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await())
+                    moveSets = toMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await(), pokemonIvs),
+                    pokemonIndividualValues = pokemonIvs
                 )
             )
         }
@@ -36,10 +37,11 @@ class SinglePokemonController(val api: Api) {
     }
 
     private fun toMoveSets(
-        pokemon: PokemonDto,
-        fastMoves: Array<FastMoveDto>,
-        chargedMoves: Array<ChargedMoveDto>
+            pokemon: PokemonDto,
+            fastMoves: Array<FastMoveDto>,
+            chargedMoves: Array<ChargedMoveDto>,
+            pokemonIvs: PokemonIndividualValues
     ): List<MoveSet> {
-        return MoveSetsMapper(pokemon, fastMoves, chargedMoves).getData()
+        return MoveSetsMapper(pokemon, fastMoves, chargedMoves).getData(pokemonIvs.level, pokemonIvs.attack)
     }
 }

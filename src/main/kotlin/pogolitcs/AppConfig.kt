@@ -3,6 +3,7 @@ package pogolitcs
 import pogolitcs.api.Api
 import pogolitcs.controller.MainPageController
 import pogolitcs.controller.SinglePokemonController
+import pogolitcs.model.PokemonIndividualValues
 import react.RComponent
 import react.RProps
 import react.RState
@@ -15,14 +16,14 @@ class AppConfig {
     private val pokemonController = SinglePokemonController(api)
 
     val routing: List<Route<out Any>> = listOf(
-        Route("/", true) { mainPageController.get() },
-        Route("/pokemon/:id", false) { pokemonController.get(it.id) }
+        Route("/", true) { x, y -> mainPageController.get() },
+        Route("/pokemon/:id", false) { props, ivs -> pokemonController.get(props.id, ivs) }
     )
 
     class Route<M>(
         val path: String,
         val exact: Boolean,
-        val controllerMethod: suspend (IdRProps) -> ModelAndView<M, KClass<out RComponent<out PageRProps<M>, out RState>>>
+        val controllerMethod: suspend (IdRProps, PokemonIndividualValues) -> ModelAndView<M, KClass<out RComponent<out PageRProps<M>, out RState>>>
     )
 
     interface IdRProps : RProps { // TODO a way to use different IN parameters per pogolitcs.controller

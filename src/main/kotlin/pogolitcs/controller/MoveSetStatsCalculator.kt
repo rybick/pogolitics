@@ -4,7 +4,12 @@ import pogolitcs.model.PokemonType
 import kotlin.math.ceil
 import kotlin.time.Duration
 
-class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast: MoveData, private val charged: MoveData) {
+class MoveSetStatsCalculator(
+        private val pokemon: PokemonData,
+        private val fast: MoveData,
+        private val charged: MoveData,
+        private val individualPokemonStats: IndividualPokemonStats
+) {
     data class PokemonData(
         val baseAttack: Int,
         val baseDefense: Int,
@@ -19,6 +24,8 @@ class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast:
     data class PokemonTypes(val primary: PokemonType, val secondary: PokemonType? = null)
 
     data class MoveData(val power: Int, val energy: Int, val duration: Duration, val type: PokemonType)
+
+    data class IndividualPokemonStats(val level: Float, val attack: Int)
 
     // cache fields
     private var dps: Double? = null
@@ -64,7 +71,8 @@ class MoveSetStatsCalculator(private val pokemon: PokemonData, private val fast:
 
     private fun damage(move: MoveData): Double {
         val stab = if (pokemon.isOfType(move.type)) 1.2 else 1.0
-        return (0.5 * move.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 0.5 // gamepress formula
+        val attack = statValue(pokemon.baseAttack, individualPokemonStats.attack, individualPokemonStats.level)
+        return (0.5 * move.power * attack * stab / expectedDefense) + 0.5 // gamepress formula
         //return floor(0.5 * attack.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 1; // original formula
     }
 
