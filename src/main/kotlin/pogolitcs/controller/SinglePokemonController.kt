@@ -25,8 +25,7 @@ class SinglePokemonController(val api: Api) {
                 view = SinglePokemonPage::class,
                 model = SinglePokemonModel(
                     pokemon = toPokemon(pokemon.await()),
-                    moveSets = toMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await(), pokemonIvs),
-                    pokemonIndividualValues = pokemonIvs
+                    moveSets = toMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await(), pokemonIvs)
                 )
             )
         }

@@ -15,14 +15,11 @@ import react.dom.div
 import styled.StyleSheet
 import styled.css
 import styled.styledDiv
-import react.setState
 
-class SinglePokemonPage(props: PageRProps<SinglePokemonModel>) : RComponent<PageRProps<SinglePokemonModel>, SinglePokemonRState>(props) {
+class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValues>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValues>, RState>(props) {
 
     override fun RBuilder.render() {
-        if (state.ivs == null) { // TODO later
-            state.ivs = props.model.pokemonIndividualValues
-        }
+        console.log(props.state)
         div {
             a(href = "/#/pokemon/${props.model.pokemon.id - 1}") { +"<" }
             a(href = "/#/pokemon/${props.model.pokemon.id + 1}") { +">" }
@@ -39,12 +36,9 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel>) : RComponent<Page
         styledDiv {
             css { +Styles.column }
             ivStatsWidget {
-                ivs = state.ivs!!
+                ivs = props.state
                 onChange = {
-                    setState {
-                        console.log(it)
-                        ivs = it
-                    }
+                    props.updateState(ivs)
                 }
             }
         }
@@ -56,9 +50,4 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel>) : RComponent<Page
             float = Float.left
         }
     }
-}
-
-//TODO
-external interface SinglePokemonRState: RState {
-    var ivs: PokemonIndividualValues?
 }
