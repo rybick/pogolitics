@@ -36,10 +36,10 @@ class SinglePokemonController(val api: Api) {
     }
 
     private fun toMoveSets(
-            pokemon: PokemonDto,
-            fastMoves: Array<FastMoveDto>,
-            chargedMoves: Array<ChargedMoveDto>,
-            pokemonIvs: PokemonIndividualValues
+        pokemon: PokemonDto,
+        fastMoves: Array<FastMoveDto>,
+        chargedMoves: Array<ChargedMoveDto>,
+        pokemonIvs: PokemonIndividualValues
     ): List<MoveSet> {
         return MoveSetsMapper(pokemon, fastMoves, chargedMoves).getData(pokemonIvs.level, pokemonIvs.attack)
     }
