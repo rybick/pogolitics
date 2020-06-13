@@ -10,12 +10,13 @@ class Api() {
     private var chargedMoves: Array<ChargedMoveDto>? = null
 
     suspend fun fetchPokemon(id: Int): PokemonDto {
-        if (pokemon == null || pokemon?.id.toString() != id.toString()) { // TODO later civilized json parsing
+        if (pokemon == null || pokemon?.id != id) {
             pokemon = window.fetch("/data/pokemon/$id.json")
                     .await()
                     .json()
                     .await()
                     .unsafeCast<PokemonDto>()
+            console.log(pokemon)
         }
         return pokemon!!
     }

@@ -8,6 +8,7 @@ import pogolitcs.model.SinglePokemonModel
 import react.RComponent
 import react.RProps
 import react.RState
+import kotlin.js.Console
 import kotlin.reflect.KClass
 
 class AppConfig {
@@ -29,6 +30,6 @@ class AppConfig {
     )
 
     interface IdRProps : RProps { // TODO a way to use different IN parameters per pogolitcs.controller
-        var id: Int
+        var id: String
     }
 }

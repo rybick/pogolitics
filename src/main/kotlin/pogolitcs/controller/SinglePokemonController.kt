@@ -17,9 +17,9 @@ import kotlin.reflect.KClass
 
 class SinglePokemonController(val api: Api) {
 
-    suspend fun get(id: Int, pokemonIvs: PokemonIndividualValues): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
+    suspend fun get(id: String, pokemonIvs: PokemonIndividualValues): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
-            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(id) }
+            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(id.toInt()) }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
             ModelAndView(
