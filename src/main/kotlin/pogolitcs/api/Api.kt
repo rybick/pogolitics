@@ -9,12 +9,7 @@ class Api() {
     private var fastMoves: Array<FastMoveDto>? = null
     private var chargedMoves: Array<ChargedMoveDto>? = null
 
-    init {
-        console.log("initted API")
-    }
-
     suspend fun fetchPokemon(id: Int): PokemonDto {
-        console.log(pokemon?.id, id, pokemon?.id != id, pokemon == null || pokemon?.id != id)
         if (pokemon == null || pokemon?.id.toString() != id.toString()) { // TODO later civilized json parsing
             pokemon = window.fetch("/data/pokemon/$id.json")
                     .await()

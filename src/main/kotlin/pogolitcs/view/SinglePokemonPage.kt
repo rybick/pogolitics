@@ -19,7 +19,6 @@ import styled.styledDiv
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValues>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValues>, RState>(props) {
 
     override fun RBuilder.render() {
-        console.log(props.state)
         div {
             a(href = "/#/pokemon/${props.model.pokemon.id - 1}") { +"<" }
             a(href = "/#/pokemon/${props.model.pokemon.id + 1}") { +">" }
