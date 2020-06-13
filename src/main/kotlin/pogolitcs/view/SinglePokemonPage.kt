@@ -35,6 +35,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         styledDiv {
             css { +Styles.column }
             ivStatsWidget {
+                cp = props.model.stats.cp
                 ivs = props.state
                 onChange = {
                     props.updateState(ivs)

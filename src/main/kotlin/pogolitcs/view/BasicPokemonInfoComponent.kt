@@ -37,7 +37,7 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
 }
 
 external interface BasicPokemonInfoRProps: RProps {
-    var data: SinglePokemonModel.Pokemon
+    var data: SinglePokemonModel.PokemonStaticInfo
 }
 
 fun RBuilder.basicPokemonInfo(handler: BasicPokemonInfoRProps.() -> Unit): ReactElement {

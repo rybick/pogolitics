@@ -1,8 +1,10 @@
 package pogolitcs.model
 
 data class SinglePokemonModel(
-    val pokemon: Pokemon,
-    val moveSets: List<MoveSet>
+        val pokemon: PokemonStaticInfo,
+        val stats: PokemonCalculatedStatistics,
+        val moveSets: List<MoveSet>
 ) {
-    data class Pokemon(val id: Int, val name: String)
+    data class PokemonStaticInfo(val id: Int, val name: String)
+    data class PokemonCalculatedStatistics(val cp: Int)
 }
