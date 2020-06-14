@@ -3,6 +3,7 @@ package pogolitcs.controller
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import pogolitcs.AppConfig
 import pogolitcs.ModelAndView
 import pogolitcs.api.Api
 import pogolitcs.api.ChargedMoveDto
@@ -15,19 +16,21 @@ import pogolitcs.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitcs.view.SinglePokemonPage
 import kotlin.reflect.KClass
 
-class SinglePokemonController(private val api: Api) {
+class SinglePokemonController(private val api: Api): Controller<AppConfig.IdRProps, SinglePokemonModel, PokemonIndividualValuesState> {
 
-    suspend fun get(id: String, pokemonIvs: PokemonIndividualValuesState): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
+    override fun getInitialState(url: String) = PokemonIndividualValuesState(40.0F, 15, 15, 15)
+
+    override suspend fun get(props: AppConfig.IdRProps, state: PokemonIndividualValuesState): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
-            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(id.toInt()) }
+            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(props.id.toInt()) }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
             ModelAndView(
                 view = SinglePokemonPage::class,
                 model = SinglePokemonModel(
                     pokemon = toPokemonStaticInfo(pokemon.await()),
-                    stats = calculatePokemonStatistics(pokemon.await(), pokemonIvs),
-                    moveSets = calculateMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await(), pokemonIvs)
+                    stats = calculatePokemonStatistics(pokemon.await(), state),
+                    moveSets = calculateMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await(), state)
                 )
             )
         }

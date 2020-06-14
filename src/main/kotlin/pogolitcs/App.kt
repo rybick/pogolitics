@@ -38,11 +38,12 @@ class App: RComponent<RProps, AppState>() {
     }
 
 
-    private fun <M, S> RBuilder.routeToPage(route: AppConfig.Route<M, S>): ReactElement {
+    private fun <R: RProps, M, S> RBuilder.routeToPage(route: AppConfig.Route<R, M, S>): ReactElement {
         return route<AppConfig.IdRProps>(route.path, exact = route.exact) { props ->
+            val url = window.location.href
             console.log(props.match.params.id) // TODO later remove
-            println(window.location.href) // TODO later remove
-            if (state.modelAndView != null && state.url == window.location.href) {
+            println(url) // TODO later remove
+            if (state.modelAndView != null && state.url == url) {
                 if (state.pageStateChanged) {
                     orderStateReload(route, props)
                 }
@@ -51,7 +52,7 @@ class App: RComponent<RProps, AppState>() {
             } else {
                 state.pageStateChanged = false
                 if (state.pageState == null) { // TODO later
-                    state.pageState = route.initialPageState
+                    state.pageState = route.controller.getInitialState(url)
                 }
                 orderStateReload(route, props)
                 renderLoadingPage()
@@ -64,9 +65,9 @@ class App: RComponent<RProps, AppState>() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <S> orderStateReload(route: AppConfig.Route<*, S>, props: RouteResultProps<AppConfig.IdRProps>) {
+    private fun <R: RProps, S> orderStateReload(route: AppConfig.Route<R, *, S>, props: RouteResultProps<AppConfig.IdRProps>) {
         MainScope().launch {
-            val modelAndView = route.controllerMethod(props.match.params, state.pageState!! as S)
+            val modelAndView = route.controller.get(props.match.params as R, state.pageState!! as S)
             setState {
                 this.url = window.location.href
                 this.modelAndView = modelAndView
