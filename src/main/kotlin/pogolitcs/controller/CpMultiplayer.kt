@@ -1,6 +1,6 @@
 package pogolitcs.controller
 
-object CPMultiplayer {
+object CpMultiplayer {
     private val map: Map<Float, Double> = mapOf(
         1F    to 0.094,
         1.5F  to 0.1351374318,
@@ -91,4 +91,8 @@ object CPMultiplayer {
     operator fun get(level: Float): Double {
         return map[level] ?: throw IndexOutOfBoundsException("Level must be in [1, 40] range and be a multiple of 0.5")
     }
+}
+
+fun calcStatValue(baseStat: Int, iv: Int = 15, level: Float = 40F): Double {
+    return CpMultiplayer[level] * (baseStat + iv)
 }

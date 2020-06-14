@@ -71,14 +71,8 @@ class MoveSetStatsCalculator(
 
     private fun damage(move: MoveData): Double {
         val stab = if (pokemon.isOfType(move.type)) 1.2 else 1.0
-        val attack = statValue(pokemon.baseAttack, individualPokemonStats.attack, individualPokemonStats.level)
+        val attack = calcStatValue(pokemon.baseAttack, individualPokemonStats.attack, individualPokemonStats.level)
         return (0.5 * move.power * attack * stab / expectedDefense) + 0.5 // gamepress formula
         //return floor(0.5 * attack.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 1; // original formula
     }
-
-    private fun statValue(baseStat: Int, iv: Int = 15, level: Float = 40F): Double {
-        return getCPMultiplayer(level) * (baseStat + iv)
-    }
-
-    private fun getCPMultiplayer(level: Float) = CPMultiplayer[level]
 }

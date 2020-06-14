@@ -47,6 +47,10 @@ class SinglePokemonController(val api: Api) {
     }
 
     private fun calculatePokemonStatistics(pokemon: PokemonDto, pokemonIvs: PokemonIndividualValues): PokemonCalculatedStatistics {
-        return PokemonCalculatedStatistics(cp = 1000)
+        val calculator = CpCalculator(
+                CpCalculator.PokemonData(pokemon.baseAttack, pokemon.baseDefense, pokemon.baseStamina),
+                CpCalculator.IndividualPokemonStats(pokemonIvs.level, pokemonIvs.attack, pokemonIvs.defense, pokemonIvs.stamina)
+        )
+        return PokemonCalculatedStatistics(cp = calculator.calcCp())
     }
 }
