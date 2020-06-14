@@ -1,7 +1,7 @@
 package pogolitcs.model
 
-// TODO think if this can be immutable
-data class PokemonIndividualValues(
+// TODO make it usable with cp
+data class PokemonIndividualValuesState(
     var level: Float,
     var attack: Int,
     var defense: Int,

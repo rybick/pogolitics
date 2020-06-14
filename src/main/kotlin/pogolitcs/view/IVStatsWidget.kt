@@ -3,11 +3,11 @@ package pogolitcs.view
 import kotlinx.html.InputType
 import kotlinx.html.js.onChangeFunction
 import org.w3c.dom.HTMLInputElement
-import pogolitcs.model.PokemonIndividualValues
+import pogolitcs.model.PokemonIndividualValuesState
+import pogolitcs.model.SinglePokemonModel
 import react.*
 import react.dom.defaultValue
 import react.dom.input
-import react.dom.span
 import styled.StyleSheet
 import styled.css
 import styled.styledDiv
@@ -32,7 +32,7 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                         attrs.pattern = "\\d*"
                         attrs.defaultValue = "40.0"
                         attrs.onChangeFunction = { event ->
-                            props.onChange(props.ivs.apply { level = (event.target as HTMLInputElement).value.toFloat() })
+                            props.onChange(createStateWith { level = (event.target as HTMLInputElement).value.toFloat() })
                         }
                     }
                 }
@@ -42,7 +42,7 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                     +"CP"
                 }
                 styledSpan {
-                    +"${props.cp}"
+                    +"${props.ivs.cp}"
                 }
             }
         }
@@ -50,23 +50,32 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
             name = "Attack"
             iv = props.ivs.attack
             onChange = { value ->
-                props.onChange(props.ivs.apply { attack = value })
+                props.onChange(createStateWith { attack = value })
             }
         }
         ivBar {
             name = "Defense"
             iv = props.ivs.defense
             onChange = { value ->
-                props.onChange(props.ivs.apply { defense = value })
+                props.onChange(createStateWith { defense = value })
             }
         }
         ivBar {
             name = "HP"
             iv = props.ivs.stamina
             onChange = { value ->
-                props.onChange(props.ivs.apply { stamina = value })
+                props.onChange(createStateWith { stamina = value })
             }
         }
+    }
+
+    private fun createStateWith(modifier: PokemonIndividualValuesState.() -> Unit): PokemonIndividualValuesState {
+        return PokemonIndividualValuesState(
+            level = props.ivs.level,
+            attack = props.ivs.attack,
+            defense = props.ivs.defense,
+            stamina = props.ivs.stamina
+        ).also(modifier)
     }
 
     private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
@@ -77,9 +86,8 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
 }
 
 external interface IVStatsWidgetRProps: RProps {
-    var cp: Int
-    var ivs: PokemonIndividualValues;
-    var onChange: (PokemonIndividualValues) -> Unit
+    var ivs: SinglePokemonModel.PokemonIndividualStatistics;
+    var onChange: (PokemonIndividualValuesState) -> Unit
 }
 
 fun RBuilder.ivStatsWidget(handler: IVStatsWidgetRProps.() -> Unit): ReactElement {

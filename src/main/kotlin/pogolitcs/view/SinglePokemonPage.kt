@@ -5,7 +5,7 @@ import kotlinx.css.float
 import kotlinx.css.pct
 import kotlinx.css.width
 import pogolitcs.PageRProps
-import pogolitcs.model.PokemonIndividualValues
+import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import react.RBuilder
 import react.RComponent
@@ -16,7 +16,7 @@ import styled.StyleSheet
 import styled.css
 import styled.styledDiv
 
-class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValues>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValues>, RState>(props) {
+class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
     override fun RBuilder.render() {
         div {
@@ -35,10 +35,9 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         styledDiv {
             css { +Styles.column }
             ivStatsWidget {
-                cp = props.model.stats.cp
-                ivs = props.state
+                ivs = props.model.stats
                 onChange = {
-                    props.updateState(ivs)
+                    props.updateState(it)
                 }
             }
         }

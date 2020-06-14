@@ -78,7 +78,7 @@ class App: RComponent<RProps, AppState>() {
     private fun <M, S> RBuilder.renderPage(): ReactElement {
         return child(state.modelAndView!!.view as KClass<RComponent<PageRProps<M, S>, RState>>) {
             attrs.model = state.modelAndView!!.model as M
-            attrs.state = state.pageState!! as S
+            //attrs.state = state.pageState!! as S
             attrs.updateState = {
                 setState {
                     pageState = it

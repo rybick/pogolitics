@@ -3,12 +3,11 @@ package pogolitcs
 import pogolitcs.api.Api
 import pogolitcs.controller.MainPageController
 import pogolitcs.controller.SinglePokemonController
-import pogolitcs.model.PokemonIndividualValues
+import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import react.RComponent
 import react.RProps
 import react.RState
-import kotlin.js.Console
 import kotlin.reflect.KClass
 
 class AppConfig {
@@ -19,7 +18,7 @@ class AppConfig {
 
     val routing: List<Route<out Any, out Any>> = listOf(
         Route<Unit, Unit>("/", true, Unit) { _, _ -> mainPageController.get() },
-        Route<SinglePokemonModel, PokemonIndividualValues>("/pokemon/:id", false, PokemonIndividualValues(40.0F, 15, 15, 15)) { props, ivs -> pokemonController.get(props.id, ivs) }
+        Route<SinglePokemonModel, PokemonIndividualValuesState>("/pokemon/:id", false, PokemonIndividualValuesState(40.0F, 15, 15, 15)) { props, ivs -> pokemonController.get(props.id, ivs) }
     )
 
     class Route<M, S>(

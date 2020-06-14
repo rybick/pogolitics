@@ -7,7 +7,7 @@ import kotlin.reflect.KClass
 
 data class ModelAndView<
     M,
-    out V: KClass<out RComponent<out PageRProps<M, *>, out RState>> // TODO any?
+    out V: KClass<out RComponent<out PageRProps<M, *>, out RState>>
 >(
     val model: M,
     val view: V
@@ -15,10 +15,9 @@ data class ModelAndView<
 
 interface PageRProps<M, S> : RProps {
     var model: M
-    var state: S
     var updateState: (S) -> Unit
 }
 
 interface PageRState<T> : RState {
-    var data: T? // TODO -?
+    var data: T?
 }
