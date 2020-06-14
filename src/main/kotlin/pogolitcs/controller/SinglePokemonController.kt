@@ -14,13 +14,18 @@ import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import pogolitcs.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitcs.view.SinglePokemonPage
+import react.RProps
 import kotlin.reflect.KClass
 
-class SinglePokemonController(private val api: Api): Controller<AppConfig.IdRProps, SinglePokemonModel, PokemonIndividualValuesState> {
+class SinglePokemonController(private val api: Api): Controller<SinglePokemonController.IdRProps, SinglePokemonModel, PokemonIndividualValuesState> {
+
+    interface IdRProps : RProps {
+        var id: String
+    }
 
     override fun getInitialState(url: String) = PokemonIndividualValuesState(40.0F, 15, 15, 15)
 
-    override suspend fun get(props: AppConfig.IdRProps, state: PokemonIndividualValuesState): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
+    override suspend fun get(props: IdRProps, state: PokemonIndividualValuesState): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
             val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(props.id.toInt()) }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }

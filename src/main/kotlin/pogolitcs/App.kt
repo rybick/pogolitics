@@ -37,11 +37,10 @@ class App: RComponent<RProps, AppState>() {
         }
     }
 
-
     private fun <R: RProps, M, S> RBuilder.routeToPage(route: AppConfig.Route<R, M, S>): ReactElement {
-        return route<AppConfig.IdRProps>(route.path, exact = route.exact) { props ->
+        return route<R>(route.path, exact = route.exact) { props ->
             val url = window.location.href
-            console.log(props.match.params.id) // TODO later remove
+            console.log(props.match.params) // TODO later remove
             println(url) // TODO later remove
             if (state.modelAndView != null && state.url == url) {
                 if (state.pageStateChanged) {
@@ -65,9 +64,9 @@ class App: RComponent<RProps, AppState>() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <R: RProps, S> orderStateReload(route: AppConfig.Route<R, *, S>, props: RouteResultProps<AppConfig.IdRProps>) {
+    private fun <R: RProps, S> orderStateReload(route: AppConfig.Route<R, *, S>, props: RouteResultProps<R>) {
         MainScope().launch {
-            val modelAndView = route.controller.get(props.match.params as R, state.pageState!! as S)
+            val modelAndView = route.controller.get(props.match.params, state.pageState!! as S)
             setState {
                 this.url = window.location.href
                 this.modelAndView = modelAndView

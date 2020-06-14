@@ -29,7 +29,4 @@ class AppConfig {
         val controller: Controller<P, M, S>
     )
 
-    interface IdRProps : RProps { // TODO a way to use different IN parameters per pogolitcs.controller
-        var id: String
-    }
 }
