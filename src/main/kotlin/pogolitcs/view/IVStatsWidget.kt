@@ -1,17 +1,16 @@
 package pogolitcs.view
 
 import kotlinx.html.InputType
-import kotlinx.html.js.onChangeFunction
+import kotlinx.html.js.*
 import org.w3c.dom.HTMLInputElement
+import org.w3c.dom.events.Event
 import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import react.*
 import react.dom.defaultValue
 import react.dom.input
-import styled.StyleSheet
-import styled.css
-import styled.styledDiv
-import styled.styledSpan
+import react.dom.key
+import styled.*
 
 class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps, RState>(props) {
 
@@ -22,7 +21,7 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
             }
             styledSpan {
                 styledSpan {
-                    +"level"
+                    +"level: "
                 }
                 styledSpan {
                     input(InputType.number) {
@@ -30,19 +29,14 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                         attrs.max = "41"
                         attrs.step = "0.5"
                         attrs.pattern = "\\d*"
-                        attrs.defaultValue = "40.0"
-                        attrs.onChangeFunction = { event ->
+                        attrs.key = "${props.ivs.level}"
+                        attrs.defaultValue = "${props.ivs.level}"
+                        val onChangeFunction = { event: Event ->
                             props.onChange(createStateWith { level = (event.target as HTMLInputElement).value.toFloat() })
                         }
+                        attrs.onBlurFunction = onChangeFunction
+                        attrs.onMouseUpFunction = onChangeFunction
                     }
-                }
-            }
-            styledSpan {
-                styledSpan {
-                    +"CP"
-                }
-                styledSpan {
-                    +"${props.ivs.cp}"
                 }
             }
         }
@@ -67,6 +61,31 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                 props.onChange(createStateWith { stamina = value })
             }
         }
+        styledDiv {
+            css {
+               +Styles.statsWrapper
+            }
+            styledSpan {
+                styledSpan {
+                    +"CP: "
+                }
+                styledInput(InputType.number) {
+                    attrs.min = "10"
+                    attrs.max = "5000"
+                    attrs.key = "${props.ivs.cp}"
+                    attrs.defaultValue = "${props.ivs.cp}"
+                    val onChangeFunction = { event: Event ->
+                        val value = (event.target as HTMLInputElement).value
+                        props.onChange(createStateWith {
+                            level = null
+                            cp = value.toInt()
+                        })
+                    }
+                    attrs.onBlurFunction = onChangeFunction
+                    attrs.onMouseUpFunction = onChangeFunction
+                }
+            }
+        }
     }
 
     private fun createStateWith(modifier: PokemonIndividualValuesState.() -> Unit): PokemonIndividualValuesState {
@@ -74,7 +93,8 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
             level = props.ivs.level,
             attack = props.ivs.attack,
             defense = props.ivs.defense,
-            stamina = props.ivs.stamina
+            stamina = props.ivs.stamina,
+            cp = null
         ).also(modifier)
     }
 

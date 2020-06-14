@@ -81,6 +81,7 @@ object CpMultiplayer {
         39F   to 0.784637,
         39.5F to 0.7874736075,
         40F   to 0.7903,
+        40.5F to 0.79280394673,
         41F   to 0.79530001,
         42F   to 0.8003,
         43F   to 0.8053,
@@ -89,7 +90,7 @@ object CpMultiplayer {
     )
 
     operator fun get(level: Float): Double {
-        return map[level] ?: throw IndexOutOfBoundsException("Level must be in [1, 40] range and be a multiple of 0.5")
+        return map[level] ?: throw IndexOutOfBoundsException("Level must be in [1, 41] range and be a multiple of 0.5")
     }
 }
 
