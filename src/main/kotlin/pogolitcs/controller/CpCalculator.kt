@@ -33,7 +33,9 @@ class CpCalculator(
         do {
             level += 0.5F
         } while (level <= MAX_LEVEL && calcCp(level) <= cp)
-        level -= 0.5F
+        if (level > 1.0F) {
+            level -= 0.5F
+        }
         val resultCp = calcCp(level)
         return CalcLevelResult(level = level, cp = resultCp, exact = resultCp == cp)
     }

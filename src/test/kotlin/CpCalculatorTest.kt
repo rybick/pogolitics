@@ -45,5 +45,15 @@ class CpCalculatorTest {
             assertEquals(3266, cp)
             assertEquals(false, exact)
         }
+        with(CpCalculator(PokemonData(190, 169, 330), PokemonIv(15, 15, 15)).calcLevel(10)) {
+            assertEquals(1.0F, level)
+            assertEquals(45, cp)
+            assertEquals(false, exact)
+        }
+        with(CpCalculator(PokemonData(190, 169, 330), PokemonIv(15, 15, 15)).calcLevel(45)) {
+            assertEquals(1.0F, level)
+            assertEquals(45, cp)
+            assertEquals(true, exact)
+        }
     }
 }

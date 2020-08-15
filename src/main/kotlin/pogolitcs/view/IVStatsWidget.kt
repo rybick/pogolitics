@@ -1,5 +1,7 @@
 package pogolitcs.view
 
+import kotlinx.css.margin
+import kotlinx.css.px
 import kotlinx.html.InputType
 import kotlinx.html.js.*
 import org.w3c.dom.HTMLInputElement
@@ -73,8 +75,14 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                 }
                 styledInput(InputType.number) {
                     css {
-                        "&::-webkit-outer-spin-button" { put("-webkit-appearance", "none") }
-                        "&::-webkit-inner-spin-button" { put("-webkit-appearance", "none") }
+                        "&::-webkit-outer-spin-button" {
+                            put("-webkit-appearance", "none")
+                            margin(0.px)
+                        }
+                        "&::-webkit-inner-spin-button" {
+                            put("-webkit-appearance", "none")
+                            margin(0.px)
+                        }
                         put("-moz-appearance", "textfield")
                     }
                     attrs.min = "10"
@@ -89,7 +97,6 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                         })
                     }
                     attrs.onBlurFunction = onChangeFunction
-                    attrs.onMouseUpFunction = onChangeFunction
                     attrs.onKeyPressFunction = { event: Event ->
                         if (event.unsafeCast<KeyboardEvent>().key == "Enter") {
                             onChangeFunction(event)
