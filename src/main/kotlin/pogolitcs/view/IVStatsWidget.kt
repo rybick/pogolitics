@@ -4,6 +4,8 @@ import kotlinx.html.InputType
 import kotlinx.html.js.*
 import org.w3c.dom.HTMLInputElement
 import org.w3c.dom.events.Event
+import org.w3c.dom.events.KeyboardEvent
+import pogolitcs.api.PokemonDto
 import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import react.*
@@ -88,6 +90,11 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                     }
                     attrs.onBlurFunction = onChangeFunction
                     attrs.onMouseUpFunction = onChangeFunction
+                    attrs.onKeyPressFunction = { event: Event ->
+                        if (event.unsafeCast<KeyboardEvent>().key == "Enter") {
+                            onChangeFunction(event)
+                        }
+                    }
                 }
             }
         }
