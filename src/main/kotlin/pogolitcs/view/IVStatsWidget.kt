@@ -70,6 +70,11 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                     +"CP: "
                 }
                 styledInput(InputType.number) {
+                    css {
+                        "&::-webkit-outer-spin-button" { put("-webkit-appearance", "none") }
+                        "&::-webkit-inner-spin-button" { put("-webkit-appearance", "none") }
+                        put("-moz-appearance", "textfield")
+                    }
                     attrs.min = "10"
                     attrs.max = "5000"
                     attrs.key = "${props.ivs.cp}"
