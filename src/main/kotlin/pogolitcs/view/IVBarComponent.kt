@@ -5,22 +5,37 @@ import kotlinx.css.properties.scale
 import kotlinx.css.properties.transform
 import kotlinx.html.InputType
 import kotlinx.html.js.onChangeFunction
+import kotlinx.html.js.onClickFunction
+import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
-import react.RBuilder
-import react.RComponent
-import react.RProps
-import react.ReactElement
+import org.w3c.dom.events.Event
+import org.w3c.dom.events.MouseEvent
+import react.*
 import react.dom.defaultValue
 import react.dom.input
+import react.dom.key
 import styled.StyleSheet
 import styled.css
 import styled.styledDiv
 import styled.styledInput
+import kotlin.math.round
 
-class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRProps, MovesetsRState>(props) {
+class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRProps, RState>(props) {
     private val styles = Styles(1.px)
 
     private val MAX_IV = 15
+
+    // TODO later, check the thing with always redrawing when OnClickFunction (or other) is defined inline
+
+    private val doOnClick: (Event) -> Unit = { event: Event ->
+        val mouseEvent = event.unsafeCast<MouseEvent>()
+        val target = event.target as HTMLElement
+        val x: Double = mouseEvent.clientX - target.getBoundingClientRect().left
+        val barWidth: Double = target.getBoundingClientRect().width
+        val ratio = x / barWidth
+        val value = 0.5 + ratio * (MAX_IV - 0.5)
+        props.onChange(round(value).toInt())
+    }
 
     override fun RBuilder.render() {
         styledDiv {
@@ -51,7 +66,8 @@ class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRPr
                         attrs.min = "0"
                         attrs.max = "15"
                         attrs.pattern = "\\d*"
-                        attrs.defaultValue = props.iv.toString()
+                        attrs.key = "${props.iv}"
+                        attrs.defaultValue = "${props.iv}"
                         attrs.onChangeFunction = {
                             props.onChange((it.target as HTMLInputElement).value.toInt())
                         }
@@ -68,6 +84,7 @@ class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRPr
                         +styles.bg
                         width = styles.barWidth(MAX_IV)
                     }
+                    attrs.onClickFunction = doOnClick
                 }
                 styledDiv {
                     css {
@@ -183,6 +200,7 @@ class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRPr
 
         val content by css {
             position = Position.absolute
+            pointerEvents = PointerEvents.none
         }
 
         val scale by css {

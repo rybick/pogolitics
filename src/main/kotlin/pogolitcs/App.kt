@@ -40,8 +40,6 @@ class App: RComponent<RProps, AppState>() {
     private fun <R: RProps, M, S> RBuilder.routeToPage(route: AppConfig.Route<R, M, S>): ReactElement {
         return route<R>(route.path, exact = route.exact) { props ->
             val url = window.location.href
-            console.log(props.match.params) // TODO later remove
-            println(url) // TODO later remove
             if (state.modelAndView != null && state.url == url) {
                 if (state.pageStateChanged) {
                     orderStateReload(route, props)
