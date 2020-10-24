@@ -16,7 +16,7 @@ buildscript {
 
 tasks.register("updatePokemonData") {
     doLast {
-        (1..649).forEach(::downloadPokemonData)
+        (1..865).forEach(::downloadPokemonData)
     }
 }
 
@@ -32,7 +32,8 @@ tasks.register("updateData") {
 }
 
 fun downloadPokemonData(id: Int) {
-    val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$id").readText().let(::parseJsonObject)
+    val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$id").readText().let(::parseNullableJsonObject)
+            ?: return
     val movesData = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/$id").readText().let(::parseJsonArray)
     File("./src/main/resources/data/pokemon/$id.json")
         .writeText(combinePokemonData(pokemonData, movesData).toString())
@@ -154,7 +155,16 @@ fun json(): JsonObject = JsonValue.EMPTY_JSON_OBJECT
 
 fun parseJsonArray(s: String): JsonArray = Json.createReader(s.reader()).use { it.readArray() }
 
-fun parseJsonObject(s: String): JsonObject = Json.createReader(s.reader()).use { it.readObject() }
+fun parseNullableJsonObject(s: String): JsonObject? {
+    return Json.createReader(s.reader()).use {
+        val value = it.readValue()
+        when (value.valueType) {
+            JsonValue.ValueType.OBJECT -> value.asJsonObject()
+            JsonValue.ValueType.NULL -> null
+            else -> throw Exception("Expected json object but got: $s")
+        }
+    }
+}
 
 fun toJsonArray(list: Collection<JsonValue>): JsonArray {
     val x = Json.createArrayBuilder()
