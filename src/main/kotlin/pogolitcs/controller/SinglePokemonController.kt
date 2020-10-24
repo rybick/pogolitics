@@ -35,7 +35,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
 
     override suspend fun get(props: IdRProps, state: PokemonIndividualValuesState): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
-            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(props.id.toInt()) }
+            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(props.id) }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
             val pokemonStats = calculatePokemonStatistics(pokemon.await(), state)

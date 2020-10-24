@@ -19,10 +19,6 @@ class CpCalculator(
 
     data class CalcLevelResult(val level: Float, val cp: Int, val exact: Boolean)
 
-    private val MAX_LEVEL = 41.0F
-    private val MAX_GREAT_CP = 1500
-    private val MAX_ULTRA_CP = 2500
-
     fun calcCp(level: Float): Int {
         val attack = calcStatValue(pokemon.baseAttack, pokemonIv.attack, level)
         val defense = calcStatValue(pokemon.baseDefense, pokemonIv.defense, level)
@@ -34,20 +30,12 @@ class CpCalculator(
         var level = 0.5F // smallest possible value (=1.0) - step (=0.5F)
         do {
             level += 0.5F
-        } while (level <= MAX_LEVEL && calcCp(level) <= cp)
+        } while (level <= ABSOLUTE_MAX_LEVEL && calcCp(level) <= cp)
         if (level > 1.0F) {
             level -= 0.5F
         }
         val resultCp = calcCp(level)
         return CalcLevelResult(level = level, cp = resultCp, exact = resultCp == cp)
-    }
-
-    fun calcBestGreatLeagueCp(): CalcLevelResult {
-        return calcLevel(MAX_GREAT_CP)
-    }
-
-    fun calcBestUltraLeagueCp(): CalcLevelResult {
-        return calcLevel(MAX_ULTRA_CP)
     }
 
 }

@@ -9,7 +9,7 @@ class Api() {
     private var fastMoves: Array<FastMoveDto>? = null
     private var chargedMoves: Array<ChargedMoveDto>? = null
 
-    suspend fun fetchPokemon(id: Int): PokemonDto {
+    suspend fun fetchPokemon(id: String): PokemonDto {
         if (pokemon == null || pokemon?.id != id) {
             pokemon = window.fetch("/data/pokemon/$id.json")
                     .await()

@@ -5,9 +5,9 @@ data class SinglePokemonModel(
         val stats: PokemonIndividualStatistics,
         val moveSets: List<MoveSet>
 ) {
-    data class PokemonStaticInfo(val id: Int, val name: String)
-    @Deprecated("changing it now")
-    data class PokemonIndividualStatistics1(val cp: Int, val level: Float, val attack: Int, val defense: Int, val stamina: Int)
+    data class PokemonStaticInfo(val id: String, val name: String) {
+        val familyId: Int get() = id.replace("[^\\d]".toRegex(), "").toInt()
+    }
 
     data class PokemonIndividualStatistics(
             val ivs: IVs,

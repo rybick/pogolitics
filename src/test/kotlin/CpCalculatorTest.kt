@@ -9,7 +9,6 @@ class CpCalculatorTest {
     val snorlax = PokemonData(190, 169, 330)
     val mewtwo = PokemonData(300, 182, 214)
     val groudon = PokemonData(270, 228, 205)
-    val mamoswine = PokemonData(247, 146, 242)
 
     val ivMax = PokemonIv(15, 15, 15)
 
@@ -61,15 +60,6 @@ class CpCalculatorTest {
             assertEquals(1.0F, level)
             assertEquals(45, cp)
             assertEquals(true, exact)
-        }
-    }
-
-    @Test
-    fun calcBestLeaguesCps() {
-        with(CpCalculator(mamoswine, ivMax).calcBestUltraLeagueCp()) {
-            //assertEquals(1500, great)
-            assertEquals(2472, cp)
-            assertEquals(26.0F, level)
         }
     }
 }

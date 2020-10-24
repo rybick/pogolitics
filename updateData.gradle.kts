@@ -16,7 +16,14 @@ buildscript {
 
 tasks.register("updatePokemonData") {
     doLast {
-        (1..865).forEach(::downloadPokemonData)
+        listOf(
+            (1..865).map { "$it" to "$it" },
+            listOf(
+               "83?form=Galarian" to "83a",
+               "150?form=Armored" to "150a",
+               "487?form=Origin" to "487a"
+            )
+        ).flatten().forEach { downloadPokemonData(it.first, it.second) }
     }
 }
 
@@ -31,11 +38,11 @@ tasks.register("updateData") {
     dependsOn("updateMovesData")
 }
 
-fun downloadPokemonData(id: Int) {
-    val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$id").readText().let(::parseNullableJsonObject)
+fun downloadPokemonData(source: String, target: String) {
+    val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$source").readText().let(::parseNullableJsonObject)
             ?: return
-    val movesData = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/$id").readText().let(::parseJsonArray)
-    File("./src/main/resources/data/pokemon/$id.json")
+    val movesData = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/$source").readText().let(::parseJsonArray)
+    File("./src/main/resources/data/pokemon/$target.json")
         .writeText(combinePokemonData(pokemonData, movesData).toString())
 }
 
