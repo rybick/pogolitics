@@ -13,7 +13,8 @@ data class SinglePokemonModel(
             val ivs: IVs,
             val currentStats: VariablePokemonStatistics,
             val bestGreatLeagueStats: VariablePokemonStatistics,
-            val bestUltraLeagueStats: VariablePokemonStatistics
+            val bestUltraLeagueStats: VariablePokemonStatistics,
+            val bestStatsWithoutBoost: VariablePokemonStatistics
     )
 
     data class VariablePokemonStatistics(val cp: Int, val level: Float)

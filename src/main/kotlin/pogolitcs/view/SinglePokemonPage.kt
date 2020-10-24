@@ -58,10 +58,10 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                 }
             }
             leagueStatsWidget {
-                name = "ultra"
-                stats = props.model.stats.bestUltraLeagueStats
+                name = "master"
+                stats = props.model.stats.bestStatsWithoutBoost
                 onClick = {
-                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestUltraLeagueStats.level)
+                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestStatsWithoutBoost.level)
                     props.updateState(newState)
                 }
             }

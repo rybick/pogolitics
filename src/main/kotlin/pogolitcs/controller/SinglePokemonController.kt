@@ -79,8 +79,9 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
                     cp = calculator.calcCp(pokemonIvs.level!!),
                     level = pokemonIvs.level!!
                 ),
-                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcBestGreatLeagueCp()),
-                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcBestUltraLeagueCp())
+                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_GREAT_CP)),
+                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_ULTRA_CP)),
+                bestStatsWithoutBoost = variablePokemonStatisticsAtBasicMaxLevel(calculator)
             )
         } else {
             val calcLevelResult = calculator.calcLevel(pokemonIvs.cp!!)
@@ -94,10 +95,15 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
                     cp = calcLevelResult.cp,
                     level = calcLevelResult.level
                 ),
-                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcBestGreatLeagueCp()),
-                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcBestUltraLeagueCp())
+                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_GREAT_CP)),
+                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_ULTRA_CP)),
+                bestStatsWithoutBoost = variablePokemonStatisticsAtBasicMaxLevel(calculator)
             )
         }
+    }
+
+    private fun variablePokemonStatisticsAtBasicMaxLevel(calculator: CpCalculator): VariablePokemonStatistics {
+        return VariablePokemonStatistics(calculator.calcCp(BASIC_MAX_LEVEL), BASIC_MAX_LEVEL)
     }
 
     private fun toVariablePokemonStatistics(calcLevelRes: CpCalculator.CalcLevelResult): VariablePokemonStatistics {
