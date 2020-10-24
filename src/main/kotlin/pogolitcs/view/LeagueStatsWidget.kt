@@ -1,6 +1,8 @@
 package pogolitcs.view
 
 import kotlinx.css.*
+import kotlinx.html.js.onChangeFunction
+import kotlinx.html.js.onClickFunction
 import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import react.*
@@ -22,6 +24,10 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
                 + (props.name + " league")
             }
             styledDiv {
+                attrs.onClickFunction = { props.onClick() }
+                css {
+                    + Styles.contentWrapper
+                }
                 styledSpan {
                     css { + Styles.group }
                     styledSpan {
@@ -63,6 +69,10 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
             // display = Display.tableRow
         }
 
+        val contentWrapper by css {
+            cursor = Cursor.pointer
+        }
+
         val cell by css {
             padding = StyleConstants.padding.small.toString()
             display = Display.tableCell
@@ -73,7 +83,7 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
 external interface LeagueStatsWidgetRProps: RProps {
     var name: String;
     var stats: SinglePokemonModel.VariablePokemonStatistics;
-    var onChange: (PokemonIndividualValuesState) -> Unit
+    var onClick: () -> Unit
 }
 
 fun RBuilder.leagueStatsWidget(handler: LeagueStatsWidgetRProps.() -> Unit): ReactElement {

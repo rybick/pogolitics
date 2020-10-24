@@ -44,15 +44,25 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             leagueStatsWidget {
                 name = "great"
                 stats = props.model.stats.bestGreatLeagueStats
-                onChange = {
-                    props.updateState(it) // TODO later
+                onClick = {
+                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestGreatLeagueStats.level)
+                    props.updateState(newState)
                 }
             }
             leagueStatsWidget {
                 name = "ultra"
                 stats = props.model.stats.bestUltraLeagueStats
-                onChange = {
-                    props.updateState(it) // TODO later
+                onClick = {
+                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestUltraLeagueStats.level)
+                    props.updateState(newState)
+                }
+            }
+            leagueStatsWidget {
+                name = "ultra"
+                stats = props.model.stats.bestUltraLeagueStats
+                onClick = {
+                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestUltraLeagueStats.level)
+                    props.updateState(newState)
                 }
             }
         }
