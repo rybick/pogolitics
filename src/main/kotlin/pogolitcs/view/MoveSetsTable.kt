@@ -25,7 +25,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
 
     override fun RBuilder.render() {
         styledDiv {
-            css { +Styles.wrapper }
+            css { +BasicStylesheet.widgetWrapper }
             styledDiv {
                 css { +Styles.table }
                 styledDiv {
@@ -125,8 +125,8 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
         val cell by css {
             display = Display.tableCell
-            padding = Style.padding.medium.toString()
-            borderColor = Style.colors.lightBorder
+            padding = StyleConstants.padding.medium.toString()
+            borderColor = StyleConstants.colors.lightBorder
             borderStyle = BorderStyle.solid
             borderBottomWidth = LinearDimension("1px")
             borderLeftWidth = LinearDimension("1px")
@@ -140,23 +140,18 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
 
         val row by css {
             display = Display.tableRow
-            padding = Style.padding.small.toString()
+            padding = StyleConstants.padding.small.toString()
         }
 
         val header by css {
-            backgroundColor = Style.colors.primary.bg
-            color = Style.colors.primary.font
+            backgroundColor = StyleConstants.colors.primary.bg
+            color = StyleConstants.colors.primary.font
             fontWeight = FontWeight.bold
         }
 
         val table by css {
             display = Display.table
             width = 100.pct
-        }
-
-        val wrapper by css {
-            display = Display.block
-            margin = Style.margin.small.toString()
         }
 
         val first by css {

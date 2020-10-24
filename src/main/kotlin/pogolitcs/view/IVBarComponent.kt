@@ -25,7 +25,7 @@ class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRPr
 
     private val MAX_IV = 15
 
-    // TODO later, check the thing with always redrawing when OnClickFunction (or other) is defined inline
+    // TODO later, check the thing with always redrawing when onClickFunction (or other) is defined inline
 
     private val doOnClick: (Event) -> Unit = { event: Event ->
         val mouseEvent = event.unsafeCast<MouseEvent>()

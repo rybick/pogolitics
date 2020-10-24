@@ -1,5 +1,6 @@
 package pogolitcs.model
 
+// TODO use IVs class
 data class PokemonIndividualValuesState(
     var level: Float?,
     var attack: Int,

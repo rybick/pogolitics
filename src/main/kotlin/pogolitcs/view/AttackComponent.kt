@@ -18,7 +18,7 @@ class AttackComponent: RComponent<AttackComponentProps, RState>() {
             styledImg {
                 css {
                     height = LinearDimension("1.5rem")
-                    margin = "0 ${Style.margin.small}"
+                    margin = "0 ${StyleConstants.margin.small}"
                 }
                 attrs {
                     src = iconPath(props.attack.type)

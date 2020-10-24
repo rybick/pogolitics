@@ -29,8 +29,8 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
         }
 
         val pokemonId by css {
-            color = Style.colors.secondary.secondaryFont
-            marginRight = Style.margin.small
+            color = StyleConstants.colors.secondary.secondaryFont
+            marginRight = StyleConstants.margin.small
             fontSize = 80.pct
         }
     }

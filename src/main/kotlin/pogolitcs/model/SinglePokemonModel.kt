@@ -6,5 +6,15 @@ data class SinglePokemonModel(
         val moveSets: List<MoveSet>
 ) {
     data class PokemonStaticInfo(val id: Int, val name: String)
-    data class PokemonIndividualStatistics(val cp: Int, val level: Float, val attack: Int, val defense: Int, val stamina: Int)
+    @Deprecated("changing it now")
+    data class PokemonIndividualStatistics1(val cp: Int, val level: Float, val attack: Int, val defense: Int, val stamina: Int)
+
+    data class PokemonIndividualStatistics(
+            val ivs: IVs,
+            val currentStats: VariablePokemonStatistics,
+            val bestGreatLeagueStats: VariablePokemonStatistics,
+            val bestUltraLeagueStats: VariablePokemonStatistics
+    )
+
+    data class VariablePokemonStatistics(val cp: Int, val level: Float)
 }

@@ -8,10 +8,12 @@ import pogolitcs.api.Api
 import pogolitcs.api.ChargedMoveDto
 import pogolitcs.api.FastMoveDto
 import pogolitcs.api.PokemonDto
+import pogolitcs.model.IVs
 import pogolitcs.model.MoveSet
 import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import pogolitcs.model.SinglePokemonModel.PokemonIndividualStatistics
+import pogolitcs.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitcs.view.SinglePokemonPage
 import react.RProps
 import kotlin.reflect.KClass
@@ -58,7 +60,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
         chargedMoves: Array<ChargedMoveDto>,
         pokemonIvs: PokemonIndividualStatistics
     ): List<MoveSet> {
-        return MoveSetsMapper(pokemon, fastMoves, chargedMoves).getData(pokemonIvs.level, pokemonIvs.attack)
+        return MoveSetsMapper(pokemon, fastMoves, chargedMoves).getData(pokemonIvs.currentStats.level, pokemonIvs.ivs.attack)
     }
 
     private fun calculatePokemonStatistics(pokemon: PokemonDto, pokemonIvs: PokemonIndividualValuesState): PokemonIndividualStatistics {
@@ -68,21 +70,37 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
         )
         if (pokemonIvs.level != null) {
             return PokemonIndividualStatistics(
-                cp = calculator.calcCp(pokemonIvs.level!!),
-                level = pokemonIvs.level!!,
-                attack = pokemonIvs.attack,
-                defense = pokemonIvs.defense,
-                stamina = pokemonIvs.stamina
+                ivs = IVs(
+                    attack = pokemonIvs.attack,
+                    defense = pokemonIvs.defense,
+                    stamina = pokemonIvs.stamina
+                ),
+                currentStats = VariablePokemonStatistics(
+                    cp = calculator.calcCp(pokemonIvs.level!!),
+                    level = pokemonIvs.level!!
+                ),
+                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcBestGreatLeagueCp()),
+                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcBestUltraLeagueCp())
             )
         } else {
             val calcLevelResult = calculator.calcLevel(pokemonIvs.cp!!)
             return PokemonIndividualStatistics(
-                cp = calcLevelResult.cp,
-                level = calcLevelResult.level,
-                attack = pokemonIvs.attack,
-                defense = pokemonIvs.defense,
-                stamina = pokemonIvs.stamina
+                ivs = IVs(
+                    attack = pokemonIvs.attack,
+                    defense = pokemonIvs.defense,
+                    stamina = pokemonIvs.stamina
+                ),
+                currentStats = VariablePokemonStatistics(
+                    cp = calcLevelResult.cp,
+                    level = calcLevelResult.level
+                ),
+                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcBestGreatLeagueCp()),
+                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcBestUltraLeagueCp())
             )
         }
+    }
+
+    private fun toVariablePokemonStatistics(calcLevelRes: CpCalculator.CalcLevelResult): VariablePokemonStatistics {
+        return VariablePokemonStatistics(calcLevelRes.cp, calcLevelRes.level)
     }
 }

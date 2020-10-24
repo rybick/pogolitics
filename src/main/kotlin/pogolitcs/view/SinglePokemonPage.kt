@@ -35,9 +35,24 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         styledDiv {
             css { +Styles.column }
             ivStatsWidget {
-                ivs = props.model.stats
+                stats = props.model.stats.currentStats
+                ivs = props.model.stats.ivs
                 onChange = {
                     props.updateState(it)
+                }
+            }
+            leagueStatsWidget {
+                name = "great"
+                stats = props.model.stats.bestGreatLeagueStats
+                onChange = {
+                    props.updateState(it) // TODO later
+                }
+            }
+            leagueStatsWidget {
+                name = "ultra"
+                stats = props.model.stats.bestUltraLeagueStats
+                onChange = {
+                    props.updateState(it) // TODO later
                 }
             }
         }
