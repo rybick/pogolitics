@@ -20,6 +20,7 @@ tasks.register("updatePokemonData") {
             (1..865).map { "$it" to "$it" },
             listOf(
                "83?form=Galarian" to "83a",
+               "105?form=Alola" to "105a",
                "150?form=Armored" to "150a",
                "487?form=Origin" to "487a"
             )
