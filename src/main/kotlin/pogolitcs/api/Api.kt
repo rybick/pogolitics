@@ -2,6 +2,7 @@ package pogolitcs.api
 
 import kotlinx.coroutines.await
 import kotlinx.coroutines.delay
+import pogolitcs.applicationRoot
 import kotlin.browser.window
 
 class Api() {
@@ -11,7 +12,7 @@ class Api() {
 
     suspend fun fetchPokemon(id: String): PokemonDto {
         if (pokemon == null || pokemon?.id != id) {
-            pokemon = window.fetch("/data/pokemon/$id.json")
+            pokemon = fetchResource("/data/pokemon/$id.json")
                     .await()
                     .json()
                     .await()
@@ -23,7 +24,7 @@ class Api() {
 
     suspend fun fetchFastMoves(): Array<FastMoveDto> {
         if (fastMoves == null) {
-            fastMoves = window.fetch("/data/attacks/fast.json")
+            fastMoves = fetchResource("/data/attacks/fast.json")
                     .await()
                     .json()
                     .await()
@@ -34,7 +35,7 @@ class Api() {
 
     suspend fun fetchChargedMoves(): Array<ChargedMoveDto> {
         if (chargedMoves == null) {
-            chargedMoves = window.fetch("/data/attacks/charged.json")
+            chargedMoves = fetchResource("/data/attacks/charged.json")
                     .await()
                     .json()
                     .await()
@@ -42,4 +43,6 @@ class Api() {
         }
         return chargedMoves!!
     }
+
+    fun fetchResource(url: String) = window.fetch(applicationRoot + url)
 }
