@@ -8,7 +8,7 @@ fun iconPath(type: PokemonType): String {
 }
 
 fun pokemonPagePath(pokemonFamilyId: Int): String {
-    return path("/#/pokemon/${pokemonFamilyId - 1}")
+    return path("/#/pokemon/${pokemonFamilyId}")
 }
 
 private fun path(url: String): String = applicationRoot + url
