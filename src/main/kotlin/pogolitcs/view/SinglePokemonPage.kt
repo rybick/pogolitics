@@ -20,8 +20,8 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
 
     override fun RBuilder.render() {
         div {
-            a(href = "/#/pokemon/${props.model.pokemon.familyId - 1}") { +"<" }
-            a(href = "/#/pokemon/${props.model.pokemon.familyId + 1}") { +">" }
+            a(href = pokemonPagePath(props.model.pokemon.familyId - 1)) { +"<" }
+            a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +">" }
         }
         styledDiv {
             css { +Styles.column }
