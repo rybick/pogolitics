@@ -1,7 +1,9 @@
 package pogolitcs.view
 
 import kotlinx.css.*
+import pogolitcs.format
 import pogolitcs.model.SinglePokemonModel
+import pogolitcs.view.BasicStylesheet.Table
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -11,14 +13,25 @@ import styled.*
 
 class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<BasicPokemonInfoRProps, MovesetsRState>(props) {
     override fun RBuilder.render() {
-        styledH1 {
-            css { +Styles.wrapper }
-            styledSpan {
-                css { +Styles.pokemonId }
-                +"#${props.data.id}"
+        styledDiv {
+            css { +BasicStylesheet.widgetWrapper }
+            styledH1 {
+                css { +Styles.wrapper }
+                styledSpan {
+                    css { +Styles.pokemonId }
+                    +"#${props.data.id}"
+                }
+                span {
+                    +props.data.name
+                }
             }
-            span {
-                +props.data.name
+            staticStat { name = "Attack"; value = props.data.baseAttack.toString() }
+            staticStat { name = "Defense"; value = props.data.baseDefense.toString() }
+            staticStat { name = "Stamina"; value = props.data.baseStamina.toString() }
+            staticStat {
+                name = "Hardiness"
+                value = props.data.hardiness.format(2)
+                info = "√(defense⋅stamina)"
             }
         }
     }

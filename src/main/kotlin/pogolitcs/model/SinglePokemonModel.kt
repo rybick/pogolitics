@@ -5,7 +5,14 @@ data class SinglePokemonModel(
         val stats: PokemonIndividualStatistics,
         val moveSets: List<MoveSet>
 ) {
-    data class PokemonStaticInfo(val id: String, val name: String) {
+    data class PokemonStaticInfo(
+        val id: String,
+        val name: String,
+        val baseAttack: Int,
+        val baseDefense: Int,
+        val baseStamina: Int,
+        val hardiness: Double
+    ) {
         val familyId: Int get() = id.replace("[^\\d]".toRegex(), "").toInt()
     }
 

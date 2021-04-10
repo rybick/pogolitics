@@ -16,6 +16,7 @@ import pogolitcs.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitcs.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitcs.view.SinglePokemonPage
 import react.RProps
+import kotlin.math.sqrt
 import kotlin.reflect.KClass
 
 class SinglePokemonController(private val api: Api): Controller<SinglePokemonController.IdRProps, SinglePokemonModel, PokemonIndividualValuesState> {
@@ -51,8 +52,18 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
     }
 
     private fun toPokemonStaticInfo(pokemon: PokemonDto): SinglePokemonModel.PokemonStaticInfo {
-        return SinglePokemonModel.PokemonStaticInfo(id = pokemon.id, name = pokemon.name)
+        return SinglePokemonModel.PokemonStaticInfo(
+            id = pokemon.id,
+            name = pokemon.name,
+            baseAttack = pokemon.baseAttack,
+            baseDefense = pokemon.baseDefense,
+            baseStamina = pokemon.baseStamina,
+            hardiness = calculateHardiness(pokemon.baseAttack, pokemon.baseStamina)
+        )
     }
+
+    private fun calculateHardiness(baseDefense: Int, baseStamina: Int): Double =
+        sqrt((baseDefense * baseStamina).toDouble())
 
     private fun calculateMoveSets(
         pokemon: PokemonDto,

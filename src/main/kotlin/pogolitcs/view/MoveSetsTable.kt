@@ -1,10 +1,10 @@
 package pogolitcs.view
 
-import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
 import kotlinx.html.unsafe
 import pogolitcs.model.MoveSet
 import pogolitcs.format
+import pogolitcs.view.BasicStylesheet.Table
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -27,24 +27,24 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
         styledDiv {
             css { +BasicStylesheet.widgetWrapper }
             styledDiv {
-                css { +Styles.table }
+                css { +Table.table }
                 styledDiv {
                     css {
-                        +Styles.row
-                        +Styles.header
+                        +Table.row
+                        +Table.header
                     }
                     styledDiv {
                         css {
-                            +Styles.cell
-                            +Styles.headerCell
-                            +Styles.first
+                            +Table.cell
+                            +Table.headerCell
+                            +Table.first
                         }
                         +"Moveset"
                     }
                     styledDiv {
                         css {
-                            +Styles.cell
-                            +Styles.headerCell
+                            +Table.cell
+                            +Table.headerCell
                         }
                         attrs {
                             onClickFunction = {
@@ -61,8 +61,8 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                     }
                     styledDiv {
                         css {
-                            +Styles.cell
-                            +Styles.headerCell
+                            +Table.cell
+                            +Table.headerCell
                         }
                         attrs {
                             onClickFunction = {
@@ -80,23 +80,23 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                 }
                 sortValues(props.values, state.sort).forEach {
                     styledDiv {
-                        css { +Styles.row }
+                        css { +Table.row }
                         styledDiv {
                             css {
-                                +Styles.cell
-                                +Styles.first
-                                +Styles.left
+                                +Table.cell
+                                +Table.first
+                                +Table.left
                             }
                             child(AttackComponent::class) { attrs.attack = it.quickAttack }
                             +" + "
                             child(AttackComponent::class) { attrs.attack = it.chargedAttack }
                         }
                         styledDiv {
-                            css { +Styles.cell }
+                            css { +Table.cell }
                             +it.dps.format(2)
                         }
                         styledDiv {
-                            css { +Styles.cell }
+                            css { +Table.cell }
                             +(it.timeToFirstAttack.inSeconds.format(2) + "s")
                         }
                     }
@@ -119,47 +119,6 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
             return if (sort.ascending) DOWN_ICON else UP_ICON
         } else {
             return SPACE
-        }
-    }
-
-    private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
-        val cell by css {
-            display = Display.tableCell
-            padding = StyleConstants.padding.medium.toString()
-            borderColor = StyleConstants.colors.lightBorder
-            borderStyle = BorderStyle.solid
-            borderBottomWidth = LinearDimension("1px")
-            borderLeftWidth = LinearDimension("1px")
-            borderTopWidth = LinearDimension("0px")
-            borderRightWidth = LinearDimension("0px")
-        }
-
-        val headerCell by css {
-            cursor = Cursor.pointer
-        }
-
-        val row by css {
-            display = Display.tableRow
-            padding = StyleConstants.padding.small.toString()
-        }
-
-        val header by css {
-            backgroundColor = StyleConstants.colors.primary.bg
-            color = StyleConstants.colors.primary.font
-            fontWeight = FontWeight.bold
-        }
-
-        val table by css {
-            display = Display.table
-            width = 100.pct
-        }
-
-        val first by css {
-            borderLeftWidth = LinearDimension("0px")
-        }
-
-        val left by css {
-            textAlign = TextAlign.left
         }
     }
 }
