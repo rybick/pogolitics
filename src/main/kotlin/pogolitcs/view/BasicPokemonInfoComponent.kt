@@ -25,18 +25,21 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
                     +props.data.name
                 }
             }
-            staticStat { name = "Attack"; value = props.data.baseAttack.toString() }
-            staticStat { name = "Defense"; value = props.data.baseDefense.toString() }
-            staticStat { name = "Stamina"; value = props.data.baseStamina.toString() }
-            staticStat {
-                name = "Hardiness"
-                value = props.data.hardiness.format(2)
-                info = "√(defense⋅stamina)"
+            styledDiv {
+                css { +Styles.staticStatsWrapper }
+                staticStat { name = "Attack"; value = props.data.baseAttack.toString() }
+                staticStat { name = "Defense"; value = props.data.baseDefense.toString() }
+                staticStat { name = "Stamina"; value = props.data.baseStamina.toString() }
+                staticStat {
+                    name = "Hardiness"
+                    value = props.data.hardiness.format(2)
+                    info = "√(defense⋅stamina)"
+                }
             }
         }
     }
 
-    private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
+    private object Styles: StyleSheet("BasicPokemonInfoComponentStyles", isStatic = true) {
         val wrapper by css {
             textAlign = TextAlign.center
         }
@@ -45,6 +48,10 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
             color = StyleConstants.colors.secondary.secondaryFont
             marginRight = StyleConstants.margin.small
             fontSize = 80.pct
+        }
+
+        val staticStatsWrapper by css {
+            textAlign = TextAlign.center
         }
     }
 }
