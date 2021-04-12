@@ -1,9 +1,6 @@
 package pogolitcs.view
 
-import kotlinx.css.Float
-import kotlinx.css.float
-import kotlinx.css.pct
-import kotlinx.css.width
+import kotlinx.css.*
 import pogolitcs.PageRProps
 import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
@@ -24,16 +21,13 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +">" }
         }
         styledDiv {
-            css { +Styles.column }
+            css { +Styles.leftWrapper }
             basicPokemonInfo {
                 data = props.model.pokemon
             }
-            moveSetsTable {
-                values = props.model.moveSets
-            }
         }
         styledDiv {
-            css { +Styles.column }
+            css { +Styles.rightWrapper }
             ivStatsWidget {
                 stats = props.model.stats.currentStats
                 ivs = props.model.stats.ivs
@@ -66,12 +60,36 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                 }
             }
         }
+        styledDiv {
+            css { +Styles.leftWrapper }
+            moveSetsTable {
+                values = props.model.moveSets
+            }
+        }
+        styledDiv {
+            css { +Styles.rightWrapper }
+            /* space for widgets that will always be last */
+        }
     }
 
     private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
-        val column by css {
+        const val smallScreenMediaQuery = "screen and (max-width: 700px)"
+
+        val leftWrapper by css {
             width = 50.pct
             float = Float.left
+            media(smallScreenMediaQuery) {
+                width = 100.pct
+            }
+        }
+
+        val rightWrapper by css {
+            width = 50.pct
+            float = Float.right
+            media(smallScreenMediaQuery) {
+                width = 100.pct
+                float = Float.left
+            }
         }
     }
 }
