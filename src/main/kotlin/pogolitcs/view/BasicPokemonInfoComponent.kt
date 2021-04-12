@@ -3,7 +3,6 @@ package pogolitcs.view
 import kotlinx.css.*
 import pogolitcs.format
 import pogolitcs.model.SinglePokemonModel
-import pogolitcs.view.BasicStylesheet.Table
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -45,8 +44,8 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
         }
 
         val pokemonId by css {
-            color = StyleConstants.colors.secondary.secondaryFont
-            marginRight = StyleConstants.margin.small
+            color = StyleConstants.Colors.secondary.secondaryText
+            marginRight = StyleConstants.Margin.small
             fontSize = 80.pct
         }
 

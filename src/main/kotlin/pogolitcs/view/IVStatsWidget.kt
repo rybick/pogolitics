@@ -132,15 +132,15 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
             display = Display.flex
             flexDirection = FlexDirection.column
             alignItems = Align.center
-            paddingBottom = StyleConstants.padding.big
+            paddingBottom = StyleConstants.Padding.big
         }
 
         val innerWrapper by css {
             display = Display.flex
             flexDirection = FlexDirection.column
             alignItems = Align.center
-            border = "${StyleConstants.Border.thick} solid ${StyleConstants.colors.primary.bg}"
-            padding = "${StyleConstants.padding.big}"
+            border = "${StyleConstants.Border.thick} solid ${StyleConstants.Colors.primary.bg}"
+            padding = "${StyleConstants.Padding.big}"
             borderRadius = 20.px
         }
 

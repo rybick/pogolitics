@@ -1,12 +1,9 @@
 package pogolitcs.view
 
 import kotlinx.css.*
-import kotlinx.html.js.onChangeFunction
 import kotlinx.html.js.onClickFunction
-import pogolitcs.model.PokemonIndividualValuesState
 import pogolitcs.model.SinglePokemonModel
 import react.*
-import react.dom.span
 import styled.StyleSheet
 import styled.css
 import styled.styledDiv
@@ -65,7 +62,7 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
         }
 
         val group by css {
-            marginLeft = StyleConstants.margin.big
+            marginLeft = StyleConstants.Margin.big
             // display = Display.tableRow
         }
 
@@ -74,7 +71,7 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
         }
 
         val cell by css {
-            padding = StyleConstants.padding.small.toString()
+            padding = StyleConstants.Padding.small.toString()
             display = Display.tableCell
         }
     }

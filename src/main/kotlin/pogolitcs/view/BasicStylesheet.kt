@@ -7,16 +7,16 @@ object BasicStylesheet: StyleSheet("ComponentStyles", isStatic = true) {
 
     val widgetWrapper by css {
         display = Display.block
-        margin = StyleConstants.margin.medium.toString()
+        margin = StyleConstants.Margin.medium.toString()
     }
 
     val widgetHeader by css {
-        paddingTop = StyleConstants.padding.medium
-        paddingLeft = StyleConstants.padding.medium
-        paddingBottom = StyleConstants.padding.medium
-        paddingRight = StyleConstants.padding.medium
-        backgroundColor = StyleConstants.colors.primary.bg
-        color = StyleConstants.colors.primary.font
+        paddingTop = StyleConstants.Padding.medium
+        paddingLeft = StyleConstants.Padding.medium
+        paddingBottom = StyleConstants.Padding.medium
+        paddingRight = StyleConstants.Padding.medium
+        backgroundColor = StyleConstants.Colors.primary.bg
+        color = StyleConstants.Colors.primary.text
         fontWeight = FontWeight.bold
         textAlign = TextAlign.center
         textTransform = TextTransform.capitalize;
@@ -30,8 +30,8 @@ object BasicStylesheet: StyleSheet("ComponentStyles", isStatic = true) {
 
         val cell by css {
             display = Display.tableCell
-            padding = StyleConstants.padding.medium.toString()
-            borderColor = StyleConstants.colors.lightBorder
+            padding = StyleConstants.Padding.medium.toString()
+            borderColor = StyleConstants.Colors.lightBorder
             borderStyle = BorderStyle.solid
             borderBottomWidth = LinearDimension("1px")
             borderLeftWidth = LinearDimension("1px")
@@ -45,12 +45,12 @@ object BasicStylesheet: StyleSheet("ComponentStyles", isStatic = true) {
 
         val row by css {
             display = Display.tableRow
-            padding = StyleConstants.padding.small.toString()
+            padding = StyleConstants.Padding.small.toString()
         }
 
         val header by css {
-            backgroundColor = StyleConstants.colors.primary.bg
-            color = StyleConstants.colors.primary.font
+            backgroundColor = StyleConstants.Colors.primary.bg
+            color = StyleConstants.Colors.primary.text
             fontWeight = FontWeight.bold
         }
 
