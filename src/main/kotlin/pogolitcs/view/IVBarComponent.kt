@@ -107,7 +107,7 @@ class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRPr
         }
     }
 
-    private class Styles(val unit: LinearDimension): StyleSheet("ComponentStyles", isStatic = false) {
+    private class Styles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles", isStatic = false) {
         private val regularColor = Color("#f0911d")
         private val strongColor = Color("#e18077")
         private val gray = Color("#e2e2e2")
@@ -122,23 +122,27 @@ class IVBarComponent(props: IVBarComponentRProps) : RComponent<IVBarComponentRPr
             width = 320.u
             paddingLeft = 6.u
             paddingRight = 6.u
+            paddingTop = 10.u
+            paddingBottom = 10.u
         }
 
         val labelsWrapper by css {
-            display = Display.table
-            width = 100.pct
+            display = Display.flex
+            flexDirection = FlexDirection.row
         }
 
         val label by css {
-            display = Display.tableCell
+            display = Display.flex
+            flexDirection = FlexDirection.columnReverse
             paddingLeft = 5.u
-            paddingTop = 20.u
             fontWeight = FontWeight("600")
             color = regularColor
         }
 
         val inputWrapper by css {
-            display = Display.tableCell
+            flexGrow = 1.0
+            paddingBottom = 3.u
+            paddingRight = 10.u
             textAlign = TextAlign.right
         }
 

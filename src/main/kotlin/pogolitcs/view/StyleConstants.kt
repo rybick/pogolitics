@@ -11,11 +11,16 @@ object StyleConstants {
         secondary = ColorGroup(bg = "#ffffff", font = "#000000", secondaryFont = "#aaaaaa"),
         lightBorder = Color("rgba(0, 60, 130, 0.25)")
     )
-    val padding = Padding(small = 5.px, medium = 10.px)
+    val padding = Padding(small = 5.px, medium = 10.px, big = 20.px)
     val margin = Margin(small = 5.px, medium = 10.px, big = 20.px)
+    // TODO make them into objects too
+
+    object Border {
+        val thick = 5.px
+    }
 
     class Colors(val primary: ColorGroup, val secondary: ColorGroup, val lightBorder: Color)
-    class Padding(val small: LinearDimension, val medium: LinearDimension)
+    class Padding(val small: LinearDimension, val medium: LinearDimension, val big: LinearDimension)
     class Margin(val small: LinearDimension, val medium: LinearDimension, val big: LinearDimension)
 
     class ColorGroup(val bg: Color, val font: Color, val secondaryFont: Color) {
