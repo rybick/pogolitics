@@ -9,15 +9,15 @@ import react.RComponent
 import react.RState
 import react.dom.a
 import react.dom.div
-import styled.StyleSheet
-import styled.css
-import styled.styledDiv
+import styled.*
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
     override fun RBuilder.render() {
-        div {
+        styledDiv {
+            css { +Styles.headerWrapper }
             a(href = pokemonPagePath(props.model.pokemon.familyId - 1)) { +"<" }
+            styledSpan { css { +Styles.spacer } }
             a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +">" }
         }
         styledDiv {
@@ -74,6 +74,19 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
 
     private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
         const val smallScreenMediaQuery = "screen and (max-width: 700px)"
+
+        val headerWrapper by css {
+            display = Display.flex
+            fontSize = 160.pct
+            a {
+                paddingLeft = StyleConstants.Padding.big
+                paddingRight = StyleConstants.Padding.big
+            }
+        }
+
+        val spacer by css {
+            flexGrow = 1.0
+        }
 
         val leftWrapper by css {
             width = 50.pct
