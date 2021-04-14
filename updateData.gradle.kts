@@ -39,6 +39,22 @@ tasks.register("updateData") {
     dependsOn("updateMovesData")
 }
 
+tasks.register("tmp") {
+    doLast {
+        (1..8).map { gen ->
+            URL("https://db.pokemongohub.net/api/pokemon/with-generation/$gen")
+                .readText()
+                .let(::parseJsonArray)
+                .map { it.asJsonObject() }
+                .map { json(
+                    "id" to it.getString("id"),
+                    "form" to it.getString("form"),
+                    "generation" to gen
+                ) }.forEach { println(it.getString("id")) }
+        }
+    }
+}
+
 fun downloadPokemonData(source: String, target: String) {
     val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$source").readText().let(::parseNullableJsonObject)
             ?: return
