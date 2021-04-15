@@ -58,12 +58,15 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
             baseAttack = pokemon.baseAttack,
             baseDefense = pokemon.baseDefense,
             baseStamina = pokemon.baseStamina,
-            hardiness = calculateHardiness(pokemon.baseAttack, pokemon.baseStamina)
+            hardiness = calculateHardiness(pokemon.baseDefense, pokemon.baseStamina)
         )
     }
 
     private fun calculateHardiness(baseDefense: Int, baseStamina: Int): Double =
         sqrt((baseDefense * baseStamina).toDouble())
+
+    private fun calculateHardiness(defense: Double, stamina: Double): Double =
+        sqrt(defense * stamina)
 
     private fun calculateMoveSets(
         pokemon: PokemonDto,
@@ -86,38 +89,42 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
                     defense = pokemonIvs.defense,
                     stamina = pokemonIvs.stamina
                 ),
-                currentStats = VariablePokemonStatistics(
-                    cp = calculator.calcCp(pokemonIvs.level!!),
-                    level = pokemonIvs.level!!
-                ),
-                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_GREAT_CP)),
-                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_ULTRA_CP)),
+                currentStats = toVariablePokemonStatistics(calculator.calcStatisticsByLevel(pokemonIvs.level!!)),
+                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcStatisticsByCp(MAX_GREAT_CP)),
+                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcStatisticsByCp(MAX_ULTRA_CP)),
                 bestStatsWithoutBoost = variablePokemonStatisticsAtBasicMaxLevel(calculator)
             )
         } else {
-            val calcLevelResult = calculator.calcLevel(pokemonIvs.cp!!)
             return PokemonIndividualStatistics(
                 ivs = IVs(
                     attack = pokemonIvs.attack,
                     defense = pokemonIvs.defense,
                     stamina = pokemonIvs.stamina
                 ),
-                currentStats = VariablePokemonStatistics(
-                    cp = calcLevelResult.cp,
-                    level = calcLevelResult.level
-                ),
-                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_GREAT_CP)),
-                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcLevel(MAX_ULTRA_CP)),
+                currentStats = toVariablePokemonStatistics(calculator.calcStatisticsByCp(pokemonIvs.cp!!)),
+                bestGreatLeagueStats = toVariablePokemonStatistics(calculator.calcStatisticsByCp(MAX_GREAT_CP)),
+                bestUltraLeagueStats = toVariablePokemonStatistics(calculator.calcStatisticsByCp(MAX_ULTRA_CP)),
                 bestStatsWithoutBoost = variablePokemonStatisticsAtBasicMaxLevel(calculator)
             )
         }
     }
 
     private fun variablePokemonStatisticsAtBasicMaxLevel(calculator: CpCalculator): VariablePokemonStatistics {
-        return VariablePokemonStatistics(calculator.calcCp(BASIC_MAX_LEVEL), BASIC_MAX_LEVEL)
+        return convertToVariablePokemonStatistics(calculator.calcStatisticsByLevel(BASIC_MAX_LEVEL))
     }
 
-    private fun toVariablePokemonStatistics(calcLevelRes: CpCalculator.CalcLevelResult): VariablePokemonStatistics {
-        return VariablePokemonStatistics(calcLevelRes.cp, calcLevelRes.level)
+    private fun toVariablePokemonStatistics(calculatedStatistics: CpCalculator.CalculatedPokemonStatistics): VariablePokemonStatistics {
+        return convertToVariablePokemonStatistics(calculatedStatistics)
+    }
+
+    private fun convertToVariablePokemonStatistics(calculatedStatistics: CpCalculator.CalculatedPokemonStatistics): VariablePokemonStatistics {
+        return VariablePokemonStatistics(
+            cp = calculatedStatistics.cp,
+            level = calculatedStatistics.level,
+            attack = calculatedStatistics.attack,
+            defense = calculatedStatistics.defense,
+            stamina = calculatedStatistics.stamina,
+            hardiness = calculateHardiness(calculatedStatistics.defense, calculatedStatistics.stamina)
+        )
     }
 }

@@ -24,5 +24,12 @@ data class SinglePokemonModel(
             val bestStatsWithoutBoost: VariablePokemonStatistics
     )
 
-    data class VariablePokemonStatistics(val cp: Int, val level: Float)
+    data class VariablePokemonStatistics(
+        val cp: Int,
+        val level: Float,
+        val attack : Double,
+        val defense : Double,
+        val stamina : Double,
+        val hardiness: Double
+    )
 }

@@ -2,6 +2,7 @@ package pogolitcs.view
 
 import kotlinx.css.*
 import kotlinx.html.js.onClickFunction
+import pogolitcs.format
 import pogolitcs.model.SinglePokemonModel
 import react.*
 import styled.StyleSheet
@@ -25,28 +26,26 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
                 css {
                     + Styles.contentWrapper
                 }
-                styledSpan {
-                    css { + Styles.group }
-                    styledSpan {
-                        css { + Styles.label }
-                        +"CP: "
-                    }
-                    styledSpan {
-                        css { + Styles.value }
-                        +"${props.stats.cp}"
-                    }
-                }
-                styledSpan {
-                    css { + Styles.group }
-                    styledSpan {
-                        css { + Styles.label }
-                        +"level: "
-                    }
-                    styledSpan {
-                        css { + Styles.value }
-                        +"${props.stats.level}"
-                    }
-                }
+                stat("CP", "${props.stats.cp}")
+                stat("level", "${props.stats.level}")
+                stat("hardiness", props.stats.hardiness.format(2))
+                stat("attack", props.stats.attack.format(2))
+                stat("defense", props.stats.defense.format(2))
+                stat("stamina", props.stats.stamina.format(2))
+            }
+        }
+    }
+
+    private fun RBuilder.stat(label: String, value: String) {
+        styledSpan {
+            css { + Styles.group }
+            styledSpan {
+                css { + Styles.label }
+                +"$label: "
+            }
+            styledSpan {
+                css { + Styles.value }
+                +value
             }
         }
     }
@@ -63,11 +62,14 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
 
         val group by css {
             marginLeft = StyleConstants.Margin.big
-            // display = Display.tableRow
         }
 
         val contentWrapper by css {
             cursor = Cursor.pointer
+            display = Display.flex
+            flexWrap = FlexWrap.wrap
+            flexDirection = FlexDirection.row
+            justifyContent = JustifyContent.center
         }
 
         val cell by css {
