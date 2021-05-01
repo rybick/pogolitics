@@ -81,16 +81,32 @@ object CpMultiplayer {
         39F   to 0.784637,
         39.5F to 0.7874736075,
         40F   to 0.7903,
-        40.5F to 0.79280394673,
+        40.5F to 0.792803968,
         41F   to 0.79530001,
+        41.5F to 0.797800015,
         42F   to 0.8003,
+        42.5F to 0.802799995,
         43F   to 0.8053,
+        43.5F to 0.8078,
         44F   to 0.81029999,
-        45F   to 0.81529999
+        44.5F to 0.812799985,
+        45F   to 0.81529999,
+        45.5F to 0.81779999,
+        46F   to 0.82029999,
+        46.5F to 0.82279999,
+        47F   to 0.82529999,
+        47.5F to 0.82779999,
+        48F   to 0.83029999,
+        48.5F to 0.83279999,
+        49F   to 0.83529999,
+        49.5F to 0.83779999,
+        50F   to 0.84029999,
+        50.5F to 0.84279999,
+        51F   to 0.84529999
     )
 
     operator fun get(level: Float): Double {
-        return map[level] ?: throw IndexOutOfBoundsException("Level must be in [1, 41] range and be a multiple of 0.5")
+        return map[level] ?: throw IndexOutOfBoundsException("Level must be in [1, 51] range and be a multiple of 0.5")
     }
 }
 
