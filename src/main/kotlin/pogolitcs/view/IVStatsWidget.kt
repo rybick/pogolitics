@@ -36,7 +36,7 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                         styledSpan {
                             input(InputType.number) {
                                 attrs.min = "1"
-                                attrs.max = "41"
+                                attrs.max = "51"
                                 attrs.step = "0.5"
                                 attrs.pattern = "\\d*"
                                 attrs.key = "${props.stats.level}"
