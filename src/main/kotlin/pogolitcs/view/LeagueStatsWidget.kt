@@ -29,9 +29,9 @@ class LeagueStatsWidget(props: LeagueStatsWidgetRProps) : RComponent<LeagueStats
                 stat("CP", "${props.stats.cp}")
                 stat("level", "${props.stats.level}")
                 stat("hardiness", props.stats.hardiness.format(2))
-                stat("attack", props.stats.attack.format(2))
-                stat("defense", props.stats.defense.format(2))
-                stat("stamina", props.stats.stamina.format(2))
+                stat("atk", props.stats.attack.format(2))
+                stat("def", props.stats.defense.format(2))
+                stat("sta", props.stats.stamina.format(2))
             }
         }
     }
