@@ -7,6 +7,7 @@ class NumberExtensionTest {
     fun format() {
         assertEquals("123.45", 123.4511F.format(2))
         assertEquals("0.451", 0.4511F.format(3))
-        assertEquals("12.00", 12F.format(2))
+        assertEquals("12", 12F.format(2))
+        assertEquals("12.5", 12.5F.format(2))
     }
 }
