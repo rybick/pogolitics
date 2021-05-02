@@ -77,6 +77,24 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                             unsafe { +("TTFA" + getIcon(state.sort, 2)) }
                         }
                     }
+                    styledDiv {
+                        css {
+                            +Table.cell
+                            +Table.headerCell
+                        }
+                        attrs {
+                            onClickFunction = {
+                                setState {
+                                    val sort = this.sort
+                                    this.sort = Sort(
+                                        columnId = 3,
+                                        ascending = if (sort?.columnId == 3) !sort.ascending else false
+                                    )
+                                }
+                            }
+                            unsafe { +("MTBA" + getIcon(state.sort, 3)) }
+                        }
+                    }
                 }
                 sortValues(props.values, state.sort).forEach {
                     styledDiv {
@@ -98,6 +116,10 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                         styledDiv {
                             css { +Table.cell }
                             +(it.timeToFirstAttack.inSeconds.format(2) + "s")
+                        }
+                        styledDiv {
+                            css { +Table.cell }
+                            +(it.meanTimeBetweenAttacks.inSeconds.format(2) + "s")
                         }
                     }
                 }

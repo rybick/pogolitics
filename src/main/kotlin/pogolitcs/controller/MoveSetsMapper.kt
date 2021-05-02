@@ -32,7 +32,8 @@ class MoveSetsMapper(
                 quickAttack = Attack(PokemonType.fromString(fastMove.type), fastMove.name),
                 chargedAttack = Attack(PokemonType.fromString(chargedMove.type), chargedMove.name),
                 dps = calculator.dps().toFloat(),
-                timeToFirstAttack = calculator.timeToFirstAttack()
+                timeToFirstAttack = calculator.timeToFirstAttack(),
+                meanTimeBetweenAttacks = calculator.meanTimeBetweenAttacks()
             )
         }
     }
