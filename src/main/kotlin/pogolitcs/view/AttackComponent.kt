@@ -1,20 +1,21 @@
 package pogolitcs.view
 
+import kotlinx.css.*
 import pogolitcs.model.Attack
-import kotlinx.css.LinearDimension
-import kotlinx.css.height
-import kotlinx.css.margin
 import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
 import react.dom.span
+import styled.StyleSheet
 import styled.css
 import styled.styledImg
+import styled.styledSpan
 
 class AttackComponent: RComponent<AttackComponentProps, RState>() {
     override fun RBuilder.render() {
-        span {
+        styledSpan {
+            css { + Styles.wrapper }
             styledImg {
                 css {
                     height = LinearDimension("1.5rem")
@@ -25,6 +26,12 @@ class AttackComponent: RComponent<AttackComponentProps, RState>() {
                 }
             }
             + props.attack.name
+        }
+    }
+
+    private object Styles: StyleSheet("AttackComponentStyles", isStatic = true) {
+        val wrapper by css {
+            display = Display.inlineBlock
         }
     }
 }
