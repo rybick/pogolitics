@@ -18,10 +18,18 @@ window.fetch("/data/attacks/charged.json")
 window.fetch("/data/attacks/fast.json")
     .then(o => o.text().then(x => chargedAttacks = JSON.parse(x)))
 
-function calc() {
+function calcForHalloweenCup() {
+    return calcForCustomCup(1500, ["ghost", "dark", "poison", "fairy", "bug"]);
+}
+
+function calcForElementalCup() {
+    return calcForCustomCup(500, ["grass", "fire", "water"]);
+}
+
+function calcForCustomCup(cpLimit, allowedTypes) {
     return pokemonList.map(p => {
         let ivs = {baseAttack: 15, baseDefense: 15, baseStamina: 15}
-        let res = new PGL.CpCalculator(p, ivs).calcLevel_za3lpa$(1500)
+        let res = new PGL.CpCalculator(p, ivs).calcStatisticsByCp_za3lpa$(cpLimit)
         let level = res.level
         let cp = res.cp
         let stats = {
@@ -32,7 +40,7 @@ function calc() {
         let tankiness = Math.sqrt(stats.defense * stats.stamina)
         return { pokemon: p, stats: stats, level: level, cp: cp, tankiness: tankiness }
     })
-        .filter(p => ["ghost", "dark", "poison", "fairy", "bug"].filter(t => p.pokemon.types.primary === t || p.pokemon.types.secondary === t).length > 0)
+        .filter(p => allowedTypes.filter(t => p.pokemon.types.primary === t || p.pokemon.types.secondary === t).length > 0)
         .sort((a, b) => b.tankiness - a.tankiness)
         .map(p => ({
             name: p.pokemon.name,
