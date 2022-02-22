@@ -1,13 +1,12 @@
 plugins {
-    id("org.jetbrains.kotlin.js") version "1.3.70-eap-184"
+    id("org.jetbrains.kotlin.js") version "1.3.70"
 }
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
 repositories {
-    maven { setUrl("https://dl.bintray.com/kotlin/kotlin-eap") }
-    maven("https://kotlin.bintray.com/kotlin-js-wrappers/")
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/kotlin/kotlin-js-wrappers/")
     mavenCentral()
     jcenter()
 }
