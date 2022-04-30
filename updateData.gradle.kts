@@ -53,6 +53,12 @@ fun updateData() {
     val (fastPvpAttacks, chargedPvpAttacks) = gameData
         .filter { getData(it)["combatMove"] != null }
         .partitionLogged(::isFastAttack)
+    filterAndConvertPokemonData(pokemonData)
+        .take(3)
+        .forEach {
+            val id = it.getInt("id")
+            File("./src/main/resources/data/pokemon/${id}TMP.json").writeText(it.toString())
+        }
     combineAndConvertFastMovesData(fastPveAttacks, fastPvpAttacks)
         .also {
             File("./src/main/resources/data/attacks/fast.json").writeText(it.toString())
@@ -63,10 +69,27 @@ fun updateData() {
         }
 }
 
+fun filterAndConvertPokemonData(pokemonData: List<JsonValue>): List<JsonObject> =
+    pokemonData
+        .map(::getData)
+        .groupBy { it.getJsonObject("pokemonSettings").getString("pokemonId") }
+        .mapValues { (key, value) ->
+            value
+                .filter { it.getJsonObject("pokemonSettings")["form"] == null }
+                .also {
+                    if (it.size != 1) {
+                        throw Exception("multiple pokemon with basic form for $key: ${it.map { it.getString("templateId") }}")
+                    }
+                }
+                .first()
+        }
+        .values
+        .map { combinePokemonData(it.getString("templateId"), it.getJsonObject("pokemonSettings"), emptyList()) }
+
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
 
 fun isFastAttack(element: JsonValue) =
-    // it may mismatch some attacks like V0232_MOVE_WATER_GUN_FAST_BLASTOISE,
+// it may mismatch some attacks like V0232_MOVE_WATER_GUN_FAST_BLASTOISE,
     // but it is not currently used and it's best we can do for now
     "_FAST$".toRegex()
         .containsMatchIn(element.asJsonObject().getString("templateId"))
@@ -101,17 +124,23 @@ fun downloadAttackData(sourceUrl: URL, targetFile: File, converter: (JsonArray) 
 }
  */
 
-fun combineAndConvertFastMovesData(fastPveAttacks: Collection<JsonValue>, fastPvpAttacks:  Collection<JsonValue>): List<JsonObject> =
+fun combineAndConvertFastMovesData(
+    fastPveAttacks: Collection<JsonValue>,
+    fastPvpAttacks: Collection<JsonValue>
+): List<JsonObject> =
     matchPveAndPvpMoves(fastPveAttacks, fastPvpAttacks, "fast")
         .map { (pve, pvp) -> convertFastMoveData(pve, pvp) }
 
-fun combineAndConvertChargedMovesData(chargedPveAttacks: Collection<JsonValue>, chargedPvpAttacks:  Collection<JsonValue>): List<JsonObject> =
+fun combineAndConvertChargedMovesData(
+    chargedPveAttacks: Collection<JsonValue>,
+    chargedPvpAttacks: Collection<JsonValue>
+): List<JsonObject> =
     matchPveAndPvpMoves(chargedPveAttacks, chargedPvpAttacks, "charged")
         .map { (pve, pvp) -> convertChargedMoveData(pve, pvp) }
 
 fun matchPveAndPvpMoves(
     pveAttacks: Collection<JsonValue>,
-    pvpAttacks:  Collection<JsonValue>,
+    pvpAttacks: Collection<JsonValue>,
     moveType: String
 ): List<Pair<JsonObject, JsonObject>> {
     val pveAttacksById: Map<String, JsonObject> = pveAttacks
@@ -138,16 +167,16 @@ fun convertFastMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
             "name" to convertToPrettyNameForFastAttack(pve.getString("vfxName")),
             "type" to convertType(pve.getString("pokemonType")),
             "pvp" to json(
-                "power" to (pvp.getIntOrNull("power") ?: 0),
-                "energy" to (pvp.getIntOrNull("energyDelta") ?: 0),
+                "power" to pvp.getInt("power", 0),
+                "energy" to pvp.getInt("energyDelta", 0),
                 // raw data has duration null if it lasts one turn, 1 if it lasts 2 turns and so on
                 // since in the previous source (go hub), the duration was simply measured in turns
                 // we recalculate it at this moment instead of production code
-                "duration" to (pvp.getIntOrNull("durationTurns") ?: 0) + 1
+                "duration" to pvp.getInt("durationTurns", 0) + 1
             ),
             "pve" to json(
-                "power" to (pve.getIntOrNull("power") ?: 0),
-                "energy" to (pve.getIntOrNull("energyDelta") ?: 0),
+                "power" to pve.getInt("power", 0),
+                "energy" to pve.getInt("energyDelta", 0),
                 "duration" to pve.getInt("durationMs")
             )
         )
@@ -170,12 +199,12 @@ fun convertChargedMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
             "name" to convertToPrettyNameForChargedAttack(pve.getString("vfxName")),
             "type" to convertType(pve.getString("pokemonType")),
             "pvp" to json(
-                "power" to (pvp.getIntOrNull("power") ?: 0),
-                "energy" to -(pvp.getIntOrNull("energyDelta") ?: 0)
+                "power" to pvp.getInt("power", 0),
+                "energy" to -pvp.getInt("energyDelta", 0)
             ),
             "pve" to json(
-                "power" to (pve.getIntOrNull("power") ?: 0),
-                "energy" to -(pve.getIntOrNull("energyDelta") ?: 0),
+                "power" to pve.getInt("power", 0),
+                "energy" to -pve.getInt("energyDelta", 0),
                 "duration" to pve.getInt("durationMs")
             )
         )
@@ -188,29 +217,27 @@ fun convertToPrettyNameForChargedAttack(vfxName: String): String =
         .split("_")
         .joinToString(" ") { it.toLowerCase().capitalize() }
 
-fun convertType(typeString: String): String {
-    val typePrefix = "POKEMON_TYPE"
-    return if (typeString.startsWith("POKEMON_TYPE")) {
-        typeString.substring(typePrefix.length + 1).toLowerCase()
-    } else throw Exception("Misformatted type: $typeString")
-}
-
-fun combinePokemonData(pokemonData: JsonObject, movesData: JsonArray): JsonObject {
+fun combinePokemonData(templateId: String, pokemonSettings: JsonObject, movesData: Collection<JsonObject>): JsonObject {
+    println(templateId)
     val quickMoves: Set<JsonObject> = movesData.map { it.asJsonObject().getJsonObject("quickMove") }.toSet()
     val chargedMoves: Set<JsonObject> = movesData.map { it.asJsonObject().getJsonObject("chargeMove") }.toSet()
-    val pokemon = pokemonData
-    return json(
-        "id" to pokemon.getInt("id"),
-        "name" to pokemon.getString("name"),
-        "baseAttack" to pokemon.getInt("atk"),
-        "baseDefense" to pokemon.getInt("def"),
-        "baseStamina" to pokemon.getInt("sta"),
-        "types" to json("primary" to pokemon.getString("type1"), "secondary" to pokemon.getString("type2", null)),
-        "moves" to json(
-            "quick" to toJsonArray(quickMoves.map(::mapMove)),
-            "charged" to toJsonArray(chargedMoves.map(::mapMove))
+    return with(pokemonSettings) {
+        json(
+            "id" to convertToPokedexNumber(templateId),
+            "name" to convertToPrettyPokemonName(getString("pokemonId")),
+            "baseAttack" to getJsonObject("stats").getInt("baseAttack", 0),
+            "baseDefense" to getJsonObject("stats").getInt("baseDefense", 0),
+            "baseStamina" to getJsonObject("stats").getInt("baseStamina", 0),
+            "types" to json(
+                "primary" to getString("type").let(::convertType),
+                "secondary" to getString("type2", null)?.let(::convertType)
+            ),
+            "moves" to json(
+                "quick" to toJsonArray(quickMoves.map(::mapMove)),
+                "charged" to toJsonArray(chargedMoves.map(::mapMove))
+            )
         )
-    )
+    }
 }
 
 fun mapMove(move: JsonObject): JsonObject {
@@ -221,6 +248,20 @@ fun mapMove(move: JsonObject): JsonObject {
         "legacy" to (move.getInt("isLegacy") != 0),
         "exclusive" to (move.getInt("isExclusive") != 0)
     )
+}
+
+fun convertToPokedexNumber(templateId: String): Int =
+    if (templateId[0] == 'V' && templateId.substring(1, 5).matches("[0-9]*".toRegex())) {
+        templateId.substring(1, 5).toInt()
+    } else throw Exception("Misformatted pokemon templateId: $templateId")
+
+fun convertToPrettyPokemonName(pokemonId: String): String = pokemonId.toLowerCase().capitalize()
+
+fun convertType(typeString: String): String {
+    val typePrefix = "POKEMON_TYPE"
+    return if (typeString.startsWith("POKEMON_TYPE")) {
+        typeString.substring(typePrefix.length + 1).toLowerCase()
+    } else throw Exception("Misformatted type: $typeString")
 }
 
 fun json(vararg pairs: Pair<String, Any?>): JsonObject {
@@ -262,8 +303,6 @@ fun toJsonArray(list: Collection<JsonValue>): JsonArray {
     list.forEach { x.add(it) }
     return x.build()
 }
-
-fun JsonObject.getIntOrNull(key: String): Int? = getJsonNumber(key)?.intValue()
 
 inline fun <T> Iterable<T>.partitionLogged(predicate: (T) -> Boolean): Pair<List<T>, List<T>> =
     partition {
