@@ -3,7 +3,7 @@ import javax.json.Json
 import javax.json.JsonObject
 import javax.json.JsonArray
 import javax.json.JsonValue
-import java.lang.Exception as Exception
+import java.lang.Exception
 
 buildscript {
     repositories {
@@ -53,11 +53,14 @@ fun updateData() {
     val (fastPvpAttacks, chargedPvpAttacks) = gameData
         .filter { getData(it)["combatMove"] != null }
         .partitionLogged(::isFastAttack)
-    combineFastMovesData(fastPveAttacks, fastPvpAttacks)
+    combineAndConvertFastMovesData(fastPveAttacks, fastPvpAttacks)
         .also {
             File("./src/main/resources/data/attacks/fast.json").writeText(it.toString())
         }
-    println(gameData[0])
+    combineFastAndChargedAttacks(chargedPveAttacks, chargedPvpAttacks)
+        .also {
+            File("./src/main/resources/data/attacks/charged.json").writeText(it.toString())
+        }
 }
 
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
@@ -98,7 +101,7 @@ fun downloadAttackData(sourceUrl: URL, targetFile: File, converter: (JsonArray) 
 }
  */
 
-fun combineFastMovesData(fastPveAttacks: Collection<JsonValue>, fastPvpAttacks:  Collection<JsonValue>): List<JsonObject> {
+fun combineAndConvertFastMovesData(fastPveAttacks: Collection<JsonValue>, fastPvpAttacks:  Collection<JsonValue>): List<JsonObject> {
     assert(fastPveAttacks.size == fastPvpAttacks.size)
     val fastPveAttacksById: Map<String, JsonObject> = fastPveAttacks
         .map { getData(it) }
@@ -136,7 +139,7 @@ fun convertFastMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
             "pve" to json(
                 "power" to (pve.getIntOrNull("power") ?: 0),
                 "energy" to (pve.getIntOrNull("energyDelta") ?: 0),
-                "duration" to (pve.getInt("durationMs") ?: 0)
+                "duration" to pve.getInt("durationMs")
             )
         )
     } catch (e: Exception) {
@@ -148,38 +151,62 @@ fun convertToPrettyNameForFastAttack(vfxName: String): String {
     return if (vfxName.endsWith("_fast")) {
         vfxName.dropLast(suffix.length)
             .split("_")
-            .map { it.toLowerCase().capitalize() }
-            .joinToString(" ")
+            .joinToString(" ") { it.toLowerCase().capitalize() }
     } else throw Exception("Misformatted vfxName of fast attack: $vfxName")
 }
+
+// TODO later this could be commonized with fast attacks
+fun combineAndConvertChargedMovesData(chargedPveAttacks: Collection<JsonValue>, chargedPvpAttacks:  Collection<JsonValue>): List<JsonObject> {
+    assert(chargedPveAttacks.size == chargedPvpAttacks.size)
+    val fastPveAttacksById: Map<String, JsonObject> = chargedPveAttacks
+        .map { getData(it) }
+        .associate { it.getString("templateId") to it.getJsonObject("moveSettings") }
+    val fastPvpAttacksById: Map<String, JsonObject> = chargedPvpAttacks
+        .map { getData(it) }
+        .associate { it.getString("templateId") to it.getJsonObject("combatMove") }
+    return fastPveAttacksById.keys
+        .map {
+            try {
+                val pve = fastPveAttacksById[it] ?: throw Exception("Missing charged PvE attack for id: $it")
+                val pvp = fastPvpAttacksById["COMBAT_$it"] ?: throw Exception("Missing charged PvP attack for id: $it")
+                convertChargedMoveData(pve, pvp)
+            } catch (e: Exception) {
+                logger.warn("Skipping charged move $it due to: $e")
+                null
+            }
+        }
+        .filterNotNull()
+}
+
+fun convertChargedMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
+    try {
+        json(
+            "name" to convertToPrettyNameForChargedAttack(pve.getString("vfxName")),
+            "type" to convertType(pve.getString("pokemonType")),
+            "pvp" to json(
+                "power" to (pvp.getIntOrNull("power") ?: 0),
+                "energy" to -(pvp.getIntOrNull("energyDelta") ?: 0)
+            ),
+            "pve" to json(
+                "power" to (pve.getIntOrNull("power") ?: 0),
+                "energy" to -(pve.getIntOrNull("energyDelta") ?: 0),
+                "duration" to pve.getInt("durationMs")
+            )
+        )
+    } catch (e: Exception) {
+        throw Exception("Error for pve = $pve; pvp = $pvp", e)
+    }
+
+fun convertToPrettyNameForChargedAttack(vfxName: String): String =
+    vfxName
+        .split("_")
+        .joinToString(" ") { it.toLowerCase().capitalize() }
 
 fun convertType(typeString: String): String {
     val typePrefix = "POKEMON_TYPE"
     return if (typeString.startsWith("POKEMON_TYPE")) {
         typeString.substring(typePrefix.length + 1).toLowerCase()
     } else throw Exception("Misformatted type: $typeString")
-}
-
-fun convertChargedMoveData(attackData: JsonArray): List<JsonObject> {
-    return attackData
-        .map { it.asJsonObject() }
-        .filter {
-            (!it.isNull("pvpPower") && !it.isNull("pvpEnergy"))
-                .apply { if (!this) logger.warn("Skipping charged move: " + it.getString("name")) }
-        }
-        .map { json(
-            "name" to it.getString("name"),
-            "type" to it.getString("type"),
-            "pvp" to json(
-                "power" to it.getInt("pvpPower"),
-                "energy" to it.getInt("pvpEnergy")
-            ),
-            "pve" to json(
-                "power" to it.getInt("power"),
-                "energy" to it.getInt("energy"),
-                "duration" to it.getInt("duration")
-            )
-        ) }
 }
 
 fun combinePokemonData(pokemonData: JsonObject, movesData: JsonArray): JsonObject {
