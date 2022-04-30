@@ -57,7 +57,7 @@ fun updateData() {
         .also {
             File("./src/main/resources/data/attacks/fast.json").writeText(it.toString())
         }
-    combineFastAndChargedAttacks(chargedPveAttacks, chargedPvpAttacks)
+    combineAndConvertChargedMovesData(chargedPveAttacks, chargedPvpAttacks)
         .also {
             File("./src/main/resources/data/attacks/charged.json").writeText(it.toString())
         }
@@ -101,26 +101,38 @@ fun downloadAttackData(sourceUrl: URL, targetFile: File, converter: (JsonArray) 
 }
  */
 
-fun combineAndConvertFastMovesData(fastPveAttacks: Collection<JsonValue>, fastPvpAttacks:  Collection<JsonValue>): List<JsonObject> {
-    assert(fastPveAttacks.size == fastPvpAttacks.size)
-    val fastPveAttacksById: Map<String, JsonObject> = fastPveAttacks
+fun combineAndConvertFastMovesData(fastPveAttacks: Collection<JsonValue>, fastPvpAttacks:  Collection<JsonValue>): List<JsonObject> =
+    matchPveAndPvpMoves(fastPveAttacks, fastPvpAttacks, "fast")
+        .map { (pve, pvp) -> convertFastMoveData(pve, pvp) }
+
+fun combineAndConvertChargedMovesData(chargedPveAttacks: Collection<JsonValue>, chargedPvpAttacks:  Collection<JsonValue>): List<JsonObject> =
+    matchPveAndPvpMoves(chargedPveAttacks, chargedPvpAttacks, "charged")
+        .map { (pve, pvp) -> convertChargedMoveData(pve, pvp) }
+
+fun matchPveAndPvpMoves(
+    chargedPveAttacks: Collection<JsonValue>,
+    chargedPvpAttacks:  Collection<JsonValue>,
+    moveType: String
+): List<Pair<JsonObject, JsonObject>> {
+    assert(chargedPveAttacks.size == chargedPvpAttacks.size)
+    val fastPveAttacksById: Map<String, JsonObject> = chargedPveAttacks
         .map { getData(it) }
         .associate { it.getString("templateId") to it.getJsonObject("moveSettings") }
-    val fastPvpAttacksById: Map<String, JsonObject> = fastPvpAttacks
+    val fastPvpAttacksById: Map<String, JsonObject> = chargedPvpAttacks
         .map { getData(it) }
         .associate { it.getString("templateId") to it.getJsonObject("combatMove") }
     return fastPveAttacksById.keys
         .map {
-            val pve = fastPveAttacksById[it] ?: throw Exception("Missing fast PvE attack for id: $it")
-            val pvp = fastPvpAttacksById["COMBAT_$it"] ?: throw Exception("Missing fast PvP attack for id: $it")
-            convertFastMoveData(pve, pvp)
+            try {
+                val pve = fastPveAttacksById[it] ?: throw Exception("Missing PvE attack for id: $it")
+                val pvp = fastPvpAttacksById["COMBAT_$it"] ?: throw Exception("Missing PvP attack for id: $it")
+                Pair(pve, pvp)
+            } catch (e: Exception) {
+                logger.warn("Skipping $moveType move $it due to: $e")
+                null
+            }
         }
-    /* TODO later anything like this needed?
-            .filter {
-            (!it.isNull("pvpPower") && !it.isNull("pvpEnergy"))
-                .apply { if (!this) logger.warn("Skipping charged move: " + it.getString("name")) }
-        }
-     */
+        .filterNotNull()
 }
 
 fun convertFastMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
@@ -153,29 +165,6 @@ fun convertToPrettyNameForFastAttack(vfxName: String): String {
             .split("_")
             .joinToString(" ") { it.toLowerCase().capitalize() }
     } else throw Exception("Misformatted vfxName of fast attack: $vfxName")
-}
-
-// TODO later this could be commonized with fast attacks
-fun combineAndConvertChargedMovesData(chargedPveAttacks: Collection<JsonValue>, chargedPvpAttacks:  Collection<JsonValue>): List<JsonObject> {
-    assert(chargedPveAttacks.size == chargedPvpAttacks.size)
-    val fastPveAttacksById: Map<String, JsonObject> = chargedPveAttacks
-        .map { getData(it) }
-        .associate { it.getString("templateId") to it.getJsonObject("moveSettings") }
-    val fastPvpAttacksById: Map<String, JsonObject> = chargedPvpAttacks
-        .map { getData(it) }
-        .associate { it.getString("templateId") to it.getJsonObject("combatMove") }
-    return fastPveAttacksById.keys
-        .map {
-            try {
-                val pve = fastPveAttacksById[it] ?: throw Exception("Missing charged PvE attack for id: $it")
-                val pvp = fastPvpAttacksById["COMBAT_$it"] ?: throw Exception("Missing charged PvP attack for id: $it")
-                convertChargedMoveData(pve, pvp)
-            } catch (e: Exception) {
-                logger.warn("Skipping charged move $it due to: $e")
-                null
-            }
-        }
-        .filterNotNull()
 }
 
 fun convertChargedMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
