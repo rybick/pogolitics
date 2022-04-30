@@ -110,29 +110,26 @@ fun combineAndConvertChargedMovesData(chargedPveAttacks: Collection<JsonValue>, 
         .map { (pve, pvp) -> convertChargedMoveData(pve, pvp) }
 
 fun matchPveAndPvpMoves(
-    chargedPveAttacks: Collection<JsonValue>,
-    chargedPvpAttacks:  Collection<JsonValue>,
+    pveAttacks: Collection<JsonValue>,
+    pvpAttacks:  Collection<JsonValue>,
     moveType: String
 ): List<Pair<JsonObject, JsonObject>> {
-    assert(chargedPveAttacks.size == chargedPvpAttacks.size)
-    val fastPveAttacksById: Map<String, JsonObject> = chargedPveAttacks
-        .map { getData(it) }
-        .associate { it.getString("templateId") to it.getJsonObject("moveSettings") }
-    val fastPvpAttacksById: Map<String, JsonObject> = chargedPvpAttacks
-        .map { getData(it) }
-        .associate { it.getString("templateId") to it.getJsonObject("combatMove") }
-    return fastPveAttacksById.keys
-        .map {
-            try {
-                val pve = fastPveAttacksById[it] ?: throw Exception("Missing PvE attack for id: $it")
-                val pvp = fastPvpAttacksById["COMBAT_$it"] ?: throw Exception("Missing PvP attack for id: $it")
-                Pair(pve, pvp)
-            } catch (e: Exception) {
-                logger.warn("Skipping $moveType move $it due to: $e")
-                null
-            }
-        }
-        .filterNotNull()
+    val pveAttacksById: Map<String, JsonObject> = pveAttacks
+        .map { getData(it).getJsonObject("moveSettings") }
+        .associateBy { it.getString("movementId") }
+    val pvpAttacksById: Map<String, JsonObject> = pvpAttacks
+        .map { getData(it).getJsonObject("combatMove") }
+        .associateBy { it.getString("uniqueId") }
+    with(pveAttacksById.keys - pvpAttacksById.keys) {
+        if (isNotEmpty())
+            logger.warn("Following $moveType PvE attacks do not have matching PvP attacks and will be skipped: $this")
+    }
+    with(pvpAttacksById.keys - pveAttacksById.keys) {
+        if (isNotEmpty())
+            logger.warn("Following $moveType PvP attacks do not have matching PvE attacks and will be skipped: $this")
+    }
+    return pveAttacksById.keys.intersect(pvpAttacksById.keys)
+        .map { Pair(pveAttacksById[it]!!, pvpAttacksById[it]!!) }
 }
 
 fun convertFastMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
