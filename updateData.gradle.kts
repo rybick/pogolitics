@@ -3,6 +3,7 @@ import javax.json.Json
 import javax.json.JsonObject
 import javax.json.JsonArray
 import javax.json.JsonValue
+import java.lang.Exception as Exception
 
 buildscript {
     repositories {
@@ -14,7 +15,7 @@ buildscript {
     }
 }
 
-tasks.register("updatePokemonData") {
+/*tasks.register("updatePokemonData") {
     doLast {
         listOf(
             (1..865).map { "$it" to "$it" },
@@ -32,13 +33,42 @@ tasks.register("updateMovesData") {
     doLast {
         downloadAttackData()
     }
-}
+}*/
 
 tasks.register("updateData") {
-    dependsOn("updatePokemonData")
-    dependsOn("updateMovesData")
+    doLast {
+        updateData()
+    }
 }
 
+fun updateData() {
+    val gameData = URL("https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json")
+        .readText()
+        .let(::parseJsonArray)
+    val pokemonData =
+        gameData.filter { getData(it)["pokemonSettings"] != null }
+    val (fastPveAttacks, chargedPveAttacks) = gameData
+        .filter { getData(it)["moveSettings"] != null }
+        .partitionLogged(::isFastAttack)
+    val (fastPvpAttacks, chargedPvpAttacks) = gameData
+        .filter { getData(it)["combatMove"] != null }
+        .partitionLogged(::isFastAttack)
+    combineFastMovesData(fastPveAttacks, fastPvpAttacks)
+        .also {
+            File("./src/main/resources/data/attacks/fast.json").writeText(it.toString())
+        }
+    println(gameData[0])
+}
+
+fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
+
+fun isFastAttack(element: JsonValue) =
+    // it may mismatch some attacks like V0232_MOVE_WATER_GUN_FAST_BLASTOISE,
+    // but it is not currently used and it's best we can do for now
+    "_FAST$".toRegex()
+        .containsMatchIn(element.asJsonObject().getString("templateId"))
+
+/*
 fun downloadPokemonData(source: String, target: String) {
     val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$source").readText().let(::parseNullableJsonObject)
             ?: return
@@ -66,28 +96,68 @@ fun downloadAttackData(sourceUrl: URL, targetFile: File, converter: (JsonArray) 
         .let(converter)
         .also { targetFile.writeText(it.toString()) }
 }
+ */
 
-fun convertFastMoveData(attackData: JsonArray): List<JsonObject> {
-    return attackData
-        .map { it.asJsonObject() }
-        .filter {
+fun combineFastMovesData(fastPveAttacks: Collection<JsonValue>, fastPvpAttacks:  Collection<JsonValue>): List<JsonObject> {
+    assert(fastPveAttacks.size == fastPvpAttacks.size)
+    val fastPveAttacksById: Map<String, JsonObject> = fastPveAttacks
+        .map { getData(it) }
+        .associate { it.getString("templateId") to it.getJsonObject("moveSettings") }
+    val fastPvpAttacksById: Map<String, JsonObject> = fastPvpAttacks
+        .map { getData(it) }
+        .associate { it.getString("templateId") to it.getJsonObject("combatMove") }
+    return fastPveAttacksById.keys
+        .map {
+            val pve = fastPveAttacksById[it] ?: throw Exception("Missing fast PvE attack for id: $it")
+            val pvp = fastPvpAttacksById["COMBAT_$it"] ?: throw Exception("Missing fast PvP attack for id: $it")
+            convertFastMoveData(pve, pvp)
+        }
+    /* TODO later anything like this needed?
+            .filter {
             (!it.isNull("pvpPower") && !it.isNull("pvpEnergy"))
                 .apply { if (!this) logger.warn("Skipping charged move: " + it.getString("name")) }
         }
-        .map { json(
-            "name" to it.getString("name"),
-            "type" to it.getString("type"),
+     */
+}
+
+fun convertFastMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
+    try {
+        json(
+            "name" to convertToPrettyNameForFastAttack(pve.getString("vfxName")),
+            "type" to convertType(pve.getString("pokemonType")),
             "pvp" to json(
-                "power" to it.getInt("pvpPower"),
-                "energy" to it.getInt("pvpEnergy"),
-                "duration" to it.getInt("pvpDuration")
+                "power" to (pvp.getIntOrNull("power") ?: 0),
+                "energy" to (pvp.getIntOrNull("energyDelta") ?: 0),
+                // raw data has duration null if it lasts one turn, 1 if it lasts 2 turns and so on
+                // since in the previous source (go hub), the duration was simply measured in turns
+                // we recalculate it at this moment instead of production code
+                "duration" to (pvp.getIntOrNull("durationTurns") ?: 0) + 1
             ),
             "pve" to json(
-                "power" to it.getInt("power"),
-                "energy" to it.getInt("energy"),
-                "duration" to it.getInt("duration")
+                "power" to (pve.getIntOrNull("power") ?: 0),
+                "energy" to (pve.getIntOrNull("energyDelta") ?: 0),
+                "duration" to (pve.getInt("durationMs") ?: 0)
             )
-        ) }
+        )
+    } catch (e: Exception) {
+        throw Exception("Error for pve = $pve; pvp = $pvp", e)
+    }
+
+fun convertToPrettyNameForFastAttack(vfxName: String): String {
+    val suffix = "_fast"
+    return if (vfxName.endsWith("_fast")) {
+        vfxName.dropLast(suffix.length)
+            .split("_")
+            .map { it.toLowerCase().capitalize() }
+            .joinToString(" ")
+    } else throw Exception("Misformatted vfxName of fast attack: $vfxName")
+}
+
+fun convertType(typeString: String): String {
+    val typePrefix = "POKEMON_TYPE"
+    return if (typeString.startsWith("POKEMON_TYPE")) {
+        typeString.substring(typePrefix.length + 1).toLowerCase()
+    } else throw Exception("Misformatted type: $typeString")
 }
 
 fun convertChargedMoveData(attackData: JsonArray): List<JsonObject> {
@@ -179,3 +249,14 @@ fun toJsonArray(list: Collection<JsonValue>): JsonArray {
     list.forEach { x.add(it) }
     return x.build()
 }
+
+fun JsonObject.getIntOrNull(key: String): Int? = getJsonNumber(key)?.intValue()
+
+inline fun <T> Iterable<T>.partitionLogged(predicate: (T) -> Boolean): Pair<List<T>, List<T>> =
+    partition {
+        try {
+            predicate(it)
+        } catch (e: Exception) {
+            throw Exception("Exception when handling $it", e)
+        }
+    }
