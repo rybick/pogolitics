@@ -164,6 +164,7 @@ fun matchPveAndPvpMoves(
 fun convertFastMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
     try {
         json(
+            "id" to pve.getString("movementId"),
             "name" to convertToPrettyNameForFastAttack(pve.getString("vfxName")),
             "type" to convertType(pve.getString("pokemonType")),
             "pvp" to json(
@@ -196,6 +197,7 @@ fun convertToPrettyNameForFastAttack(vfxName: String): String {
 fun convertChargedMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
     try {
         json(
+            "id" to pve.getString("movementId"),
             "name" to convertToPrettyNameForChargedAttack(pve.getString("vfxName")),
             "type" to convertType(pve.getString("pokemonType")),
             "pvp" to json(
