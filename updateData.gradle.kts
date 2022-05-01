@@ -54,7 +54,7 @@ fun updateData() {
         .filter { getData(it)["combatMove"] != null }
         .partitionLogged(::isFastAttack)
     filterAndConvertPokemonData(pokemonData)
-        .take(3)
+        .take(6)
         .forEach {
             val id = it.getInt("id")
             File("./src/main/resources/data/pokemon/${id}TMP.json").writeText(it.toString())
@@ -84,7 +84,7 @@ fun filterAndConvertPokemonData(pokemonData: List<JsonValue>): List<JsonObject> 
                 .first()
         }
         .values
-        .map { combinePokemonData(it.getString("templateId"), it.getJsonObject("pokemonSettings"), emptyList()) }
+        .map { combinePokemonData(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
 
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
 
@@ -219,10 +219,7 @@ fun convertToPrettyNameForChargedAttack(vfxName: String): String =
         .split("_")
         .joinToString(" ") { it.toLowerCase().capitalize() }
 
-fun combinePokemonData(templateId: String, pokemonSettings: JsonObject, movesData: Collection<JsonObject>): JsonObject {
-    println(templateId)
-    val quickMoves: Set<JsonObject> = movesData.map { it.asJsonObject().getJsonObject("quickMove") }.toSet()
-    val chargedMoves: Set<JsonObject> = movesData.map { it.asJsonObject().getJsonObject("chargeMove") }.toSet()
+fun combinePokemonData(templateId: String, pokemonSettings: JsonObject): JsonObject {
     return with(pokemonSettings) {
         json(
             "id" to convertToPokedexNumber(templateId),
@@ -235,20 +232,29 @@ fun combinePokemonData(templateId: String, pokemonSettings: JsonObject, movesDat
                 "secondary" to getString("type2", null)?.let(::convertType)
             ),
             "moves" to json(
-                "quick" to toJsonArray(quickMoves.map(::mapMove)),
-                "charged" to toJsonArray(chargedMoves.map(::mapMove))
+                "quick" to mapMoves(getJsonArray("quickMoves"), getJsonArray("eliteQuickMove")),
+                "charged" to mapMoves(getJsonArray("cinematicMoves"), getJsonArray("eliteCinematicMove"))
             )
         )
     }
 }
 
-fun mapMove(move: JsonObject): JsonObject {
+fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?): JsonArray =
+    toJsonArray(
+        (moves?.map(::mapMove) ?: emptyList())
+            + (eliteMoves?.map(::mapEliteMove) ?: emptyList())
+    )
+
+fun mapMove(moveName: JsonValue): JsonObject {
     return json(
-        "id" to move.getInt("id"),
-        "name" to move.getString("name"),
-        "type" to move.getString("type"),
-        "legacy" to (move.getInt("isLegacy") != 0),
-        "exclusive" to (move.getInt("isExclusive") != 0)
+        "id" to moveName,
+        "elite" to false
+    )
+}
+fun mapEliteMove(moveName: JsonValue): JsonObject {
+    return json(
+        "id" to moveName,
+        "elite" to true
     )
 }
 
