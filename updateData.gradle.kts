@@ -15,26 +15,6 @@ buildscript {
     }
 }
 
-/*tasks.register("updatePokemonData") {
-    doLast {
-        listOf(
-            (1..865).map { "$it" to "$it" },
-            listOf(
-               "83?form=Galarian" to "83a",
-               "105?form=Alola" to "105a",
-               "150?form=Armored" to "150a",
-               "487?form=Origin" to "487a"
-            )
-        ).flatten().forEach { downloadPokemonData(it.first, it.second) }
-    }
-}
-
-tasks.register("updateMovesData") {
-    doLast {
-        downloadAttackData()
-    }
-}*/
-
 tasks.register("updateData") {
     doLast {
         updateData()
@@ -88,40 +68,10 @@ fun filterAndConvertPokemonData(pokemonData: List<JsonValue>): List<JsonObject> 
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
 
 fun isFastAttack(element: JsonValue) =
-// it may mismatch some attacks like V0232_MOVE_WATER_GUN_FAST_BLASTOISE,
+    // it may mismatch some attacks like V0232_MOVE_WATER_GUN_FAST_BLASTOISE,
     // but it is not currently used and it's best we can do for now
     "_FAST$".toRegex()
         .containsMatchIn(element.asJsonObject().getString("templateId"))
-
-/*
-fun downloadPokemonData(source: String, target: String) {
-    val pokemonData = URL("https://db.pokemongohub.net/api/pokemon/$source").readText().let(::parseNullableJsonObject)
-            ?: return
-    val movesData = URL("https://db.pokemongohub.net/api/movesets/with-pokemon/$source").readText().let(::parseJsonArray)
-    File("./src/main/resources/data/pokemon/$target.json")
-        .writeText(combinePokemonData(pokemonData, movesData).toString())
-}
-
-fun downloadAttackData() {
-    downloadAttackData(
-        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/fast/with-stats"),
-        targetFile = File("./src/main/resources/data/attacks/fast.json"),
-        converter = ::convertFastMoveData
-    )
-    downloadAttackData(
-        sourceUrl = URL("https://db.pokemongohub.net/api/moves/with-filter/charge/with-stats"),
-        targetFile = File("./src/main/resources/data/attacks/charged.json"),
-        converter = ::convertChargedMoveData
-    )
-}
-
-fun downloadAttackData(sourceUrl: URL, targetFile: File, converter: (JsonArray) -> List<JsonObject>) {
-    sourceUrl.readText()
-        .let(::parseJsonArray)
-        .let(converter)
-        .also { targetFile.writeText(it.toString()) }
-}
- */
 
 fun combineAndConvertFastMovesData(
     fastPveAttacks: Collection<JsonValue>,
