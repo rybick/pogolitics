@@ -1,0 +1,1 @@
+{"id":851,"name":"Centiskorch","baseAttack":220,"baseDefense":158,"baseStamina":225,"types":{"primary":"fire","secondary":"bug"},"moves":{"quick":[{"id":"BUG_BITE_FAST","elite":false},{"id":"EMBER_FAST","elite":false}],"charged":[{"id":"HEAT_WAVE","elite":false},{"id":"BUG_BUZZ","elite":false},{"id":"CRUNCH","elite":false},{"id":"LUNGE","elite":false}]}}

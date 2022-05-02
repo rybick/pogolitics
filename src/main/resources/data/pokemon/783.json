@@ -1,1 +1,1 @@
-{"id":783,"name":"Hakamo-o","baseAttack":145,"baseDefense":162,"baseStamina":146,"types":{"primary":"dragon","secondary":"fighting"},"moves":{"quick":[],"charged":[]}}
+{"id":783,"name":"Hakamo_o","baseAttack":145,"baseDefense":162,"baseStamina":146,"types":{"primary":"dragon","secondary":"fighting"},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"DRAGON_TAIL_FAST","elite":false}],"charged":[{"id":"DRAGON_CLAW","elite":false},{"id":"BRICK_BREAK","elite":false},{"id":"DRAGON_PULSE","elite":false}]}}

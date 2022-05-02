@@ -1,1 +1,1 @@
-{"id":772,"name":"Type: Null","baseAttack":184,"baseDefense":184,"baseStamina":216,"types":{"primary":"normal","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":772,"name":"Type_null","baseAttack":184,"baseDefense":184,"baseStamina":216,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":846,"name":"Arrokuda","baseAttack":118,"baseDefense":72,"baseStamina":121,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"WATERFALL_FAST","elite":false},{"id":"BITE_FAST","elite":false},{"id":"PECK_FAST","elite":false}],"charged":[{"id":"CRUNCH","elite":false},{"id":"AQUA_JET","elite":false},{"id":"CLOSE_COMBAT","elite":false}]}}

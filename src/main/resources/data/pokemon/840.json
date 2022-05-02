@@ -1,0 +1,1 @@
+{"id":840,"name":"Applin","baseAttack":71,"baseDefense":116,"baseStamina":120,"types":{"primary":"grass","secondary":"dragon"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

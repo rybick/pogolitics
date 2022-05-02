@@ -1,0 +1,1 @@
+{"id":883,"name":"Arctovish","baseAttack":171,"baseDefense":185,"baseStamina":207,"types":{"primary":"water","secondary":"ice"},"moves":{"quick":[{"id":"POWDER_SNOW_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"BRINE","elite":false},{"id":"AVALANCHE","elite":false},{"id":"ANCIENT_POWER","elite":false}]}}

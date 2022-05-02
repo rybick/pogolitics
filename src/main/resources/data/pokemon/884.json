@@ -1,0 +1,1 @@
+{"id":884,"name":"Duraludon","baseAttack":239,"baseDefense":185,"baseStamina":172,"types":{"primary":"steel","secondary":"dragon"},"moves":{"quick":[{"id":"DRAGON_TAIL_FAST","elite":false},{"id":"METAL_CLAW_FAST","elite":false}],"charged":[{"id":"FLASH_CANNON","elite":false},{"id":"DRAGON_CLAW","elite":false},{"id":"HYPER_BEAM","elite":false}]}}

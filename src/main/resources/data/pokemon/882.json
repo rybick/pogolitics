@@ -1,0 +1,1 @@
+{"id":882,"name":"Dracovish","baseAttack":175,"baseDefense":185,"baseStamina":207,"types":{"primary":"water","secondary":"dragon"},"moves":{"quick":[{"id":"DRAGON_BREATH_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"BRINE","elite":false},{"id":"DRAGON_PULSE","elite":false},{"id":"ANCIENT_POWER","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":885,"name":"Dreepy","baseAttack":117,"baseDefense":61,"baseStamina":99,"types":{"primary":"dragon","secondary":"ghost"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false},{"id":"QUICK_ATTACK_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

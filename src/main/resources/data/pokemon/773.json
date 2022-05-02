@@ -1,1 +1,1 @@
-{"id":773,"name":"Silvally","baseAttack":198,"baseDefense":198,"baseStamina":216,"types":{"primary":"normal","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":773,"name":"Silvally","baseAttack":198,"baseDefense":198,"baseStamina":216,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":816,"name":"Sobble","baseAttack":132,"baseDefense":79,"baseStamina":137,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"POUND_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"WATER_PULSE","elite":false},{"id":"SURF","elite":false}]}}

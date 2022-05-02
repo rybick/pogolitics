@@ -1,0 +1,1 @@
+{"id":819,"name":"Skwovet","baseAttack":95,"baseDefense":86,"baseStamina":172,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"BITE_FAST","elite":false},{"id":"BULLET_SEED_FAST","elite":false}],"charged":[{"id":"BODY_SLAM","elite":false},{"id":"CRUNCH","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":776,"name":"Turtonator","baseAttack":165,"baseDefense":215,"baseStamina":155,"types":{"primary":"fire","secondary":"dragon"},"moves":{"quick":[],"charged":[]}}
+{"id":776,"name":"Turtonator","baseAttack":165,"baseDefense":215,"baseStamina":155,"types":{"primary":"fire","secondary":"dragon"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

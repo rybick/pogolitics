@@ -1,1 +1,1 @@
-{"id":760,"name":"Bewear","baseAttack":226,"baseDefense":141,"baseStamina":260,"types":{"primary":"normal","secondary":"fighting"},"moves":{"quick":[],"charged":[]}}
+{"id":760,"name":"Bewear","baseAttack":226,"baseDefense":141,"baseStamina":260,"types":{"primary":"normal","secondary":"fighting"},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"LOW_KICK_FAST","elite":false},{"id":"SHADOW_CLAW_FAST","elite":false}],"charged":[{"id":"SUPER_POWER","elite":false},{"id":"PAYBACK","elite":false},{"id":"STOMP","elite":false},{"id":"DRAIN_PUNCH","elite":true}]}}

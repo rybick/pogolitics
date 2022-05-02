@@ -1,1 +1,1 @@
-{"id":756,"name":"Shiinotic","baseAttack":154,"baseDefense":168,"baseStamina":155,"types":{"primary":"grass","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":756,"name":"Shiinotic","baseAttack":154,"baseDefense":168,"baseStamina":155,"types":{"primary":"grass","secondary":"fairy"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

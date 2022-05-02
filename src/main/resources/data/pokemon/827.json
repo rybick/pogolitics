@@ -1,0 +1,1 @@
+{"id":827,"name":"Nickit","baseAttack":85,"baseDefense":82,"baseStamina":120,"types":{"primary":"dark","secondary":null},"moves":{"quick":[{"id":"QUICK_ATTACK_FAST","elite":false},{"id":"SNARL_FAST","elite":false}],"charged":[{"id":"NIGHT_SLASH","elite":false},{"id":"PLAY_ROUGH","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":879,"name":"Copperajah","baseAttack":226,"baseDefense":126,"baseStamina":263,"types":{"primary":"steel","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"ROCK_SMASH_FAST","elite":false}],"charged":[{"id":"IRON_HEAD","elite":false},{"id":"DIG","elite":false},{"id":"PLAY_ROUGH","elite":false},{"id":"HEAVY_SLAM","elite":false}]}}

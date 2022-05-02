@@ -1,0 +1,1 @@
+{"id":833,"name":"Chewtle","baseAttack":114,"baseDefense":85,"baseStamina":137,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"WATER_GUN_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"BODY_SLAM","elite":false},{"id":"SURF","elite":false}]}}

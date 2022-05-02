@@ -1,1 +1,1 @@
-{"id":722,"name":"Rowlet","baseAttack":102,"baseDefense":99,"baseStamina":169,"types":{"primary":"grass","secondary":"flying"},"moves":{"quick":[],"charged":[]}}
+{"id":722,"name":"Rowlet","baseAttack":102,"baseDefense":99,"baseStamina":169,"types":{"primary":"grass","secondary":"flying"},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"RAZOR_LEAF_FAST","elite":false}],"charged":[{"id":"SEED_BOMB","elite":false},{"id":"ENERGY_BALL","elite":false}]}}

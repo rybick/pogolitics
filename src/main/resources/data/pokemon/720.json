@@ -1,1 +1,1 @@
-{"id":720,"name":"Hoopa","baseAttack":287,"baseDefense":206,"baseStamina":190,"types":{"primary":"psychic","secondary":"ghost"},"moves":{"quick":[],"charged":[]}}
+{"id":720,"name":"Hoopa","baseAttack":261,"baseDefense":187,"baseStamina":173,"types":{"primary":"psychic","secondary":"ghost"},"moves":{"quick":[{"id":"CONFUSION_FAST","elite":false},{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"SHADOW_BALL","elite":false},{"id":"PSYBEAM","elite":false},{"id":"PSYCHIC","elite":false}]}}

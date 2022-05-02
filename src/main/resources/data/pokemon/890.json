@@ -1,0 +1,1 @@
+{"id":890,"name":"Eternatus","baseAttack":278,"baseDefense":192,"baseStamina":268,"types":{"primary":"poison","secondary":"dragon"},"moves":{"quick":[{"id":"DRAGON_TAIL_FAST","elite":false},{"id":"POISON_JAB_FAST","elite":false}],"charged":[{"id":"CROSS_POISON","elite":false},{"id":"DRAGON_PULSE","elite":false},{"id":"FLAMETHROWER","elite":false}]}}

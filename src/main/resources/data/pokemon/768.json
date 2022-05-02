@@ -1,1 +1,1 @@
-{"id":768,"name":"Golisopod","baseAttack":218,"baseDefense":226,"baseStamina":181,"types":{"primary":"bug","secondary":"water"},"moves":{"quick":[],"charged":[]}}
+{"id":768,"name":"Golisopod","baseAttack":218,"baseDefense":226,"baseStamina":181,"types":{"primary":"bug","secondary":"water"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":881,"name":"Arctozolt","baseAttack":190,"baseDefense":166,"baseStamina":207,"types":{"primary":"electric","secondary":"ice"},"moves":{"quick":[{"id":"POWDER_SNOW_FAST","elite":false},{"id":"THUNDER_SHOCK_FAST","elite":false}],"charged":[{"id":"DISCHARGE","elite":false},{"id":"AVALANCHE","elite":false},{"id":"ANCIENT_POWER","elite":false}]}}

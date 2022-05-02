@@ -1,1 +1,1 @@
-{"id":724,"name":"Decidueye","baseAttack":210,"baseDefense":179,"baseStamina":186,"types":{"primary":"grass","secondary":"ghost"},"moves":{"quick":[],"charged":[]}}
+{"id":724,"name":"Decidueye","baseAttack":210,"baseDefense":179,"baseStamina":186,"types":{"primary":"grass","secondary":"ghost"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false},{"id":"RAZOR_LEAF_FAST","elite":false}],"charged":[{"id":"SHADOW_SNEAK","elite":false},{"id":"ENERGY_BALL","elite":false},{"id":"BRAVE_BIRD","elite":false}]}}

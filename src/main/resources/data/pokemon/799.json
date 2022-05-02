@@ -1,1 +1,1 @@
-{"id":799,"name":"Guzzlord","baseAttack":188,"baseDefense":99,"baseStamina":440,"types":{"primary":"dark","secondary":"dragon"},"moves":{"quick":[],"charged":[]}}
+{"id":799,"name":"Guzzlord","baseAttack":188,"baseDefense":99,"baseStamina":440,"types":{"primary":"dark","secondary":"ghost"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

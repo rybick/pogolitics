@@ -1,1 +1,1 @@
-{"id":386,"name":"Deoxys","baseAttack":345,"baseDefense":115,"baseStamina":137,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":386,"name":"Deoxys","baseAttack":345,"baseDefense":115,"baseStamina":137,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[{"id":"ZEN_HEADBUTT_FAST","elite":false},{"id":"CHARGE_BEAM_FAST","elite":false}],"charged":[{"id":"PSYCHO_BOOST","elite":false},{"id":"ZAP_CANNON","elite":false},{"id":"HYPER_BEAM","elite":false}]}}

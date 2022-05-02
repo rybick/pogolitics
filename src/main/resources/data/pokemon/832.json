@@ -1,0 +1,1 @@
+{"id":832,"name":"Dubwool","baseAttack":159,"baseDefense":198,"baseStamina":176,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"TAKE_DOWN_FAST","elite":false}],"charged":[{"id":"WILD_CHARGE","elite":false},{"id":"PAYBACK","elite":false},{"id":"BODY_SLAM","elite":false}]}}

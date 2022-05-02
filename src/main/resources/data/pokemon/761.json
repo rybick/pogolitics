@@ -1,1 +1,1 @@
-{"id":761,"name":"Bounsweet","baseAttack":55,"baseDefense":69,"baseStamina":123,"types":{"primary":"grass","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":761,"name":"Bounsweet","baseAttack":55,"baseDefense":69,"baseStamina":123,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

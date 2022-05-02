@@ -1,0 +1,1 @@
+{"id":867,"name":"Runerigus","baseAttack":163,"baseDefense":237,"baseStamina":151,"types":{"primary":"ground","secondary":"ghost"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"SHADOW_BALL","elite":false},{"id":"SAND_TOMB","elite":false},{"id":"ROCK_TOMB","elite":false}]}}

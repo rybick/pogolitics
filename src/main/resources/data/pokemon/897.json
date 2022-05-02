@@ -1,0 +1,1 @@
+{"id":897,"name":"Spectrier","baseAttack":273,"baseDefense":146,"baseStamina":205,"types":{"primary":"ghost","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"TAKE_DOWN_FAST","elite":false}],"charged":[{"id":"SHADOW_BALL","elite":false},{"id":"FOUL_PLAY","elite":false},{"id":"BULLDOZE","elite":false}]}}

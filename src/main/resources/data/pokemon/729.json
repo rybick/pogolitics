@@ -1,1 +1,1 @@
-{"id":729,"name":"Brionne","baseAttack":168,"baseDefense":145,"baseStamina":155,"types":{"primary":"water","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":729,"name":"Brionne","baseAttack":168,"baseDefense":145,"baseStamina":155,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"CHARM_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"AQUA_JET","elite":false},{"id":"WATER_PULSE","elite":false},{"id":"DISARMING_VOICE","elite":false}]}}

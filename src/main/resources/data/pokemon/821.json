@@ -1,0 +1,1 @@
+{"id":821,"name":"Rookidee","baseAttack":88,"baseDefense":67,"baseStamina":116,"types":{"primary":"flying","secondary":null},"moves":{"quick":[{"id":"PECK_FAST","elite":false},{"id":"AIR_SLASH_FAST","elite":false}],"charged":[{"id":"DRILL_PECK","elite":false},{"id":"BRAVE_BIRD","elite":false}]}}

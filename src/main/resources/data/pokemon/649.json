@@ -1,1 +1,1 @@
-{"id":649,"name":"Genesect","baseAttack":252,"baseDefense":199,"baseStamina":174,"types":{"primary":"bug","secondary":"steel"},"moves":{"quick":[],"charged":[]}}
+{"id":649,"name":"Genesect","baseAttack":252,"baseDefense":199,"baseStamina":174,"types":{"primary":"bug","secondary":"steel"},"moves":{"quick":[{"id":"METAL_CLAW_FAST","elite":false},{"id":"FURY_CUTTER_FAST","elite":false}],"charged":[{"id":"X_SCISSOR","elite":false},{"id":"MAGNET_BOMB","elite":false},{"id":"HYPER_BEAM","elite":false}]}}

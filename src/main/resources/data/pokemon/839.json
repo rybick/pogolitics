@@ -1,0 +1,1 @@
+{"id":839,"name":"Coalossal","baseAttack":146,"baseDefense":198,"baseStamina":242,"types":{"primary":"rock","secondary":"fire"},"moves":{"quick":[{"id":"SMACK_DOWN_FAST","elite":false},{"id":"INCINERATE_FAST","elite":false}],"charged":[{"id":"ROCK_BLAST","elite":false},{"id":"ROCK_SLIDE","elite":false},{"id":"FLAME_CHARGE","elite":false}]}}

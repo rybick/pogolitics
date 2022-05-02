@@ -1,1 +1,1 @@
-{"id":798,"name":"Kartana","baseAttack":355,"baseDefense":200,"baseStamina":153,"types":{"primary":"grass","secondary":"steel"},"moves":{"quick":[],"charged":[]}}
+{"id":798,"name":"Kartana","baseAttack":323,"baseDefense":182,"baseStamina":139,"types":{"primary":"grass","secondary":"steel"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

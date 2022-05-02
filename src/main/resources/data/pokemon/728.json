@@ -1,1 +1,1 @@
-{"id":728,"name":"Popplio","baseAttack":120,"baseDefense":103,"baseStamina":137,"types":{"primary":"water","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":728,"name":"Popplio","baseAttack":120,"baseDefense":103,"baseStamina":137,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"POUND_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"AQUA_JET","elite":false},{"id":"WATER_PULSE","elite":false},{"id":"AQUA_TAIL","elite":false}]}}

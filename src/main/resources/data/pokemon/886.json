@@ -1,0 +1,1 @@
+{"id":886,"name":"Drakloak","baseAttack":163,"baseDefense":105,"baseStamina":169,"types":{"primary":"dragon","secondary":"ghost"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false},{"id":"DRAGON_TAIL_FAST","elite":false}],"charged":[{"id":"DRAGON_PULSE","elite":false},{"id":"SHADOW_BALL","elite":false},{"id":"OUTRAGE","elite":false}]}}

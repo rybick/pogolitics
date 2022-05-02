@@ -1,1 +1,1 @@
-{"id":757,"name":"Salandit","baseAttack":136,"baseDefense":80,"baseStamina":134,"types":{"primary":"poison","secondary":"fire"},"moves":{"quick":[],"charged":[]}}
+{"id":757,"name":"Salandit","baseAttack":136,"baseDefense":80,"baseStamina":134,"types":{"primary":"poison","secondary":"fire"},"moves":{"quick":[{"id":"EMBER_FAST","elite":false},{"id":"POISON_JAB_FAST","elite":false}],"charged":[{"id":"POISON_FANG","elite":false},{"id":"FLAMETHROWER","elite":false},{"id":"DRAGON_PULSE","elite":false}]}}

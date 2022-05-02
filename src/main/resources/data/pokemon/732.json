@@ -1,1 +1,1 @@
-{"id":732,"name":"Trumbeak","baseAttack":159,"baseDefense":100,"baseStamina":146,"types":{"primary":"normal","secondary":"flying"},"moves":{"quick":[],"charged":[]}}
+{"id":732,"name":"Trumbeak","baseAttack":159,"baseDefense":100,"baseStamina":146,"types":{"primary":"normal","secondary":"flying"},"moves":{"quick":[{"id":"PECK_FAST","elite":false},{"id":"ROCK_SMASH_FAST","elite":false}],"charged":[{"id":"DRILL_PECK","elite":false},{"id":"ROCK_BLAST","elite":false},{"id":"SKY_ATTACK","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":837,"name":"Rolycoly","baseAttack":73,"baseDefense":91,"baseStamina":102,"types":{"primary":"rock","secondary":null},"moves":{"quick":[{"id":"SMACK_DOWN_FAST","elite":false},{"id":"TACKLE_FAST","elite":false}],"charged":[{"id":"ROCK_BLAST","elite":false},{"id":"ROCK_SLIDE","elite":false}]}}

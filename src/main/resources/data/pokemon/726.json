@@ -1,1 +1,1 @@
-{"id":726,"name":"Torracat","baseAttack":174,"baseDefense":103,"baseStamina":163,"types":{"primary":"fire","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":726,"name":"Torracat","baseAttack":174,"baseDefense":103,"baseStamina":163,"types":{"primary":"fire","secondary":null},"moves":{"quick":[{"id":"BITE_FAST","elite":false},{"id":"EMBER_FAST","elite":false}],"charged":[{"id":"FLAMETHROWER","elite":false},{"id":"FLAME_CHARGE","elite":false},{"id":"CRUNCH","elite":false}]}}

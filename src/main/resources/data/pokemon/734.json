@@ -1,1 +1,1 @@
-{"id":734,"name":"Yungoos","baseAttack":122,"baseDefense":56,"baseStamina":134,"types":{"primary":"normal","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":734,"name":"Yungoos","baseAttack":122,"baseDefense":56,"baseStamina":134,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"HYPER_FANG","elite":false},{"id":"CRUNCH","elite":false},{"id":"ROCK_TOMB","elite":false}]}}

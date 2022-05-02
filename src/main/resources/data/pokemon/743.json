@@ -1,1 +1,1 @@
-{"id":743,"name":"Ribombee","baseAttack":198,"baseDefense":146,"baseStamina":155,"types":{"primary":"bug","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":743,"name":"Ribombee","baseAttack":198,"baseDefense":146,"baseStamina":155,"types":{"primary":"bug","secondary":"fairy"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

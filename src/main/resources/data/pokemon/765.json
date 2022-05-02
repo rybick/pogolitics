@@ -1,1 +1,1 @@
-{"id":765,"name":"Oranguru","baseAttack":168,"baseDefense":192,"baseStamina":207,"types":{"primary":"normal","secondary":"psychic"},"moves":{"quick":[],"charged":[]}}
+{"id":765,"name":"Oranguru","baseAttack":168,"baseDefense":192,"baseStamina":207,"types":{"primary":"normal","secondary":"psychic"},"moves":{"quick":[{"id":"CONFUSION_FAST","elite":false},{"id":"ZEN_HEADBUTT_FAST","elite":false},{"id":"YAWN_FAST","elite":false}],"charged":[{"id":"PSYCHIC","elite":false},{"id":"FOUL_PLAY","elite":false},{"id":"FUTURESIGHT","elite":false}]}}

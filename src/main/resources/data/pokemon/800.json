@@ -1,1 +1,1 @@
-{"id":800,"name":"Necrozma","baseAttack":251,"baseDefense":195,"baseStamina":219,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":800,"name":"Necrozma","baseAttack":251,"baseDefense":195,"baseStamina":219,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

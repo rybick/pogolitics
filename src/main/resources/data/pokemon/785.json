@@ -1,1 +1,1 @@
-{"id":785,"name":"Tapu Koko","baseAttack":250,"baseDefense":181,"baseStamina":172,"types":{"primary":"electric","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":785,"name":"Tapu_koko","baseAttack":250,"baseDefense":181,"baseStamina":172,"types":{"primary":"electric","secondary":"fairy"},"moves":{"quick":[{"id":"VOLT_SWITCH_FAST","elite":false},{"id":"QUICK_ATTACK_FAST","elite":false}],"charged":[{"id":"THUNDERBOLT","elite":false},{"id":"DAZZLING_GLEAM","elite":false},{"id":"BRAVE_BIRD","elite":false},{"id":"THUNDER","elite":false}]}}

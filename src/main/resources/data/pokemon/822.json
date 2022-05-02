@@ -1,0 +1,1 @@
+{"id":822,"name":"Corvisquire","baseAttack":129,"baseDefense":110,"baseStamina":169,"types":{"primary":"flying","secondary":null},"moves":{"quick":[{"id":"PECK_FAST","elite":false},{"id":"AIR_SLASH_FAST","elite":false}],"charged":[{"id":"DRILL_PECK","elite":false},{"id":"BRAVE_BIRD","elite":false}]}}

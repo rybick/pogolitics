@@ -1,0 +1,1 @@
+{"id":836,"name":"Boltund","baseAttack":197,"baseDefense":131,"baseStamina":170,"types":{"primary":"electric","secondary":null},"moves":{"quick":[{"id":"SPARK_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"CRUNCH","elite":false},{"id":"THUNDER","elite":false}]}}

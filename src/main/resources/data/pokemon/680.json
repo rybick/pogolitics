@@ -1,1 +1,1 @@
-{"id":680,"name":"Doublade","baseAttack":188,"baseDefense":206,"baseStamina":153,"types":{"primary":"steel","secondary":"ghost"},"moves":{"quick":[],"charged":[]}}
+{"id":680,"name":"Doublade","baseAttack":0,"baseDefense":0,"baseStamina":0,"types":{"primary":"steel","secondary":"ghost"},"moves":{"quick":[{"id":"PSYCHO_CUT_FAST","elite":false},{"id":"FURY_CUTTER_FAST","elite":false}],"charged":[{"id":"IRON_HEAD","elite":false},{"id":"GYRO_BALL","elite":false}]}}

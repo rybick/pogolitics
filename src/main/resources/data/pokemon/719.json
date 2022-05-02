@@ -1,1 +1,1 @@
-{"id":719,"name":"Diancie","baseAttack":190,"baseDefense":285,"baseStamina":137,"types":{"primary":"rock","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":719,"name":"Diancie","baseAttack":190,"baseDefense":285,"baseStamina":137,"types":{"primary":"rock","secondary":"fairy"},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"ROCK_THROW_FAST","elite":false}],"charged":[{"id":"ROCK_SLIDE","elite":false},{"id":"MOONBLAST","elite":false},{"id":"POWER_GEM","elite":false}]}}

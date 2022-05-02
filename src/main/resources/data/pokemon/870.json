@@ -1,0 +1,1 @@
+{"id":870,"name":"Falinks","baseAttack":193,"baseDefense":170,"baseStamina":163,"types":{"primary":"fighting","secondary":null},"moves":{"quick":[{"id":"ROCK_SMASH_FAST","elite":false},{"id":"COUNTER_FAST","elite":false}],"charged":[{"id":"SUPER_POWER","elite":false},{"id":"BRICK_BREAK","elite":false},{"id":"MEGAHORN","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":853,"name":"Grapploct","baseAttack":209,"baseDefense":162,"baseStamina":190,"types":{"primary":"fighting","secondary":null},"moves":{"quick":[{"id":"ROCK_SMASH_FAST","elite":false},{"id":"WATERFALL_FAST","elite":false}],"charged":[{"id":"BRICK_BREAK","elite":false},{"id":"SUPER_POWER","elite":false},{"id":"ICE_PUNCH","elite":false},{"id":"SURF","elite":false}]}}

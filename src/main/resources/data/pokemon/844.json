@@ -1,0 +1,1 @@
+{"id":844,"name":"Sandaconda","baseAttack":202,"baseDefense":207,"baseStamina":176,"types":{"primary":"ground","secondary":null},"moves":{"quick":[{"id":"MUD_SLAP_FAST","elite":false},{"id":"MUD_SHOT_FAST","elite":false}],"charged":[{"id":"DIG","elite":false},{"id":"BULLDOZE","elite":false},{"id":"EARTH_POWER","elite":false}]}}

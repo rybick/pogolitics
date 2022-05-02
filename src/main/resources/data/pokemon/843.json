@@ -1,0 +1,1 @@
+{"id":843,"name":"Silicobra","baseAttack":103,"baseDefense":123,"baseStamina":141,"types":{"primary":"ground","secondary":null},"moves":{"quick":[{"id":"MUD_SLAP_FAST","elite":false},{"id":"MUD_SHOT_FAST","elite":false}],"charged":[{"id":"DIG","elite":false},{"id":"BULLDOZE","elite":false},{"id":"EARTH_POWER","elite":false}]}}

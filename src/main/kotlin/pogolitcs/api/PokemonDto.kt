@@ -12,11 +12,8 @@ data class PokemonDto(
     data class TypesDto(val primary: String, val secondary: String?)
     class MovesDto(val quick: Array<MoveDto>, val charged: Array<MoveDto>)
     data class MoveDto(
-        val id: Int,
-        val name: String,
-        val type: String,
-        val legacy: Boolean,
-        val exclusive: Boolean
+        val id: String,
+        val elite: Boolean
     )
 }
 

@@ -1,1 +1,1 @@
-{"id":748,"name":"Toxapex","baseAttack":114,"baseDefense":273,"baseStamina":137,"types":{"primary":"poison","secondary":"water"},"moves":{"quick":[],"charged":[]}}
+{"id":748,"name":"Toxapex","baseAttack":114,"baseDefense":273,"baseStamina":137,"types":{"primary":"poison","secondary":"water"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

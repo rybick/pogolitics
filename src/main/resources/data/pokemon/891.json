@@ -1,0 +1,1 @@
+{"id":891,"name":"Kubfu","baseAttack":170,"baseDefense":112,"baseStamina":155,"types":{"primary":"fighting","secondary":null},"moves":{"quick":[{"id":"ROCK_SMASH_FAST","elite":false},{"id":"COUNTER_FAST","elite":false}],"charged":[{"id":"BRICK_BREAK","elite":false},{"id":"DYNAMIC_PUNCH","elite":false},{"id":"CLOSE_COMBAT","elite":false}]}}

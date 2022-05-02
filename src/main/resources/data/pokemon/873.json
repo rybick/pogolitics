@@ -1,0 +1,1 @@
+{"id":873,"name":"Frosmoth","baseAttack":230,"baseDefense":155,"baseStamina":172,"types":{"primary":"ice","secondary":"bug"},"moves":{"quick":[{"id":"POWDER_SNOW_FAST","elite":false},{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"ICY_WIND","elite":false},{"id":"BUG_BUZZ","elite":false},{"id":"ICE_BEAM","elite":false},{"id":"HURRICANE","elite":false}]}}

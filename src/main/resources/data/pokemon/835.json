@@ -1,0 +1,1 @@
+{"id":835,"name":"Yamper","baseAttack":80,"baseDefense":90,"baseStamina":153,"types":{"primary":"electric","secondary":null},"moves":{"quick":[{"id":"SPARK_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"CRUNCH","elite":false},{"id":"THUNDER","elite":false}]}}

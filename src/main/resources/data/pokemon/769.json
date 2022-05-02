@@ -1,1 +1,1 @@
-{"id":769,"name":"Sandygast","baseAttack":120,"baseDefense":118,"baseStamina":146,"types":{"primary":"ghost","secondary":"ground"},"moves":{"quick":[],"charged":[]}}
+{"id":769,"name":"Sandygast","baseAttack":120,"baseDefense":118,"baseStamina":146,"types":{"primary":"ghost","secondary":"ground"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":797,"name":"Celesteela","baseAttack":207,"baseDefense":199,"baseStamina":219,"types":{"primary":"steel","secondary":"flying"},"moves":{"quick":[],"charged":[]}}
+{"id":797,"name":"Celesteela","baseAttack":207,"baseDefense":199,"baseStamina":219,"types":{"primary":"steel","secondary":"flying"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

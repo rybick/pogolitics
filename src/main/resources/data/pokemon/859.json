@@ -1,0 +1,1 @@
+{"id":859,"name":"Impidimp","baseAttack":103,"baseDefense":69,"baseStamina":128,"types":{"primary":"dark","secondary":"fairy"},"moves":{"quick":[{"id":"BITE_FAST","elite":false},{"id":"SUCKER_PUNCH_FAST","elite":false}],"charged":[{"id":"FOUL_PLAY","elite":false},{"id":"DARK_PULSE","elite":false},{"id":"PLAY_ROUGH","elite":false}]}}

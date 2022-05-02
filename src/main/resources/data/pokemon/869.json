@@ -1,0 +1,1 @@
+{"id":869,"name":"Alcremie","baseAttack":203,"baseDefense":203,"baseStamina":163,"types":{"primary":"fairy","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"CHARM_FAST","elite":false}],"charged":[{"id":"DAZZLING_GLEAM","elite":false},{"id":"PSYSHOCK","elite":false},{"id":"ENERGY_BALL","elite":false}]}}

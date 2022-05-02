@@ -1,0 +1,1 @@
+{"id":824,"name":"Blipbug","baseAttack":46,"baseDefense":67,"baseStamina":93,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"STRUGGLE_BUG_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

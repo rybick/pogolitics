@@ -1,1 +1,1 @@
-{"id":754,"name":"Lurantis","baseAttack":192,"baseDefense":169,"baseStamina":172,"types":{"primary":"grass","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":754,"name":"Lurantis","baseAttack":192,"baseDefense":169,"baseStamina":172,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"RAZOR_LEAF_FAST","elite":false},{"id":"FURY_CUTTER_FAST","elite":false}],"charged":[{"id":"LEAF_BLADE","elite":false},{"id":"LEAF_STORM","elite":false},{"id":"SUPER_POWER","elite":false},{"id":"X_SCISSOR","elite":false}]}}

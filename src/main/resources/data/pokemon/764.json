@@ -1,1 +1,1 @@
-{"id":764,"name":"Comfey","baseAttack":165,"baseDefense":215,"baseStamina":139,"types":{"primary":"fairy","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":764,"name":"Comfey","baseAttack":165,"baseDefense":215,"baseStamina":139,"types":{"primary":"fairy","secondary":null},"moves":{"quick":[{"id":"VINE_WHIP_FAST","elite":false},{"id":"HIDDEN_POWER_FAST","elite":false}],"charged":[{"id":"PETAL_BLIZZARD","elite":false},{"id":"GRASS_KNOT","elite":false},{"id":"DRAINING_KISS","elite":false}]}}

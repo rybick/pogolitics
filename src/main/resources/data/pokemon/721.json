@@ -1,1 +1,1 @@
-{"id":721,"name":"Volcanion","baseAttack":241,"baseDefense":210,"baseStamina":190,"types":{"primary":"fire","secondary":"water"},"moves":{"quick":[],"charged":[]}}
+{"id":721,"name":"Volcanion","baseAttack":252,"baseDefense":216,"baseStamina":190,"types":{"primary":"fire","secondary":"water"},"moves":{"quick":[{"id":"INCINERATE_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false},{"id":"TAKE_DOWN_FAST","elite":false}],"charged":[{"id":"HYDRO_PUMP","elite":false},{"id":"OVERHEAT","elite":false},{"id":"EARTH_POWER","elite":false},{"id":"SLUDGE_BOMB","elite":false}]}}

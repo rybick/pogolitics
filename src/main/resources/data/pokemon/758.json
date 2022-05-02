@@ -1,1 +1,1 @@
-{"id":758,"name":"Salazzle","baseAttack":228,"baseDefense":130,"baseStamina":169,"types":{"primary":"poison","secondary":"fire"},"moves":{"quick":[],"charged":[]}}
+{"id":758,"name":"Salazzle","baseAttack":228,"baseDefense":130,"baseStamina":169,"types":{"primary":"poison","secondary":"fire"},"moves":{"quick":[{"id":"INCINERATE_FAST","elite":false},{"id":"POISON_JAB_FAST","elite":false}],"charged":[{"id":"POISON_FANG","elite":false},{"id":"FIRE_BLAST","elite":false},{"id":"DRAGON_PULSE","elite":false},{"id":"SLUDGE_WAVE","elite":false}]}}

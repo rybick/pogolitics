@@ -1,1 +1,1 @@
-{"id":803,"name":"Poipole","baseAttack":1,"baseDefense":1,"baseStamina":1,"types":{"primary":"poison","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":803,"name":"Poipole","baseAttack":145,"baseDefense":133,"baseStamina":167,"types":{"primary":"poison","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,0 +1,1 @@
+{"id":834,"name":"Drednaw","baseAttack":213,"baseDefense":164,"baseStamina":207,"types":{"primary":"water","secondary":"rock"},"moves":{"quick":[{"id":"WATERFALL_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"BODY_SLAM","elite":false},{"id":"SURF","elite":false},{"id":"ROCK_BLAST","elite":false}]}}

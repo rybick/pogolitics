@@ -1,1 +1,1 @@
-{"id":791,"name":"Solgaleo","baseAttack":280,"baseDefense":210,"baseStamina":289,"types":{"primary":"psychic","secondary":"steel"},"moves":{"quick":[],"charged":[]}}
+{"id":791,"name":"Solgaleo","baseAttack":255,"baseDefense":191,"baseStamina":264,"types":{"primary":"psychic","secondary":"steel"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

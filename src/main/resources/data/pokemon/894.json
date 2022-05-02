@@ -1,0 +1,1 @@
+{"id":894,"name":"Regieleki","baseAttack":250,"baseDefense":125,"baseStamina":190,"types":{"primary":"electric","secondary":null},"moves":{"quick":[{"id":"THUNDER_SHOCK_FAST","elite":false},{"id":"LOCK_ON_FAST","elite":false}],"charged":[{"id":"HYPER_BEAM","elite":false},{"id":"THUNDER","elite":false},{"id":"ZAP_CANNON","elite":false}]}}

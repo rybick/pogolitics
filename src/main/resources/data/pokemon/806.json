@@ -1,1 +1,1 @@
-{"id":806,"name":"Blacephalon","baseAttack":1,"baseDefense":1,"baseStamina":1,"types":{"primary":"fire","secondary":"ghost"},"moves":{"quick":[],"charged":[]}}
+{"id":806,"name":"Blacephalon","baseAttack":315,"baseDefense":148,"baseStamina":142,"types":{"primary":"fire","secondary":"ghost"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

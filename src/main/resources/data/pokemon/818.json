@@ -1,0 +1,1 @@
+{"id":818,"name":"Inteleon","baseAttack":262,"baseDefense":142,"baseStamina":172,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"POUND_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"WATER_PULSE","elite":false},{"id":"SURF","elite":false},{"id":"SHADOW_BALL","elite":false}]}}

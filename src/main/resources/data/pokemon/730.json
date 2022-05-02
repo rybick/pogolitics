@@ -1,1 +1,1 @@
-{"id":730,"name":"Primarina","baseAttack":232,"baseDefense":195,"baseStamina":190,"types":{"primary":"water","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":730,"name":"Primarina","baseAttack":232,"baseDefense":195,"baseStamina":190,"types":{"primary":"water","secondary":"fairy"},"moves":{"quick":[{"id":"CHARM_FAST","elite":false},{"id":"WATERFALL_FAST","elite":false}],"charged":[{"id":"PSYCHIC","elite":false},{"id":"HYDRO_PUMP","elite":false},{"id":"MOONBLAST","elite":false}]}}

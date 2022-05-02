@@ -1,1 +1,1 @@
-{"id":723,"name":"Dartrix","baseAttack":142,"baseDefense":139,"baseStamina":186,"types":{"primary":"grass","secondary":"flying"},"moves":{"quick":[],"charged":[]}}
+{"id":723,"name":"Dartrix","baseAttack":142,"baseDefense":139,"baseStamina":186,"types":{"primary":"grass","secondary":"flying"},"moves":{"quick":[{"id":"PECK_FAST","elite":false},{"id":"RAZOR_LEAF_FAST","elite":false}],"charged":[{"id":"SEED_BOMB","elite":false},{"id":"ENERGY_BALL","elite":false},{"id":"BRAVE_BIRD","elite":false}]}}

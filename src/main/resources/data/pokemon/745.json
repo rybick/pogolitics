@@ -1,1 +1,1 @@
-{"id":745,"name":"Lycanroc","baseAttack":231,"baseDefense":140,"baseStamina":181,"types":{"primary":"rock","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":745,"name":"Lycanroc","baseAttack":231,"baseDefense":140,"baseStamina":181,"types":{"primary":"rock","secondary":null},"moves":{"quick":[{"id":"SUCKER_PUNCH_FAST","elite":false},{"id":"ROCK_THROW_FAST","elite":false}],"charged":[{"id":"STONE_EDGE","elite":false},{"id":"DRILL_RUN","elite":false},{"id":"CRUNCH","elite":false}]}}

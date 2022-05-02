@@ -1,0 +1,1 @@
+{"id":820,"name":"Greedent","baseAttack":160,"baseDefense":156,"baseStamina":260,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"BITE_FAST","elite":false},{"id":"BULLET_SEED_FAST","elite":false}],"charged":[{"id":"BODY_SLAM","elite":false},{"id":"CRUNCH","elite":false}]}}

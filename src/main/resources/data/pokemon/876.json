@@ -1,0 +1,1 @@
+{"id":876,"name":"Indeedee","baseAttack":208,"baseDefense":166,"baseStamina":155,"types":{"primary":"psychic","secondary":"normal"},"moves":{"quick":[{"id":"EXTRASENSORY_FAST","elite":false}],"charged":[{"id":"PSYBEAM","elite":false},{"id":"PSYCHIC","elite":false},{"id":"SHADOW_BALL","elite":false}]}}

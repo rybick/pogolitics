@@ -1,0 +1,1 @@
+{"id":841,"name":"Flapple","baseAttack":214,"baseDefense":144,"baseStamina":172,"types":{"primary":"grass","secondary":"dragon"},"moves":{"quick":[{"id":"BULLET_SEED_FAST","elite":false},{"id":"DRAGON_BREATH_FAST","elite":false}],"charged":[{"id":"DRAGON_PULSE","elite":false},{"id":"FLY","elite":false},{"id":"OUTRAGE","elite":false},{"id":"SEED_BOMB","elite":false}]}}

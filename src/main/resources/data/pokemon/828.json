@@ -1,0 +1,1 @@
+{"id":828,"name":"Thievul","baseAttack":172,"baseDefense":164,"baseStamina":172,"types":{"primary":"dark","secondary":null},"moves":{"quick":[{"id":"QUICK_ATTACK_FAST","elite":false},{"id":"SNARL_FAST","elite":false}],"charged":[{"id":"NIGHT_SLASH","elite":false},{"id":"PLAY_ROUGH","elite":false}]}}

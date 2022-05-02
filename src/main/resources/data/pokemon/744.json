@@ -1,1 +1,1 @@
-{"id":744,"name":"Rockruff","baseAttack":117,"baseDefense":78,"baseStamina":128,"types":{"primary":"rock","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":744,"name":"Rockruff","baseAttack":117,"baseDefense":78,"baseStamina":128,"types":{"primary":"rock","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"ROCK_THROW_FAST","elite":false}],"charged":[{"id":"STONE_EDGE","elite":false},{"id":"ROCK_TOMB","elite":false},{"id":"CRUNCH","elite":false}]}}

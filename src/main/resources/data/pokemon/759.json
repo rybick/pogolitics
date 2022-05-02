@@ -1,1 +1,1 @@
-{"id":759,"name":"Stufful","baseAttack":136,"baseDefense":95,"baseStamina":172,"types":{"primary":"normal","secondary":"fighting"},"moves":{"quick":[],"charged":[]}}
+{"id":759,"name":"Stufful","baseAttack":136,"baseDefense":95,"baseStamina":172,"types":{"primary":"normal","secondary":"fighting"},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"TAKE_DOWN_FAST","elite":false}],"charged":[{"id":"SUPER_POWER","elite":false},{"id":"BRICK_BREAK","elite":false},{"id":"STOMP","elite":false}]}}

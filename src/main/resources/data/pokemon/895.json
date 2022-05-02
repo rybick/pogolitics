@@ -1,0 +1,1 @@
+{"id":895,"name":"Regidrago","baseAttack":202,"baseDefense":101,"baseStamina":400,"types":{"primary":"dragon","secondary":null},"moves":{"quick":[{"id":"BITE_FAST","elite":false}],"charged":[{"id":"HYPER_BEAM","elite":false},{"id":"OUTRAGE","elite":false},{"id":"DRAGON_PULSE","elite":false}]}}

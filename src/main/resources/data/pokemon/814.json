@@ -1,0 +1,1 @@
+{"id":814,"name":"Raboot","baseAttack":170,"baseDefense":125,"baseStamina":163,"types":{"primary":"fire","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"EMBER_FAST","elite":false}],"charged":[{"id":"FLAME_CHARGE","elite":false},{"id":"FLAMETHROWER","elite":false}]}}

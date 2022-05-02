@@ -1,0 +1,1 @@
+{"id":893,"name":"Zarude","baseAttack":242,"baseDefense":215,"baseStamina":233,"types":{"primary":"dark","secondary":"grass"},"moves":{"quick":[{"id":"VINE_WHIP_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"POWER_WHIP","elite":false},{"id":"ENERGY_BALL","elite":false},{"id":"DARK_PULSE","elite":false}]}}

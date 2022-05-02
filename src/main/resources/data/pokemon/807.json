@@ -1,1 +1,1 @@
-{"id":807,"name":"Zeraora","baseAttack":1,"baseDefense":1,"baseStamina":1,"types":{"primary":"electric","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":807,"name":"Zeraora","baseAttack":252,"baseDefense":177,"baseStamina":204,"types":{"primary":"electric","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

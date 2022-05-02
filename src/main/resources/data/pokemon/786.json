@@ -1,1 +1,1 @@
-{"id":786,"name":"Tapu Lele","baseAttack":259,"baseDefense":208,"baseStamina":172,"types":{"primary":"psychic","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":786,"name":"Tapu_lele","baseAttack":259,"baseDefense":208,"baseStamina":172,"types":{"primary":"psychic","secondary":"fairy"},"moves":{"quick":[{"id":"CONFUSION_FAST","elite":false},{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"PSYSHOCK","elite":false},{"id":"MOONBLAST","elite":false},{"id":"FOCUS_BLAST","elite":false},{"id":"FUTURESIGHT","elite":false}]}}

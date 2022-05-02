@@ -1,1 +1,1 @@
-{"id":782,"name":"Jangmo-o","baseAttack":102,"baseDefense":108,"baseStamina":128,"types":{"primary":"dragon","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":782,"name":"Jangmo_o","baseAttack":102,"baseDefense":108,"baseStamina":128,"types":{"primary":"dragon","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"DRAGON_TAIL_FAST","elite":false}],"charged":[{"id":"DRAGON_CLAW","elite":false},{"id":"BRICK_BREAK","elite":false},{"id":"DRAGON_PULSE","elite":false}]}}

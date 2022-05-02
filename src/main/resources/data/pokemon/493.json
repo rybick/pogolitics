@@ -1,1 +1,1 @@
-{"id":493,"name":"Arceus","baseAttack":238,"baseDefense":238,"baseStamina":237,"types":{"primary":"bug","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":493,"name":"Arceus","baseAttack":238,"baseDefense":238,"baseStamina":237,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"IRON_TAIL_FAST","elite":false},{"id":"SHADOW_CLAW_FAST","elite":false}],"charged":[{"id":"FUTURESIGHT","elite":false},{"id":"HYPER_BEAM","elite":false},{"id":"OUTRAGE","elite":false}]}}

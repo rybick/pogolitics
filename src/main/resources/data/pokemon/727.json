@@ -1,1 +1,1 @@
-{"id":727,"name":"Incineroar","baseAttack":214,"baseDefense":175,"baseStamina":216,"types":{"primary":"fire","secondary":"dark"},"moves":{"quick":[],"charged":[]}}
+{"id":727,"name":"Incineroar","baseAttack":214,"baseDefense":175,"baseStamina":216,"types":{"primary":"fire","secondary":"dark"},"moves":{"quick":[{"id":"SNARL_FAST","elite":false},{"id":"FIRE_FANG_FAST","elite":false}],"charged":[{"id":"FIRE_BLAST","elite":false},{"id":"FLAME_CHARGE","elite":false},{"id":"DARK_PULSE","elite":false}]}}

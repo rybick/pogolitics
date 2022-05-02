@@ -1,1 +1,1 @@
-{"id":679,"name":"Honedge","baseAttack":135,"baseDefense":139,"baseStamina":128,"types":{"primary":"steel","secondary":"ghost"},"moves":{"quick":[],"charged":[]}}
+{"id":679,"name":"Honedge","baseAttack":0,"baseDefense":0,"baseStamina":0,"types":{"primary":"steel","secondary":"ghost"},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"FURY_CUTTER_FAST","elite":false}],"charged":[{"id":"IRON_HEAD","elite":false},{"id":"GYRO_BALL","elite":false}]}}

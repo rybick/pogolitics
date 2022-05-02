@@ -1,0 +1,1 @@
+{"id":830,"name":"Eldegoss","baseAttack":148,"baseDefense":211,"baseStamina":155,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"RAZOR_LEAF_FAST","elite":false},{"id":"BULLET_SEED_FAST","elite":false}],"charged":[{"id":"ENERGY_BALL","elite":false},{"id":"GRASS_KNOT","elite":false}]}}

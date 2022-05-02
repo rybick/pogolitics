@@ -1,1 +1,1 @@
-{"id":752,"name":"Araquanid","baseAttack":126,"baseDefense":219,"baseStamina":169,"types":{"primary":"water","secondary":"bug"},"moves":{"quick":[],"charged":[]}}
+{"id":752,"name":"Araquanid","baseAttack":126,"baseDefense":219,"baseStamina":169,"types":{"primary":"water","secondary":"bug"},"moves":{"quick":[{"id":"INFESTATION_FAST","elite":false},{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"BUG_BUZZ","elite":false},{"id":"BUBBLE_BEAM","elite":false},{"id":"MIRROR_COAT","elite":false}]}}

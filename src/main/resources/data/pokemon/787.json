@@ -1,1 +1,1 @@
-{"id":787,"name":"Tapu Bulu","baseAttack":249,"baseDefense":215,"baseStamina":172,"types":{"primary":"grass","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":787,"name":"Tapu_bulu","baseAttack":249,"baseDefense":215,"baseStamina":172,"types":{"primary":"grass","secondary":"fairy"},"moves":{"quick":[{"id":"BULLET_SEED_FAST","elite":false},{"id":"ROCK_SMASH_FAST","elite":false}],"charged":[{"id":"GRASS_KNOT","elite":false},{"id":"DAZZLING_GLEAM","elite":false},{"id":"MEGAHORN","elite":false},{"id":"SOLAR_BEAM","elite":false}]}}

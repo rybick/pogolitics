@@ -1,0 +1,1 @@
+{"id":872,"name":"Snom","baseAttack":76,"baseDefense":59,"baseStamina":102,"types":{"primary":"ice","secondary":"bug"},"moves":{"quick":[{"id":"POWDER_SNOW_FAST","elite":false},{"id":"STRUGGLE_BUG_FAST","elite":false}],"charged":[{"id":"ICY_WIND","elite":false},{"id":"BUG_BUZZ","elite":false}]}}

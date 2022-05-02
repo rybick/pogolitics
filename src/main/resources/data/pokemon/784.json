@@ -1,1 +1,1 @@
-{"id":784,"name":"Kommo-o","baseAttack":222,"baseDefense":240,"baseStamina":181,"types":{"primary":"dragon","secondary":"fighting"},"moves":{"quick":[],"charged":[]}}
+{"id":784,"name":"Kommo_o","baseAttack":222,"baseDefense":240,"baseStamina":181,"types":{"primary":"dragon","secondary":"fighting"},"moves":{"quick":[{"id":"POISON_JAB_FAST","elite":false},{"id":"DRAGON_TAIL_FAST","elite":false}],"charged":[{"id":"DRAGON_CLAW","elite":false},{"id":"CLOSE_COMBAT","elite":false},{"id":"FLAMETHROWER","elite":false}]}}

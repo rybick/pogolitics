@@ -1,0 +1,1 @@
+{"id":877,"name":"Morpeko","baseAttack":192,"baseDefense":121,"baseStamina":151,"types":{"primary":"electric","secondary":"dark"},"moves":{"quick":[{"id":"THUNDER_SHOCK_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"CRUNCH","elite":false},{"id":"PAYBACK","elite":false},{"id":"THUNDERBOLT","elite":false},{"id":"WILD_CHARGE","elite":false}]}}

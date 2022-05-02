@@ -1,1 +1,1 @@
-{"id":423,"name":"Gastrodon","baseAttack":169,"baseDefense":143,"baseStamina":244,"types":{"primary":"water","secondary":"ground"},"moves":{"quick":[],"charged":[]}}
+{"id":423,"name":"Gastrodon","baseAttack":169,"baseDefense":143,"baseStamina":244,"types":{"primary":"water","secondary":"ground"},"moves":{"quick":[{"id":"MUD_SLAP_FAST","elite":false},{"id":"HIDDEN_POWER_FAST","elite":false}],"charged":[{"id":"WATER_PULSE","elite":false},{"id":"EARTH_POWER","elite":false},{"id":"BODY_SLAM","elite":false}]}}

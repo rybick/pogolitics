@@ -1,1 +1,1 @@
-{"id":733,"name":"Toucannon","baseAttack":222,"baseDefense":146,"baseStamina":190,"types":{"primary":"normal","secondary":"flying"},"moves":{"quick":[],"charged":[]}}
+{"id":733,"name":"Toucannon","baseAttack":222,"baseDefense":146,"baseStamina":190,"types":{"primary":"normal","secondary":"flying"},"moves":{"quick":[{"id":"PECK_FAST","elite":false},{"id":"ROCK_SMASH_FAST","elite":false},{"id":"BULLET_SEED_FAST","elite":false}],"charged":[{"id":"DRILL_PECK","elite":false},{"id":"ROCK_BLAST","elite":false},{"id":"FLASH_CANNON","elite":false}]}}

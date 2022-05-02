@@ -1,0 +1,1 @@
+{"id":815,"name":"Cinderace","baseAttack":238,"baseDefense":163,"baseStamina":190,"types":{"primary":"fire","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"EMBER_FAST","elite":false}],"charged":[{"id":"FLAME_CHARGE","elite":false},{"id":"FLAMETHROWER","elite":false},{"id":"FOCUS_BLAST","elite":false}]}}

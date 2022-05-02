@@ -1,0 +1,1 @@
+{"id":856,"name":"Hatenna","baseAttack":98,"baseDefense":93,"baseStamina":123,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[{"id":"CONFUSION_FAST","elite":false},{"id":"CHARM_FAST","elite":false}],"charged":[{"id":"PSYBEAM","elite":false},{"id":"PSYCHIC","elite":false},{"id":"DAZZLING_GLEAM","elite":false}]}}

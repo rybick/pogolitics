@@ -1,1 +1,1 @@
-{"id":770,"name":"Palossand","baseAttack":178,"baseDefense":178,"baseStamina":198,"types":{"primary":"ghost","secondary":"ground"},"moves":{"quick":[],"charged":[]}}
+{"id":770,"name":"Palossand","baseAttack":178,"baseDefense":178,"baseStamina":198,"types":{"primary":"ghost","secondary":"ground"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

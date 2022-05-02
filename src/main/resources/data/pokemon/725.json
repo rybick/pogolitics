@@ -1,1 +1,1 @@
-{"id":725,"name":"Litten","baseAttack":128,"baseDefense":79,"baseStamina":128,"types":{"primary":"fire","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":725,"name":"Litten","baseAttack":128,"baseDefense":79,"baseStamina":128,"types":{"primary":"fire","secondary":null},"moves":{"quick":[{"id":"SCRATCH_FAST","elite":false},{"id":"EMBER_FAST","elite":false}],"charged":[{"id":"FLAMETHROWER","elite":false},{"id":"FLAME_CHARGE","elite":false},{"id":"CRUNCH","elite":false}]}}

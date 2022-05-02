@@ -1,0 +1,1 @@
+{"id":825,"name":"Dottler","baseAttack":87,"baseDefense":157,"baseStamina":137,"types":{"primary":"bug","secondary":"psychic"},"moves":{"quick":[{"id":"STRUGGLE_BUG_FAST","elite":false},{"id":"CONFUSION_FAST","elite":false}],"charged":[{"id":"BUG_BUZZ","elite":false},{"id":"PSYCHIC","elite":false}]}}

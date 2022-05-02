@@ -1,1 +1,1 @@
-{"id":767,"name":"Wimpod","baseAttack":67,"baseDefense":74,"baseStamina":93,"types":{"primary":"bug","secondary":"water"},"moves":{"quick":[],"charged":[]}}
+{"id":767,"name":"Wimpod","baseAttack":67,"baseDefense":74,"baseStamina":93,"types":{"primary":"bug","secondary":"water"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

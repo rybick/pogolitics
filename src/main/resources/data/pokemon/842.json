@@ -1,0 +1,1 @@
+{"id":842,"name":"Appletun","baseAttack":178,"baseDefense":146,"baseStamina":242,"types":{"primary":"grass","secondary":"dragon"},"moves":{"quick":[{"id":"BULLET_SEED_FAST","elite":false},{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"DRAGON_PULSE","elite":false},{"id":"ENERGY_BALL","elite":false},{"id":"OUTRAGE","elite":false},{"id":"SEED_BOMB","elite":false}]}}

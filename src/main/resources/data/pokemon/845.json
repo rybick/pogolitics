@@ -1,0 +1,1 @@
+{"id":845,"name":"Cramorant","baseAttack":173,"baseDefense":163,"baseStamina":172,"types":{"primary":"flying","secondary":"water"},"moves":{"quick":[{"id":"PECK_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"DRILL_PECK","elite":false},{"id":"FLY","elite":false},{"id":"HYDRO_PUMP","elite":false}]}}

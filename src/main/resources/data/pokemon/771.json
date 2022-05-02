@@ -1,1 +1,1 @@
-{"id":771,"name":"Pyukumuku","baseAttack":97,"baseDefense":224,"baseStamina":146,"types":{"primary":"water","secondary":null},"moves":{"quick":[],"charged":[]}}
+{"id":771,"name":"Pyukumuku","baseAttack":97,"baseDefense":224,"baseStamina":146,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

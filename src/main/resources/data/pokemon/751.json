@@ -1,1 +1,1 @@
-{"id":751,"name":"Dewpider","baseAttack":72,"baseDefense":117,"baseStamina":116,"types":{"primary":"water","secondary":"bug"},"moves":{"quick":[],"charged":[]}}
+{"id":751,"name":"Dewpider","baseAttack":72,"baseDefense":117,"baseStamina":116,"types":{"primary":"water","secondary":"bug"},"moves":{"quick":[{"id":"INFESTATION_FAST","elite":false},{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"WATER_PULSE","elite":false},{"id":"BUBBLE_BEAM","elite":false},{"id":"MIRROR_COAT","elite":false}]}}

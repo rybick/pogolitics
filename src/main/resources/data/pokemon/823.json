@@ -1,0 +1,1 @@
+{"id":823,"name":"Corviknight","baseAttack":163,"baseDefense":192,"baseStamina":221,"types":{"primary":"flying","secondary":"steel"},"moves":{"quick":[{"id":"STEEL_WING_FAST","elite":false},{"id":"AIR_SLASH_FAST","elite":false}],"charged":[{"id":"DRILL_PECK","elite":false},{"id":"BRAVE_BIRD","elite":false},{"id":"IRON_HEAD","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":788,"name":"Tapu Fini","baseAttack":189,"baseDefense":254,"baseStamina":172,"types":{"primary":"water","secondary":"fairy"},"moves":{"quick":[],"charged":[]}}
+{"id":788,"name":"Tapu_fini","baseAttack":189,"baseDefense":254,"baseStamina":172,"types":{"primary":"water","secondary":"fairy"},"moves":{"quick":[{"id":"WATER_GUN_FAST","elite":false},{"id":"HIDDEN_POWER_FAST","elite":false}],"charged":[{"id":"SURF","elite":false},{"id":"MOONBLAST","elite":false},{"id":"ICE_BEAM","elite":false},{"id":"HYDRO_PUMP","elite":false}]}}

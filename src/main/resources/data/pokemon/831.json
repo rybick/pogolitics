@@ -1,0 +1,1 @@
+{"id":831,"name":"Wooloo","baseAttack":76,"baseDefense":97,"baseStamina":123,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"TAKE_DOWN_FAST","elite":false}],"charged":[{"id":"WILD_CHARGE","elite":false},{"id":"PAYBACK","elite":false},{"id":"STOMP","elite":false}]}}

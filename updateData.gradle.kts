@@ -54,10 +54,9 @@ fun updateData() {
         .filter { getData(it)["combatMove"] != null }
         .partitionLogged(::isFastAttack)
     filterAndConvertPokemonData(pokemonData)
-        .take(6)
         .forEach {
             val id = it.getInt("id")
-            File("./src/main/resources/data/pokemon/${id}TMP.json").writeText(it.toString())
+            File("./src/main/resources/data/pokemon/${id}.json").writeText(it.toString())
         }
     combineAndConvertFastMovesData(fastPveAttacks, fastPvpAttacks)
         .also {
@@ -245,15 +244,15 @@ fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?): JsonArray =
             + (eliteMoves?.map(::mapEliteMove) ?: emptyList())
     )
 
-fun mapMove(moveName: JsonValue): JsonObject {
+fun mapMove(moveId: JsonValue): JsonObject {
     return json(
-        "id" to moveName,
+        "id" to moveId,
         "elite" to false
     )
 }
-fun mapEliteMove(moveName: JsonValue): JsonObject {
+fun mapEliteMove(moveId: JsonValue): JsonObject {
     return json(
-        "id" to moveName,
+        "id" to moveId,
         "elite" to true
     )
 }

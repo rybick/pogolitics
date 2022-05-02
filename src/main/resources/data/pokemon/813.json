@@ -1,0 +1,1 @@
+{"id":813,"name":"Scorbunny","baseAttack":132,"baseDefense":79,"baseStamina":137,"types":{"primary":"fire","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"EMBER_FAST","elite":false}],"charged":[{"id":"FLAME_CHARGE","elite":false},{"id":"FLAMETHROWER","elite":false}]}}
