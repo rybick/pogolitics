@@ -33,6 +33,10 @@ fun updateData() {
     val (fastPvpAttacks, chargedPvpAttacks) = gameData
         .filter { getData(it)["combatMove"] != null }
         .partitionLogged(::isFastAttack)
+    createPokemonIndex(pokemonData)
+        .also {
+            File("./src/main/resources/data/pokemon/index.json").writeText(it.toString())
+        }
     filterAndConvertPokemonData(pokemonData)
         .forEach {
             val id = it.getInt("id")
@@ -48,7 +52,13 @@ fun updateData() {
         }
 }
 
-fun filterAndConvertPokemonData(pokemonData: List<JsonValue>): List<JsonObject> =
+fun createPokemonIndex(pokemonData: List<JsonValue>): JsonArray =
+    pokemonData
+        .map(::getData)
+        .map { convertToPokemonIndexEntry(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
+        .let(::toJsonArray)
+
+fun filterAndConvertPokemonData(pokemonData: List<JsonValue>): Collection<JsonObject> =
     pokemonData
         .map(::getData)
         .groupBy { it.getJsonObject("pokemonSettings").getString("pokemonId") }
@@ -63,7 +73,7 @@ fun filterAndConvertPokemonData(pokemonData: List<JsonValue>): List<JsonObject> 
                 .first()
         }
         .values
-        .map { combinePokemonData(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
+        .map { convertPokemonData(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
 
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
 
@@ -76,16 +86,18 @@ fun isFastAttack(element: JsonValue) =
 fun combineAndConvertFastMovesData(
     fastPveAttacks: Collection<JsonValue>,
     fastPvpAttacks: Collection<JsonValue>
-): List<JsonObject> =
+): JsonArray =
     matchPveAndPvpMoves(fastPveAttacks, fastPvpAttacks, "fast")
         .map { (pve, pvp) -> convertFastMoveData(pve, pvp) }
+        .let(::toJsonArray)
 
 fun combineAndConvertChargedMovesData(
     chargedPveAttacks: Collection<JsonValue>,
     chargedPvpAttacks: Collection<JsonValue>
-): List<JsonObject> =
+): JsonArray =
     matchPveAndPvpMoves(chargedPveAttacks, chargedPvpAttacks, "charged")
         .map { (pve, pvp) -> convertChargedMoveData(pve, pvp) }
+        .let(::toJsonArray)
 
 fun matchPveAndPvpMoves(
     pveAttacks: Collection<JsonValue>,
@@ -168,8 +180,19 @@ fun convertToPrettyNameForChargedAttack(vfxName: String): String =
         .split("_")
         .joinToString(" ") { it.toLowerCase().capitalize() }
 
-fun combinePokemonData(templateId: String, pokemonSettings: JsonObject): JsonObject {
-    return with(pokemonSettings) {
+fun convertToPokemonIndexEntry(templateId: String, pokemonSettings: JsonObject): JsonObject =
+    with(pokemonSettings) {
+        json(
+            "uniqueId" to templateId,
+            "pokedexNumber" to convertToPokedexNumber(templateId),
+            "name" to convertToPrettyPokemonName(getString("pokemonId")),
+            "form" to getString("form", null)
+        )
+    }
+
+
+fun convertPokemonData(templateId: String, pokemonSettings: JsonObject): JsonObject =
+    with(pokemonSettings) {
         json(
             "id" to convertToPokedexNumber(templateId),
             "name" to convertToPrettyPokemonName(getString("pokemonId")),
@@ -186,7 +209,7 @@ fun combinePokemonData(templateId: String, pokemonSettings: JsonObject): JsonObj
             )
         )
     }
-}
+
 
 fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?): JsonArray =
     toJsonArray(

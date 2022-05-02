@@ -4,10 +4,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import pogolitcs.ModelAndView
-import pogolitcs.api.Api
-import pogolitcs.api.ChargedMoveDto
-import pogolitcs.api.FastMoveDto
-import pogolitcs.api.PokemonDto
+import pogolitcs.api.*
 import pogolitcs.model.IVs
 import pogolitcs.model.MoveSet
 import pogolitcs.model.PokemonIndividualValuesState
@@ -36,9 +33,10 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
 
     override suspend fun get(props: IdRProps, state: PokemonIndividualValuesState): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
-            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(props.id) }
+            val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
+            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(pokemonIndex.await().findPokemonId(props.id)) }
             val pokemonStats = calculatePokemonStatistics(pokemon.await(), state)
             ModelAndView(
                 view = SinglePokemonPage::class,
@@ -50,6 +48,15 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
             )
         }
     }
+
+    private fun Array<PokemonIndexEntryDto>.findPokemonId(pokedexNumber: String): String =
+        // in transition phase pokedexNumber == id
+        pokedexNumber.toInt().let { pokedexNumberInt ->
+            filter { it.pokedexNumber == pokedexNumberInt }
+                .first { it.form == null }
+                .pokedexNumber
+                .toString()
+        }
 
     private fun toPokemonStaticInfo(pokemon: PokemonDto): SinglePokemonModel.PokemonStaticInfo {
         return SinglePokemonModel.PokemonStaticInfo(

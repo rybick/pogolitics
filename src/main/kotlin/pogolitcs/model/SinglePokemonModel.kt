@@ -17,11 +17,11 @@ data class SinglePokemonModel(
     }
 
     data class PokemonIndividualStatistics(
-            val ivs: IVs,
-            val currentStats: VariablePokemonStatistics,
-            val bestGreatLeagueStats: VariablePokemonStatistics,
-            val bestUltraLeagueStats: VariablePokemonStatistics,
-            val bestStatsWithoutBoost: VariablePokemonStatistics
+        val ivs: IVs,
+        val currentStats: VariablePokemonStatistics,
+        val bestGreatLeagueStats: VariablePokemonStatistics,
+        val bestUltraLeagueStats: VariablePokemonStatistics,
+        val bestStatsWithoutBoost: VariablePokemonStatistics
     )
 
     data class VariablePokemonStatistics(

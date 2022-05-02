@@ -6,9 +6,21 @@ import pogolitcs.applicationRoot
 import kotlin.browser.window
 
 class Api() {
+    private var index: Array<PokemonIndexEntryDto>? = null
     private var pokemon: PokemonDto? = null
     private var fastMoves: Array<FastMoveDto>? = null
     private var chargedMoves: Array<ChargedMoveDto>? = null
+
+    suspend fun fetchPokemonIndex(): Array<PokemonIndexEntryDto> {
+        if (index == null) {
+            index = fetchResource("/data/pokemon/index.json")
+                .await()
+                .json()
+                .await()
+                .unsafeCast<Array<PokemonIndexEntryDto>>()
+        }
+        return index!!
+    }
 
     suspend fun fetchPokemon(id: String): PokemonDto {
         if (pokemon == null || pokemon?.id != id) {
