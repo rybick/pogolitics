@@ -37,10 +37,10 @@ fun updateData() {
         .also {
             File("./src/main/resources/data/pokemon/index.json").writeText(it.toString())
         }
-    filterAndConvertPokemonData(pokemonData)
+    convertAllPokemonData(pokemonData)
         .forEach {
-            val id = it.getInt("pokedexNumber")
-            File("./src/main/resources/data/pokemon/${id}.json").writeText(it.toString())
+            val uniqueId = it.getString("uniqueId")
+            File("./src/main/resources/data/pokemon/${uniqueId}.json").writeText(it.toString())
         }
     combineAndConvertFastMovesData(fastPveAttacks, fastPvpAttacks)
         .also {
@@ -58,21 +58,9 @@ fun createPokemonIndex(pokemonData: List<JsonValue>): JsonArray =
         .map { convertToPokemonIndexEntry(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
         .let(::toJsonArray)
 
-fun filterAndConvertPokemonData(pokemonData: List<JsonValue>): Collection<JsonObject> =
+fun convertAllPokemonData(pokemonData: List<JsonValue>): Collection<JsonObject> =
     pokemonData
         .map(::getData)
-        .groupBy { it.getJsonObject("pokemonSettings").getString("pokemonId") }
-        .mapValues { (key, value) ->
-            value
-                .filter { it.getJsonObject("pokemonSettings")["form"] == null }
-                .also {
-                    if (it.size != 1) {
-                        throw Exception("multiple pokemon with basic form for $key: ${it.map { it.getString("templateId") }}")
-                    }
-                }
-                .first()
-        }
-        .values
         .map { convertPokemonData(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
 
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!

@@ -1,0 +1,1 @@
+{"uniqueId":"V0258_POKEMON_MUDKIP_NORMAL","pokedexNumber":258,"name":"Mudkip","form":"NORMAL","baseAttack":126,"baseDefense":93,"baseStamina":137,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"DIG","elite":false},{"id":"SLUDGE","elite":false},{"id":"STOMP","elite":false}]}}

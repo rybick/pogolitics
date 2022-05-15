@@ -1,0 +1,1 @@
+{"uniqueId":"V0876_POKEMON_INDEEDEE_FEMALE","pokedexNumber":876,"name":"Indeedee","form":"FEMALE","baseAttack":184,"baseDefense":184,"baseStamina":172,"types":{"primary":"psychic","secondary":"normal"},"moves":{"quick":[{"id":"EXTRASENSORY_FAST","elite":false}],"charged":[{"id":"PSYBEAM","elite":false},{"id":"PSYCHIC","elite":false},{"id":"ENERGY_BALL","elite":false}]}}

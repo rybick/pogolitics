@@ -21,10 +21,9 @@ class Api() {
         return index!!
     }
 
-    suspend fun fetchPokemon(id: String): PokemonDto {
-        val pokedexNumber = id.toInt()
-        if (pokemon == null || pokemon?.pokedexNumber != pokedexNumber) {
-            pokemon = fetchResource("/data/pokemon/$pokedexNumber.json")
+    suspend fun fetchPokemon(uniqueId: String): PokemonDto {
+        if (pokemon == null || pokemon?.uniqueId != uniqueId) {
+            pokemon = fetchResource("/data/pokemon/$uniqueId.json")
                     .await()
                     .json()
                     .await()

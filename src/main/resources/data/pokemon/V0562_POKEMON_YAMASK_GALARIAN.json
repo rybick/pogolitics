@@ -1,0 +1,1 @@
+{"uniqueId":"V0562_POKEMON_YAMASK_GALARIAN","pokedexNumber":562,"name":"Yamask","form":"GALARIAN","baseAttack":95,"baseDefense":141,"baseStamina":116,"types":{"primary":"ground","secondary":"ghost"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"NIGHT_SHADE","elite":false},{"id":"ROCK_TOMB","elite":false}]}}

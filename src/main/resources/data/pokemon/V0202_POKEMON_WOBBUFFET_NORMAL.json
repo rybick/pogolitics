@@ -1,0 +1,1 @@
+{"uniqueId":"V0202_POKEMON_WOBBUFFET_NORMAL","pokedexNumber":202,"name":"Wobbuffet","form":"NORMAL","baseAttack":60,"baseDefense":106,"baseStamina":382,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[{"id":"COUNTER_FAST","elite":false},{"id":"SPLASH_FAST","elite":false},{"id":"CHARM_FAST","elite":false}],"charged":[{"id":"MIRROR_COAT","elite":false}]}}

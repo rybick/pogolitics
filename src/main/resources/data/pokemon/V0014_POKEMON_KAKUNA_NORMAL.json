@@ -1,0 +1,1 @@
+{"uniqueId":"V0014_POKEMON_KAKUNA_NORMAL","pokedexNumber":14,"name":"Kakuna","form":"NORMAL","baseAttack":46,"baseDefense":75,"baseStamina":128,"types":{"primary":"bug","secondary":"poison"},"moves":{"quick":[{"id":"BUG_BITE_FAST","elite":false},{"id":"POISON_STING_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,0 +1,1 @@
+{"uniqueId":"V0396_POKEMON_STARLY_NORMAL","pokedexNumber":396,"name":"Starly","form":"NORMAL","baseAttack":101,"baseDefense":58,"baseStamina":120,"types":{"primary":"normal","secondary":"flying"},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"QUICK_ATTACK_FAST","elite":false}],"charged":[{"id":"AERIAL_ACE","elite":false},{"id":"BRAVE_BIRD","elite":false}]}}

@@ -1,0 +1,1 @@
+{"uniqueId":"V0225_POKEMON_DELIBIRD_WINTER_2020","pokedexNumber":225,"name":"Delibird","form":"WINTER_2020","baseAttack":128,"baseDefense":90,"baseStamina":128,"types":{"primary":"ice","secondary":"flying"},"moves":{"quick":[{"id":"PRESENT_FAST","elite":false}],"charged":[{"id":"ICE_PUNCH","elite":false},{"id":"ICY_WIND","elite":false},{"id":"AERIAL_ACE","elite":false}]}}

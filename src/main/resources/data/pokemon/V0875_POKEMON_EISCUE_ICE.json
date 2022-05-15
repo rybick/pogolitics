@@ -1,0 +1,1 @@
+{"uniqueId":"V0875_POKEMON_EISCUE_ICE","pokedexNumber":875,"name":"Eiscue","form":"ICE","baseAttack":148,"baseDefense":195,"baseStamina":181,"types":{"primary":"ice","secondary":null},"moves":{"quick":[{"id":"POWDER_SNOW_FAST","elite":false}],"charged":[{"id":"ICY_WIND","elite":false},{"id":"WEATHER_BALL_ICE","elite":false},{"id":"SURF","elite":false}]}}

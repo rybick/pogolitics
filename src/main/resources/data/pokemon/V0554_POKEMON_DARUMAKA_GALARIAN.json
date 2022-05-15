@@ -1,0 +1,1 @@
+{"uniqueId":"V0554_POKEMON_DARUMAKA_GALARIAN","pokedexNumber":554,"name":"Darumaka","form":"GALARIAN","baseAttack":153,"baseDefense":86,"baseStamina":172,"types":{"primary":"ice","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"ICE_FANG_FAST","elite":false}],"charged":[{"id":"ICE_PUNCH","elite":false},{"id":"ICE_BEAM","elite":false}]}}

@@ -1,0 +1,1 @@
+{"uniqueId":"V0013_POKEMON_WEEDLE_NORMAL","pokedexNumber":13,"name":"Weedle","form":"NORMAL","baseAttack":63,"baseDefense":50,"baseStamina":120,"types":{"primary":"bug","secondary":"poison"},"moves":{"quick":[{"id":"BUG_BITE_FAST","elite":false},{"id":"POISON_STING_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

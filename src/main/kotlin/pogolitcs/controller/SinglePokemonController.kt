@@ -36,7 +36,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
-            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(pokemonIndex.await().findPokemonId(props.id)) }
+            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(pokemonIndex.await().findPokemonUniqueId(props.id)) }
             val pokemonStats = calculatePokemonStatistics(pokemon.await(), state)
             ModelAndView(
                 view = SinglePokemonPage::class,
@@ -49,13 +49,11 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
         }
     }
 
-    private fun Array<PokemonIndexEntryDto>.findPokemonId(pokedexNumber: String): String =
-        // in transition phase pokedexNumber == id
+    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: String): String =
         pokedexNumber.toInt().let { pokedexNumberInt ->
             filter { it.pokedexNumber == pokedexNumberInt }
                 .first { it.form == null }
-                .pokedexNumber
-                .toString()
+                .uniqueId
         }
 
     private fun toPokemonStaticInfo(pokemon: PokemonDto): SinglePokemonModel.PokemonStaticInfo {
