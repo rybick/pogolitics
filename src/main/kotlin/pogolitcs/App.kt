@@ -5,6 +5,7 @@ import kotlinx.coroutines.launch
 import org.w3c.dom.url.URLSearchParams
 import pogolitcs.view.MovesetsRProps
 import pogolitcs.view.MovesetsRState
+import pogolitcs.view.NotFoundPage
 import react.*
 import react.dom.p
 import react.router.dom.RouteResultProps
@@ -34,6 +35,7 @@ class App: RComponent<RProps, AppState>() {
                 appConfig.routing.forEach {
                     routeToPage(it)
                 }
+                route("*") { renderNotFoundPage() }
             }
         }
     }
@@ -60,6 +62,10 @@ class App: RComponent<RProps, AppState>() {
 
     private fun RBuilder.renderLoadingPage(): ReactElement {
         return p { +"loading..." }
+    }
+
+    private fun RBuilder.renderNotFoundPage(): ReactElement {
+        return child(NotFoundPage::class) {}
     }
 
     @Suppress("UNCHECKED_CAST")
