@@ -8,7 +8,6 @@ import react.RBuilder
 import react.RComponent
 import react.RState
 import react.dom.a
-import react.dom.div
 import styled.*
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {

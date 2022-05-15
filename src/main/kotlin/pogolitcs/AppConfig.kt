@@ -11,7 +11,7 @@ class AppConfig {
     private val api = Api()
 
     private val mainPageController = MainPageController()
-    private val pokemonListController = PokemonListController()
+    private val pokemonListController = PokemonListController(api)
     private val pokemonController = SinglePokemonController(api)
 
     // TODO later: move path to controller as well
