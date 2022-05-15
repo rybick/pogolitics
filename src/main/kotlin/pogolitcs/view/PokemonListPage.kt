@@ -5,10 +5,12 @@ import pogolitcs.model.PokemonListModel
 import react.RBuilder
 import react.RComponent
 import react.RState
+import react.dom.a
 import styled.css
 import styled.styledDiv
 
-class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) : RComponent<PageRProps<PokemonListModel, Unit>, RState>(props) {
+class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
+    RComponent<PageRProps<PokemonListModel, Unit>, RState>(props) {
     override fun RBuilder.render() {
         styledDiv {
             css { +BasicStylesheet.widgetWrapper }
@@ -57,7 +59,9 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) : RComponent<Pa
                             css {
                                 +BasicStylesheet.Table.cell
                             }
-                            +pokemon.name
+                            a(href = pokemonPagePath(pokemon.pokedexNumber, pokemon.form)) {
+                                +pokemon.name
+                            }
                         }
                         styledDiv {
                             css {
@@ -66,6 +70,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) : RComponent<Pa
                             +(pokemon.form ?: "")
                         }
                     }
+
                 }
             }
         }
