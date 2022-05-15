@@ -3,6 +3,8 @@ package pogolitcs.controller
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
+import kotlinx.css.tr
+import org.w3c.dom.url.URLSearchParams
 import pogolitcs.ModelAndView
 import pogolitcs.api.*
 import pogolitcs.model.IVs
@@ -31,12 +33,21 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
                 cp = null
             )
 
-    override suspend fun get(props: IdRProps, state: PokemonIndividualValuesState): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
+    override suspend fun get(
+        props: IdRProps,
+        params: URLSearchParams,
+        state: PokemonIndividualValuesState
+    ): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
+            val form = params.get("form")
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
-            val pokemon: Deferred<PokemonDto> = async { api.fetchPokemon(pokemonIndex.await().findPokemonUniqueId(props.id)) }
+            val pokemon: Deferred<PokemonDto> = async {
+                pokemonIndex.await()
+                    .findPokemonUniqueId(props.id, form)
+                    .let { uniqueId -> api.fetchPokemon(uniqueId) }
+            }
             val pokemonStats = calculatePokemonStatistics(pokemon.await(), state)
             ModelAndView(
                 view = SinglePokemonPage::class,
@@ -49,10 +60,10 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
         }
     }
 
-    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: String): String =
+    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: String, form: String?): String =
         pokedexNumber.toInt().let { pokedexNumberInt ->
             filter { it.pokedexNumber == pokedexNumberInt }
-                .first { it.form == null }
+                .first { it.form.equals(form, ignoreCase = true) }
                 .uniqueId
         }
 

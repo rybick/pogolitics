@@ -2,6 +2,7 @@ package pogolitcs
 
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
+import org.w3c.dom.url.URLSearchParams
 import pogolitcs.view.MovesetsRProps
 import pogolitcs.view.MovesetsRState
 import react.*
@@ -64,7 +65,12 @@ class App: RComponent<RProps, AppState>() {
     @Suppress("UNCHECKED_CAST")
     private fun <R: RProps, S> orderStateReload(route: AppConfig.Route<R, *, S>, props: RouteResultProps<R>) {
         MainScope().launch {
-            val modelAndView = route.controller.get(props.match.params, state.pageState!! as S)
+            val modelAndView =
+                route.controller.get(
+                    props = props.match.params,
+                    params = URLSearchParams(props.location.search),
+                    state = state.pageState!! as S
+                )
             setState {
                 this.url = window.location.href
                 this.modelAndView = modelAndView
