@@ -224,7 +224,12 @@ fun convertToPokedexNumber(templateId: String): Int =
         templateId.substring(1, 5).toInt()
     } else throw Exception("Misformatted pokemon templateId: $templateId")
 
-fun convertToPrettyPokemonName(pokemonId: String): String = pokemonId.toLowerCase().capitalize()
+fun convertToPrettyPokemonName(pokemonId: String): String =
+    pokemonId
+        .split('_')
+        .joinToString(" ") {
+            it.toLowerCase().capitalize()
+        }
 
 fun convertToPrettyForm(maybeForm: String?, pokemonId: String) =
     maybeForm?.let { form ->
