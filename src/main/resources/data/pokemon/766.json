@@ -1,1 +1,1 @@
-{"id":766,"name":"Passimian","baseAttack":222,"baseDefense":160,"baseStamina":225,"types":{"primary":"fighting","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0766_POKEMON_PASSIMIAN","pokedexNumber":766,"name":"Passimian","form":null,"baseAttack":222,"baseDefense":160,"baseStamina":225,"types":{"primary":"fighting","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

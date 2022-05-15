@@ -1,1 +1,1 @@
-{"id":780,"name":"Drampa","baseAttack":231,"baseDefense":164,"baseStamina":186,"types":{"primary":"normal","secondary":"dragon"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0780_POKEMON_DRAMPA","pokedexNumber":780,"name":"Drampa","form":null,"baseAttack":231,"baseDefense":164,"baseStamina":186,"types":{"primary":"normal","secondary":"dragon"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":794,"name":"Buzzwole","baseAttack":236,"baseDefense":196,"baseStamina":216,"types":{"primary":"bug","secondary":"fighting"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0794_POKEMON_BUZZWOLE","pokedexNumber":794,"name":"Buzzwole","form":null,"baseAttack":236,"baseDefense":196,"baseStamina":216,"types":{"primary":"bug","secondary":"fighting"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

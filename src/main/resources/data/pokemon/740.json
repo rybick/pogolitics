@@ -1,1 +1,1 @@
-{"id":740,"name":"Crabominable","baseAttack":231,"baseDefense":138,"baseStamina":219,"types":{"primary":"fighting","secondary":"ice"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0740_POKEMON_CRABOMINABLE","pokedexNumber":740,"name":"Crabominable","form":null,"baseAttack":231,"baseDefense":138,"baseStamina":219,"types":{"primary":"fighting","secondary":"ice"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":772,"name":"Type_null","baseAttack":184,"baseDefense":184,"baseStamina":216,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0772_POKEMON_TYPE_NULL","pokedexNumber":772,"name":"Type_null","form":null,"baseAttack":184,"baseDefense":184,"baseStamina":216,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":762,"name":"Steenee","baseAttack":78,"baseDefense":94,"baseStamina":141,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0762_POKEMON_STEENEE","pokedexNumber":762,"name":"Steenee","form":null,"baseAttack":78,"baseDefense":94,"baseStamina":141,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":132,"name":"Ditto","baseAttack":91,"baseDefense":91,"baseStamina":134,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"TRANSFORM_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0132_POKEMON_DITTO","pokedexNumber":132,"name":"Ditto","form":null,"baseAttack":91,"baseDefense":91,"baseStamina":134,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"TRANSFORM_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

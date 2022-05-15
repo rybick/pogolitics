@@ -1,1 +1,1 @@
-{"id":750,"name":"Mudsdale","baseAttack":214,"baseDefense":174,"baseStamina":225,"types":{"primary":"ground","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0750_POKEMON_MUDSDALE","pokedexNumber":750,"name":"Mudsdale","form":null,"baseAttack":214,"baseDefense":174,"baseStamina":225,"types":{"primary":"ground","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

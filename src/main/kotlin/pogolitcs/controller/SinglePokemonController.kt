@@ -60,7 +60,8 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
 
     private fun toPokemonStaticInfo(pokemon: PokemonDto): SinglePokemonModel.PokemonStaticInfo {
         return SinglePokemonModel.PokemonStaticInfo(
-            id = pokemon.id,
+            uniqueId = pokemon.uniqueId,
+            pokedexNumber = pokemon.pokedexNumber,
             name = pokemon.name,
             baseAttack = pokemon.baseAttack,
             baseDefense = pokemon.baseDefense,

@@ -1,1 +1,1 @@
-{"id":806,"name":"Blacephalon","baseAttack":315,"baseDefense":148,"baseStamina":142,"types":{"primary":"fire","secondary":"ghost"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0806_POKEMON_BLACEPHALON","pokedexNumber":806,"name":"Blacephalon","form":null,"baseAttack":315,"baseDefense":148,"baseStamina":142,"types":{"primary":"fire","secondary":"ghost"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

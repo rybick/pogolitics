@@ -1,1 +1,1 @@
-{"id":415,"name":"Combee","baseAttack":59,"baseDefense":83,"baseStamina":102,"types":{"primary":"bug","secondary":"flying"},"moves":{"quick":[{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"BUG_BUZZ","elite":false}]}}
+{"uniqueId":"V0415_POKEMON_COMBEE","pokedexNumber":415,"name":"Combee","form":null,"baseAttack":59,"baseDefense":83,"baseStamina":102,"types":{"primary":"bug","secondary":"flying"},"moves":{"quick":[{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"BUG_BUZZ","elite":false}]}}

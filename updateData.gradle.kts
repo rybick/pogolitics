@@ -39,7 +39,7 @@ fun updateData() {
         }
     filterAndConvertPokemonData(pokemonData)
         .forEach {
-            val id = it.getInt("id")
+            val id = it.getInt("pokedexNumber")
             File("./src/main/resources/data/pokemon/${id}.json").writeText(it.toString())
         }
     combineAndConvertFastMovesData(fastPveAttacks, fastPvpAttacks)
@@ -186,16 +186,17 @@ fun convertToPokemonIndexEntry(templateId: String, pokemonSettings: JsonObject):
             "uniqueId" to templateId,
             "pokedexNumber" to convertToPokedexNumber(templateId),
             "name" to convertToPrettyPokemonName(getString("pokemonId")),
-            "form" to getString("form", null)
+            "form" to convertToPrettyForm(getString("form", null), getString("pokemonId"))
         )
     }
-
 
 fun convertPokemonData(templateId: String, pokemonSettings: JsonObject): JsonObject =
     with(pokemonSettings) {
         json(
-            "id" to convertToPokedexNumber(templateId),
+            "uniqueId" to templateId,
+            "pokedexNumber" to convertToPokedexNumber(templateId),
             "name" to convertToPrettyPokemonName(getString("pokemonId")),
+            "form" to convertToPrettyForm(getString("form", null), getString("pokemonId")),
             "baseAttack" to getJsonObject("stats").getInt("baseAttack", 0),
             "baseDefense" to getJsonObject("stats").getInt("baseDefense", 0),
             "baseStamina" to getJsonObject("stats").getInt("baseStamina", 0),
@@ -236,6 +237,15 @@ fun convertToPokedexNumber(templateId: String): Int =
     } else throw Exception("Misformatted pokemon templateId: $templateId")
 
 fun convertToPrettyPokemonName(pokemonId: String): String = pokemonId.toLowerCase().capitalize()
+
+fun convertToPrettyForm(maybeForm: String?, pokemonId: String) =
+    maybeForm?.let { form ->
+        if (form.startsWith(pokemonId)) {
+            form.substring(pokemonId.length + 1)
+        } else {
+            form
+        }
+    }
 
 fun convertType(typeString: String): String {
     val typePrefix = "POKEMON_TYPE"

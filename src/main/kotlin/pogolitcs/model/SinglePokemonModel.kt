@@ -6,14 +6,15 @@ data class SinglePokemonModel(
         val moveSets: List<MoveSet>
 ) {
     data class PokemonStaticInfo(
-        val id: String,
+        val uniqueId: String,
+        val pokedexNumber: Int,
         val name: String,
         val baseAttack: Int,
         val baseDefense: Int,
         val baseStamina: Int,
         val hardiness: Double
     ) {
-        val familyId: Int get() = id.replace("[^\\d]".toRegex(), "").toInt()
+        val familyId: Int get() = pokedexNumber
     }
 
     data class PokemonIndividualStatistics(

@@ -18,7 +18,7 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
                 css { +Styles.wrapper }
                 styledSpan {
                     css { +Styles.pokemonId }
-                    +"#${props.data.id}"
+                    +"#${props.data.pokedexNumber}"
                 }
                 span {
                     +props.data.name

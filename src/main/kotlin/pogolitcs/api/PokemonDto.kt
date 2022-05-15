@@ -1,7 +1,8 @@
 package pogolitcs.api
 
 data class PokemonDto(
-    val id: String,
+    val uniqueId: String,
+    val pokedexNumber: Int,
     val name: String,
     val baseAttack: Int,
     val baseDefense: Int,

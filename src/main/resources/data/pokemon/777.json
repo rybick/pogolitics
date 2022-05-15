@@ -1,1 +1,1 @@
-{"id":777,"name":"Togedemaru","baseAttack":190,"baseDefense":145,"baseStamina":163,"types":{"primary":"electric","secondary":"steel"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0777_POKEMON_TOGEDEMARU","pokedexNumber":777,"name":"Togedemaru","form":null,"baseAttack":190,"baseDefense":145,"baseStamina":163,"types":{"primary":"electric","secondary":"steel"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

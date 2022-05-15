@@ -1,7 +1,6 @@
 package pogolitcs.api
 
 import kotlinx.coroutines.await
-import kotlinx.coroutines.delay
 import pogolitcs.applicationRoot
 import kotlin.browser.window
 
@@ -23,8 +22,9 @@ class Api() {
     }
 
     suspend fun fetchPokemon(id: String): PokemonDto {
-        if (pokemon == null || pokemon?.id != id) {
-            pokemon = fetchResource("/data/pokemon/$id.json")
+        val pokedexNumber = id.toInt()
+        if (pokemon == null || pokemon?.pokedexNumber != pokedexNumber) {
+            pokemon = fetchResource("/data/pokemon/$pokedexNumber.json")
                     .await()
                     .json()
                     .await()

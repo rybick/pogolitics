@@ -1,1 +1,1 @@
-{"id":736,"name":"Grubbin","baseAttack":115,"baseDefense":85,"baseStamina":132,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0736_POKEMON_GRUBBIN","pokedexNumber":736,"name":"Grubbin","form":null,"baseAttack":115,"baseDefense":85,"baseStamina":132,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

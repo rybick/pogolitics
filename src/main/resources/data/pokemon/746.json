@@ -1,1 +1,1 @@
-{"id":746,"name":"Wishiwashi","baseAttack":46,"baseDefense":43,"baseStamina":128,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0746_POKEMON_WISHIWASHI","pokedexNumber":746,"name":"Wishiwashi","form":null,"baseAttack":46,"baseDefense":43,"baseStamina":128,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

@@ -1,1 +1,1 @@
-{"id":265,"name":"Wurmple","baseAttack":75,"baseDefense":59,"baseStamina":128,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0265_POKEMON_WURMPLE","pokedexNumber":265,"name":"Wurmple","form":null,"baseAttack":75,"baseDefense":59,"baseStamina":128,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

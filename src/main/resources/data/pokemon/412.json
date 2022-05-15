@@ -1,1 +1,1 @@
-{"id":412,"name":"Burmy","baseAttack":53,"baseDefense":83,"baseStamina":120,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0412_POKEMON_BURMY","pokedexNumber":412,"name":"Burmy","form":null,"baseAttack":53,"baseDefense":83,"baseStamina":120,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"BUG_BITE_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

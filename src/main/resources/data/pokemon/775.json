@@ -1,1 +1,1 @@
-{"id":775,"name":"Komala","baseAttack":216,"baseDefense":165,"baseStamina":163,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0775_POKEMON_KOMALA","pokedexNumber":775,"name":"Komala","form":null,"baseAttack":216,"baseDefense":165,"baseStamina":163,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
