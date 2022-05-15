@@ -21,7 +21,7 @@ import kotlin.reflect.KClass
 class SinglePokemonController(private val api: Api): Controller<SinglePokemonController.IdRProps, SinglePokemonModel, PokemonIndividualValuesState> {
 
     interface IdRProps : RProps {
-        var id: String
+        var pokedexNumber: String
     }
 
     override fun getInitialState(url: String) =
@@ -45,7 +45,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
             val pokemon: Deferred<PokemonDto> = async {
                 pokemonIndex.await()
-                    .findPokemonUniqueId(props.id, form)
+                    .findPokemonUniqueId(props.pokedexNumber, form)
                     .let { uniqueId -> api.fetchPokemon(uniqueId) }
             }
             val pokemonStats = calculatePokemonStatistics(pokemon.await(), state)

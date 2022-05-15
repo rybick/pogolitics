@@ -20,7 +20,7 @@ class AppConfig {
     // TODO later: move path to controller as well
     val routing: List<Route<out RProps, out Any, out Any>> = listOf(
         Route("/", true, mainPageController),
-        Route("/pokemon/:id", false, pokemonController)
+        Route("/pokemon/:pokedexNumber", false, pokemonController)
     )
 
     class Route<P: RProps, M, S>(
