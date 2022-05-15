@@ -1,7 +1,7 @@
 package pogolitcs.controller
 
 import org.w3c.dom.url.URLSearchParams
-import pogolitcs.ModelAndView
+import pogolitcs.ControllerResult
 import pogolitcs.PageRProps
 import react.RComponent
 import react.RProps
@@ -14,5 +14,5 @@ interface Controller<P: RProps, M, S> {
         props: P,
         params: URLSearchParams,
         state: S
-    ): ModelAndView<M, KClass<out RComponent<out PageRProps<M, S>, out RState>>>
+    ): ControllerResult<M, KClass<out RComponent<out PageRProps<M, S>, out RState>>>
 }

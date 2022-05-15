@@ -3,9 +3,8 @@ package pogolitcs.controller
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
-import kotlinx.css.tr
 import org.w3c.dom.url.URLSearchParams
-import pogolitcs.ModelAndView
+import pogolitcs.ControllerResult
 import pogolitcs.api.*
 import pogolitcs.model.IVs
 import pogolitcs.model.MoveSet
@@ -37,34 +36,41 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
         props: IdRProps,
         params: URLSearchParams,
         state: PokemonIndividualValuesState
-    ): ModelAndView<SinglePokemonModel, KClass<SinglePokemonPage>> {
+    ): ControllerResult<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
             val form = params.get("form")
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
-            val pokemon: Deferred<PokemonDto> = async {
+            val maybePokemon: Deferred<PokemonDto?> = async {
                 pokemonIndex.await()
                     .findPokemonUniqueId(props.pokedexNumber, form)
-                    .let { uniqueId -> api.fetchPokemon(uniqueId) }
+                    ?.let { uniqueId -> api.fetchPokemon(uniqueId) }
             }
-            val pokemonStats = calculatePokemonStatistics(pokemon.await(), state)
-            ModelAndView(
-                view = SinglePokemonPage::class,
-                model = SinglePokemonModel(
-                    pokemon = toPokemonStaticInfo(pokemon.await()),
-                    stats = pokemonStats,
-                    moveSets = calculateMoveSets(pokemon.await(), fastMoves.await(), chargedMoves.await(), pokemonStats)
+            maybePokemon.await()?.let { pokemon ->
+                val pokemonStats = calculatePokemonStatistics(pokemon, state)
+                ControllerResult.modelAndView(
+                    view = SinglePokemonPage::class,
+                    model = SinglePokemonModel(
+                        pokemon = toPokemonStaticInfo(pokemon),
+                        stats = pokemonStats,
+                        moveSets = calculateMoveSets(
+                            pokemon,
+                            fastMoves.await(),
+                            chargedMoves.await(),
+                            pokemonStats
+                        )
+                    )
                 )
-            )
+            } ?: ControllerResult.notFound("No such pokemon")
         }
     }
 
-    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: String, form: String?): String =
+    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: String, form: String?): String? =
         pokedexNumber.toInt().let { pokedexNumberInt ->
             filter { it.pokedexNumber == pokedexNumberInt }
-                .first { it.form.equals(form, ignoreCase = true) }
-                .uniqueId
+                .firstOrNull { it.form.equals(form, ignoreCase = true) }
+                ?.uniqueId
         }
 
     private fun toPokemonStaticInfo(pokemon: PokemonDto): SinglePokemonModel.PokemonStaticInfo {

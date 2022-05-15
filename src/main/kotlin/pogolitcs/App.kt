@@ -3,8 +3,7 @@ package pogolitcs
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.w3c.dom.url.URLSearchParams
-import pogolitcs.view.MovesetsRProps
-import pogolitcs.view.MovesetsRState
+import pogolitcs.view.NotFoundModel
 import pogolitcs.view.NotFoundPage
 import react.*
 import react.dom.p
@@ -16,7 +15,7 @@ import kotlin.browser.window
 import kotlin.reflect.KClass
 
 external interface AppState : RState {
-    var modelAndView: ModelAndView<*, *>?
+    var controllerResult: ControllerResult<*, *>?
     var url: String?
     var pageState: Any?
     var pageStateChanged: Boolean
@@ -35,7 +34,7 @@ class App: RComponent<RProps, AppState>() {
                 appConfig.routing.forEach {
                     routeToPage(it)
                 }
-                route("*") { renderNotFoundPage() }
+                route("*") { renderNotFoundPage("Invalid path") }
             }
         }
     }
@@ -43,7 +42,7 @@ class App: RComponent<RProps, AppState>() {
     private fun <R: RProps, M, S> RBuilder.routeToPage(route: AppConfig.Route<R, M, S>): ReactElement {
         return route<R>(route.path, exact = route.exact) { props ->
             val url = window.location.href
-            if (state.modelAndView != null && state.url == url) {
+            if (state.controllerResult != null && state.url == url) {
                 if (state.pageStateChanged) {
                     orderStateReload(route, props)
                 }
@@ -64,14 +63,16 @@ class App: RComponent<RProps, AppState>() {
         return p { +"loading..." }
     }
 
-    private fun RBuilder.renderNotFoundPage(): ReactElement {
-        return child(NotFoundPage::class) {}
+    private fun RBuilder.renderNotFoundPage(reason: String): ReactElement {
+        return child(NotFoundPage::class) {
+            attrs.model = NotFoundModel(reason)
+        }
     }
 
     @Suppress("UNCHECKED_CAST")
     private fun <R: RProps, S> orderStateReload(route: AppConfig.Route<R, *, S>, props: RouteResultProps<R>) {
         MainScope().launch {
-            val modelAndView =
+            val controllerResult =
                 route.controller.get(
                     props = props.match.params,
                     params = URLSearchParams(props.location.search),
@@ -79,22 +80,26 @@ class App: RComponent<RProps, AppState>() {
                 )
             setState {
                 this.url = window.location.href
-                this.modelAndView = modelAndView
+                this.controllerResult = controllerResult
             }
         }
     }
 
     @Suppress("UNCHECKED_CAST")
     private fun <M, S> RBuilder.renderPage(): ReactElement {
-        return child(state.modelAndView!!.view as KClass<RComponent<PageRProps<M, S>, RState>>) {
-            attrs.model = state.modelAndView!!.model as M
-            //attrs.state = state.pageState!! as S
-            attrs.updateState = {
-                setState {
-                    pageState = it
-                    pageStateChanged = true
+        return if (state.controllerResult!!.isModelAndView) {
+            child(state.controllerResult!!.view as KClass<RComponent<PageRProps<M, S>, RState>>) {
+                attrs.model = state.controllerResult!!.model as M
+                //attrs.state = state.pageState!! as S
+                attrs.updateState = {
+                    setState {
+                        pageState = it
+                        pageStateChanged = true
+                    }
                 }
             }
+        } else {
+            renderNotFoundPage(state.controllerResult!!.notFoundReason!!)
         }
     }
 
