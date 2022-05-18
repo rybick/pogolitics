@@ -1,4 +1,4 @@
-import pogolitcs.format
+import pogolitics.format
 import kotlin.test.Test
 import kotlin.test.assertEquals
 

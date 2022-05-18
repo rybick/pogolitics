@@ -1,8 +1,8 @@
-import pogolitcs.controller.MoveSetStatsCalculator
-import pogolitcs.controller.MoveSetStatsCalculator.*
-import pogolitcs.controller.MoveSetStatsCalculator.MoveData
-import pogolitcs.model.PokemonType
-import pogolitcs.pvpTurns
+import pogolitics.controller.MoveSetStatsCalculator
+import pogolitics.controller.MoveSetStatsCalculator.*
+import pogolitics.controller.MoveSetStatsCalculator.MoveData
+import pogolitics.model.PokemonType
+import pogolitics.pvpTurns
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration

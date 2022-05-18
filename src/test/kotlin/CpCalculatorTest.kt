@@ -1,6 +1,6 @@
-import pogolitcs.controller.CpCalculator
-import pogolitcs.controller.CpCalculator.PokemonIv
-import pogolitcs.controller.CpCalculator.PokemonData
+import pogolitics.controller.CpCalculator
+import pogolitics.controller.CpCalculator.PokemonIv
+import pogolitics.controller.CpCalculator.PokemonData
 import kotlin.test.Test
 import kotlin.test.assertEquals
 
