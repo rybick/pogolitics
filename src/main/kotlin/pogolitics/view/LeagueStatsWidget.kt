@@ -85,7 +85,7 @@ external interface LeagueStatsWidgetRProps: RProps {
     var onClick: () -> Unit
 }
 
-fun RBuilder.leagueStatsWidget(handler: LeagueStatsWidgetRProps.() -> Unit): ReactElement {
+fun RBuilder.leagueStatsWidget(handler: LeagueStatsWidgetRProps.() -> Unit) {
     return child(LeagueStatsWidget::class) {
         this.attrs(handler)
     }

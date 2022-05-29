@@ -162,7 +162,7 @@ external interface IVStatsWidgetRProps: RProps {
     var onChange: (PokemonIndividualValuesState) -> Unit
 }
 
-fun RBuilder.ivStatsWidget(handler: IVStatsWidgetRProps.() -> Unit): ReactElement {
+fun RBuilder.ivStatsWidget(handler: IVStatsWidgetRProps.() -> Unit) {
     return child(IVStatsWidget::class) {
         this.attrs(handler)
     }

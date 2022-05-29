@@ -6,12 +6,13 @@ import pogolitics.PageRProps
 import react.RComponent
 import react.RProps
 import react.RState
+import react.router.Params
 import kotlin.reflect.KClass
 
-interface Controller<P: RProps, M, S> {
+interface Controller<M, S> {
     fun getInitialState(url: String): S
     suspend fun get(
-        props: P,
+        props: Params,
         params: URLSearchParams,
         state: S
     ): ControllerResult<M, KClass<out RComponent<out PageRProps<M, S>, out RState>>>

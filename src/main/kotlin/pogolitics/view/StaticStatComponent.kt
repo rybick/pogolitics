@@ -24,9 +24,7 @@ class StaticStatComponent: RComponent<StaticStatComponentRProps, RState>() {
                             +BasicStylesheet.Table.headerCell
                             +BasicStylesheet.Table.first
                         }
-                        attrs {
-                            title = props.info
-                        }
+                        attrs.title = props.info
                         +props.name
                     }
                 }
@@ -64,7 +62,7 @@ external interface StaticStatComponentRProps: RProps {
     var info: String
 }
 
-fun RBuilder.staticStat(handler: StaticStatComponentRProps.() -> Unit): ReactElement {
+fun RBuilder.staticStat(handler: StaticStatComponentRProps.() -> Unit) {
     return child(StaticStatComponent::class) {
         this.attrs(handler)
     }

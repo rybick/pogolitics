@@ -13,7 +13,9 @@ import styled.StyleSheet
 import styled.css
 import styled.styledDiv
 import react.*
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
     override fun MovesetsRState.init(props: MovesetsRProps) {
         sort = null
@@ -46,8 +48,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                             +Table.cell
                             +Table.headerCell
                         }
-                        attrs {
-                            onClickFunction = {
+                        attrs.onClickFunction = {
                                 setState {
                                     val sort = this.sort
                                     this.sort = Sort(
@@ -56,16 +57,14 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                                     )
                                 }
                             }
-                            unsafe { +("DPS" + getIcon(state.sort, 1)) }
-                        }
+                        attrs.unsafe { +("DPS" + getIcon(state.sort, 1)) }
                     }
                     styledDiv {
                         css {
                             +Table.cell
                             +Table.headerCell
                         }
-                        attrs {
-                            onClickFunction = {
+                        attrs.onClickFunction = {
                                 setState {
                                     val sort = this.sort
                                     this.sort = Sort(
@@ -74,16 +73,14 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                                     )
                                 }
                             }
-                            unsafe { +("TTFA" + getIcon(state.sort, 2)) }
-                        }
+                        attrs.unsafe { +("TTFA" + getIcon(state.sort, 2)) }
                     }
                     styledDiv {
                         css {
                             +Table.cell
                             +Table.headerCell
                         }
-                        attrs {
-                            onClickFunction = {
+                            attrs.onClickFunction = {
                                 setState {
                                     val sort = this.sort
                                     this.sort = Sort(
@@ -92,8 +89,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                                     )
                                 }
                             }
-                            unsafe { +("MTBA" + getIcon(state.sort, 3)) }
-                        }
+                        attrs.unsafe { +("MTBA" + getIcon(state.sort, 3)) }
                     }
                 }
                 sortValues(props.values, state.sort).forEach {
@@ -145,7 +141,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     }
 }
 
-fun RBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit): ReactElement {
+fun RBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit) {
     return child(MovesetsTable::class) {
         this.attrs(handler)
     }

@@ -2,7 +2,7 @@ package pogolitics.api
 
 import kotlinx.coroutines.await
 import pogolitics.applicationRoot
-import kotlin.browser.window
+import kotlinx.browser.window
 
 class Api() {
     private var index: Array<PokemonIndexEntryDto>? = null

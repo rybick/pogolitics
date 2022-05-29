@@ -6,8 +6,10 @@ import pogolitics.pvpTurns
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 import kotlin.time.seconds
 
+@OptIn(ExperimentalTime::class)
 class StatsCalculatorTest {
 
     @Test

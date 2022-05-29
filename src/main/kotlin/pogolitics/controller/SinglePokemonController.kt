@@ -14,10 +14,11 @@ import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitics.view.SinglePokemonPage
 import react.RProps
+import react.router.Params
 import kotlin.math.sqrt
 import kotlin.reflect.KClass
 
-class SinglePokemonController(private val api: Api): Controller<SinglePokemonController.IdRProps, SinglePokemonModel, PokemonIndividualValuesState> {
+class SinglePokemonController(private val api: Api): Controller<SinglePokemonModel, PokemonIndividualValuesState> {
 
     interface IdRProps : RProps {
         var pokedexNumber: String
@@ -33,7 +34,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
             )
 
     override suspend fun get(
-        props: IdRProps,
+        props: Params,
         params: URLSearchParams,
         state: PokemonIndividualValuesState
     ): ControllerResult<SinglePokemonModel, KClass<SinglePokemonPage>> {
@@ -44,7 +45,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonCon
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
             val maybePokemon: Deferred<PokemonDto?> = async {
                 pokemonIndex.await()
-                    .findPokemonUniqueId(props.pokedexNumber, form)
+                    .findPokemonUniqueId(props["pokedexNumber"]!!, form)
                     ?.let { uniqueId -> api.fetchPokemon(uniqueId) }
             }
             maybePokemon.await()?.let { pokemon ->

@@ -59,7 +59,7 @@ external interface BasicPokemonInfoRProps: RProps {
     var data: SinglePokemonModel.PokemonStaticInfo
 }
 
-fun RBuilder.basicPokemonInfo(handler: BasicPokemonInfoRProps.() -> Unit): ReactElement {
+fun RBuilder.basicPokemonInfo(handler: BasicPokemonInfoRProps.() -> Unit) {
     return child(BasicPokemonInfoComponent::class) {
         this.attrs(handler)
     }

@@ -16,13 +16,10 @@ class AttackComponent: RComponent<AttackComponentProps, RState>() {
     override fun RBuilder.render() {
         styledSpan {
             css { + Styles.wrapper }
-            styledImg {
+            styledImg(src = iconPath(props.attack.type)) {
                 css {
                     height = LinearDimension("1.5rem")
                     margin = "0 ${StyleConstants.Margin.small}"
-                }
-                attrs {
-                    src = iconPath(props.attack.type)
                 }
             }
             + props.attack.name

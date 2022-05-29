@@ -11,4 +11,5 @@ private fun format(numberAsString: String, decimalPlaces: Int): String {
     return parts[0] + part2.subSequence(0, decimalPlaces + 1)
 }
 
+@OptIn(ExperimentalTime::class) // TODO later deprecation
 val Int.pvpTurns get(): Duration = (0.5 * this).seconds

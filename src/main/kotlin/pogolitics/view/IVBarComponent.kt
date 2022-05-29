@@ -263,7 +263,7 @@ external interface IVBarComponentRProps: RProps {
     var onChange: (Int) -> Unit
 }
 
-fun RBuilder.ivBar(handler: IVBarComponentRProps.() -> Unit): ReactElement {
+fun RBuilder.ivBar(handler: IVBarComponentRProps.() -> Unit) {
     return child(IVBarComponent::class) {
         this.attrs(handler)
     }

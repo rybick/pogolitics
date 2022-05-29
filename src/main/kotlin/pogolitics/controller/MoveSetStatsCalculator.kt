@@ -3,7 +3,9 @@ package pogolitics.controller
 import pogolitics.model.PokemonType
 import kotlin.math.ceil
 import kotlin.time.Duration
+import kotlin.time.ExperimentalTime
 
+@OptIn(ExperimentalTime::class)
 class MoveSetStatsCalculator(
         private val pokemon: PokemonData,
         private val fast: MoveData,

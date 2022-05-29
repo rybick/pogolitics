@@ -10,14 +10,15 @@ import pogolitics.api.PokemonIndexEntryDto
 import pogolitics.model.PokemonListModel
 import pogolitics.view.PokemonListPage
 import react.RProps
+import react.router.Params
 import kotlin.reflect.KClass
 
-class PokemonListController(private val api: Api): Controller<RProps, PokemonListModel, Unit> {
+class PokemonListController(private val api: Api): Controller<PokemonListModel, Unit> {
 
-    override fun getInitialState(url: String) = Unit
+    override fun getInitialState(url: String) {}
 
     override suspend fun get(
-        props: RProps,
+        props: Params,
         params: URLSearchParams,
         state: Unit
     ): ControllerResult<PokemonListModel, KClass<PokemonListPage>> =
