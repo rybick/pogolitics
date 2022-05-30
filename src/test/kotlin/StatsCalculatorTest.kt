@@ -6,10 +6,8 @@ import pogolitics.pvpTurns
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
-import kotlin.time.seconds
+import kotlin.time.Duration.Companion.seconds
 
-@OptIn(ExperimentalTime::class)
 class StatsCalculatorTest {
 
     @Test
@@ -83,6 +81,6 @@ class StatsCalculatorTest {
     }
 
     private fun assertEqualsToMillisecondPrecision(expected: Duration, actual: Duration) {
-        assertEquals(expected.inMilliseconds.toInt(), actual.inMilliseconds.toInt())
+        assertEquals(expected.inWholeMilliseconds, actual.inWholeMilliseconds)
     }
 }

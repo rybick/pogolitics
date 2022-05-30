@@ -3,9 +3,8 @@ package pogolitics.controller
 import pogolitics.model.PokemonType
 import kotlin.math.ceil
 import kotlin.time.Duration
-import kotlin.time.ExperimentalTime
+import kotlin.time.DurationUnit.SECONDS
 
-@OptIn(ExperimentalTime::class)
 class MoveSetStatsCalculator(
         private val pokemon: PokemonData,
         private val fast: MoveData,
@@ -53,15 +52,15 @@ class MoveSetStatsCalculator(
     }
 
     // DPS if only fast attack is used
-    private fun fastAttackDps(): Double = damage(fast) / fast.duration.inSeconds
+    private fun fastAttackDps(): Double = damage(fast) / fast.duration.toDouble(SECONDS)
 
     private val expectedDefense get() = 100
 
-    private fun fastAttackEnergyGain() = fast.energy / fast.duration.inSeconds
+    private fun fastAttackEnergyGain() = fast.energy / fast.duration.toDouble(SECONDS)
 
     private fun chargedAttackDurationPerSecond(): Double =
-        (charged.duration.inSeconds * fast.energy) /
-                (charged.duration.inSeconds * fast.energy + fast.duration.inSeconds * charged.energy)
+        (charged.duration.toDouble(SECONDS) * fast.energy) /
+                (charged.duration.toDouble(SECONDS) * fast.energy + fast.duration.toDouble(SECONDS) * charged.energy)
 
     private fun effectiveFastAttackEnergyGain(): Double {
         return fastAttackEnergyGain() * (1 - chargedAttackDurationPerSecond())

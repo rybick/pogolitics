@@ -9,13 +9,11 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import styled.StyleSheet
 import styled.css
 import styled.styledDiv
 import react.*
-import kotlin.time.ExperimentalTime
+import kotlin.time.DurationUnit
 
-@OptIn(ExperimentalTime::class)
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
     override fun MovesetsRState.init(props: MovesetsRProps) {
         sort = null
@@ -111,11 +109,11 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                         }
                         styledDiv {
                             css { +Table.cell }
-                            +(it.timeToFirstAttack.inSeconds.format(2) + "s")
+                            +(it.timeToFirstAttack.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                         styledDiv {
                             css { +Table.cell }
-                            +(it.meanTimeBetweenAttacks.inSeconds.format(2) + "s")
+                            +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                     }
                 }

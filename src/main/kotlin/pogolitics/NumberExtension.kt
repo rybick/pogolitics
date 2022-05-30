@@ -1,6 +1,7 @@
 package pogolitics
 
-import kotlin.time.*
+import kotlin.time.Duration
+import kotlin.time.Duration.Companion.seconds
 
 fun Float.format(decimalPlaces: Int): String = format(this.toString(), decimalPlaces)
 fun Double.format(decimalPlaces: Int): String = format(this.toString(), decimalPlaces)
@@ -11,5 +12,4 @@ private fun format(numberAsString: String, decimalPlaces: Int): String {
     return parts[0] + part2.subSequence(0, decimalPlaces + 1)
 }
 
-@OptIn(ExperimentalTime::class) // TODO later deprecation
 val Int.pvpTurns get(): Duration = (0.5 * this).seconds
