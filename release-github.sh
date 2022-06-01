@@ -1,5 +1,5 @@
 sed -i 's/const val applicationRoot = ""/const val applicationRoot = "\/pogolitics"/g' \
-  ./src/main/kotlin/pogolitcs/EnvVariables.kt
+  ./src/main/kotlin/pogolitics/EnvVariables.kt
 
 ./gradlew build
 
@@ -22,4 +22,4 @@ cd ../pogolitics/
 
 #sed -i 's/const val applicationRoot = "\/pogolitics"/const val applicationRoot = ""/g' \
 #  ./src/main/kotlin/pogolitcs/EnvVariables.kt
-git checkout ./src/main/kotlin/pogolitcs/EnvVariables.kt
+git checkout ./src/main/kotlin/pogolitics/EnvVariables.kt
