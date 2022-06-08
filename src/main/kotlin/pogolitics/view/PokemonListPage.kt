@@ -57,7 +57,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                                 +BasicStylesheet.Table.first
                                 +BasicStylesheet.Table.left
                             }
-                            +"${pokemon.pokedexNumber}"
+                            +"#${pokemon.pokedexNumber}"
                         }
                         styledDiv {
                             css {
