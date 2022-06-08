@@ -4,9 +4,14 @@ data class PokemonListModel(
     val pokemon: List<PokemonEntry>
 ) {
     data class PokemonEntry(
-        val uniqueId: String,
         val pokedexNumber: Int,
         val name: String,
-        val form: String?
+        val forms: List<Form>
+    )
+
+    data class Form(
+        val uniqueId: String,
+        val name: String?,
+        val prettyName: String
     )
 }

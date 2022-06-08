@@ -1,11 +1,13 @@
 package pogolitics.view
 
 import kotlinx.css.Color
+import kotlinx.css.pct
 import kotlinx.css.px
 
 object StyleConstants {
     object Colors {
         val primary = ColorGroup(bg = "#0079fb", text = "#ffffff", secondaryText = "#777777")
+        val primaryHovered = ColorGroup(bg = "#5099ff", text = "#ffffff", secondaryText = "#777777")
         val secondary = ColorGroup(bg = "#ffffff", text = "#000000", secondaryText = "#aaaaaa")
         val lightBorder = Color("rgba(0, 60, 130, 0.25)")
     }
@@ -24,6 +26,11 @@ object StyleConstants {
 
     object Border {
         val thick = 5.px
+    }
+
+    object Font {
+        val bigger = 110.pct
+        val smaller = 90.pct
     }
 
     class ColorGroup(val bg: Color, val text: Color, val secondaryText: Color) {

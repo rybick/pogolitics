@@ -13,7 +13,7 @@ import react.RProps
 import react.router.Params
 import kotlin.reflect.KClass
 
-class PokemonListController(private val api: Api): Controller<PokemonListModel, Unit> {
+class PokemonListController(private val api: Api) : Controller<PokemonListModel, Unit> {
 
     override fun getInitialState(url: String) {}
 
@@ -26,17 +26,36 @@ class PokemonListController(private val api: Api): Controller<PokemonListModel, 
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             ControllerResult.modelAndView(
                 view = PokemonListPage::class,
-                model = PokemonListModel(pokemonIndex.await().map { toPokemonEntry(it) })
+                model = PokemonListModel(mapToPokemonEntries(pokemonIndex.await()))
             )
         }
 
-    private fun toPokemonEntry(pokemonDto: PokemonIndexEntryDto): PokemonListModel.PokemonEntry =
-        with(pokemonDto) {
-            PokemonListModel.PokemonEntry(
-                uniqueId = uniqueId,
-                pokedexNumber = pokedexNumber,
-                name = name,
-                form = form
-            )
+    private fun mapToPokemonEntries(pokemonDtos: Array<PokemonIndexEntryDto>): List<PokemonListModel.PokemonEntry> =
+        pokemonDtos
+            .groupBy { it.pokedexNumber }
+            .mapValues { (pokedexNumber, entries) ->
+                PokemonListModel.PokemonEntry(
+                    pokedexNumber = pokedexNumber,
+                    name = entries.first().name,
+                    forms = entries
+                        .map {
+                            PokemonListModel.Form(
+                                name = it.form,
+                                prettyName = toPrettyName(it.form),
+                                uniqueId = it.uniqueId
+                            )
+                        }
+                )
+            }
+            .values
+            .sortedBy { it.pokedexNumber }
+
+    private fun toPrettyName(form: String?) = form
+        ?.run {
+            lowercase()
+                .replaceFirstChar { it.uppercase() }
+                .replace("_", " ")
         }
+        ?: "Default"
+
 }
