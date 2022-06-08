@@ -49,20 +49,25 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
                     ?.let { uniqueId -> api.fetchPokemon(uniqueId) }
             }
             maybePokemon.await()?.let { pokemon ->
-                val pokemonStats = calculatePokemonStatistics(pokemon, state)
-                ControllerResult.modelAndView(
-                    view = SinglePokemonPage::class,
-                    model = SinglePokemonModel(
-                        pokemon = toPokemonStaticInfo(pokemon),
-                        stats = pokemonStats,
-                        moveSets = calculateMoveSets(
-                            pokemon,
-                            fastMoves.await(),
-                            chargedMoves.await(),
-                            pokemonStats
+                try { // TODO temporary logging
+                    val pokemonStats = calculatePokemonStatistics(pokemon, state)
+                    ControllerResult.modelAndView(
+                        view = SinglePokemonPage::class,
+                        model = SinglePokemonModel(
+                            pokemon = toPokemonStaticInfo(pokemon),
+                            stats = pokemonStats,
+                            moveSets = calculateMoveSets(
+                                pokemon,
+                                fastMoves.await(),
+                                chargedMoves.await(),
+                                pokemonStats
+                            )
                         )
                     )
-                )
+                } catch (e: Exception) {
+                    console.error(e.stackTraceToString())
+                    throw e
+                }
             } ?: ControllerResult.notFound("No such pokemon")
         }
     }
