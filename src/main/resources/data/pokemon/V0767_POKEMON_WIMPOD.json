@@ -1,1 +1,1 @@
-{"uniqueId":"V0767_POKEMON_WIMPOD","pokedexNumber":767,"name":"Wimpod","form":null,"baseAttack":67,"baseDefense":74,"baseStamina":93,"types":{"primary":"bug","secondary":"water"},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0767_POKEMON_WIMPOD","pokedexNumber":767,"name":"Wimpod","form":null,"baseAttack":67,"baseDefense":74,"baseStamina":93,"types":{"primary":"bug","secondary":"water"},"moves":{"quick":[{"id":"STRUGGLE_BUG_FAST","elite":false}],"charged":[{"id":"BUG_BUZZ","elite":false}]}}
