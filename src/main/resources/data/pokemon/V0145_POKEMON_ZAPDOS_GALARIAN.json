@@ -1,0 +1,1 @@
+{"uniqueId":"V0145_POKEMON_ZAPDOS_GALARIAN","pokedexNumber":145,"name":"Zapdos","form":"GALARIAN","baseAttack":252,"baseDefense":189,"baseStamina":207,"types":{"primary":"fighting","secondary":"flying"},"moves":{"quick":[{"id":"COUNTER_FAST","elite":false}],"charged":[{"id":"CLOSE_COMBAT","elite":false},{"id":"ANCIENT_POWER","elite":false},{"id":"BRAVE_BIRD","elite":false}]}}
