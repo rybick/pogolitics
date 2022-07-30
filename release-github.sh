@@ -11,6 +11,7 @@ if [[ `git status --porcelain` ]]; then
   exit 0
 fi
 
+rm -rf ./pogolitics/*
 cp -r ../pogolitics/build/distributions/* ./pogolitics/
 
 git add -A
