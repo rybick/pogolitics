@@ -59,9 +59,7 @@ class App: RComponent<RProps, AppState>() {
                         renderPage<M, S>()
                     } else {
                         state.pageStateChanged = false
-                        if (state.pageState == null) { // TODO later
-                            state.pageState = route.controller.getInitialState(url)
-                        }
+                        state.pageState = route.controller.getInitialState(url)
                         orderStateReload(route, params, location)
                         renderLoadingPage()
                     }
