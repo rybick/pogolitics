@@ -1,1 +1,1 @@
-{"uniqueId":"V0789_POKEMON_COSMOG","pokedexNumber":789,"name":"Cosmog","form":null,"baseAttack":54,"baseDefense":57,"baseStamina":125,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[{"id":"STRUGGLE","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
+{"uniqueId":"V0789_POKEMON_COSMOG","pokedexNumber":789,"name":"Cosmog","form":null,"baseAttack":54,"baseDefense":57,"baseStamina":125,"types":{"primary":"psychic","secondary":null},"moves":{"quick":[{"id":"SPLASH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
