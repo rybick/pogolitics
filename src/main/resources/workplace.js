@@ -2,26 +2,52 @@ let pokemonList = [];
 let pokemonMap = {};
 let fastAttacks = null;
 let chargedAttacks = null;
+let fastAttacksMap = null;
+let chargedAttacksMap = null;
 
 getIds().then(ids =>
     ids.forEach(i =>
         window.fetch("/data/pokemon/" + i + ".json")
-            .then(o => o.text().then(x => {
+            .then(o => o.text())
+            .then(x => {
                 let p = JSON.parse(x)
                 pokemonMap[i] = p
                 pokemonList.push(p)
-                console.log(pokemonList)
-            }))
+            })
     )
 )
 
-window.fetch("/data/attacks/charged.json")
-    .then(o => o.text().then(x => fastAttacks = JSON.parse(x)))
-
 window.fetch("/data/attacks/fast.json")
-    .then(o => o.text().then(x => chargedAttacks = JSON.parse(x)))
+    .then(o => o.text())
+    .then(x => fastAttacks = JSON.parse(x))
+    .then(attacks => fastAttacksMap = groupBy(fastAttacks, o => o.id))
 
+window.fetch("/data/attacks/charged.json")
+    .then(o => o.text())
+    .then(x => chargedAttacks = JSON.parse(x))
+    .then(attacks => chargedAttacksMap = groupBy(chargedAttacks, o => o.id))
 
+function joinPokemonWithAttacks() {
+    return pokemonList.map(pokemon => {
+        let result = Object.assign(pokemon, {})
+        result.moves.charged = result.moves.charged.map(m => Object.assign(m, {body: chargedAttacksMap[m.id]}))
+        result.moves.quick = result.moves.quick.map(m => Object.assign(m, {body: fastAttacksMap[m.id]}))
+        return result;
+    })
+}
+
+// joinPokemonWithAttacks().filter(p => p.moves.quick.filter(a => a.body && a.body.type == 'fairy').length > 0)
+
+function groupBy(arr, keySupplier) {
+    return arr.reduce(function(map, obj) {
+        map[keySupplier(obj)] = obj;
+        return map;
+    }, {});
+}
+
+function sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 function calcForHalloweenCup() {
     return calcForCustomCup(1500, ["ghost", "dark", "poison", "fairy", "bug"]);
