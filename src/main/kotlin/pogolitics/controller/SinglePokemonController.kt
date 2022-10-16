@@ -6,6 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
 import pogolitics.api.*
+import pogolitics.controller.MoveSetsMapper.Mode
 import pogolitics.model.IVs
 import pogolitics.model.MoveSet
 import pogolitics.model.PokemonIndividualValuesState
@@ -40,6 +41,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
     ): ControllerResult<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
             val form = params.get("form")
+            val mode = params.get("mode") ?: "pvp"
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
@@ -57,10 +59,11 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
                             pokemon = toPokemonStaticInfo(pokemon),
                             stats = pokemonStats,
                             moveSets = calculateMoveSets(
-                                pokemon,
-                                fastMoves.await(),
-                                chargedMoves.await(),
-                                pokemonStats
+                                mode = Mode.fromString(mode),
+                                pokemon = pokemon,
+                                fastMoves = fastMoves.await(),
+                                chargedMoves = chargedMoves.await(),
+                                pokemonIvs = pokemonStats
                             )
                         )
                     )
@@ -98,12 +101,14 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
         sqrt(defense * stamina)
 
     private fun calculateMoveSets(
+        mode: Mode,
         pokemon: PokemonDto,
         fastMoves: Array<FastMoveDto>,
         chargedMoves: Array<ChargedMoveDto>,
-        pokemonIvs: PokemonIndividualStatistics
+        pokemonIvs: PokemonIndividualStatistics,
     ): List<MoveSet> {
-        return MoveSetsMapper(pokemon, fastMoves, chargedMoves).getData(pokemonIvs.currentStats.level, pokemonIvs.ivs.attack)
+        return MoveSetsMapper.create(mode, pokemon, fastMoves, chargedMoves)
+            .getData(pokemonIvs.currentStats.level, pokemonIvs.ivs.attack)
     }
 
     private fun calculatePokemonStatistics(pokemon: PokemonDto, pokemonIvs: PokemonIndividualValuesState): PokemonIndividualStatistics {

@@ -8,12 +8,81 @@ import pogolitics.model.Attack
 import pogolitics.model.MoveSet
 import pogolitics.model.PokemonType
 import pogolitics.pvpTurns
+import kotlin.time.Duration.Companion.milliseconds
 
-class MoveSetsMapper(
+private class PvPMoveSetsMapper(
+    pokemonDto: PokemonDto,
+    fastMoves: Array<FastMoveDto>,
+    chargedMoves: Array<ChargedMoveDto>
+) : MoveSetsMapper(pokemonDto, fastMoves, chargedMoves) {
+    override fun mapFastMove(moveDto: FastMoveDto): MoveData {
+        return MoveData(
+            power = moveDto.pvp.power,
+            energy = moveDto.pvp.energy,
+            duration = moveDto.pvp.duration.pvpTurns,
+            type = PokemonType.fromString(moveDto.type)
+        )
+    }
+
+    override fun mapChargedMove(moveDto: ChargedMoveDto): MoveData {
+        return MoveData(
+            power = moveDto.pvp.power,
+            energy = moveDto.pvp.energy,
+            duration = 1.pvpTurns,
+            type = PokemonType.fromString(moveDto.type)
+        )
+    }
+}
+
+private class PvEMoveSetsMapper(
+    pokemonDto: PokemonDto,
+    fastMoves: Array<FastMoveDto>,
+    chargedMoves: Array<ChargedMoveDto>
+) : MoveSetsMapper(pokemonDto, fastMoves, chargedMoves) {
+    override fun mapFastMove(moveDto: FastMoveDto): MoveData {
+        return MoveData(
+            power = moveDto.pve.power,
+            energy = moveDto.pve.energy,
+            duration = moveDto.pve.duration.milliseconds,
+            type = PokemonType.fromString(moveDto.type)
+        )
+    }
+
+    override fun mapChargedMove(moveDto: ChargedMoveDto): MoveData {
+        return MoveData(
+            power = moveDto.pve.power,
+            energy = moveDto.pve.energy,
+            duration = moveDto.pve.duration.milliseconds,
+            type = PokemonType.fromString(moveDto.type)
+        )
+    }
+}
+
+sealed class MoveSetsMapper constructor(
     private val pokemonDto: PokemonDto,
     fastMoves: Array<FastMoveDto>,
     chargedMoves: Array<ChargedMoveDto>
 ) {
+    enum class Mode {
+        PVP, PVE;
+
+        companion object {
+            fun fromString(value: String) =  Mode.valueOf(value.uppercase())
+        }
+    }
+    companion object {
+        fun create(
+            mode: Mode,
+            pokemonDto: PokemonDto,
+            fastMoves: Array<FastMoveDto>,
+            chargedMoves: Array<ChargedMoveDto>
+        ): MoveSetsMapper = if (mode == Mode.PVP) {
+            PvPMoveSetsMapper(pokemonDto, fastMoves, chargedMoves)
+        } else {
+            PvEMoveSetsMapper(pokemonDto, fastMoves, chargedMoves)
+        }
+    }
+
     private val quickAttacks: Map<String, FastMoveDto> = fastMoves.associateBy { it.id }
     private val chargedAttacks: Map<String, ChargedMoveDto> = chargedMoves.associateBy { it.id }
 
@@ -49,23 +118,9 @@ class MoveSetsMapper(
         )
     }
 
-    private fun mapFastMove(moveDto: FastMoveDto): MoveData {
-        return MoveData(
-            power = moveDto.pvp.power,
-            energy = moveDto.pvp.energy,
-            duration = moveDto.pvp.duration.pvpTurns,
-            type = PokemonType.fromString(moveDto.type)
-        )
-    }
+    protected abstract fun mapFastMove(moveDto: FastMoveDto): MoveData
 
-    private fun mapChargedMove(moveDto: ChargedMoveDto): MoveData {
-        return MoveData(
-            power = moveDto.pvp.power,
-            energy = moveDto.pvp.energy,
-            duration = 1.pvpTurns,
-            type = PokemonType.fromString(moveDto.type)
-        )
-    }
+    protected abstract fun mapChargedMove(moveDto: ChargedMoveDto): MoveData
 
     private fun <T, U, O> combinations(arr1: Array<T>, arr2: Array<U>, mapper: (T, U) -> O): List<O> {
         return arr1.flatMap { a1 -> arr2.map { a2 -> mapper(a1, a2) } }
