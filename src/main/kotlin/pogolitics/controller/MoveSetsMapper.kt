@@ -5,6 +5,7 @@ import pogolitics.api.ChargedMoveDto
 import pogolitics.api.FastMoveDto
 import pogolitics.api.PokemonDto
 import pogolitics.model.Attack
+import pogolitics.model.BattleMode
 import pogolitics.model.MoveSet
 import pogolitics.model.PokemonType
 import pogolitics.pvpTurns
@@ -63,20 +64,13 @@ sealed class MoveSetsMapper constructor(
     fastMoves: Array<FastMoveDto>,
     chargedMoves: Array<ChargedMoveDto>
 ) {
-    enum class Mode {
-        PVP, PVE;
-
-        companion object {
-            fun fromString(value: String) =  Mode.valueOf(value.uppercase())
-        }
-    }
     companion object {
         fun create(
-            mode: Mode,
+            mode: BattleMode,
             pokemonDto: PokemonDto,
             fastMoves: Array<FastMoveDto>,
             chargedMoves: Array<ChargedMoveDto>
-        ): MoveSetsMapper = if (mode == Mode.PVP) {
+        ): MoveSetsMapper = if (mode == BattleMode.PVP) {
             PvPMoveSetsMapper(pokemonDto, fastMoves, chargedMoves)
         } else {
             PvEMoveSetsMapper(pokemonDto, fastMoves, chargedMoves)

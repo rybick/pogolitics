@@ -2,6 +2,7 @@ package pogolitics.view
 
 import kotlinx.css.*
 import pogolitics.PageRProps
+import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
 import react.RBuilder
@@ -34,28 +35,39 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                     props.updateState(it)
                 }
             }
-            leagueStatsWidget {
-                name = "great"
-                stats = props.model.stats.bestGreatLeagueStats
-                onClick = {
-                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestGreatLeagueStats.level)
-                    props.updateState(newState)
+            if (props.model.mode == BattleMode.PVP) {
+                leagueStatsWidget {
+                    name = "great"
+                    stats = props.model.stats.bestGreatLeagueStats
+                    onClick = {
+                        val newState = PokemonIndividualValuesState(
+                            props.model.stats.ivs,
+                            props.model.stats.bestGreatLeagueStats.level
+                        )
+                        props.updateState(newState)
+                    }
                 }
-            }
-            leagueStatsWidget {
-                name = "ultra"
-                stats = props.model.stats.bestUltraLeagueStats
-                onClick = {
-                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestUltraLeagueStats.level)
-                    props.updateState(newState)
+                leagueStatsWidget {
+                    name = "ultra"
+                    stats = props.model.stats.bestUltraLeagueStats
+                    onClick = {
+                        val newState = PokemonIndividualValuesState(
+                            props.model.stats.ivs,
+                            props.model.stats.bestUltraLeagueStats.level
+                        )
+                        props.updateState(newState)
+                    }
                 }
-            }
-            leagueStatsWidget {
-                name = "master"
-                stats = props.model.stats.bestStatsWithoutBoost
-                onClick = {
-                    val newState = PokemonIndividualValuesState(props.model.stats.ivs, props.model.stats.bestStatsWithoutBoost.level)
-                    props.updateState(newState)
+                leagueStatsWidget {
+                    name = "master"
+                    stats = props.model.stats.bestStatsWithoutBoost
+                    onClick = {
+                        val newState = PokemonIndividualValuesState(
+                            props.model.stats.ivs,
+                            props.model.stats.bestStatsWithoutBoost.level
+                        )
+                        props.updateState(newState)
+                    }
                 }
             }
         }

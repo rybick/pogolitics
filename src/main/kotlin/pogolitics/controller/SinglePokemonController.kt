@@ -6,11 +6,7 @@ import kotlinx.coroutines.coroutineScope
 import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
 import pogolitics.api.*
-import pogolitics.controller.MoveSetsMapper.Mode
-import pogolitics.model.IVs
-import pogolitics.model.MoveSet
-import pogolitics.model.PokemonIndividualValuesState
-import pogolitics.model.SinglePokemonModel
+import pogolitics.model.*
 import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitics.view.SinglePokemonPage
@@ -41,7 +37,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
     ): ControllerResult<SinglePokemonModel, KClass<SinglePokemonPage>> {
         return coroutineScope {
             val form = params.get("form")
-            val mode = params.get("mode") ?: "pvp"
+            val mode = BattleMode.fromString(params.get("mode") ?: "pvp") // TODO display some kind of error page for invalid values
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
@@ -51,26 +47,22 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
                     ?.let { uniqueId -> api.fetchPokemon(uniqueId) }
             }
             maybePokemon.await()?.let { pokemon ->
-                try { // TODO temporary logging
-                    val pokemonStats = calculatePokemonStatistics(pokemon, state)
-                    ControllerResult.modelAndView(
-                        view = SinglePokemonPage::class,
-                        model = SinglePokemonModel(
-                            pokemon = toPokemonStaticInfo(pokemon),
-                            stats = pokemonStats,
-                            moveSets = calculateMoveSets(
-                                mode = Mode.fromString(mode),
-                                pokemon = pokemon,
-                                fastMoves = fastMoves.await(),
-                                chargedMoves = chargedMoves.await(),
-                                pokemonIvs = pokemonStats
-                            )
+                val pokemonStats = calculatePokemonStatistics(pokemon, state)
+                ControllerResult.modelAndView(
+                    view = SinglePokemonPage::class,
+                    model = SinglePokemonModel(
+                        mode = mode,
+                        pokemon = toPokemonStaticInfo(pokemon),
+                        stats = pokemonStats,
+                        moveSets = calculateMoveSets(
+                            mode = mode,
+                            pokemon = pokemon,
+                            fastMoves = fastMoves.await(),
+                            chargedMoves = chargedMoves.await(),
+                            pokemonIvs = pokemonStats
                         )
                     )
-                } catch (e: Exception) {
-                    console.error(e.stackTraceToString())
-                    throw e
-                }
+                )
             } ?: ControllerResult.notFound("No such pokemon")
         }
     }
@@ -101,7 +93,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
         sqrt(defense * stamina)
 
     private fun calculateMoveSets(
-        mode: Mode,
+        mode: BattleMode,
         pokemon: PokemonDto,
         fastMoves: Array<FastMoveDto>,
         chargedMoves: Array<ChargedMoveDto>,

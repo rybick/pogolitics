@@ -1,6 +1,7 @@
 package pogolitics.model
 
 data class SinglePokemonModel(
+        val mode: BattleMode,
         val pokemon: PokemonStaticInfo,
         val stats: PokemonIndividualStatistics,
         val moveSets: List<MoveSet>
