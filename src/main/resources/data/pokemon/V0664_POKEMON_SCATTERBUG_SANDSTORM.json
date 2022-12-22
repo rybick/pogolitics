@@ -1,0 +1,1 @@
+{"uniqueId":"V0664_POKEMON_SCATTERBUG_SANDSTORM","pokedexNumber":664,"name":"Scatterbug","form":"SANDSTORM","baseAttack":63,"baseDefense":63,"baseStamina":116,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"BUG_BITE_FAST","elite":false},{"id":"TACKLE_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
