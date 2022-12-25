@@ -11,7 +11,6 @@ import react.RState
 import react.dom.a
 import styled.*
 import react.SwitchSelector
-//import switchSelector
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
