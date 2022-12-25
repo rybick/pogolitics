@@ -10,6 +10,8 @@ import react.RComponent
 import react.RState
 import react.dom.a
 import styled.*
+import react.SwitchSelector
+//import switchSelector
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
@@ -19,6 +21,8 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             a(href = pokemonPagePath(props.model.pokemon.familyId - 1)) { +"<" }
             styledSpan { css { +Styles.spacer } }
             a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +">" }
+            SwitchSelector {}
+            //switchSelector()
         }
         styledDiv {
             css { +Styles.leftWrapper }
