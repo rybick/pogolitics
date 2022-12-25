@@ -47,3 +47,7 @@ buildscript {
         "classpath"(group = "org.glassfish", name = "javax.json", version = "1.1.4")
     }
 }
+
+rootProject.extensions.configure<org.jetbrains.kotlin.gradle.targets.js.nodejs.NodeJsRootExtension> {
+    versions.webpackCli.version = "4.10.0"
+}
