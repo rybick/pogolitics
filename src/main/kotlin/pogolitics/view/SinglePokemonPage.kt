@@ -18,7 +18,10 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
     override fun RBuilder.render() {
         styledDiv {
             css { +Styles.headerWrapper }
-            a(href = pokemonPagePath(props.model.pokemon.familyId - 1)) { +"⮜" }
+            styledA(href = pokemonPagePath(props.model.pokemon.familyId - 1)) {
+                css { +Styles.arrow }
+                +"⮜"
+            }
             styledSpan {
                 css { +Styles.spacer }
                 SwitchSelector {
@@ -28,7 +31,10 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                     }
                 }
             }
-            a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +"⮞" }
+            styledA(href = pokemonPagePath(props.model.pokemon.familyId + 1)) {
+                css { +Styles.arrow }
+                +"⮞"
+            }
         }
         styledDiv {
             css { +Styles.leftWrapper }
@@ -100,18 +106,19 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             paddingTop = StyleConstants.Padding.small
             display = Display.flex
             fontSize = 160.pct
-            a {
-                width = 42.px
-                height = 42.px
-                textAlign = TextAlign.center
-                borderRadius = 50.pct
-                marginLeft = StyleConstants.Margin.small
-                marginRight = StyleConstants.Margin.small
-                hover {
-                    color = StyleConstants.Colors.primary.text
-                    backgroundColor = StyleConstants.Colors.primary.bg
-                    textDecoration = TextDecoration.none
-                }
+        }
+
+        val arrow by css {
+            width = 42.px
+            height = 42.px
+            textAlign = TextAlign.center
+            borderRadius = 50.pct
+            marginLeft = StyleConstants.Margin.small
+            marginRight = StyleConstants.Margin.small
+            hover {
+                color = StyleConstants.Colors.primary.text
+                backgroundColor = StyleConstants.Colors.primary.bg
+                textDecoration = TextDecoration.none
             }
         }
 
