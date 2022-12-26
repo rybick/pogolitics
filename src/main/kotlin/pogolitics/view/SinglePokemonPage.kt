@@ -1,6 +1,7 @@
 package pogolitics.view
 
 import kotlinx.css.*
+import kotlinx.css.properties.TextDecoration
 import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
@@ -17,11 +18,17 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
     override fun RBuilder.render() {
         styledDiv {
             css { +Styles.headerWrapper }
-            a(href = pokemonPagePath(props.model.pokemon.familyId - 1)) { +"<" }
-            styledSpan { css { +Styles.spacer } }
-            a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +">" }
-            SwitchSelector {}
-            //switchSelector()
+            a(href = pokemonPagePath(props.model.pokemon.familyId - 1)) { +"⮜" }
+            styledSpan {
+                css { +Styles.spacer }
+                SwitchSelector {
+                    attrs {
+                        onlabel = "PvP"
+                        offlabel = "PvE"
+                    }
+                }
+            }
+            a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +"⮞" }
         }
         styledDiv {
             css { +Styles.leftWrapper }
@@ -90,16 +97,27 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         const val smallScreenMediaQuery = "screen and (max-width: 700px)"
 
         val headerWrapper by css {
+            paddingTop = StyleConstants.Padding.small
             display = Display.flex
             fontSize = 160.pct
             a {
-                paddingLeft = StyleConstants.Padding.big
-                paddingRight = StyleConstants.Padding.big
+                width = 42.px
+                height = 42.px
+                textAlign = TextAlign.center
+                borderRadius = 50.pct
+                marginLeft = StyleConstants.Margin.small
+                marginRight = StyleConstants.Margin.small
+                hover {
+                    color = StyleConstants.Colors.primary.text
+                    backgroundColor = StyleConstants.Colors.primary.bg
+                    textDecoration = TextDecoration.none
+                }
             }
         }
 
         val spacer by css {
             flexGrow = 1.0
+            textAlign = TextAlign.center
         }
 
         val leftWrapper by css {
