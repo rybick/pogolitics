@@ -3,8 +3,6 @@ package pogolitics.view
 import kotlinx.browser.window
 import kotlinx.css.*
 import kotlinx.css.properties.TextDecoration
-import org.w3c.dom.Location
-import org.w3c.dom.Window
 import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
@@ -14,7 +12,6 @@ import pogolitics.view.component.ArrowDirection
 import react.RBuilder
 import react.RComponent
 import react.RState
-import react.dom.a
 import styled.*
 import react.SwitchSelector
 

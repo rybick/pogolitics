@@ -2,6 +2,8 @@ package pogolitics.view.component
 
 import kotlinx.css.*
 import kotlinx.css.properties.TextDecoration
+import kotlinx.css.properties.scale
+import kotlinx.css.properties.transform
 import pogolitics.view.StyleConstants
 import react.Props
 import react.fc
@@ -27,9 +29,11 @@ private object Styles: StyleSheet("ArrowComponentStyles", isStatic = true) {
     val arrowLeft by Styles.css {
         +arrow
         span {
-            marginLeft = -2.px
+            marginLeft = (-3).px
+            display = Display.block
+            transform { scale(-1, 1) }
             after {
-                content = QuotedString("⮜")
+                content = QuotedString("➤")
             }
         }
     }
@@ -37,9 +41,10 @@ private object Styles: StyleSheet("ArrowComponentStyles", isStatic = true) {
     val arrowRight by Styles.css {
         +arrow
         span {
-            marginLeft = 2.px
+            marginLeft = 3.px
+            display = Display.block
             after {
-                content = QuotedString("⮞")
+                content = QuotedString("➤")
             }
         }
     }
