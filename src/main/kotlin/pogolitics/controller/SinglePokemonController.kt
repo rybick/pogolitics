@@ -52,7 +52,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
                     view = SinglePokemonPage::class,
                     model = SinglePokemonModel(
                         mode = mode,
-                        pokemon = toPokemonStaticInfo(pokemon),
+                        pokemon = toPokemonStaticInfo(pokemon, form),
                         stats = pokemonStats,
                         moveSets = calculateMoveSets(
                             mode = mode,
@@ -74,10 +74,11 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
                 ?.uniqueId
         }
 
-    private fun toPokemonStaticInfo(pokemon: PokemonDto): SinglePokemonModel.PokemonStaticInfo {
+    private fun toPokemonStaticInfo(pokemon: PokemonDto, form: String?): SinglePokemonModel.PokemonStaticInfo {
         return SinglePokemonModel.PokemonStaticInfo(
             uniqueId = pokemon.uniqueId,
             pokedexNumber = pokemon.pokedexNumber,
+            form = form,
             name = pokemon.name,
             baseAttack = pokemon.baseAttack,
             baseDefense = pokemon.baseDefense,

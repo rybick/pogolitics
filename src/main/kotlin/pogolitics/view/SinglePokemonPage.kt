@@ -1,6 +1,10 @@
 package pogolitics.view
 
+import kotlinx.browser.window
 import kotlinx.css.*
+import kotlinx.css.properties.TextDecoration
+import org.w3c.dom.Location
+import org.w3c.dom.Window
 import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
@@ -10,15 +14,42 @@ import react.RComponent
 import react.RState
 import react.dom.a
 import styled.*
+import react.SwitchSelector
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
     override fun RBuilder.render() {
         styledDiv {
             css { +Styles.headerWrapper }
-            a(href = pokemonPagePath(props.model.pokemon.familyId - 1)) { +"<" }
-            styledSpan { css { +Styles.spacer } }
-            a(href = pokemonPagePath(props.model.pokemon.familyId + 1)) { +">" }
+            styledA(href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)) {
+                css { +Styles.arrow }
+                +"⮜"
+            }
+            styledSpan {
+                css { +Styles.spacer }
+                SwitchSelector {
+                    attrs {
+                        checked = BattleMode.PVP == props.model.mode
+                        onlabel = "PvP"
+                        offlabel = "PvE"
+                        onChange = { checked ->
+                            // set timeout to let the animation end.
+                            // It would be better to use state instead but this was easier, so I guess TODO one day.
+                            window.setTimeout({
+                                window.location.href = pokemonPagePath(
+                                    pokedexNumber = props.model.pokemon.pokedexNumber,
+                                    form = props.model.pokemon.form,
+                                    mode = if (checked) BattleMode.PVP else BattleMode.PVE
+                                )
+                            }, timeout = 300)
+                        }
+                    }
+                }
+            }
+            styledA(href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)) {
+                css { +Styles.arrow }
+                +"⮞"
+            }
         }
         styledDiv {
             css { +Styles.leftWrapper }
@@ -87,16 +118,28 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         const val smallScreenMediaQuery = "screen and (max-width: 700px)"
 
         val headerWrapper by css {
+            paddingTop = StyleConstants.Padding.small
             display = Display.flex
             fontSize = 160.pct
-            a {
-                paddingLeft = StyleConstants.Padding.big
-                paddingRight = StyleConstants.Padding.big
+        }
+
+        val arrow by css {
+            width = 42.px
+            height = 42.px
+            textAlign = TextAlign.center
+            borderRadius = 50.pct
+            marginLeft = StyleConstants.Margin.small
+            marginRight = StyleConstants.Margin.small
+            hover {
+                color = StyleConstants.Colors.primary.text
+                backgroundColor = StyleConstants.Colors.primary.bg
+                textDecoration = TextDecoration.none
             }
         }
 
         val spacer by css {
             flexGrow = 1.0
+            textAlign = TextAlign.center
         }
 
         val leftWrapper by css {
