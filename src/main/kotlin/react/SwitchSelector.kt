@@ -15,5 +15,7 @@ external interface SwitchSelectorProps : Props {
     var style: String
     var width: Int
     var height: Int
+    var checked: Boolean
+    var onChange: (checked: Boolean) -> Unit
 }
 

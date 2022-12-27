@@ -1,7 +1,10 @@
 package pogolitics.view
 
+import kotlinx.browser.window
 import kotlinx.css.*
 import kotlinx.css.properties.TextDecoration
+import org.w3c.dom.Location
+import org.w3c.dom.Window
 import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
@@ -18,7 +21,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
     override fun RBuilder.render() {
         styledDiv {
             css { +Styles.headerWrapper }
-            styledA(href = pokemonPagePath(props.model.pokemon.familyId - 1)) {
+            styledA(href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)) {
                 css { +Styles.arrow }
                 +"⮜"
             }
@@ -26,12 +29,24 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                 css { +Styles.spacer }
                 SwitchSelector {
                     attrs {
+                        checked = BattleMode.PVP == props.model.mode
                         onlabel = "PvP"
                         offlabel = "PvE"
+                        onChange = { checked ->
+                            // set timeout to let the animation end.
+                            // It would be better to use state instead but this was easier, so I guess TODO one day.
+                            window.setTimeout({
+                                window.location.href = pokemonPagePath(
+                                    pokedexNumber = props.model.pokemon.pokedexNumber,
+                                    form = props.model.pokemon.form,
+                                    mode = if (checked) BattleMode.PVP else BattleMode.PVE
+                                )
+                            }, timeout = 300)
+                        }
                     }
                 }
             }
-            styledA(href = pokemonPagePath(props.model.pokemon.familyId + 1)) {
+            styledA(href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)) {
                 css { +Styles.arrow }
                 +"⮞"
             }

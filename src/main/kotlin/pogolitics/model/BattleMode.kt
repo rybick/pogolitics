@@ -5,5 +5,6 @@ enum class BattleMode {
 
     companion object {
         fun fromString(value: String) = BattleMode.valueOf(value.uppercase())
+        val default = PVP
     }
 }

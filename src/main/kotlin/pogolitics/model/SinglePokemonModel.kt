@@ -9,14 +9,13 @@ data class SinglePokemonModel(
     data class PokemonStaticInfo(
         val uniqueId: String,
         val pokedexNumber: Int,
+        val form: String?,
         val name: String,
         val baseAttack: Int,
         val baseDefense: Int,
         val baseStamina: Int,
         val hardiness: Double
-    ) {
-        val familyId: Int get() = pokedexNumber
-    }
+    )
 
     data class PokemonIndividualStatistics(
         val ivs: IVs,
