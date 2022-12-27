@@ -9,6 +9,8 @@ import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
+import pogolitics.view.component.Arrow
+import pogolitics.view.component.ArrowDirection
 import react.RBuilder
 import react.RComponent
 import react.RState
@@ -21,9 +23,11 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
     override fun RBuilder.render() {
         styledDiv {
             css { +Styles.headerWrapper }
-            styledA(href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)) {
-                css { +Styles.arrow }
-                +"⮜"
+            Arrow {
+               attrs {
+                   href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
+                   direction = ArrowDirection.LEFT
+               }
             }
             styledSpan {
                 css { +Styles.spacer }
@@ -46,9 +50,11 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                     }
                 }
             }
-            styledA(href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)) {
-                css { +Styles.arrow }
-                +"⮞"
+            Arrow {
+                attrs {
+                    href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)
+                    direction = ArrowDirection.RIGHT
+                }
             }
         }
         styledDiv {
