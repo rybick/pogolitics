@@ -26,9 +26,9 @@ interface HeaderProps: Props
 private object HeaderStyles: StyleSheet("HeaderComponentStyles", isStatic = true) {
     val headerWrapper by css {
         boxSizing = BoxSizing.contentBox
-        height = 70.px
-        paddingTop = StyleConstants.Padding.small
-        paddingBottom = StyleConstants.Padding.small
+        height = 60.px
+        paddingTop = StyleConstants.Padding.medium
+        paddingBottom = StyleConstants.Padding.medium
         paddingLeft = StyleConstants.Padding.medium
         paddingRight = StyleConstants.Padding.medium
         backgroundColor = StyleConstants.Colors.primary.bg
