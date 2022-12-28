@@ -167,6 +167,7 @@ class IVBarStyles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles",
         backgroundColor = regularColor
         marginLeft = 10.u
         marginRight = 10.u
+        cursor = Cursor.pointer
         before {
             content = QuotedString("")
             marginLeft = (-8).u
