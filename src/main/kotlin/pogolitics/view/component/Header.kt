@@ -2,10 +2,10 @@ package pogolitics.view.component
 
 import kotlinx.css.*
 import pogolitics.view.StyleConstants
-import pogolitics.view.iconPath
 import pogolitics.view.logoPath
+import pogolitics.view.pokemonListPagePath
 import react.Props
-import react.dom.attrs
+import react.dom.a
 import react.dom.img
 import react.fc
 import styled.StyleSheet
@@ -15,7 +15,9 @@ import styled.styledDiv
 val Header = fc<HeaderProps> {
     styledDiv {
         css { +HeaderStyles.headerWrapper }
-        img(src = logoPath()) {}
+        a(href = pokemonListPagePath()) { // TODO lead to main page when there is anything there
+            img(src = logoPath()) {}
+        }
     }
 }
 
