@@ -11,7 +11,7 @@ import styled.css
 import styled.styledDiv
 
 class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : RComponent<PageRProps<NotFoundModel, Unit>, RState>(props) {
-    override fun RBuilder.render() {
+    override fun RBuilder.render() = renderPage {
         styledDiv {
             css { +Styles.pageWrapper }
             styledDiv {

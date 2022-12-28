@@ -8,7 +8,7 @@ import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.component.NavigationArrow
-import pogolitics.view.component.ArrowDirection
+import pogolitics.view.component.NavigationDirection
 import react.RBuilder
 import react.RComponent
 import react.RState
@@ -17,13 +17,13 @@ import react.SwitchSelector
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
-    override fun RBuilder.render() {
+    override fun RBuilder.render() = renderPage {
         styledDiv {
             css { +Styles.headerWrapper }
             NavigationArrow {
                attrs {
                    href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
-                   direction = ArrowDirection.PREVIOUS
+                   direction = NavigationDirection.PREVIOUS
                }
             }
             styledSpan {
@@ -50,7 +50,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             NavigationArrow {
                 attrs {
                     href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)
-                    direction = ArrowDirection.NEXT
+                    direction = NavigationDirection.NEXT
                 }
             }
         }

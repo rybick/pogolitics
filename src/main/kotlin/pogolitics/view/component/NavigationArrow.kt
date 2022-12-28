@@ -17,16 +17,16 @@ val NavigationArrow = fc<ArrowProps> { props ->
 }
 
 interface ArrowProps: Props {
-    var direction: ArrowDirection
+    var direction: NavigationDirection
     var href: String
 }
 
-enum class ArrowDirection(val style: RuleSet) {
-    PREVIOUS(Styles.arrowPrevious), NEXT(Styles.arrowNext);
+enum class NavigationDirection(val style: RuleSet) {
+    PREVIOUS(NavigationArrowStyles.arrowPrevious), NEXT(NavigationArrowStyles.arrowNext);
 }
 
-private object Styles: StyleSheet("NavigationArrowComponentStyles", isStatic = true) {
-    val arrowPrevious by Styles.css {
+private object NavigationArrowStyles: StyleSheet("NavigationArrowComponentStyles", isStatic = true) {
+    val arrowPrevious by NavigationArrowStyles.css {
         +arrow
         span {
             marginLeft = (-3).px
@@ -38,7 +38,7 @@ private object Styles: StyleSheet("NavigationArrowComponentStyles", isStatic = t
         }
     }
 
-    val arrowNext by Styles.css {
+    val arrowNext by NavigationArrowStyles.css {
         +arrow
         span {
             marginLeft = 3.px
@@ -49,7 +49,7 @@ private object Styles: StyleSheet("NavigationArrowComponentStyles", isStatic = t
         }
     }
 
-    private val arrow by Styles.css {
+    private val arrow by NavigationArrowStyles.css {
         display = Display.inlineBlock
         cursor = Cursor.pointer
         width = 42.px

@@ -8,6 +8,9 @@ import pogolitics.model.PokemonType
 fun iconPath(type: PokemonType): String =
     path("/img/icon/${type.displayName}.png")
 
+fun logoPath(): String =
+    path("/img/logo/120x70.png")
+
 fun pokemonPagePath(pokedexNumber: Int, form: String? = null, mode: BattleMode = BattleMode.default): String =
     path("/#/pokemon/${pokedexNumber}", mapOf("form" to form, "mode" to mode.toString()))
 
