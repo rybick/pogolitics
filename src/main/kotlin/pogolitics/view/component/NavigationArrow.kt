@@ -9,7 +9,7 @@ import react.Props
 import react.fc
 import styled.*
 
-val Arrow = fc<ArrowProps> { props ->
+val NavigationArrow = fc<ArrowProps> { props ->
     styledA(href = props.href) {
         css { +props.direction.style }
         styledSpan {}
@@ -22,11 +22,11 @@ interface ArrowProps: Props {
 }
 
 enum class ArrowDirection(val style: RuleSet) {
-    LEFT(Styles.arrowLeft), RIGHT(Styles.arrowRight);
+    PREVIOUS(Styles.arrowPrevious), NEXT(Styles.arrowNext);
 }
 
-private object Styles: StyleSheet("ArrowComponentStyles", isStatic = true) {
-    val arrowLeft by Styles.css {
+private object Styles: StyleSheet("NavigationArrowComponentStyles", isStatic = true) {
+    val arrowPrevious by Styles.css {
         +arrow
         span {
             marginLeft = (-3).px
@@ -38,7 +38,7 @@ private object Styles: StyleSheet("ArrowComponentStyles", isStatic = true) {
         }
     }
 
-    val arrowRight by Styles.css {
+    val arrowNext by Styles.css {
         +arrow
         span {
             marginLeft = 3.px

@@ -8,7 +8,7 @@ import react.dom.a
 import react.dom.p
 
 class MainPage(props: PageRProps<Unit, Unit>) : RComponent<PageRProps<Unit, Unit>, RState>(props) {
-    override fun RBuilder.render() {
+    override fun RBuilder.render() = renderPage {
         p { +"page under construction" }
         p {
             a(href = pokemonListPagePath()) {
