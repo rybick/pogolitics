@@ -140,7 +140,7 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
             flexDirection = FlexDirection.column
             alignItems = Align.center
             border = "${StyleConstants.Border.thick} solid ${StyleConstants.Colors.primary.bg}"
-            padding = "${StyleConstants.Padding.big}"
+            padding = "${StyleConstants.Padding.semiBig}"
             borderRadius = 20.px
         }
 
