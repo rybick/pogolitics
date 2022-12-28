@@ -39,7 +39,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                             window.setTimeout({
                                 window.location.href = pokemonPagePath(
                                     pokedexNumber = props.model.pokemon.pokedexNumber,
-                                    form = props.model.pokemon.form?.code,
+                                    form = props.model.pokemon.form,
                                     mode = if (checked) BattleMode.PVP else BattleMode.PVE
                                 )
                             }, timeout = 300)

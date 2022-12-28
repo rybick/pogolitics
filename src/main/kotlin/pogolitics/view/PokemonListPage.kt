@@ -88,8 +88,8 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
             css {
                 +Styles.form
             }
-            a(href = pokemonPagePath(pokedexNumber, form.name)) {
-                +form.prettyName
+            a(href = pokemonPagePath(pokedexNumber, form.toPokemonForm())) {
+                +form.prettyNameOrDefault
             }
         }
     }

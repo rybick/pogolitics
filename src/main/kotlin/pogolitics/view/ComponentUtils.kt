@@ -2,6 +2,7 @@ package pogolitics.view
 
 import pogolitics.applicationRoot
 import pogolitics.model.BattleMode
+import pogolitics.model.PokemonForm
 import pogolitics.model.PokemonType
 
 fun iconPath(type: PokemonType): String =
@@ -10,7 +11,7 @@ fun iconPath(type: PokemonType): String =
 fun logoPath(): String =
     path("/img/logo/120x70.png")
 
-fun pokemonPagePath(pokedexNumber: Int, form: String? = null, mode: BattleMode = BattleMode.default): String =
+fun pokemonPagePath(pokedexNumber: Int, form: PokemonForm? = null, mode: BattleMode = BattleMode.default): String =
     pagePath(Page.POKEMON(pokedexNumber, form, mode))
 
 fun pokemonListPagePath(): String = pagePath(Page.POKEMON_LIST)
@@ -33,14 +34,14 @@ sealed class Page(
 ) {
     object HOME: Page(null, "⌂", "#")
     object POKEMON_LIST: Page(HOME, "pokemon list", "pokemon")
-    class POKEMON(pokedexNumber: Int, pokemonForm: String?, mode: BattleMode, prettyName: String? = null):
+    class POKEMON(pokedexNumber: Int, pokemonForm: PokemonForm?, mode: BattleMode, prettyName: String? = null):
         Page(
             parent = POKEMON_LIST,
             prettyName = prettyName ?: "$pokedexNumber",
             pathSegment = "$pokedexNumber",
-            urlParams = mapOf("form" to pokemonForm, "mode" to mode.toString())
+            urlParams = mapOf("form" to pokemonForm?.code, "mode" to mode.toString())
         )
-} // TODO later make pokemonForm value object
+}
 
 private fun path(baseUrl: String, params: Map<String, String?> = mapOf()): String =
     applicationRoot + baseUrl +
