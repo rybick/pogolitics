@@ -9,6 +9,7 @@ import org.w3c.dom.events.KeyboardEvent
 import pogolitics.model.IVs
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
+import pogolitics.view.component.IVBar
 import react.*
 import react.dom.defaultValue
 import react.dom.input
@@ -52,25 +53,31 @@ class IVStatsWidget(props: IVStatsWidgetRProps) : RComponent<IVStatsWidgetRProps
                         }
                     }
                 }
-                ivBar {
-                    name = "Attack"
-                    iv = props.ivs.attack
-                    onChange = { value ->
-                        props.onChange(createStateWith { attack = value })
+                IVBar {
+                    attrs {
+                        name = "Attack"
+                        iv = props.ivs.attack
+                        onChange = { value ->
+                            props.onChange(createStateWith { attack = value })
+                        }
                     }
                 }
-                ivBar {
-                    name = "Defense"
-                    iv = props.ivs.defense
-                    onChange = { value ->
-                        props.onChange(createStateWith { defense = value })
+                IVBar {
+                    attrs {
+                        name = "Defense"
+                        iv = props.ivs.defense
+                        onChange = { value ->
+                            props.onChange(createStateWith { defense = value })
+                        }
                     }
                 }
-                ivBar {
-                    name = "HP"
-                    iv = props.ivs.stamina
-                    onChange = { value ->
-                        props.onChange(createStateWith { stamina = value })
+                IVBar {
+                    attrs {
+                        name = "HP"
+                        iv = props.ivs.stamina
+                        onChange = { value ->
+                            props.onChange(createStateWith { stamina = value })
+                        }
                     }
                 }
                 styledDiv {
