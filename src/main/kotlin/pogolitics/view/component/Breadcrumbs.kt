@@ -1,6 +1,7 @@
 package pogolitics.view.component
 
 import kotlinx.css.*
+import kotlinx.css.properties.TextDecoration
 import pogolitics.view.Page
 import pogolitics.view.StyleConstants
 import pogolitics.view.pagePath
@@ -39,8 +40,19 @@ interface BreadcrumbsProps: Props {
 
 private object BreadcrumbsStyles: StyleSheet("BreadcrumbsComponentStyles", isStatic = true) {
     val breadcrumbsWrapper by css {
-        borderBottom = "1px ${StyleConstants.Colors.primary.bg} solid"
         paddingLeft = StyleConstants.Padding.medium
+        paddingBottom = StyleConstants.Padding.small
+        backgroundColor = StyleConstants.Colors.primary.bg
+        color = StyleConstants.Colors.primary.secondaryText
+        fontSize = StyleConstants.Font.small
+        a {
+            color = StyleConstants.Colors.primary.secondaryText
+            fontWeight = FontWeight.bold
+            hover {
+                color = StyleConstants.Colors.primaryHovered.secondaryText
+                textDecoration = TextDecoration.none
+            }
+        }
     }
 
     val separator by css {
