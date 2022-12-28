@@ -5,6 +5,7 @@ import kotlinx.html.unsafe
 import pogolitics.model.MoveSet
 import pogolitics.format
 import pogolitics.view.BasicStylesheet.Table
+import pogolitics.view.component.Attack
 import react.RBuilder
 import react.RComponent
 import react.RProps
@@ -99,9 +100,9 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                                 +Table.first
                                 +Table.left
                             }
-                            child(AttackComponent::class) { attrs.attack = it.quickAttack }
+                            Attack { attrs.attack = it.quickAttack }
                             +" + "
-                            child(AttackComponent::class) { attrs.attack = it.chargedAttack }
+                            Attack { attrs.attack = it.chargedAttack }
                         }
                         styledDiv {
                             css { +Table.cell }
