@@ -7,6 +7,7 @@ import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
+import pogolitics.view.component.IVStatsWidget
 import pogolitics.view.component.NavigationArrow
 import pogolitics.view.component.NavigationDirection
 import react.RBuilder
@@ -62,11 +63,13 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         }
         styledDiv {
             css { +Styles.rightWrapper }
-            ivStatsWidget {
-                stats = props.model.stats.currentStats
-                ivs = props.model.stats.ivs
-                onChange = {
-                    props.updateState(it)
+            IVStatsWidget {
+                attrs {
+                    stats = props.model.stats.currentStats
+                    ivs = props.model.stats.ivs
+                    onChange = {
+                        props.updateState(it)
+                    }
                 }
             }
             if (props.model.mode == BattleMode.PVP) {
