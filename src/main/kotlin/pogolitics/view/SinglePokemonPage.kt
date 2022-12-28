@@ -7,6 +7,7 @@ import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
+import pogolitics.view.component.BasicPokemonInfo
 import pogolitics.view.component.IVStatsWidget
 import pogolitics.view.component.NavigationArrow
 import pogolitics.view.component.NavigationDirection
@@ -57,8 +58,8 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         }
         styledDiv {
             css { +Styles.leftWrapper }
-            basicPokemonInfo {
-                data = props.model.pokemon
+            BasicPokemonInfo {
+                attrs.data = props.model.pokemon
             }
         }
         styledDiv {
