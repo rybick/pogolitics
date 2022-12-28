@@ -10,7 +10,7 @@ import react.dom.p
 import styled.css
 import styled.styledDiv
 
-class MainPage(props: PageRProps<Unit, Unit>) : RComponent<PageRProps<Unit, Unit>, RState>(props) {
+class HomePage(props: PageRProps<Unit, Unit>) : RComponent<PageRProps<Unit, Unit>, RState>(props) {
     override fun RBuilder.render() = renderPage(Page.HOME) {
         styledDiv {
             css {

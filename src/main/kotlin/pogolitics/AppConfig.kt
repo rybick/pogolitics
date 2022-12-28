@@ -2,15 +2,14 @@ package pogolitics
 
 import pogolitics.api.Api
 import pogolitics.controller.Controller
-import pogolitics.controller.MainPageController
+import pogolitics.controller.HomePageController
 import pogolitics.controller.PokemonListController
 import pogolitics.controller.SinglePokemonController
-import react.RProps
 
 class AppConfig {
     private val api = Api()
 
-    private val mainPageController = MainPageController()
+    private val mainPageController = HomePageController()
     private val pokemonListController = PokemonListController(api)
     private val pokemonController = SinglePokemonController(api)
 
