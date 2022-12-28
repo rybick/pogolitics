@@ -7,6 +7,7 @@ import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
 import pogolitics.api.Api
 import pogolitics.api.PokemonIndexEntryDto
+import pogolitics.model.PokemonForm
 import pogolitics.model.PokemonListModel
 import pogolitics.view.PokemonListPage
 import react.RProps
@@ -39,23 +40,11 @@ class PokemonListController(private val api: Api) : Controller<PokemonListModel,
                     name = entries.first().name,
                     forms = entries
                         .map {
-                            PokemonListModel.Form(
-                                name = it.form,
-                                prettyName = toPrettyName(it.form),
-                                uniqueId = it.uniqueId
-                            )
+                            PokemonListModel.Form(PokemonForm.ofNullable(it.form), it.uniqueId)
                         }
                 )
             }
             .values
             .sortedBy { it.pokedexNumber }
-
-    private fun toPrettyName(form: String?) = form
-        ?.run {
-            lowercase()
-                .replaceFirstChar { it.uppercase() }
-                .replace("_", " ")
-        }
-        ?: "Default"
 
 }

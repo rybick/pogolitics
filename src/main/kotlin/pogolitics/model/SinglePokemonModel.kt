@@ -9,7 +9,7 @@ data class SinglePokemonModel(
     data class PokemonStaticInfo(
         val uniqueId: String,
         val pokedexNumber: Int,
-        val form: String?,
+        val form: PokemonForm?,
         val name: String,
         val baseAttack: Int,
         val baseDefense: Int,

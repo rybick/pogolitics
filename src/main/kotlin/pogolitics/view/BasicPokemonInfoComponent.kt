@@ -23,6 +23,12 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
                 span {
                     +props.data.name
                 }
+                props.data.form?.let { form ->
+                    styledSpan {
+                        css { +Styles.pokemonForm }
+                        +"(${form.prettyName})"
+                    }
+                }
             }
             styledDiv {
                 css { +Styles.staticStatsWrapper }
@@ -46,6 +52,12 @@ class BasicPokemonInfoComponent(props: BasicPokemonInfoRProps) : RComponent<Basi
         val pokemonId by css {
             color = StyleConstants.Colors.secondary.secondaryText
             marginRight = StyleConstants.Margin.small
+            fontSize = 80.pct
+        }
+
+        val pokemonForm by css {
+            color = StyleConstants.Colors.secondary.secondaryText
+            marginLeft = StyleConstants.Margin.small
             fontSize = 80.pct
         }
 

@@ -78,7 +78,7 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
         return SinglePokemonModel.PokemonStaticInfo(
             uniqueId = pokemon.uniqueId,
             pokedexNumber = pokemon.pokedexNumber,
-            form = form,
+            form = PokemonForm.ofNullable(form),
             name = pokemon.name,
             baseAttack = pokemon.baseAttack,
             baseDefense = pokemon.baseDefense,

@@ -10,8 +10,10 @@ data class PokemonListModel(
     )
 
     data class Form(
+        private val form: PokemonForm?,
         val uniqueId: String,
-        val name: String?,
-        val prettyName: String
-    )
+    ) {
+        val name: String? = form?.code
+        val prettyName: String = form?.prettyName ?: "Default"
+    }
 }
