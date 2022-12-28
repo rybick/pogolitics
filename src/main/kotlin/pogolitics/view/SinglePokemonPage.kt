@@ -17,7 +17,7 @@ import react.SwitchSelector
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
-    override fun RBuilder.render() = renderPage {
+    override fun RBuilder.render() = renderPage(pokemonPage(props.model)) {
         styledDiv {
             css { +Styles.headerWrapper }
             NavigationArrow {
@@ -116,6 +116,13 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             /* space for widgets that will always be last */
         }
     }
+    private fun pokemonPage(model: SinglePokemonModel): Page =
+        Page.POKEMON(
+            pokedexNumber = model.pokemon.pokedexNumber,
+            pokemonForm = model.pokemon.form,
+            prettyName = model.pokemon.name,
+            mode = model.mode
+        )
 
     private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
         const val smallScreenMediaQuery = "screen and (max-width: 700px)"

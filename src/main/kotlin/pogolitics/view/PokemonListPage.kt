@@ -15,7 +15,7 @@ import styled.styledSpan
 
 class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
     RComponent<PageRProps<PokemonListModel, Unit>, RState>(props) {
-    override fun RBuilder.render() = renderPage {
+    override fun RBuilder.render() = renderPage(Page.POKEMON_LIST) {
         styledDiv {
             css { +BasicStylesheet.widgetWrapper }
             styledDiv {

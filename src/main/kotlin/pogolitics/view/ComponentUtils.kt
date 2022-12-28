@@ -16,15 +16,11 @@ fun pokemonPagePath(pokedexNumber: Int, form: PokemonForm? = null, mode: BattleM
 
 fun pokemonListPagePath(): String = pagePath(Page.POKEMON_LIST)
 
-fun pagePath(page: Page): String {
-    fun rawPagePath(page: Page?): String =
-        if (page == null) {
-            ""
-        } else {
-            rawPagePath(page.parent) + "/" + page.pathSegment
-        }
-    return path(rawPagePath(page), page.urlParams)
-}
+fun pagePath(page: Page): String =
+    path(
+        baseUrl = "/" + page.getFullPath().joinToString("/") { it.pathSegment },
+        params = page.urlParams
+    )
 
 sealed class Page(
     val parent: Page?,
@@ -32,8 +28,8 @@ sealed class Page(
     val pathSegment: String,
     val urlParams: Map<String, String?> = mapOf()
 ) {
-    object HOME: Page(null, "⌂", "#")
-    object POKEMON_LIST: Page(HOME, "pokemon list", "pokemon")
+    object HOME: Page(null, "Home", "#")
+    object POKEMON_LIST: Page(HOME, "Pokemon", "pokemon")
     class POKEMON(pokedexNumber: Int, pokemonForm: PokemonForm?, mode: BattleMode, prettyName: String? = null):
         Page(
             parent = POKEMON_LIST,
@@ -41,6 +37,16 @@ sealed class Page(
             pathSegment = "$pokedexNumber",
             urlParams = mapOf("form" to pokemonForm?.code, "mode" to mode.toString())
         )
+
+    fun getFullPath(): List<Page> {
+        fun rawPagePath(page: Page?): List<Page> =
+            if (page == null) {
+                listOf()
+            } else {
+                rawPagePath(page.parent) + page
+            }
+        return rawPagePath(this)
+    }
 }
 
 private fun path(baseUrl: String, params: Map<String, String?> = mapOf()): String =
