@@ -15,8 +15,8 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-legacy:17.0.2-${kotlinJS}")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom-legacy:17.0.2-${kotlinJS}")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:17.0.2-${kotlinJS}")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:17.0.2-${kotlinJS}")
     implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom:6.2.1-${kotlinJS}")
     implementation("org.jetbrains.kotlin-wrappers:kotlin-styled:5.3.3-${kotlinJS}")
 
