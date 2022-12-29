@@ -1,22 +1,17 @@
 package pogolitics.view.component
 
-import kotlinx.css.*
-import kotlinx.css.properties.scale
-import kotlinx.css.properties.transform
-import kotlinx.html.InputType
-import kotlinx.html.js.onChangeFunction
-import kotlinx.html.js.onClickFunction
-import kotlinx.html.org.w3c.dom.events.Event
-import org.w3c.dom.HTMLElement
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.MouseEvent
+import csstype.*
+import dom.html.HTMLDivElement
+import emotion.react.css
+import pogolitics.cssClass
+import pogolitics.plus
 import react.*
-import react.dom.defaultValue
-import react.dom.key
-import styled.StyleSheet
-import styled.css
+import react.dom.events.MouseEvent
+import react.dom.events.MouseEventHandler
+import react.dom.html.InputType
+import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.input
 import styled.styledDiv
-import styled.styledInput
 import kotlin.math.round
 
 val IVBar = fc<IVBarComponentRProps> { props ->
@@ -26,9 +21,9 @@ val IVBar = fc<IVBarComponentRProps> { props ->
 
     // TODO later, check the thing with always redrawing when onClickFunction (or other) is defined inline
 
-    val doOnClick: (Event) -> Unit = { event: Event ->
-        val mouseEvent = event.unsafeCast<MouseEvent>()
-        val target = event.target as HTMLElement
+    val doOnClick: MouseEventHandler<HTMLDivElement> = { event: MouseEvent<HTMLDivElement, *> ->
+        val mouseEvent = event //.unsafeCast<MouseEvent>()
+        val target: HTMLDivElement = event.target as HTMLDivElement // TODO later mig - does it work?
         val x: Double = mouseEvent.clientX - target.getBoundingClientRect().left
         val barWidth: Double = target.getBoundingClientRect().width
         val ratio = x / barWidth
@@ -36,70 +31,60 @@ val IVBar = fc<IVBarComponentRProps> { props ->
         props.onChange(round(value).toInt())
     }
 
-    styledDiv {
-        css {
-            +styles.componentWrapper
-        }
+    div {
+        attrs.css(styles.componentWrapper)
         styledDiv {
-            css {
-                +styles.labelsWrapper
-            }
+            attrs.css(styles.labelsWrapper)
             styledDiv {
-                css {
-                    +styles.label
-                    if (props.iv == MAX_IV) {
-                        +styles.labelIvMax
-                    }
-                }
+                attrs.css(
+                    styles.label +
+                        if (props.iv == MAX_IV) {
+                            styles.labelIvMax
+                        } else ({})
+                )
                 +props.name
             }
             styledDiv {
-                css {
-                    +styles.inputWrapper
-                }
-                styledInput(InputType.number) {
-                    css {
-                        +styles.input
-                    }
+                attrs.css(styles.inputWrapper)
+                input {
+                    attrs.css(styles.input)
+                    attrs.type = InputType.number
                     attrs.min = "0"
                     attrs.max = "15"
                     attrs.pattern = "\\d*"
                     attrs.key = "${props.iv}"
                     attrs.defaultValue = "${props.iv}"
-                    attrs.onChangeFunction = {
-                        props.onChange((it.target as HTMLInputElement).value.toInt())
+                    attrs.onChange = {
+                        props.onChange(it.target.value.toInt())
                     }
                 }
             }
         }
         styledDiv {
-            css {
-                +styles.wrapper
+            attrs.css(styles.wrapper)
+            div {
+                attrs.css(
+                    styles.bar +
+                    styles.bg +
+                    ({ width = styles.barWidth(MAX_IV) })
+                )
+                attrs.onClick = doOnClick
             }
             styledDiv {
-                css {
-                    +styles.bar
-                    +styles.bg
-                    width = styles.barWidth(MAX_IV)
-                }
-                attrs.onClickFunction = doOnClick
+                attrs.css(
+                    styles.bar +
+                    styles.content +
+                    (
+                        if (props.iv == 0) {
+                            styles.iv0
+                        } else if (props.iv == MAX_IV) {
+                            styles.ivMax
+                        } else ({})
+                    ) + ({ width = styles.barWidth(props.iv) })
+                )
             }
             styledDiv {
-                css {
-                    +styles.bar
-                    +styles.content
-                    width = styles.barWidth(props.iv)
-                    if (props.iv == 0) {
-                        +styles.iv0
-                    } else if (props.iv == MAX_IV) {
-                        +styles.ivMax
-                    }
-                }
-            }
-            styledDiv {
-                css {
-                    +styles.scale
-                }
+                attrs.css(styles.scale)
             }
         }
     }
@@ -112,18 +97,18 @@ external interface IVBarComponentRProps: RProps {
     var onChange: (Int) -> Unit
 }
 
-class IVBarStyles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles", isStatic = false) {
+class IVBarStyles(val unit: Length) {
     private val regularColor = Color("#f0911d")
     private val strongColor = Color("#e18077")
     private val gray = Color("#e2e2e2")
 
-    private val Number.u: LinearDimension get() = unit * this
+    private val Number.u: Length get() = "calc($unit * $this)".unsafeCast<Length>() // TODO later mig does it work?
 
-    fun barWidth(width: Int): LinearDimension {
-        return 20.u * (width - 1)
+    fun barWidth(width: Int): Length {
+        return (20 * (width - 1)).u
     }
 
-    val componentWrapper by css {
+    val componentWrapper = cssClass {
         width = 320.u
         paddingLeft = 6.u
         paddingRight = 6.u
@@ -131,45 +116,45 @@ class IVBarStyles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles",
         paddingBottom = 10.u
     }
 
-    val labelsWrapper by css {
+    val labelsWrapper = cssClass {
         display = Display.flex
         flexDirection = FlexDirection.row
     }
 
-    val label by css {
+    val label = cssClass {
         display = Display.flex
         flexDirection = FlexDirection.columnReverse
         paddingLeft = 5.u
-        fontWeight = FontWeight("600")
+        fontWeight = integer(600)
         color = regularColor
     }
 
-    val inputWrapper by css {
-        flexGrow = 1.0
+    val inputWrapper = cssClass {
+        flexGrow = number(1.0)
         paddingBottom = 3.u
         paddingRight = 10.u
         textAlign = TextAlign.right
     }
 
-    val input by css {
+    val input = cssClass {
         textAlign = TextAlign.right
         maxHeight = 20.u
         fontSize = 80.pct
     }
 
-    val wrapper by css {
+    val wrapper = cssClass {
         marginBottom = 20.u
-        backgroundColor = Color.white
+        backgroundColor = NamedColor.white
     }
 
-    val bar by css {
+    val bar = cssClass {
         height = 20.u
         backgroundColor = regularColor
         marginLeft = 10.u
         marginRight = 10.u
         cursor = Cursor.pointer
         before {
-            content = QuotedString("")
+            content = string("") // TODO later mig QuotedString?
             marginLeft = (-8).u
             position = Position.absolute
             float = Float.left
@@ -178,12 +163,10 @@ class IVBarStyles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles",
             backgroundColor = regularColor
             borderTopLeftRadius = 10.u
             borderBottomLeftRadius = 10.u
-            transform {
-                scale(0.8, 1.0)
-            }
+            transform = scale(0.8, 1.0)
         }
         after {
-            content = QuotedString("")
+            content = string("")
             marginRight = (-8).u
             float = Float.right
             height = 20.u
@@ -191,13 +174,11 @@ class IVBarStyles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles",
             backgroundColor = regularColor
             borderTopRightRadius = 10.u
             borderBottomRightRadius = 10.u
-            transform {
-                scale(0.8, 1.0)
-            }
+            transform = scale(0.8, 1.0)
         }
     }
 
-    val bg by css {
+    val bg = cssClass {
         backgroundColor = gray
         marginBottom = (-20).u
         before {
@@ -208,45 +189,45 @@ class IVBarStyles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles",
         }
     }
 
-    val content by css {
+    val content = cssClass {
         position = Position.absolute
-        pointerEvents = PointerEvents.none
+        pointerEvents = None.none
     }
 
-    val scale by css {
+    val scale = cssClass {
         marginTop = (-20).u
         paddingBottom = (-20).u
         width = 150.u
         before {
             position = Position.absolute
-            content = QuotedString("")
+            content = string("")
             marginLeft = 100.u
             width = 4.u
             height = 20.u
-            backgroundColor = Color.white
+            backgroundColor = NamedColor.white
             display = Display.block
         }
         after {
             position = Position.absolute
-            content = QuotedString("")
+            content = string("")
             marginLeft = 200.u
             width = 4.u
             height = 20.u
-            backgroundColor = Color.white
+            backgroundColor = NamedColor.white
             display = Display.block
         }
     }
 
-    val iv0 by css {
+    val iv0 = cssClass {
         before {
-            display = Display.none
+            display = None.none
         }
         after {
-            display = Display.none
+            display = None.none
         }
     }
 
-    val ivMax by css {
+    val ivMax = cssClass {
         backgroundColor = strongColor
         before {
             backgroundColor = strongColor
@@ -256,7 +237,7 @@ class IVBarStyles(val unit: LinearDimension): StyleSheet("IVBarComponentStyles",
         }
     }
 
-    val labelIvMax by css {
+    val labelIvMax = cssClass {
         color = strongColor
     }
 

@@ -1,21 +1,26 @@
 package pogolitics.view.component
 
-import kotlinx.css.*
+import csstype.TextAlign
+import csstype.pct
+import emotion.react.css
+import pogolitics.cssClass
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*
-import react.dom.span
+import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.h1
+import react.dom.html.ReactHTML.span
 import styled.*
 
 val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
-    styledDiv {
-        css { +BasicStylesheet.widgetWrapper }
-        styledH1 {
-            css { +BasicPokemonInfoStyles.wrapper }
+    div {
+        attrs.css(BasicStylesheet.widgetWrapper)
+        h1 {
+            attrs.css(BasicPokemonInfoStyles.wrapper)
             styledSpan {
-                css { +BasicPokemonInfoStyles.pokemonId }
+                attrs.css(BasicPokemonInfoStyles.pokemonId)
                 +"#${props.data.pokedexNumber}"
             }
             span {
@@ -23,14 +28,14 @@ val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
             }
             props.data.form?.let { form ->
                 styledSpan {
-                    css { +BasicPokemonInfoStyles.pokemonForm }
+                    attrs.css(BasicPokemonInfoStyles.pokemonForm)
                     +"(${form.prettyName})"
                 }
             }
         }
-        styledDiv {
-            css { +BasicPokemonInfoStyles.staticStatsWrapper }
-            StaticStat { attrs.name = "Attack"; attrs.value = props.data.baseAttack.toString() }
+        div {
+            attrs.css(BasicPokemonInfoStyles.staticStatsWrapper)
+            StaticStat { attrs.name = "Attack";  attrs.value = props.data.baseAttack.toString() }
             StaticStat { attrs.name = "Defense"; attrs.value = props.data.baseDefense.toString() }
             StaticStat { attrs.name = "Stamina"; attrs.value = props.data.baseStamina.toString() }
             StaticStat {
@@ -42,24 +47,24 @@ val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
     }
 }
 
-private object BasicPokemonInfoStyles : StyleSheet("BasicPokemonInfoComponentStyles", isStatic = true) {
-    val wrapper by css {
+private object BasicPokemonInfoStyles {
+    val wrapper = cssClass {
         textAlign = TextAlign.center
     }
 
-    val pokemonId by css {
+    val pokemonId = cssClass {
         color = StyleConstants.Colors.secondary.secondaryText
         marginRight = StyleConstants.Margin.small
         fontSize = 80.pct
     }
 
-    val pokemonForm by css {
+    val pokemonForm = cssClass {
         color = StyleConstants.Colors.secondary.secondaryText
         marginLeft = StyleConstants.Margin.small
         fontSize = 80.pct
     }
 
-    val staticStatsWrapper by css {
+    val staticStatsWrapper = cssClass {
         textAlign = TextAlign.center
     }
 }

@@ -1,31 +1,27 @@
 package pogolitics.view.component
 
-import kotlinx.css.*
-import kotlinx.html.js.onClickFunction
+import csstype.*
+import emotion.react.css
+import pogolitics.cssClass
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
+import pogolitics.plus
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*
-import styled.StyleSheet
-import styled.css
-import styled.styledDiv
-import styled.styledSpan
+import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.span
 
 val LeagueStatsWidget = fc<LeagueStatsWidgetRProps> { props ->
-    styledDiv {
-        css { +BasicStylesheet.widgetWrapper }
-        styledDiv {
-            css {
-                +BasicStylesheet.widgetHeader
-            }
+    div {
+        attrs.css(BasicStylesheet.widgetWrapper)
+        div {
+            attrs.css(BasicStylesheet.widgetHeader)
             + (props.name + " league")
         }
-        styledDiv {
-            attrs.onClickFunction = { props.onClick() }
-            css {
-                +LeagueStatsWidgetStyles.contentWrapper
-            }
+        div {
+            attrs.onClick = { props.onClick() }
+            attrs.css(LeagueStatsWidgetStyles.contentWrapper)
             stat("CP", "${props.stats.cp}")
             stat("level", "${props.stats.level}")
             stat("hardiness", props.stats.hardiness.format(2))
@@ -42,35 +38,37 @@ external interface LeagueStatsWidgetRProps: RProps {
     var onClick: () -> Unit
 }
 
-private fun RBuilder.stat(label: String, value: String) {
-    styledSpan {
-        css { +LeagueStatsWidgetStyles.group }
-        styledSpan {
-            css { +LeagueStatsWidgetStyles.label }
+private fun RElementBuilder<*>.stat(label: String, value: String) {
+    span {
+        attrs.css(LeagueStatsWidgetStyles.group)
+        span {
+            attrs.css(LeagueStatsWidgetStyles.label)
             +"$label: "
         }
-        styledSpan {
-            css { +LeagueStatsWidgetStyles.value }
+        span {
+            attrs.css(LeagueStatsWidgetStyles.value)
             +value
         }
     }
 }
 
-private object LeagueStatsWidgetStyles: StyleSheet("LeagueStatsWidgetStyles", isStatic = true) {
-    val label by css {
-        + cell
+private object LeagueStatsWidgetStyles {
+    val cell = cssClass {
+        padding = StyleConstants.Padding.small
+        display = Display.tableCell
+    }
+
+    val label = cell + cssClass {
         fontWeight = FontWeight.bold
     }
 
-    val value by css {
-        + cell
-    }
+    val value = cell + cssClass {}
 
-    val group by css {
+    val group = cssClass {
         marginLeft = StyleConstants.Margin.big
     }
 
-    val contentWrapper by css {
+    val contentWrapper = cssClass {
         cursor = Cursor.pointer
         display = Display.flex
         flexWrap = FlexWrap.wrap
@@ -78,9 +76,5 @@ private object LeagueStatsWidgetStyles: StyleSheet("LeagueStatsWidgetStyles", is
         justifyContent = JustifyContent.center
     }
 
-    val cell by css {
-        padding = StyleConstants.Padding.small.toString()
-        display = Display.tableCell
-    }
 }
 

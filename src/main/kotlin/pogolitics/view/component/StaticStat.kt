@@ -1,43 +1,43 @@
 package pogolitics.view.component
 
-import kotlinx.css.*
-import kotlinx.html.title
+import csstype.Display
+import csstype.TextAlign
+import csstype.px
+import emotion.react.css
+import pogolitics.cssClass
+import pogolitics.plus
 import pogolitics.view.BasicStylesheet
 import react.*
-import styled.StyleSheet
-import styled.css
+import react.dom.html.ReactHTML.div
 import styled.styledDiv
 
 val StaticStat = fc<StaticStatComponentRProps>() { props ->
-    styledDiv {
-        css { +StaticStatStyles.wrapper }
+    div {
+        attrs.css(StaticStatStyles.wrapper)
         styledDiv {
-            css { +BasicStylesheet.Table.table }
+            attrs.css(BasicStylesheet.Table.table)
             styledDiv {
-                css {
-                    +BasicStylesheet.Table.row
-                    +BasicStylesheet.Table.header
-                }
-                styledDiv {
-                    css {
-                        +BasicStylesheet.Table.cell
-                        +BasicStylesheet.Table.headerCell
-                        +BasicStylesheet.Table.first
-                    }
+                attrs.css(
+                    BasicStylesheet.Table.row + BasicStylesheet.Table.header
+                )
+                div {
+                    attrs.css(
+                        BasicStylesheet.Table.cell +
+                        BasicStylesheet.Table.headerCell +
+                        BasicStylesheet.Table.first
+                    )
                     attrs.title = props.info
                     +props.name
                 }
             }
             styledDiv {
-                css {
-                    +BasicStylesheet.Table.row
-                }
+                attrs.css(BasicStylesheet.Table.row)
                 styledDiv {
-                    css {
-                        +BasicStylesheet.Table.cell
-                        +BasicStylesheet.Table.headerCell
-                        +BasicStylesheet.Table.first
-                    }
+                    attrs.css(
+                        BasicStylesheet.Table.cell +
+                        BasicStylesheet.Table.headerCell +
+                        BasicStylesheet.Table.first
+                    )
                     +props.value
                 }
             }
@@ -51,8 +51,8 @@ external interface StaticStatComponentRProps: RProps {
     var info: String
 }
 
-private object StaticStatStyles: StyleSheet("StaticStatComponentStyles", isStatic = true) {
-    val wrapper by css {
+private object StaticStatStyles {
+    val wrapper = cssClass {
         display = Display.inlineBlock
         textAlign = TextAlign.center
         marginRight = 1.px

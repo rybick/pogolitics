@@ -1,8 +1,9 @@
 package pogolitics.view
 
-import kotlinx.css.Color
-import kotlinx.css.pct
-import kotlinx.css.px
+import csstype.Color
+import csstype.pct
+import csstype.px
+
 
 object StyleConstants {
     object Colors {
