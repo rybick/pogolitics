@@ -161,7 +161,6 @@ private object IVStatsWidgetStyles : StyleSheet("IVStatsWidgetStyles", isStatic 
     }
 }
 
-
 external interface IVStatsWidgetRProps : RProps {
     var stats: SinglePokemonModel.VariablePokemonStatistics
     var ivs: IVs

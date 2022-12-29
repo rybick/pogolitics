@@ -5,7 +5,6 @@ import pogolitics.format
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
-import pogolitics.view.staticStat
 import react.*
 import react.dom.span
 import styled.*
@@ -31,13 +30,13 @@ val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
         }
         styledDiv {
             css { +BasicPokemonInfoStyles.staticStatsWrapper }
-            staticStat { name = "Attack"; value = props.data.baseAttack.toString() }
-            staticStat { name = "Defense"; value = props.data.baseDefense.toString() }
-            staticStat { name = "Stamina"; value = props.data.baseStamina.toString() }
-            staticStat {
-                name = "Hardiness"
-                value = props.data.hardiness.format(2)
-                info = "√(defense⋅stamina)"
+            StaticStat { attrs.name = "Attack"; attrs.value = props.data.baseAttack.toString() }
+            StaticStat { attrs.name = "Defense"; attrs.value = props.data.baseDefense.toString() }
+            StaticStat { attrs.name = "Stamina"; attrs.value = props.data.baseStamina.toString() }
+            StaticStat {
+                attrs.name = "Hardiness"
+                attrs.value = props.data.hardiness.format(2)
+                attrs.info = "(defense⋅stamina)"
             }
         }
     }
@@ -64,7 +63,6 @@ private object BasicPokemonInfoStyles : StyleSheet("BasicPokemonInfoComponentSty
         textAlign = TextAlign.center
     }
 }
-
 
 external interface BasicPokemonInfoRProps : RProps {
     var data: SinglePokemonModel.PokemonStaticInfo
