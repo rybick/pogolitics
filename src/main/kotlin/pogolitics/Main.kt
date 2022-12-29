@@ -1,7 +1,7 @@
 package pogolitics
 
+import browser.document
 import dom.Element
-import kotlinx.browser.document
 import react.RProps
 import react.createElement
 import react.dom.client.createRoot
@@ -10,10 +10,7 @@ fun main() {
     exportForJs()
     document.createElement("div")
         .apply { id = "root" }
-        .also { document.body!!.appendChild(it) }
-        // don't know why the types don't match here.
-        // It's the same js class but ported two kotlin twice. Both libs are the newest version.
-        .let { it as Element }
+        .also { document.body.appendChild(it) }
         .also { element: Element ->
             createRoot(element)
                 .render(
