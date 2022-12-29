@@ -6,9 +6,9 @@ import kotlinx.css.properties.transform
 import kotlinx.html.InputType
 import kotlinx.html.js.onChangeFunction
 import kotlinx.html.js.onClickFunction
+import kotlinx.html.org.w3c.dom.events.Event
 import org.w3c.dom.HTMLElement
 import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.Event
 import org.w3c.dom.events.MouseEvent
 import react.*
 import react.dom.defaultValue

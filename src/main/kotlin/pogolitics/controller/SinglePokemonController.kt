@@ -1,5 +1,6 @@
 package pogolitics.controller
 
+import js.core.get
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope

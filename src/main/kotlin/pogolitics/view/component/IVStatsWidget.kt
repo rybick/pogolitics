@@ -3,8 +3,8 @@ package pogolitics.view.component
 import kotlinx.css.*
 import kotlinx.html.InputType
 import kotlinx.html.js.*
+import kotlinx.html.org.w3c.dom.events.Event
 import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.Event
 import org.w3c.dom.events.KeyboardEvent
 import pogolitics.model.IVs
 import pogolitics.model.PokemonIndividualValuesState

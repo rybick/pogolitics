@@ -35,7 +35,7 @@ class App: RComponent<RProps, AppState>() {
                 }
                 Route {
                     attrs.path = "/"
-                    attrs.element = createElement {
+                    attrs.element = createElement<PageRProps<NotFoundModel, Unit>> {
                         renderNotFoundPage("Invalid path")
                     }
                 }
@@ -46,7 +46,7 @@ class App: RComponent<RProps, AppState>() {
     private fun <M, S> RBuilder.routeToPage(route: AppConfig.Route<M, S>) {
         Route {
             attrs.path = route.path
-            attrs.element = createElement {
+            attrs.element = createElement<PageRProps<M, S>> {
                 child(fc { // workaround to be able to call useParams(), perhaps it can be done cleane
                     val params: Params = useParams()
                     val location: Location = useLocation()
@@ -68,7 +68,7 @@ class App: RComponent<RProps, AppState>() {
         }
     }
 
-    private fun RBuilder.renderLoadingPage(): ReactElement {
+    private fun RBuilder.renderLoadingPage(): ReactElement<RProps> {
         return createElement { p { +"loading..." } }!!
     }
 
