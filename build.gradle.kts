@@ -18,7 +18,8 @@ dependencies {
     implementation("org.jetbrains.kotlin-wrappers:kotlin-react-legacy:18.2.0-${kotlinJS}")
     implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom-legacy:18.2.0-${kotlinJS}")
     implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom:6.3.0-${kotlinJS}")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-styled:5.3.6-${kotlinJS}")
+    // implementation("org.jetbrains.kotlin-wrappers:kotlin-styled:5.3.6-${kotlinJS}")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.10.5-${kotlinJS}")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 
