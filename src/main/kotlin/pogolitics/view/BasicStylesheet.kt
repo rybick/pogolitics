@@ -40,7 +40,7 @@ object BasicStylesheet {
         }
 
         val headerCell = cssClass {
-            cursor = Cursor.pointer
+            // cursor = Cursor.pointer  // TODO later mig
         }
 
         val row = cssClass {

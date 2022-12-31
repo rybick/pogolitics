@@ -152,7 +152,7 @@ class IVBarStyles(val unit: Length) {
         backgroundColor = regularColor
         marginLeft = 10.u
         marginRight = 10.u
-        cursor = Cursor.pointer
+        // cursor = Cursor.pointer // TODO later mig
         before {
             content = string("") // TODO later mig QuotedString?
             marginLeft = (-8).u

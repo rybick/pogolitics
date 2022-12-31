@@ -31,7 +31,7 @@ enum class NavigationDirection(val style: CssBuilder) {
 private object NavigationArrowStyles {
     private val arrow = cssClass {
         display = Display.inlineBlock
-        cursor = Cursor.pointer
+        // cursor = Cursor.pointer // TODO later mig
         width = 42.px
         height = 42.px
         textAlign = TextAlign.center

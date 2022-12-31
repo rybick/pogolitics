@@ -69,7 +69,7 @@ private object LeagueStatsWidgetStyles {
     }
 
     val contentWrapper = cssClass {
-        cursor = Cursor.pointer
+        // cursor = Cursor.pointer // TODO later mig
         display = Display.flex
         flexWrap = FlexWrap.wrap
         flexDirection = FlexDirection.row
