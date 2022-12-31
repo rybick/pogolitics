@@ -1,10 +1,15 @@
 package pogolitics.view.component
 
-import csstype.*
+import csstype.ClassName
+import csstype.Content
+import csstype.Display
+import csstype.None
+import csstype.TextAlign
+import csstype.pct
+import csstype.px
+import csstype.scale
+import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.CssBuilder
-import pogolitics.cssClass
-import pogolitics.plus
 import pogolitics.view.StyleConstants
 import react.Props
 import react.dom.html.ReactHTML.a
@@ -14,7 +19,7 @@ import react.fc
 val NavigationArrow = fc<ArrowProps> { props ->
     a {
         attrs.href = props.href
-        attrs.css(props.direction.style)
+        attrs.css(props.direction.style) {}
         span {}
     }
 }
@@ -24,12 +29,12 @@ interface ArrowProps: Props {
     var href: String
 }
 
-enum class NavigationDirection(val style: CssBuilder) {
+enum class NavigationDirection(val style: ClassName) {
     PREVIOUS(NavigationArrowStyles.arrowPrevious), NEXT(NavigationArrowStyles.arrowNext);
 }
 
 private object NavigationArrowStyles {
-    private val arrow = cssClass {
+    private val arrow = ClassName {
         display = Display.inlineBlock
         // cursor = Cursor.pointer // TODO later mig
         width = 42.px
@@ -45,7 +50,7 @@ private object NavigationArrowStyles {
         }
     }
 
-    val arrowPrevious = arrow + cssClass {
+    val arrowPrevious = ClassName(arrow) {
         span {
             marginLeft = (-3).px
             display = Display.block
@@ -56,7 +61,7 @@ private object NavigationArrowStyles {
         }
     }
 
-    val arrowNext = arrow + cssClass {
+    val arrowNext = ClassName(arrow) {
         span {
             marginLeft = 3.px
             display = Display.block

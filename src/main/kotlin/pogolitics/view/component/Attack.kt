@@ -3,7 +3,7 @@ package pogolitics.view.component
 import csstype.Display
 import csstype.Margin
 import csstype.rem
-import pogolitics.cssClass
+import emotion.css.ClassName
 import pogolitics.model.Attack
 import pogolitics.view.StyleConstants
 import pogolitics.view.iconPath
@@ -14,7 +14,7 @@ import react.dom.html.ReactHTML.span
 
 val Attack = fc<AttackProps> { props ->
     span {
-        attrs.css(AttackStyles.wrapper)
+        attrs.css(AttackStyles.wrapper) {}
         img {
             attrs.src = iconPath(props.attack.type)
             attrs.css {
@@ -27,7 +27,7 @@ val Attack = fc<AttackProps> { props ->
 }
 
 private object AttackStyles {
-    val wrapper = cssClass {
+    val wrapper = ClassName {
         display = Display.inlineBlock
     }
 }

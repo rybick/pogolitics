@@ -2,12 +2,11 @@ package pogolitics.view.component
 
 import csstype.*
 import dom.html.HTMLInputElement
+import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.cssClass
 import pogolitics.model.IVs
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
-import pogolitics.plus
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*
@@ -21,13 +20,13 @@ import styled.*
 val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
     div {
         attrs.css(
-            BasicStylesheet.widgetWrapper +
+            BasicStylesheet.widgetWrapper,
             IVStatsWidgetStyles.outerWrapper
-        )
+        ) {}
         styledDiv {
-            attrs.css(IVStatsWidgetStyles.innerWrapper)
+            attrs.css(IVStatsWidgetStyles.innerWrapper) {}
             styledDiv {
-                attrs.css(IVStatsWidgetStyles.upperStatsWrapper)
+                attrs.css(IVStatsWidgetStyles.upperStatsWrapper) {}
                 styledSpan {
                     styledSpan {
                         +"level: "
@@ -74,7 +73,7 @@ val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
                 }
             }
             styledDiv {
-                attrs.css(IVStatsWidgetStyles.lowerStatsWrapper)
+                attrs.css(IVStatsWidgetStyles.lowerStatsWrapper) {}
                 styledSpan {
                     styledSpan {
                         +"CP: "
@@ -127,14 +126,14 @@ private fun IVStatsWidgetRProps.createStateWith(modifier: PokemonIndividualValue
 }
 
 private object IVStatsWidgetStyles {
-    val outerWrapper = cssClass {
+    val outerWrapper = ClassName {
         display = Display.flex
         flexDirection = FlexDirection.column
         alignItems = AlignItems.center
         paddingBottom = StyleConstants.Padding.big
     }
 
-    val innerWrapper = cssClass {
+    val innerWrapper = ClassName {
         display = Display.flex
         flexDirection = FlexDirection.column
         alignItems = AlignItems.center
@@ -143,12 +142,12 @@ private object IVStatsWidgetStyles {
         borderRadius = 20.px
     }
 
-    val upperStatsWrapper = cssClass {
+    val upperStatsWrapper = ClassName {
         marginTop = 10.px
         marginBottom = 15.px
     }
 
-    val lowerStatsWrapper = cssClass {
+    val lowerStatsWrapper = ClassName {
         marginTop = 15.px
         marginBottom = 5.px
     }

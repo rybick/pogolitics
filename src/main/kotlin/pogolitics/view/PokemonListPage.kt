@@ -1,11 +1,10 @@
 package pogolitics.view
 
 import csstype.*
+import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
-import pogolitics.cssClass
 import pogolitics.model.PokemonListModel
-import pogolitics.plus
 import react.RBuilder
 import react.RComponent
 import react.RState
@@ -20,61 +19,59 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
 
     override fun RBuilder.render() = renderPage(Page.POKEMON_LIST) {
         div {
-            attrs.css(BasicStylesheet.widgetWrapper)
+            attrs.css(BasicStylesheet.widgetWrapper) {}
             styledDiv {
-                attrs.css(BasicStylesheet.Table.table)
+                attrs.css(BasicStylesheet.Table.table) {}
                 styledDiv {
                     attrs.css(
-                        BasicStylesheet.Table.row +
+                        BasicStylesheet.Table.row,
                         BasicStylesheet.Table.header
-                    )
+                    ) {}
                     styledDiv {
                         attrs.css(
-                            BasicStylesheet.Table.cell +
-                            BasicStylesheet.Table.headerCell +
+                            BasicStylesheet.Table.cell,
+                            BasicStylesheet.Table.headerCell,
                             BasicStylesheet.Table.first
-                        )
+                        ) {}
                         +"№"
                     }
                     styledDiv {
                         attrs.css(
-                            BasicStylesheet.Table.cell +
+                            BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell
-                        )
+                        ) {}
                         +"name"
                     }
                     styledDiv {
                         attrs.css(
-                            BasicStylesheet.Table.cell +
+                            BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell
-                        )
+                        ) {}
                         +"forms"
                     }
                 }
                 props.model.pokemon.forEach { pokemon ->
                     styledDiv {
-                        attrs.css(BasicStylesheet.Table.row)
+                        attrs.css(BasicStylesheet.Table.row) {}
                         styledDiv {
                             attrs.css(
-                                BasicStylesheet.Table.cell +
-                                BasicStylesheet.Table.first +
+                                BasicStylesheet.Table.cell,
+                                BasicStylesheet.Table.first,
                                 BasicStylesheet.Table.left
-                            )
+                            ) {}
                             +"#${pokemon.pokedexNumber}"
                         }
                         styledDiv {
                             attrs.css(
-                                BasicStylesheet.Table.cell +
+                                BasicStylesheet.Table.cell,
                                 Styles.pokemonName
-                            )
+                            ) {}
                             a(href = pokemonPagePath(pokemon.pokedexNumber)) {
                                 +pokemon.name
                             }
                         }
                         styledDiv {
-                            attrs.css(
-                                BasicStylesheet.Table.cell
-                            )
+                            attrs.css(BasicStylesheet.Table.cell) {}
                             pokemon.forms.forEach {
                                 formWidget(pokemon.pokedexNumber, it)
                             }
@@ -87,7 +84,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
 
     private fun RBuilder.formWidget(pokedexNumber: Int, form: PokemonListModel.Form) {
         span {
-            attrs.css(Styles.form)
+            attrs.css(Styles.form) {}
             a(href = pokemonPagePath(pokedexNumber, form.toPokemonForm())) {
                 +form.prettyNameOrDefault
             }
@@ -95,7 +92,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
     }
 
     private object Styles {
-        val form = cssClass  {
+        val form = ClassName  {
             margin = StyleConstants.Margin.small
             fontWeight = FontWeight.bold
             fontSize = StyleConstants.Font.smaller
@@ -114,7 +111,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
             }
         }
 
-        val pokemonName = cssClass {
+        val pokemonName = ClassName {
             a {
                 fontWeight = FontWeight.bold
             }

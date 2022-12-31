@@ -3,7 +3,6 @@ package pogolitics.view
 import emotion.react.css
 import pogolitics.model.MoveSet
 import pogolitics.format
-import pogolitics.plus
 import pogolitics.view.BasicStylesheet.Table
 import pogolitics.view.component.Attack
 import react.RBuilder
@@ -27,27 +26,17 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
 
     override fun RBuilder.render() {
         div {
-            attrs.css(BasicStylesheet.widgetWrapper)
+            attrs.css(BasicStylesheet.widgetWrapper) {}
             styledDiv {
-                attrs.css(Table.table)
+                attrs.css(Table.table) {}
                 styledDiv {
-                    attrs.css(
-                        Table.row +
-                        Table.header
-                    )
+                    attrs.css(Table.row, Table.header) {}
                     styledDiv {
-                        attrs.css(
-                            Table.cell +
-                            Table.headerCell +
-                            Table.first
-                        )
+                        attrs.css(Table.cell, Table.headerCell, Table.first) {}
                         +"Moveset"
                     }
                     styledDiv {
-                        attrs.css(
-                            Table.cell +
-                            Table.headerCell
-                        )
+                        attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
                             setState {
                                 val sort = this.sort
@@ -60,10 +49,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                         +("DPS" + getIcon(state.sort, 1))
                     }
                     div {
-                        attrs.css(
-                            Table.cell +
-                            Table.headerCell
-                        )
+                        attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
                             setState {
                                 val sort = this.sort
@@ -76,10 +62,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                         +("TTFA" + getIcon(state.sort, 2))
                     }
                     styledDiv {
-                        attrs.css(
-                            Table.cell +
-                            Table.headerCell
-                        )
+                        attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
                             setState {
                                 val sort = this.sort
@@ -94,27 +77,23 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                 }
                 sortValues(props.values, state.sort).forEach {
                     styledDiv {
-                        attrs.css(Table.row)
+                        attrs.css(Table.row) {}
                         styledDiv {
-                            attrs.css(
-                                Table.cell +
-                                Table.first +
-                                Table.left
-                            )
+                            attrs.css(Table.cell, Table.first, Table.left) {}
                             Attack { attrs.attack = it.quickAttack }
                             +" + "
                             Attack { attrs.attack = it.chargedAttack }
                         }
                         styledDiv {
-                            attrs.css(Table.cell)
+                            attrs.css(Table.cell) {}
                             +it.dps.format(2)
                         }
                         styledDiv {
-                            attrs.css(Table.cell)
+                            attrs.css(Table.cell) {}
                             +(it.timeToFirstAttack.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                         styledDiv {
-                            attrs.css(Table.cell)
+                            attrs.css(Table.cell) {}
                             +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                     }

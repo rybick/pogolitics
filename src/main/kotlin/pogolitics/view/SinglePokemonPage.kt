@@ -1,11 +1,14 @@
 package pogolitics.view
 
-import cssom.matchMedia
-import csstype.*
+import csstype.Display
+import csstype.Float
+import csstype.TextAlign
+import csstype.number
+import csstype.pct
+import emotion.css.ClassName
 import emotion.react.css
 import kotlinx.browser.window
 import pogolitics.PageRProps
-import pogolitics.cssClass
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
@@ -21,7 +24,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
 
     override fun RBuilder.render() = renderPage(pokemonPage(props.model)) {
         div {
-            attrs.css(Styles.headerWrapper)
+            attrs.css(Styles.headerWrapper) {}
             NavigationArrow {
                attrs {
                    href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
@@ -29,7 +32,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                }
             }
             styledSpan {
-                attrs.css(Styles.spacer)
+                attrs.css(Styles.spacer) {}
                 SwitchSelector {
                     attrs {
                         checked = BattleMode.PVP == props.model.mode
@@ -55,13 +58,13 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             }
         }
         div {
-            attrs.css(Styles.leftWrapper)
+            attrs.css(Styles.leftWrapper) {}
             BasicPokemonInfo {
                 attrs.data = props.model.pokemon
             }
         }
         div {
-            attrs.css(Styles.rightWrapper)
+            attrs.css(Styles.rightWrapper) {}
             IVStatsWidget {
                 attrs {
                     stats = props.model.stats.currentStats
@@ -114,13 +117,13 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             }
         }
         div {
-            attrs.css(Styles.leftWrapper)
+            attrs.css(Styles.leftWrapper) {}
             moveSetsTable {
                 values = props.model.moveSets
             }
         }
         div {
-            attrs.css(Styles.rightWrapper)
+            attrs.css(Styles.rightWrapper) {}
             /* space for widgets that will always be last */
         }
     }
@@ -135,18 +138,18 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
     private object Styles {
         const val smallScreenMediaQuery = "screen and (max-width: 700px)"
 
-        val headerWrapper = cssClass {
+        val headerWrapper = ClassName {
             paddingTop = StyleConstants.Padding.small
             display = Display.flex
             fontSize = 160.pct
         }
 
-        val spacer = cssClass {
+        val spacer = ClassName {
             flexGrow = number(1.0)
             textAlign = TextAlign.center
         }
 
-        val leftWrapper = cssClass {
+        val leftWrapper = ClassName {
             width = 50.pct
             float = Float.left
             "@media $smallScreenMediaQuery" {
@@ -154,7 +157,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             }
         }
 
-        val rightWrapper = cssClass {
+        val rightWrapper = ClassName {
             width = 50.pct
             float = Float.right
             "@media $smallScreenMediaQuery" {

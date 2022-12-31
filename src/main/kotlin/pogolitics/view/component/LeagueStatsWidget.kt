@@ -1,11 +1,14 @@
 package pogolitics.view.component
 
-import csstype.*
+import csstype.Display
+import csstype.FlexDirection
+import csstype.FlexWrap
+import csstype.FontWeight
+import csstype.JustifyContent
+import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.cssClass
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
-import pogolitics.plus
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*
@@ -14,14 +17,14 @@ import react.dom.html.ReactHTML.span
 
 val LeagueStatsWidget = fc<LeagueStatsWidgetRProps> { props ->
     div {
-        attrs.css(BasicStylesheet.widgetWrapper)
+        attrs.css(BasicStylesheet.widgetWrapper) {}
         div {
-            attrs.css(BasicStylesheet.widgetHeader)
+            attrs.css(BasicStylesheet.widgetHeader) {}
             + (props.name + " league")
         }
         div {
             attrs.onClick = { props.onClick() }
-            attrs.css(LeagueStatsWidgetStyles.contentWrapper)
+            attrs.css(LeagueStatsWidgetStyles.contentWrapper) {}
             stat("CP", "${props.stats.cp}")
             stat("level", "${props.stats.level}")
             stat("hardiness", props.stats.hardiness.format(2))
@@ -40,35 +43,35 @@ external interface LeagueStatsWidgetRProps: RProps {
 
 private fun RElementBuilder<*>.stat(label: String, value: String) {
     span {
-        attrs.css(LeagueStatsWidgetStyles.group)
+        attrs.css(LeagueStatsWidgetStyles.group) {}
         span {
-            attrs.css(LeagueStatsWidgetStyles.label)
+            attrs.css(LeagueStatsWidgetStyles.label) {}
             +"$label: "
         }
         span {
-            attrs.css(LeagueStatsWidgetStyles.value)
+            attrs.css(LeagueStatsWidgetStyles.value) {}
             +value
         }
     }
 }
 
 private object LeagueStatsWidgetStyles {
-    val cell = cssClass {
+    val cell = ClassName {
         padding = StyleConstants.Padding.small
         display = Display.tableCell
     }
 
-    val label = cell + cssClass {
+    val label = ClassName(cell) {
         fontWeight = FontWeight.bold
     }
 
-    val value = cell + cssClass {}
+    val value = ClassName(cell) {}
 
-    val group = cssClass {
+    val group = ClassName {
         marginLeft = StyleConstants.Margin.big
     }
 
-    val contentWrapper = cssClass {
+    val contentWrapper = ClassName {
         // cursor = Cursor.pointer // TODO later mig
         display = Display.flex
         flexWrap = FlexWrap.wrap

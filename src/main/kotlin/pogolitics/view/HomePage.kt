@@ -12,7 +12,7 @@ import react.dom.html.ReactHTML.p
 class HomePage(props: PageRProps<Unit, Unit>) : RComponent<PageRProps<Unit, Unit>, RState>(props) {
     override fun RBuilder.render() = renderPage(Page.HOME) {
         div {
-            attrs.css(BasicStylesheet.widgetWrapper)
+            attrs.css(BasicStylesheet.widgetWrapper) {}
             attrs.css {
                 margin = StyleConstants.Margin.big
             }

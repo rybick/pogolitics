@@ -2,8 +2,8 @@ package pogolitics.view.component
 
 import csstype.TextAlign
 import csstype.pct
+import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.cssClass
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.BasicStylesheet
@@ -16,11 +16,11 @@ import styled.*
 
 val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
     div {
-        attrs.css(BasicStylesheet.widgetWrapper)
+        attrs.css(BasicStylesheet.widgetWrapper) {}
         h1 {
-            attrs.css(BasicPokemonInfoStyles.wrapper)
+            attrs.css(BasicPokemonInfoStyles.wrapper) {}
             styledSpan {
-                attrs.css(BasicPokemonInfoStyles.pokemonId)
+                attrs.css(BasicPokemonInfoStyles.pokemonId) {}
                 +"#${props.data.pokedexNumber}"
             }
             span {
@@ -28,13 +28,13 @@ val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
             }
             props.data.form?.let { form ->
                 styledSpan {
-                    attrs.css(BasicPokemonInfoStyles.pokemonForm)
+                    attrs.css(BasicPokemonInfoStyles.pokemonForm) {}
                     +"(${form.prettyName})"
                 }
             }
         }
         div {
-            attrs.css(BasicPokemonInfoStyles.staticStatsWrapper)
+            attrs.css(BasicPokemonInfoStyles.staticStatsWrapper) {}
             StaticStat { attrs.name = "Attack";  attrs.value = props.data.baseAttack.toString() }
             StaticStat { attrs.name = "Defense"; attrs.value = props.data.baseDefense.toString() }
             StaticStat { attrs.name = "Stamina"; attrs.value = props.data.baseStamina.toString() }
@@ -48,23 +48,23 @@ val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
 }
 
 private object BasicPokemonInfoStyles {
-    val wrapper = cssClass {
+    val wrapper = ClassName {
         textAlign = TextAlign.center
     }
 
-    val pokemonId = cssClass {
+    val pokemonId = ClassName {
         color = StyleConstants.Colors.secondary.secondaryText
         marginRight = StyleConstants.Margin.small
         fontSize = 80.pct
     }
 
-    val pokemonForm = cssClass {
+    val pokemonForm = ClassName {
         color = StyleConstants.Colors.secondary.secondaryText
         marginLeft = StyleConstants.Margin.small
         fontSize = 80.pct
     }
 
-    val staticStatsWrapper = cssClass {
+    val staticStatsWrapper = ClassName {
         textAlign = TextAlign.center
     }
 }

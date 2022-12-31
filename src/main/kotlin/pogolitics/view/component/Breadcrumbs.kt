@@ -2,8 +2,8 @@ package pogolitics.view.component
 
 import csstype.FontWeight
 import csstype.None
+import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.cssClass
 import pogolitics.view.Page
 import pogolitics.view.StyleConstants
 import pogolitics.view.pagePath
@@ -16,11 +16,11 @@ import styled.styledSpan
 val Breadcrumbs = fc<BreadcrumbsProps> { props ->
     props.page?.let { thePage ->
         div {
-            attrs.css(BreadcrumbsStyles.breadcrumbsWrapper)
+            attrs.css(BreadcrumbsStyles.breadcrumbsWrapper) {}
             thePage.getFullPath().forEachIndexed { index, page ->
                 if (index > 0) {
                     styledSpan {
-                        attrs.css(BreadcrumbsStyles.separator)
+                        attrs.css(BreadcrumbsStyles.separator) {}
                         +"»"
                     }
                 }
@@ -40,7 +40,7 @@ interface BreadcrumbsProps: Props {
 }
 
 private object BreadcrumbsStyles {
-    val breadcrumbsWrapper = cssClass {
+    val breadcrumbsWrapper = ClassName {
         paddingLeft = StyleConstants.Padding.medium
         paddingBottom = StyleConstants.Padding.small
         backgroundColor = StyleConstants.Colors.primary.bg
@@ -56,7 +56,7 @@ private object BreadcrumbsStyles {
         }
     }
 
-    val separator = cssClass {
+    val separator = ClassName {
         marginLeft = StyleConstants.Padding.small
         marginRight = StyleConstants.Padding.small
     }

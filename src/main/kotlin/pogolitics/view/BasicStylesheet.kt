@@ -1,16 +1,22 @@
 package pogolitics.view
 
-import csstype.*
-import pogolitics.cssClass
+import csstype.Display
+import csstype.FontWeight
+import csstype.LineStyle
+import csstype.TextAlign
+import csstype.TextTransform
+import csstype.pct
+import csstype.px
+import emotion.css.ClassName
 
 object BasicStylesheet {
 
-    val widgetWrapper = cssClass {
+    val widgetWrapper = ClassName {
         display = Display.block
         margin = StyleConstants.Margin.medium
     }
 
-    val widgetHeader = cssClass {
+    val widgetHeader = ClassName {
         paddingTop = StyleConstants.Padding.medium
         paddingLeft = StyleConstants.Padding.medium
         paddingBottom = StyleConstants.Padding.medium
@@ -23,12 +29,12 @@ object BasicStylesheet {
     }
 
     object Table {
-        val table = cssClass {
+        val table = ClassName {
             display = Display.table
             width = 100.pct
         }
 
-        val cell = cssClass {
+        val cell = ClassName {
             display = Display.tableCell
             padding = StyleConstants.Padding.medium
             borderColor = StyleConstants.Colors.lightBorder
@@ -39,26 +45,26 @@ object BasicStylesheet {
             borderRightWidth = 0.px
         }
 
-        val headerCell = cssClass {
+        val headerCell = ClassName {
             // cursor = Cursor.pointer  // TODO later mig
         }
 
-        val row = cssClass {
+        val row = ClassName {
             display = Display.tableRow
             padding = StyleConstants.Padding.small
         }
 
-        val header = cssClass {
+        val header = ClassName {
             backgroundColor = StyleConstants.Colors.primary.bg
             color = StyleConstants.Colors.primary.text
             fontWeight = FontWeight.bold
         }
 
-        val first = cssClass {
+        val first = ClassName {
             borderLeftWidth = 0.px
         }
 
-        val left = cssClass {
+        val left = ClassName {
             textAlign = TextAlign.left
         }
     }

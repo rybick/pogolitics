@@ -2,9 +2,9 @@ package pogolitics.view
 
 import csstype.TextAlign
 import csstype.pct
+import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
-import pogolitics.cssClass
 import react.RBuilder
 import react.RComponent
 import react.RState
@@ -15,24 +15,24 @@ import styled.styledDiv
 class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : RComponent<PageRProps<NotFoundModel, Unit>, RState>(props) {
     override fun RBuilder.render() = renderPage(null) {
         div {
-            attrs.css(Styles.pageWrapper)
+            attrs.css(Styles.pageWrapper) {}
             styledDiv {
-                attrs.css(BasicStylesheet.widgetHeader)
+                attrs.css(BasicStylesheet.widgetHeader) {}
                 + ("Page Not Found")
             }
             styledDiv {
-                attrs.css(Styles.contentWrapper)
+                attrs.css(Styles.contentWrapper) {}
                 p { +props.model.reason }
             }
         }
     }
 
     private object Styles {
-        val pageWrapper = cssClass {
+        val pageWrapper = ClassName {
             padding = 10.pct
         }
 
-        val contentWrapper = cssClass {
+        val contentWrapper = ClassName {
             paddingTop = StyleConstants.Padding.big
             paddingBottom = StyleConstants.Padding.big
             textAlign = TextAlign.center
