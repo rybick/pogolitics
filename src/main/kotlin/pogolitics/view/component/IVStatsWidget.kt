@@ -81,14 +81,14 @@ val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
                     input() {
                         attrs.css {
                             "&::-webkit-outer-spin-button" {
-                                //put("-webkit-appearance", "none")
-                                //margin(0.px)
+                                appearance = None.none
+                                margin = 0.px
                             }
                             "&::-webkit-inner-spin-button" {
-                                // put("-webkit-appearance", "none")
-                                // margin(0.px)
+                                appearance = None.none
+                                margin = 0.px
                             }
-                            // put("-moz-appearance", "textfield") // TODO later mig do those things
+                            appearance = Appearance.textfield
                         }
                         attrs.type = InputType.number
                         attrs.min = "10"
