@@ -154,7 +154,7 @@ class IVBarStyles(val unit: Length) {
         marginRight = 10.u
         // cursor = Cursor.pointer // TODO later mig
         before {
-            content = string("") // TODO later mig QuotedString?
+            content = Content("") // TODO later mig QuotedString?
             marginLeft = (-8).u
             position = Position.absolute
             float = Float.left
@@ -166,7 +166,7 @@ class IVBarStyles(val unit: Length) {
             transform = scale(0.8, 1.0)
         }
         after {
-            content = string("")
+            content = Content("")
             marginRight = (-8).u
             float = Float.right
             height = 20.u
@@ -200,7 +200,7 @@ class IVBarStyles(val unit: Length) {
         width = 150.u
         before {
             position = Position.absolute
-            content = string("")
+            content = Content("")
             marginLeft = 100.u
             width = 4.u
             height = 20.u
@@ -209,7 +209,7 @@ class IVBarStyles(val unit: Length) {
         }
         after {
             position = Position.absolute
-            content = string("")
+            content = Content("")
             marginLeft = 200.u
             width = 4.u
             height = 20.u

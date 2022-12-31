@@ -51,7 +51,7 @@ private object NavigationArrowStyles {
             display = Display.block
             transform = scale(-1, 1)
             after {
-                content = string("➤") // TODO later mig QuotedString?
+                content = Content("➤")
             }
         }
     }
@@ -61,7 +61,7 @@ private object NavigationArrowStyles {
             marginLeft = 3.px
             display = Display.block
             after {
-                content = string("➤")
+                content = Content("➤")
             }
         }
     }
