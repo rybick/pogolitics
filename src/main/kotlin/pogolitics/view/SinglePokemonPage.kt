@@ -141,20 +141,6 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             fontSize = 160.pct
         }
 
-        val arrow = cssClass { // TODO later remove it
-            width = 42.px
-            height = 42.px
-            textAlign = TextAlign.center
-            borderRadius = 50.pct
-            marginLeft = StyleConstants.Margin.small
-            marginRight = StyleConstants.Margin.small
-            hover {
-                color = StyleConstants.Colors.primary.text
-                backgroundColor = StyleConstants.Colors.primary.bg
-                textDecoration = None.none
-            }
-        }
-
         val spacer = cssClass {
             flexGrow = number(1.0)
             textAlign = TextAlign.center
