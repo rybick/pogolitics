@@ -99,7 +99,7 @@ class IVBarStyles(val unit: Length) {
     private val strongColor = Color("#e18077")
     private val gray = Color("#e2e2e2")
 
-    private val Number.u: Length get() = "calc($unit * $this)".unsafeCast<Length>() // TODO later mig does it work?
+    private val Number.u: Length get() = "calc($unit * $this)".unsafeCast<Length>()
 
     fun barWidth(width: Int): Length {
         return (20 * (width - 1)).u
@@ -151,7 +151,7 @@ class IVBarStyles(val unit: Length) {
         marginRight = 10.u
         // cursor = Cursor.pointer // TODO later mig
         before {
-            content = Content("") // TODO later mig QuotedString?
+            content = Content("")
             marginLeft = (-8).u
             position = Position.absolute
             float = Float.left
