@@ -20,9 +20,8 @@ val IVBar = fc<IVBarComponentRProps> { props ->
 
     // TODO later, check the thing with always redrawing when onClickFunction (or other) is defined inline
 
-    val doOnClick: MouseEventHandler<HTMLDivElement> = { event: MouseEvent<HTMLDivElement, *> ->
-        val mouseEvent = event //.unsafeCast<MouseEvent>()
-        val target: HTMLDivElement = event.target as HTMLDivElement // TODO later mig - does it work?
+    val doOnClick: MouseEventHandler<HTMLDivElement> = { mouseEvent: MouseEvent<HTMLDivElement, *> ->
+        val target: HTMLDivElement = mouseEvent.target as HTMLDivElement
         val x: Double = mouseEvent.clientX - target.getBoundingClientRect().left
         val barWidth: Double = target.getBoundingClientRect().width
         val ratio = x / barWidth
