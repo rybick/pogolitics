@@ -1,5 +1,6 @@
 package pogolitics.view
 
+import cssom.matchMedia
 import csstype.*
 import emotion.react.css
 import kotlinx.browser.window
@@ -15,7 +16,6 @@ import react.RState
 import styled.*
 import react.SwitchSelector
 import react.dom.html.ReactHTML.div
-import kotlin.Float
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
@@ -141,7 +141,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             fontSize = 160.pct
         }
 
-        val arrow = cssClass {
+        val arrow = cssClass { // TODO later remove it
             width = 42.px
             height = 42.px
             textAlign = TextAlign.center
@@ -162,19 +162,19 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
 
         val leftWrapper = cssClass {
             width = 50.pct
-            float = csstype.Float.left
-            /* media(smallScreenMediaQuery) {
+            float = Float.left
+            "@media $smallScreenMediaQuery" {
                 width = 100.pct
-            }*/ // TODO later mig how to
+            }
         }
 
         val rightWrapper = cssClass {
             width = 50.pct
-            float = csstype.Float.right
-            /* media(smallScreenMediaQuery) {
+            float = Float.right
+            "@media $smallScreenMediaQuery" {
                 width = 100.pct
                 float = Float.left
-            } */ // TODO later mig how to
+            }
         }
     }
 }
