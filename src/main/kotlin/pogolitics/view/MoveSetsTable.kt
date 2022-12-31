@@ -1,8 +1,6 @@
 package pogolitics.view
 
 import emotion.react.css
-import kotlinx.html.js.onClickFunction
-import kotlinx.html.unsafe
 import pogolitics.model.MoveSet
 import pogolitics.format
 import pogolitics.plus
@@ -15,6 +13,7 @@ import react.RState
 import styled.styledDiv
 import react.*
 import react.dom.html.ReactHTML.div
+import kotlin.text.Typography.nbsp
 import kotlin.time.DurationUnit
 
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
@@ -22,9 +21,9 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
         sort = null
     }
 
-    private val UP_ICON = "&#9652;"
-    private val DOWN_ICON = "&#9662;"
-    private val SPACE = "&nbsp;"
+    private val UP_ICON = Char(9652) //"&#9652;"
+    private val DOWN_ICON = Char(9662) //"&#9662;"
+    private val SPACE = nbsp //"&nbsp;"
 
     override fun RBuilder.render() {
         div {
@@ -60,7 +59,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                         }
                         +("DPS" + getIcon(state.sort, 1))
                     }
-                    styledDiv {
+                    div {
                         attrs.css(
                             Table.cell +
                             Table.headerCell
@@ -90,7 +89,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                                 )
                             }
                         }
-                        +("MTBA" + getIcon(state.sort, 3)) // TODO later mig attrs.unsafe {}
+                        +("MTBA" + getIcon(state.sort, 3))
                     }
                 }
                 sortValues(props.values, state.sort).forEach {
