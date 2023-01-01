@@ -14,7 +14,7 @@ import react.dom.html.ReactHTML.span
 
 val Attack = fc<AttackProps> { props ->
     span {
-        attrs.css(AttackStyles.wrapper) {}
+        attrs.css(if (props.attack.elite) AttackStyles.eliteAttackWrapper else AttackStyles.regularAttackWrapper) {}
         img {
             attrs.src = iconPath(props.attack.type)
             attrs.css {
@@ -29,6 +29,14 @@ val Attack = fc<AttackProps> { props ->
 private object AttackStyles {
     val wrapper = ClassName {
         display = Display.inlineBlock
+        paddingRight = StyleConstants.Padding.medium
+        borderRadius = StyleConstants.Border.Radius.small
+    }
+
+    val regularAttackWrapper = ClassName(wrapper) {  }
+    val eliteAttackWrapper = ClassName(wrapper) {
+        color = StyleConstants.Colors.secondarySpecial.text
+        backgroundColor = StyleConstants.Colors.secondarySpecial.bg
     }
 }
 

@@ -92,8 +92,8 @@ sealed class MoveSetsMapper constructor(
                 individualPokemonStats = IndividualPokemonStats(pokemonLevel, pokemonAttackIv)
             )
             MoveSet(
-                quickAttack = Attack(PokemonType.fromString(fastMove.type), fastMove.name),
-                chargedAttack = Attack(PokemonType.fromString(chargedMove.type), chargedMove.name),
+                quickAttack = Attack(PokemonType.fromString(fastMove.type), fastMove.name, fast.elite),
+                chargedAttack = Attack(PokemonType.fromString(chargedMove.type), chargedMove.name, charged.elite),
                 dps = calculator.dps().toFloat(),
                 timeToFirstAttack = calculator.timeToFirstAttack(),
                 meanTimeBetweenAttacks = calculator.meanTimeBetweenAttacks()

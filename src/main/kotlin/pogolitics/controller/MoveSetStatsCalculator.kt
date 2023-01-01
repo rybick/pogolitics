@@ -24,7 +24,12 @@ class MoveSetStatsCalculator(
 
     data class PokemonTypes(val primary: PokemonType, val secondary: PokemonType? = null)
 
-    data class MoveData(val power: Int, val energy: Int, val duration: Duration, val type: PokemonType)
+    data class MoveData(
+        val power: Int,
+        val energy: Int,
+        val duration: Duration,
+        val type: PokemonType
+    )
 
     data class IndividualPokemonStats(val level: Float, val attack: Int)
 

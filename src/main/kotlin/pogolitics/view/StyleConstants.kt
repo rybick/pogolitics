@@ -10,6 +10,7 @@ object StyleConstants {
         val primary = ColorGroup(bg = "#0079fb", text = "#ffffff", secondaryText = "#dce8fe")
         val primaryHovered = ColorGroup(bg = "#5099ff", text = "#ffffff", secondaryText = "#ffffff")
         val secondary = ColorGroup(bg = "#ffffff", text = "#000000", secondaryText = "#aaaaaa")
+        val secondarySpecial = ColorGroup(bg = "#ededed", text = "#000000", secondaryText = "#999999")
         val lightBorder = Color("rgba(0, 60, 130, 0.25)")
     }
 
@@ -28,6 +29,9 @@ object StyleConstants {
 
     object Border {
         val thick = 5.px
+        object Radius {
+            val small = 5.px
+        }
     }
 
     object Font {

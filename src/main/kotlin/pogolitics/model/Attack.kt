@@ -1,3 +1,3 @@
 package pogolitics.model
 
-data class Attack(val type: PokemonType, val name: String)
+data class Attack(val type: PokemonType, val name: String, val elite: Boolean)
