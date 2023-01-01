@@ -20,8 +20,6 @@ dependencies {
     implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom:6.3.0-${kotlinJS}")
     implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.10.5-${kotlinJS}")
 
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
-
     implementation(npm("bootstrap-switch-button-react", "1.2.0"))
 }
 
