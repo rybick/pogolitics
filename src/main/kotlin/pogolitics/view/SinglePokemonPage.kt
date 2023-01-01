@@ -1,8 +1,13 @@
 package pogolitics.view
 
+import csstype.Display
+import csstype.Float
+import csstype.TextAlign
+import csstype.number
+import csstype.pct
+import emotion.css.ClassName
+import emotion.react.css
 import kotlinx.browser.window
-import kotlinx.css.*
-import kotlinx.css.properties.TextDecoration
 import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
@@ -13,12 +18,13 @@ import react.RComponent
 import react.RState
 import styled.*
 import react.SwitchSelector
+import react.dom.html.ReactHTML.div
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
     override fun RBuilder.render() = renderPage(pokemonPage(props.model)) {
-        styledDiv {
-            css { +Styles.headerWrapper }
+        div {
+            attrs.css(Styles.headerWrapper) {}
             NavigationArrow {
                attrs {
                    href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
@@ -26,7 +32,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                }
             }
             styledSpan {
-                css { +Styles.spacer }
+                attrs.css(Styles.spacer) {}
                 SwitchSelector {
                     attrs {
                         checked = BattleMode.PVP == props.model.mode
@@ -47,20 +53,18 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                 }
             }
             NavigationArrow {
-                attrs {
-                    href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)
-                    direction = NavigationDirection.NEXT
-                }
+                attrs.href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)
+                attrs.direction = NavigationDirection.NEXT
             }
         }
-        styledDiv {
-            css { +Styles.leftWrapper }
+        div {
+            attrs.css(Styles.leftWrapper) {}
             BasicPokemonInfo {
                 attrs.data = props.model.pokemon
             }
         }
-        styledDiv {
-            css { +Styles.rightWrapper }
+        div {
+            attrs.css(Styles.rightWrapper) {}
             IVStatsWidget {
                 attrs {
                     stats = props.model.stats.currentStats
@@ -112,14 +116,14 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                 }
             }
         }
-        styledDiv {
-            css { +Styles.leftWrapper }
+        div {
+            attrs.css(Styles.leftWrapper) {}
             moveSetsTable {
                 values = props.model.moveSets
             }
         }
-        styledDiv {
-            css { +Styles.rightWrapper }
+        div {
+            attrs.css(Styles.rightWrapper) {}
             /* space for widgets that will always be last */
         }
     }
@@ -131,46 +135,32 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             mode = model.mode
         )
 
-    private object Styles: StyleSheet("ComponentStyles", isStatic = true) {
+    private object Styles {
         const val smallScreenMediaQuery = "screen and (max-width: 700px)"
 
-        val headerWrapper by css {
+        val headerWrapper = ClassName {
             paddingTop = StyleConstants.Padding.small
             display = Display.flex
             fontSize = 160.pct
         }
 
-        val arrow by css {
-            width = 42.px
-            height = 42.px
-            textAlign = TextAlign.center
-            borderRadius = 50.pct
-            marginLeft = StyleConstants.Margin.small
-            marginRight = StyleConstants.Margin.small
-            hover {
-                color = StyleConstants.Colors.primary.text
-                backgroundColor = StyleConstants.Colors.primary.bg
-                textDecoration = TextDecoration.none
-            }
-        }
-
-        val spacer by css {
-            flexGrow = 1.0
+        val spacer = ClassName {
+            flexGrow = number(1.0)
             textAlign = TextAlign.center
         }
 
-        val leftWrapper by css {
+        val leftWrapper = ClassName {
             width = 50.pct
             float = Float.left
-            media(smallScreenMediaQuery) {
+            "@media $smallScreenMediaQuery" {
                 width = 100.pct
             }
         }
 
-        val rightWrapper by css {
+        val rightWrapper = ClassName {
             width = 50.pct
             float = Float.right
-            media(smallScreenMediaQuery) {
+            "@media $smallScreenMediaQuery" {
                 width = 100.pct
                 float = Float.left
             }

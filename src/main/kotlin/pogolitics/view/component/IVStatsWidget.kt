@@ -1,118 +1,110 @@
 package pogolitics.view.component
 
-import kotlinx.css.*
-import kotlinx.html.InputType
-import kotlinx.html.js.*
-import kotlinx.html.org.w3c.dom.events.Event
-import org.w3c.dom.HTMLInputElement
-import org.w3c.dom.events.KeyboardEvent
+import csstype.*
+import dom.html.HTMLInputElement
+import emotion.css.ClassName
+import emotion.react.css
 import pogolitics.model.IVs
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*
-import react.dom.defaultValue
-import react.dom.input
-import react.dom.key
+import react.dom.events.KeyboardEvent
+import react.dom.events.SyntheticEvent
+import react.dom.html.InputType
+import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.input
 import styled.*
 
 val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
-    styledDiv {
-        css {
-            +BasicStylesheet.widgetWrapper
-            +IVStatsWidgetStyles.outerWrapper
-        }
+    div {
+        attrs.css(
+            BasicStylesheet.widgetWrapper,
+            IVStatsWidgetStyles.outerWrapper
+        ) {}
         styledDiv {
-            css { +IVStatsWidgetStyles.innerWrapper }
+            attrs.css(IVStatsWidgetStyles.innerWrapper) {}
             styledDiv {
-                css {
-                    +IVStatsWidgetStyles.upperStatsWrapper
-                }
+                attrs.css(IVStatsWidgetStyles.upperStatsWrapper) {}
                 styledSpan {
                     styledSpan {
                         +"level: "
                     }
                     styledSpan {
-                        input(InputType.number) {
+                        input {
+                            attrs.type = InputType.number
                             attrs.min = "1"
                             attrs.max = "51"
-                            attrs.step = "0.5"
+                            attrs.step = 0.5
                             attrs.pattern = "\\d*"
                             attrs.key = "${props.stats.level}"
                             attrs.defaultValue = "${props.stats.level}"
-                            val onChangeFunction = { event: Event ->
+                            val onChangeFunction = { event: SyntheticEvent<*, *> ->
                                 props.onChange(props.createStateWith {
                                     level = (event.target as HTMLInputElement).value.toFloat()
                                 })
                             }
-                            attrs.onBlurFunction = onChangeFunction
-                            attrs.onMouseUpFunction = onChangeFunction
+                            attrs.onBlur = onChangeFunction
+                            attrs.onMouseUp = onChangeFunction
                         }
                     }
                 }
             }
             IVBar {
-                attrs {
-                    name = "Attack"
-                    iv = props.ivs.attack
-                    onChange = { value ->
-                        props.onChange(props.createStateWith { attack = value })
-                    }
+                attrs.name = "Attack"
+                attrs.iv = props.ivs.attack
+                attrs.onChange = { value ->
+                    props.onChange(props.createStateWith { attack = value })
                 }
             }
             IVBar {
-                attrs {
-                    name = "Defense"
-                    iv = props.ivs.defense
-                    onChange = { value ->
-                        props.onChange(props.createStateWith { defense = value })
-                    }
+                attrs.name = "Defense"
+                attrs.iv = props.ivs.defense
+                attrs.onChange = { value ->
+                    props.onChange(props.createStateWith { defense = value })
                 }
             }
             IVBar {
-                attrs {
-                    name = "HP"
-                    iv = props.ivs.stamina
-                    onChange = { value ->
-                        props.onChange(props.createStateWith { stamina = value })
-                    }
+                attrs.name = "HP"
+                attrs.iv = props.ivs.stamina
+                attrs.onChange = { value ->
+                    props.onChange(props.createStateWith { stamina = value })
                 }
             }
             styledDiv {
-                css {
-                    +IVStatsWidgetStyles.lowerStatsWrapper
-                }
+                attrs.css(IVStatsWidgetStyles.lowerStatsWrapper) {}
                 styledSpan {
                     styledSpan {
                         +"CP: "
                     }
-                    styledInput(InputType.number) {
-                        css {
+                    input() {
+                        attrs.css {
                             "&::-webkit-outer-spin-button" {
-                                put("-webkit-appearance", "none")
-                                margin(0.px)
+                                appearance = None.none
+                                margin = 0.px
                             }
                             "&::-webkit-inner-spin-button" {
-                                put("-webkit-appearance", "none")
-                                margin(0.px)
+                                appearance = None.none
+                                margin = 0.px
                             }
-                            put("-moz-appearance", "textfield")
+                            appearance = Appearance.textfield
                         }
+                        attrs.type = InputType.number
                         attrs.min = "10"
                         attrs.max = "5000"
                         attrs.key = "${props.stats.cp}"
                         attrs.defaultValue = "${props.stats.cp}"
-                        val onChangeFunction = { event: Event ->
+                        val onChangeFunction = { event: SyntheticEvent<*, *> ->
                             val value = (event.target as HTMLInputElement).value
                             props.onChange(props.createStateWith {
                                 level = null
                                 cp = value.toInt()
                             })
                         }
-                        attrs.onBlurFunction = onChangeFunction
-                        attrs.onKeyPressFunction = { event: Event ->
-                            if (event.unsafeCast<KeyboardEvent>().key == "Enter") {
+                        attrs.onBlur = onChangeFunction
+                        attrs.onKeyUp = { event: KeyboardEvent<*> ->
+                            if (event.key == "Enter") {
                                 onChangeFunction(event)
                             }
                         }
@@ -133,29 +125,29 @@ private fun IVStatsWidgetRProps.createStateWith(modifier: PokemonIndividualValue
     ).also(modifier)
 }
 
-private object IVStatsWidgetStyles : StyleSheet("IVStatsWidgetStyles", isStatic = true) {
-    val outerWrapper by css {
+private object IVStatsWidgetStyles {
+    val outerWrapper = ClassName {
         display = Display.flex
         flexDirection = FlexDirection.column
-        alignItems = Align.center
+        alignItems = AlignItems.center
         paddingBottom = StyleConstants.Padding.big
     }
 
-    val innerWrapper by css {
+    val innerWrapper = ClassName {
         display = Display.flex
         flexDirection = FlexDirection.column
-        alignItems = Align.center
-        border = "${StyleConstants.Border.thick} solid ${StyleConstants.Colors.primary.bg}"
-        padding = "${StyleConstants.Padding.semiBig}"
+        alignItems = AlignItems.center
+        border = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
+        padding = StyleConstants.Padding.semiBig
         borderRadius = 20.px
     }
 
-    val upperStatsWrapper by css {
+    val upperStatsWrapper = ClassName {
         marginTop = 10.px
         marginBottom = 15.px
     }
 
-    val lowerStatsWrapper by css {
+    val lowerStatsWrapper = ClassName {
         marginTop = 15.px
         marginBottom = 5.px
     }

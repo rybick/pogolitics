@@ -1,30 +1,32 @@
 package pogolitics.view.component
 
-import kotlinx.css.*
+import csstype.BoxSizing
+import csstype.px
+import emotion.css.ClassName
+import emotion.react.css
 import pogolitics.view.StyleConstants
 import pogolitics.view.logoPath
 import pogolitics.view.pokemonListPagePath
 import react.Props
 import react.dom.a
+import react.dom.html.ReactHTML.div
 import react.dom.img
 import react.fc
-import styled.StyleSheet
-import styled.css
-import styled.styledDiv
 
 val Header = fc<HeaderProps> {
-    styledDiv {
-        css { +HeaderStyles.headerWrapper }
-        a(href = pokemonListPagePath()) { // TODO lead to main page when there is anything there
-            img(src = logoPath()) {}
+    div {
+        attrs.css(HeaderStyles.headerWrapper) {}
+        a { // TODO lead to main page when there is anything there
+            attrs.href = pokemonListPagePath()
+            img { attrs.src = logoPath() }
         }
     }
 }
 
 interface HeaderProps: Props
 
-private object HeaderStyles: StyleSheet("HeaderComponentStyles", isStatic = true) {
-    val headerWrapper by css {
+private object HeaderStyles {
+    val headerWrapper = ClassName {
         boxSizing = BoxSizing.contentBox
         height = 60.px
         paddingTop = StyleConstants.Padding.medium
