@@ -1,16 +1,23 @@
 package pogolitics.view
 
-import kotlinx.css.*
-import styled.StyleSheet
+import csstype.Display
+import csstype.FontWeight
+import csstype.LineStyle
+import csstype.TextAlign
+import csstype.TextTransform
+import csstype.pct
+import csstype.px
+import emotion.css.ClassName
+import pogolitics.pointer
 
-object BasicStylesheet: StyleSheet("ComponentStyles", isStatic = true) {
+object BasicStylesheet {
 
-    val widgetWrapper by css {
+    val widgetWrapper = ClassName {
         display = Display.block
-        margin = StyleConstants.Margin.medium.toString()
+        margin = StyleConstants.Margin.medium
     }
 
-    val widgetHeader by css {
+    val widgetHeader = ClassName {
         paddingTop = StyleConstants.Padding.medium
         paddingLeft = StyleConstants.Padding.medium
         paddingBottom = StyleConstants.Padding.medium
@@ -22,43 +29,43 @@ object BasicStylesheet: StyleSheet("ComponentStyles", isStatic = true) {
         textTransform = TextTransform.capitalize;
     }
 
-    object Table: StyleSheet("TableStyles", isStatic = true) {
-        val table by css {
+    object Table {
+        val table = ClassName {
             display = Display.table
             width = 100.pct
         }
 
-        val cell by css {
+        val cell = ClassName {
             display = Display.tableCell
-            padding = StyleConstants.Padding.medium.toString()
+            padding = StyleConstants.Padding.medium
             borderColor = StyleConstants.Colors.lightBorder
-            borderStyle = BorderStyle.solid
-            borderBottomWidth = LinearDimension("1px")
-            borderLeftWidth = LinearDimension("1px")
-            borderTopWidth = LinearDimension("0px")
-            borderRightWidth = LinearDimension("0px")
+            borderStyle = LineStyle.solid
+            borderBottomWidth = 1.px
+            borderLeftWidth = 1.px
+            borderTopWidth = 0.px
+            borderRightWidth = 0.px
         }
 
-        val headerCell by css {
-            cursor = Cursor.pointer
+        val headerCell = ClassName {
+            cursor = pointer
         }
 
-        val row by css {
+        val row = ClassName {
             display = Display.tableRow
-            padding = StyleConstants.Padding.small.toString()
+            padding = StyleConstants.Padding.small
         }
 
-        val header by css {
+        val header = ClassName {
             backgroundColor = StyleConstants.Colors.primary.bg
             color = StyleConstants.Colors.primary.text
             fontWeight = FontWeight.bold
         }
 
-        val first by css {
-            borderLeftWidth = LinearDimension("0px")
+        val first = ClassName {
+            borderLeftWidth = 0.px
         }
 
-        val left by css {
+        val left = ClassName {
             textAlign = TextAlign.left
         }
     }

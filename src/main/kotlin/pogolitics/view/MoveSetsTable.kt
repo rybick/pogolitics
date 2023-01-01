@@ -1,7 +1,6 @@
 package pogolitics.view
 
-import kotlinx.html.js.onClickFunction
-import kotlinx.html.unsafe
+import emotion.react.css
 import pogolitics.model.MoveSet
 import pogolitics.format
 import pogolitics.view.BasicStylesheet.Table
@@ -10,9 +9,10 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import styled.css
 import styled.styledDiv
 import react.*
+import react.dom.html.ReactHTML.div
+import kotlin.text.Typography.nbsp
 import kotlin.time.DurationUnit
 
 class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
@@ -20,100 +20,80 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
         sort = null
     }
 
-    private val UP_ICON = "&#9652;"
-    private val DOWN_ICON = "&#9662;"
-    private val SPACE = "&nbsp;"
+    private val UP_ICON = Char(9652) //"&#9652;"
+    private val DOWN_ICON = Char(9662) //"&#9662;"
+    private val SPACE = nbsp //"&nbsp;"
 
     override fun RBuilder.render() {
-        styledDiv {
-            css { +BasicStylesheet.widgetWrapper }
+        div {
+            attrs.css(BasicStylesheet.widgetWrapper) {}
             styledDiv {
-                css { +Table.table }
+                attrs.css(Table.table) {}
                 styledDiv {
-                    css {
-                        +Table.row
-                        +Table.header
-                    }
+                    attrs.css(Table.row, Table.header) {}
                     styledDiv {
-                        css {
-                            +Table.cell
-                            +Table.headerCell
-                            +Table.first
-                        }
+                        attrs.css(Table.cell, Table.headerCell, Table.first) {}
                         +"Moveset"
                     }
                     styledDiv {
-                        css {
-                            +Table.cell
-                            +Table.headerCell
-                        }
-                        attrs.onClickFunction = {
-                                setState {
-                                    val sort = this.sort
-                                    this.sort = Sort(
-                                            columnId = 1,
-                                            ascending = if (sort?.columnId == 1) !sort.ascending else false
-                                    )
-                                }
+                        attrs.css(Table.cell, Table.headerCell) {}
+                        attrs.onClick = {
+                            setState {
+                                val sort = this.sort
+                                this.sort = Sort(
+                                        columnId = 1,
+                                        ascending = if (sort?.columnId == 1) !sort.ascending else false
+                                )
                             }
-                        attrs.unsafe { +("DPS" + getIcon(state.sort, 1)) }
+                        }
+                        +("DPS" + getIcon(state.sort, 1))
+                    }
+                    div {
+                        attrs.css(Table.cell, Table.headerCell) {}
+                        attrs.onClick = {
+                            setState {
+                                val sort = this.sort
+                                this.sort = Sort(
+                                        columnId = 2,
+                                        ascending = if (sort?.columnId == 2) !sort.ascending else false
+                                )
+                            }
+                        }
+                        +("TTFA" + getIcon(state.sort, 2))
                     }
                     styledDiv {
-                        css {
-                            +Table.cell
-                            +Table.headerCell
-                        }
-                        attrs.onClickFunction = {
-                                setState {
-                                    val sort = this.sort
-                                    this.sort = Sort(
-                                            columnId = 2,
-                                            ascending = if (sort?.columnId == 2) !sort.ascending else false
-                                    )
-                                }
+                        attrs.css(Table.cell, Table.headerCell) {}
+                        attrs.onClick = {
+                            setState {
+                                val sort = this.sort
+                                this.sort = Sort(
+                                    columnId = 3,
+                                    ascending = if (sort?.columnId == 3) !sort.ascending else false
+                                )
                             }
-                        attrs.unsafe { +("TTFA" + getIcon(state.sort, 2)) }
-                    }
-                    styledDiv {
-                        css {
-                            +Table.cell
-                            +Table.headerCell
                         }
-                            attrs.onClickFunction = {
-                                setState {
-                                    val sort = this.sort
-                                    this.sort = Sort(
-                                        columnId = 3,
-                                        ascending = if (sort?.columnId == 3) !sort.ascending else false
-                                    )
-                                }
-                            }
-                        attrs.unsafe { +("MTBA" + getIcon(state.sort, 3)) }
+                        +("MTBA" + getIcon(state.sort, 3))
                     }
                 }
                 sortValues(props.values, state.sort).forEach {
                     styledDiv {
-                        css { +Table.row }
+                        attrs.css(Table.row) {}
                         styledDiv {
-                            css {
-                                +Table.cell
-                                +Table.first
-                                +Table.left
-                            }
+                            attrs.css(Table.cell, Table.first, Table.left) {}
                             Attack { attrs.attack = it.quickAttack }
                             +" + "
                             Attack { attrs.attack = it.chargedAttack }
                         }
                         styledDiv {
-                            css { +Table.cell }
+                            attrs.css(Table.cell) {}
                             +it.dps.format(2)
                         }
                         styledDiv {
-                            css { +Table.cell }
+                            attrs.css(Table.cell) {}
                             +(it.timeToFirstAttack.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                         styledDiv {
-                            css { +Table.cell }
+                            attrs.css(Table.cell) {}
                             +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                     }

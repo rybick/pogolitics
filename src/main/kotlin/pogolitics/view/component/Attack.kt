@@ -1,30 +1,33 @@
 package pogolitics.view.component
 
-import kotlinx.css.*
+import csstype.Display
+import csstype.Margin
+import csstype.rem
+import emotion.css.ClassName
 import pogolitics.model.Attack
 import pogolitics.view.StyleConstants
 import pogolitics.view.iconPath
 import react.*
-import styled.StyleSheet
-import styled.css
-import styled.styledImg
-import styled.styledSpan
+import react.dom.html.ReactHTML.img
+import emotion.react.css
+import react.dom.html.ReactHTML.span
 
 val Attack = fc<AttackProps> { props ->
-    styledSpan {
-        css { +AttackStyles.wrapper }
-        styledImg(src = iconPath(props.attack.type)) {
-            css {
-                height = LinearDimension("1.5rem")
-                margin = "0 ${StyleConstants.Margin.small}"
+    span {
+        attrs.css(AttackStyles.wrapper) {}
+        img {
+            attrs.src = iconPath(props.attack.type)
+            attrs.css {
+                height = 1.5.rem
+                margin = Margin(StyleConstants.Margin.small, StyleConstants.Margin.small)
             }
         }
         + props.attack.name
     }
 }
 
-private object AttackStyles: StyleSheet("AttackComponentStyles", isStatic = true) {
-    val wrapper by css {
+private object AttackStyles {
+    val wrapper = ClassName {
         display = Display.inlineBlock
     }
 }

@@ -1,17 +1,23 @@
 package pogolitics
 
-import react.dom.*
-import kotlinx.browser.document
+import browser.document
+import dom.Element
+import react.RProps
+import react.createElement
+import react.dom.client.createRoot
 
 fun main() {
     exportForJs()
     document.createElement("div")
         .apply { id = "root" }
-        .also { document.body!!.appendChild(it) }
-        .also {
-            render(it) {
-                child(App::class) {}
-            }
+        .also { document.body.appendChild(it) }
+        .also { element: Element ->
+            createRoot(element)
+                .render(
+                    createElement<RProps> {
+                        child(App::class) {}
+                    }
+                )
         }
 }
 
