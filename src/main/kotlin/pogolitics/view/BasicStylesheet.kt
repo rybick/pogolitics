@@ -8,6 +8,7 @@ import csstype.TextTransform
 import csstype.pct
 import csstype.px
 import emotion.css.ClassName
+import pogolitics.pointer
 
 object BasicStylesheet {
 
@@ -46,7 +47,7 @@ object BasicStylesheet {
         }
 
         val headerCell = ClassName {
-            // cursor = Cursor.pointer  // TODO later mig
+            cursor = pointer
         }
 
         val row = ClassName {

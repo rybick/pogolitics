@@ -9,6 +9,7 @@ import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
+import pogolitics.pointer
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*
@@ -72,7 +73,7 @@ private object LeagueStatsWidgetStyles {
     }
 
     val contentWrapper = ClassName {
-        // cursor = Cursor.pointer // TODO later mig
+        cursor = pointer
         display = Display.flex
         flexWrap = FlexWrap.wrap
         flexDirection = FlexDirection.row

@@ -4,6 +4,7 @@ import csstype.*
 import dom.html.HTMLDivElement
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.pointer
 import react.*
 import react.dom.events.MouseEvent
 import react.dom.events.MouseEventHandler
@@ -148,7 +149,7 @@ class IVBarStyles(val unit: Length) {
         backgroundColor = regularColor
         marginLeft = 10.u
         marginRight = 10.u
-        // cursor = Cursor.pointer // TODO later mig
+        cursor = pointer
         before {
             content = Content("")
             marginLeft = (-8).u

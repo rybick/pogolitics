@@ -10,6 +10,7 @@ import csstype.px
 import csstype.scale
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.pointer
 import pogolitics.view.StyleConstants
 import react.Props
 import react.dom.html.ReactHTML.a
@@ -36,7 +37,7 @@ enum class NavigationDirection(val style: ClassName) {
 private object NavigationArrowStyles {
     private val arrow = ClassName {
         display = Display.inlineBlock
-        // cursor = Cursor.pointer // TODO later mig
+        cursor = pointer
         width = 42.px
         height = 42.px
         textAlign = TextAlign.center
