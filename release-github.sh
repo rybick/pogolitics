@@ -15,7 +15,7 @@ rm -rf ./pogolitics/*
 cp -r ../pogolitics/build/distributions/* ./pogolitics/
 
 git add -A
-git commit
+git commit -m "Release pogolitcs"
 
 git push
 
