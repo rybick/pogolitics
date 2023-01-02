@@ -13,7 +13,7 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import kotlin.math.round
 
-val IVBar = fc<IVBarComponentRProps> { props ->
+val IVBar = FC<IVBarComponentRProps> { props ->
     val styles = IVBarStyles(1.px)
 
     val MAX_IV = 15

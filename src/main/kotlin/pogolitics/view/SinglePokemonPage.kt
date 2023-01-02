@@ -13,42 +13,39 @@ import pogolitics.model.BattleMode
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.component.*
-import react.RBuilder
-import react.RComponent
+import react.Component
 import react.State
 import react.SwitchSelector
+import react.attrs
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
 
-class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, State>(props) {
+class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) :
+    Component<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, State>(props) {
 
-    override fun RBuilder.render() = renderPage(pokemonPage(props.model)) {
+    override fun render() = renderPage(pokemonPage(props.model)) {
         div {
             attrs.css(Styles.headerWrapper) {}
             NavigationArrow {
-               attrs {
-                   href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
-                   direction = NavigationDirection.PREVIOUS
-               }
+               href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
+               direction = NavigationDirection.PREVIOUS
             }
             span {
                 attrs.css(Styles.spacer) {}
                 SwitchSelector {
-                    attrs {
-                        checked = BattleMode.PVP == props.model.mode
-                        onlabel = "PvP"
-                        offlabel = "PvE"
-                        onChange = { checked ->
-                            // set timeout to let the animation end.
-                            // It would be better to use state instead but this was easier, so I guess TODO one day.
-                            window.setTimeout({
-                                window.location.href = pokemonPagePath(
-                                    pokedexNumber = props.model.pokemon.pokedexNumber,
-                                    form = props.model.pokemon.form,
-                                    mode = if (checked) BattleMode.PVP else BattleMode.PVE
-                                )
-                            }, timeout = 300)
-                        }
+                    checked = BattleMode.PVP == props.model.mode
+                    onlabel = "PvP"
+                    offlabel = "PvE"
+                    onChange = { checked ->
+                        // set timeout to let the animation end.
+                        // It would be better to use state instead but this was easier, so I guess TODO one day.
+                        window.setTimeout({
+                            window.location.href = pokemonPagePath(
+                                pokedexNumber = props.model.pokemon.pokedexNumber,
+                                form = props.model.pokemon.form,
+                                mode = if (checked) BattleMode.PVP else BattleMode.PVE
+                            )
+                        }, timeout = 300)
                     }
                 }
             }
@@ -66,52 +63,44 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         div {
             attrs.css(Styles.rightWrapper) {}
             IVStatsWidget {
-                attrs {
-                    stats = props.model.stats.currentStats
-                    ivs = props.model.stats.ivs
-                    onChange = {
-                        props.updateState(it)
-                    }
+                stats = props.model.stats.currentStats
+                ivs = props.model.stats.ivs
+                onChange = {
+                    props.updateState(it)
                 }
             }
             if (props.model.mode == BattleMode.PVP) {
                 LeagueStatsWidget {
-                    attrs {
-                        name = "great"
-                        stats = props.model.stats.bestGreatLeagueStats
-                        onClick = {
-                            val newState = PokemonIndividualValuesState(
-                                props.model.stats.ivs,
-                                props.model.stats.bestGreatLeagueStats.level
-                            )
-                            props.updateState(newState)
-                        }
+                    name = "great"
+                    stats = props.model.stats.bestGreatLeagueStats
+                    onClick = {
+                        val newState = PokemonIndividualValuesState(
+                            props.model.stats.ivs,
+                            props.model.stats.bestGreatLeagueStats.level
+                        )
+                        props.updateState(newState)
                     }
                 }
                 LeagueStatsWidget {
-                    attrs {
-                        name = "ultra"
-                        stats = props.model.stats.bestUltraLeagueStats
-                        onClick = {
-                            val newState = PokemonIndividualValuesState(
-                                props.model.stats.ivs,
-                                props.model.stats.bestUltraLeagueStats.level
-                            )
-                            props.updateState(newState)
-                        }
+                    name = "ultra"
+                    stats = props.model.stats.bestUltraLeagueStats
+                    onClick = {
+                        val newState = PokemonIndividualValuesState(
+                            props.model.stats.ivs,
+                            props.model.stats.bestUltraLeagueStats.level
+                        )
+                        props.updateState(newState)
                     }
                 }
                 LeagueStatsWidget {
-                    attrs {
-                        name = "master"
-                        stats = props.model.stats.bestStatsWithoutBoost
-                        onClick = {
-                            val newState = PokemonIndividualValuesState(
-                                props.model.stats.ivs,
-                                props.model.stats.bestStatsWithoutBoost.level
-                            )
-                            props.updateState(newState)
-                        }
+                    name = "master"
+                    stats = props.model.stats.bestStatsWithoutBoost
+                    onClick = {
+                        val newState = PokemonIndividualValuesState(
+                            props.model.stats.ivs,
+                            props.model.stats.bestStatsWithoutBoost.level
+                        )
+                        props.updateState(newState)
                     }
                 }
             }

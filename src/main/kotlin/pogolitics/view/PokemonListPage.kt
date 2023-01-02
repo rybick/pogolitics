@@ -5,18 +5,18 @@ import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
 import pogolitics.model.PokemonListModel
-import react.RBuilder
-import react.RComponent
+import react.ChildrenBuilder
+import react.Component
+import react.attrs
 import react.State
-import react.dom.a
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
 
 class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
-    RComponent<PageRProps<PokemonListModel, Unit>, State>(props) {
+    Component<PageRProps<PokemonListModel, Unit>, State>(props) {
 
-    override fun RBuilder.render() = renderPage(Page.POKEMON_LIST) {
+    override fun render() = renderPage(Page.POKEMON_LIST) {
         div {
             attrs.css(BasicStylesheet.widgetWrapper) {}
             div {
@@ -65,7 +65,8 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                                 BasicStylesheet.Table.cell,
                                 Styles.pokemonName
                             ) {}
-                            a(href = pokemonPagePath(pokemon.pokedexNumber)) {
+                            a {
+                                href = pokemonPagePath(pokemon.pokedexNumber)
                                 +pokemon.name
                             }
                         }
@@ -81,10 +82,11 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
         }
     }
 
-    private fun RBuilder.formWidget(pokedexNumber: Int, form: PokemonListModel.Form) {
+    private fun ChildrenBuilder.formWidget(pokedexNumber: Int, form: PokemonListModel.Form) {
         span {
             attrs.css(Styles.form) {}
-            a(href = pokemonPagePath(pokedexNumber, form.toPokemonForm())) {
+            a {
+                href = pokemonPagePath(pokedexNumber, form.toPokemonForm())
                 +form.prettyNameOrDefault
             }
         }

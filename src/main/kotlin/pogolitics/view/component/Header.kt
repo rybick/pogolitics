@@ -8,17 +8,18 @@ import pogolitics.view.StyleConstants
 import pogolitics.view.logoPath
 import pogolitics.view.pokemonListPagePath
 import react.Props
-import react.dom.a
+import react.attrs
+import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
-import react.dom.img
+import react.dom.html.ReactHTML.img
 import react.fc
 
 val Header = fc<HeaderProps> {
     div {
-        attrs.css(HeaderStyles.headerWrapper) {}
+        css(HeaderStyles.headerWrapper) {}
         a { // TODO lead to main page when there is anything there
-            attrs.href = pokemonListPagePath()
-            img { attrs.src = logoPath() }
+            href = pokemonListPagePath()
+            img { src = logoPath() }
         }
     }
 }

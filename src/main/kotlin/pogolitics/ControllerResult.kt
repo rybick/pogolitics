@@ -1,7 +1,7 @@
 package pogolitics
 
+import react.Component
 import react.Props
-import react.RComponent
 import react.State
 import kotlin.reflect.KClass
 
@@ -35,7 +35,7 @@ class ControllerResult<
     }
 }
 
-typealias View <M> = KClass<out RComponent<out PageRProps<M, *>, out State>>
+typealias View <M> = KClass<out Component<out PageRProps<M, *>, out State>>
 
 interface PageRProps<M, S> : Props {
     var model: M
