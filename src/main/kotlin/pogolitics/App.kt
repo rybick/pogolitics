@@ -7,10 +7,10 @@ import org.w3c.dom.url.URLSearchParams
 import pogolitics.view.NotFoundModel
 import pogolitics.view.NotFoundPage
 import react.*
-import react.dom.p
 import react.router.*
 import react.router.dom.HashRouter
 import kotlinx.browser.window
+import react.dom.html.ReactHTML.p
 import kotlin.reflect.KClass
 
 external interface AppState : RState {
@@ -20,14 +20,14 @@ external interface AppState : RState {
     var pageStateChanged: Boolean
 }
 
-class App: RComponent<RProps, AppState>() {
+class App: Component<RProps, AppState>() {
     val appConfig = AppConfig()
 
-    override fun AppState.init(props: RProps) {
-        pageStateChanged = false
-    }
+//    override fun AppState.init(props: RProps) {
+//        pageStateChanged = false
+//    } // TODO later mig
 
-    override fun RBuilder.render() {
+    override fun render() = Fragment.create {
         HashRouter {
             Routes {
                 appConfig.routing.forEach {
@@ -35,7 +35,7 @@ class App: RComponent<RProps, AppState>() {
                 }
                 Route {
                     attrs.path = "/"
-                    attrs.element = createElement<PageRProps<NotFoundModel, Unit>> {
+                    attrs.element = Fragment.create {
                         renderNotFoundPage("Invalid path")
                     }
                 }
@@ -43,37 +43,35 @@ class App: RComponent<RProps, AppState>() {
         }
     }
 
-    private fun <M, S> RBuilder.routeToPage(route: AppConfig.Route<M, S>) {
+    private fun <M, S> ChildrenBuilder.routeToPage(route: AppConfig.Route<M, S>) {
         Route {
             attrs.path = route.path
-            attrs.element = createElement<PageRProps<M, S>> {
-                child(fc { // workaround to be able to call useParams(), perhaps it can be done cleane
-                    val params: Params = useParams()
-                    val location: Location = useLocation()
-                    val url = window.location.href
-                    if (state.controllerResult != null && state.url == url) {
-                        if (state.pageStateChanged) {
-                            orderStateReload(route, params, location)
-                        }
-                        state.pageStateChanged = false
-                        renderPage<M, S>()
-                    } else {
-                        state.pageStateChanged = false
-                        state.pageState = route.controller.getInitialState(url)
+            attrs.element = Fragment.create {
+                val params: Params = useParams()
+                val location: Location = useLocation()
+                val url = window.location.href
+                if (state.controllerResult != null && state.url == url) {
+                    if (state.pageStateChanged) {
                         orderStateReload(route, params, location)
-                        renderLoadingPage()
                     }
-                })
+                    state.pageStateChanged = false
+                    renderPage<M, S>()
+                } else {
+                    state.pageStateChanged = false
+                    state.pageState = route.controller.getInitialState(url)
+                    orderStateReload(route, params, location)
+                    renderLoadingPage()
+                }
             }
         }
     }
 
-    private fun RBuilder.renderLoadingPage(): ReactElement<RProps> {
-        return createElement { p { +"loading..." } }!!
+    private fun ChildrenBuilder.renderLoadingPage() {
+        p { +"loading..." }
     }
 
-    private fun RBuilder.renderNotFoundPage(reason: String) {
-        return child(NotFoundPage::class) {
+    private fun ChildrenBuilder.renderNotFoundPage(reason: String) {
+        NotFoundPage::class.react {
             attrs.model = NotFoundModel(reason)
         }
     }
@@ -87,24 +85,27 @@ class App: RComponent<RProps, AppState>() {
                     params = URLSearchParams(location.search),
                     state = state.pageState!! as S
                 )
-            setState {
-                this.url = window.location.href
-                this.controllerResult = controllerResult
-            }
+            setState({ state ->
+                state.url = window.location.href
+                state.controllerResult = controllerResult
+                state
+            })
         }
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <M, S> RBuilder.renderPage() {
+    private fun <M, S> ChildrenBuilder.renderPage() {
         return if (state.controllerResult!!.isModelAndView) {
-            child(state.controllerResult!!.view as KClass<RComponent<PageRProps<M, S>, RState>>) {
+            val component = state.controllerResult!!.view as KClass<Component<PageRProps<M, S>, RState>>
+            component.react {
                 attrs.model = state.controllerResult!!.model as M
                 //attrs.state = state.pageState!! as S
                 attrs.updateState = {
-                    setState {
-                        pageState = it
-                        pageStateChanged = true
-                    }
+                    setState({state ->
+                        state.pageState = it
+                        state.pageStateChanged = true
+                        state
+                    })
                 }
             }
         } else {

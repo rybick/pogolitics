@@ -5,8 +5,6 @@ import pogolitics.model.MoveSet
 import pogolitics.format
 import pogolitics.view.BasicStylesheet.Table
 import pogolitics.view.component.Attack
-import react.RBuilder
-import react.RComponent
 import react.RProps
 import react.RState
 import styled.styledDiv
@@ -15,84 +13,87 @@ import react.dom.html.ReactHTML.div
 import kotlin.text.Typography.nbsp
 import kotlin.time.DurationUnit
 
-class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, MovesetsRState>(props) {
-    override fun MovesetsRState.init(props: MovesetsRProps) {
-        sort = null
-    }
+class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsRState>(props) {
+//    override fun MovesetsRState.init(props: MovesetsRProps) {
+//        sort = null
+//    } // TODO later mig
 
     private val UP_ICON = Char(9652) //"&#9652;"
     private val DOWN_ICON = Char(9662) //"&#9662;"
     private val SPACE = nbsp //"&nbsp;"
 
-    override fun RBuilder.render() {
+    override fun render() = Fragment.create {
         div {
             attrs.css(BasicStylesheet.widgetWrapper) {}
-            styledDiv {
+            div {
                 attrs.css(Table.table) {}
-                styledDiv {
+                div {
                     attrs.css(Table.row, Table.header) {}
-                    styledDiv {
+                    div {
                         attrs.css(Table.cell, Table.headerCell, Table.first) {}
                         +"Moveset"
                     }
-                    styledDiv {
+                    div {
                         attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
-                            setState {
-                                val sort = this.sort
-                                this.sort = Sort(
+                            setState({ state ->
+                                val sort = state.sort
+                                state.sort = Sort(
                                         columnId = 1,
                                         ascending = if (sort?.columnId == 1) !sort.ascending else false
                                 )
-                            }
+                                state
+                            })
                         }
                         +("DPS" + getIcon(state.sort, 1))
                     }
                     div {
                         attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
-                            setState {
-                                val sort = this.sort
-                                this.sort = Sort(
+                            setState({ state ->
+                                val sort = state.sort
+                                state.sort = Sort(
                                         columnId = 2,
                                         ascending = if (sort?.columnId == 2) !sort.ascending else false
                                 )
-                            }
+                                state
+                            })
                         }
                         +("TTFA" + getIcon(state.sort, 2))
                     }
-                    styledDiv {
+                    div {
                         attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
-                            setState {
-                                val sort = this.sort
-                                this.sort = Sort(
+                            setState({ state ->
+                                val sort = state.sort
+                                state.sort = Sort(
                                     columnId = 3,
                                     ascending = if (sort?.columnId == 3) !sort.ascending else false
                                 )
-                            }
+                                state
+                            })
                         }
                         +("MTBA" + getIcon(state.sort, 3))
                     }
                 }
                 sortValues(props.values, state.sort).forEach {
-                    styledDiv {
+                    div {
                         attrs.css(Table.row) {}
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell, Table.first, Table.left) {}
                             Attack { attrs.attack = it.quickAttack }
                             +" + "
                             Attack { attrs.attack = it.chargedAttack }
                         }
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell) {}
                             +it.dps.format(2)
                         }
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell) {}
                             +(it.timeToFirstAttack.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell) {}
                             +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
@@ -120,11 +121,8 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     }
 }
 
-fun RBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit) {
-    return child(MovesetsTable::class) {
-        this.attrs(handler)
-    }
-}
+fun ChildrenBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit): Unit =
+    MovesetsTable::class.react(handler)
 
 external interface MovesetsRProps: RProps {
     var values: List<MoveSet>

@@ -42,7 +42,7 @@ external interface LeagueStatsWidgetRProps: RProps {
     var onClick: () -> Unit
 }
 
-private fun RElementBuilder<*>.stat(label: String, value: String) {
+private fun ChildrenBuilder.stat(label: String, value: String) {
     span {
         attrs.css(LeagueStatsWidgetStyles.group) {}
         span {

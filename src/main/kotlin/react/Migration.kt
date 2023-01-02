@@ -3,4 +3,6 @@ package react
 typealias RState = State
 typealias RProps = Props
 
-//fun <P : Props> fc(block: ChildrenBuilder.(props: P) -> Unit) = FC(block)
+fun <P : Props> fc(block: ChildrenBuilder.(props: P) -> Unit) = FC(block)
+
+val <P : Props> P.attrs get() = this

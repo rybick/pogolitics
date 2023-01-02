@@ -8,25 +8,26 @@ import pogolitics.view.Page
 import pogolitics.view.StyleConstants
 import pogolitics.view.pagePath
 import react.Props
+import react.attrs
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.span
 import react.fc
-import styled.styledSpan
 
-val Breadcrumbs = fc<BreadcrumbsProps> { props ->
+val Breadcrumbs = fc<BreadcrumbsProps> { props: BreadcrumbsProps ->
     props.page?.let { thePage ->
         div {
-            attrs.css(BreadcrumbsStyles.breadcrumbsWrapper) {}
+            css(BreadcrumbsStyles.breadcrumbsWrapper) {}
             thePage.getFullPath().forEachIndexed { index, page ->
                 if (index > 0) {
-                    styledSpan {
+                    span {
                         attrs.css(BreadcrumbsStyles.separator) {}
                         +"»"
                     }
                 }
-                styledSpan {
+                span {
                     a {
-                        attrs.href = pagePath(page)
+                        href = pagePath(page)
                         +page.prettyName
                     }
                 }

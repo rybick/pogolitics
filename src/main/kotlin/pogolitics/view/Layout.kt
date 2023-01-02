@@ -2,10 +2,13 @@ package pogolitics.view
 
 import pogolitics.view.component.Breadcrumbs
 import pogolitics.view.component.Header
-import react.RBuilder
+import react.ChildrenBuilder
+import react.Fragment
+import react.ReactNode
+import react.create
 
-fun RBuilder.renderPage(page: Page?, contentRenderer: RBuilder.() -> Unit) {
+fun renderPage(page: Page?, contentRenderer: ChildrenBuilder.() -> Unit): ReactNode = Fragment.create {
     Header {}
-    Breadcrumbs { attrs.page = page }
+    Breadcrumbs { this.page = page }
     contentRenderer()
 }

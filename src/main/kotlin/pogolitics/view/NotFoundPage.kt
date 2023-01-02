@@ -5,22 +5,23 @@ import csstype.pct
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
-import react.RBuilder
-import react.RComponent
+import react.Component
 import react.RState
+import react.ReactNode
+import react.attrs
 import react.dom.html.ReactHTML.div
-import react.dom.p
-import styled.styledDiv
+import react.dom.html.ReactHTML.p
 
-class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : RComponent<PageRProps<NotFoundModel, Unit>, RState>(props) {
-    override fun RBuilder.render() = renderPage(null) {
+class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : Component<PageRProps<NotFoundModel, Unit>, RState>(props) {
+
+    override fun render(): ReactNode = renderPage(null) {
         div {
-            attrs.css(Styles.pageWrapper) {}
-            styledDiv {
+            css(Styles.pageWrapper) {}
+            div {
                 attrs.css(BasicStylesheet.widgetHeader) {}
                 + ("Page Not Found")
             }
-            styledDiv {
+            div {
                 attrs.css(Styles.contentWrapper) {}
                 p { +props.model.reason }
             }

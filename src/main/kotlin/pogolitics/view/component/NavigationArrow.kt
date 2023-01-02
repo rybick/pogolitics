@@ -13,6 +13,7 @@ import emotion.react.css
 import pogolitics.pointer
 import pogolitics.view.StyleConstants
 import react.Props
+import react.attrs
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.span
 import react.fc

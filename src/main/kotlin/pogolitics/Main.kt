@@ -2,9 +2,12 @@ package pogolitics
 
 import browser.document
 import dom.Element
+import react.Fragment
 import react.RProps
+import react.create
 import react.createElement
 import react.dom.client.createRoot
+import react.react
 
 fun main() {
     exportForJs()
@@ -14,8 +17,8 @@ fun main() {
         .also { element: Element ->
             createRoot(element)
                 .render(
-                    createElement<RProps> {
-                        child(App::class) {}
+                    Fragment.create {
+                        App::class.react {}
                     }
                 )
         }
