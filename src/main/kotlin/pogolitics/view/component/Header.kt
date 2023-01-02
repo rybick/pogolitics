@@ -13,13 +13,11 @@ import pogolitics.view.pokemonListPagePath
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML.a
-import react.SearchInput
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
-import web.prompts.alert
 
 val Header = FC<HeaderProps> {
     var term: String by useState("Pikachu")

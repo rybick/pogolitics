@@ -23,7 +23,6 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 
     implementation(npm("bootstrap-switch-button-react", "1.2.0"))
-    implementation(npm("react-search-input", "0.11.3"))
 }
 
 kotlin {
