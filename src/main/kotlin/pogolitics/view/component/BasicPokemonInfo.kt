@@ -68,6 +68,6 @@ private object BasicPokemonInfoStyles {
     }
 }
 
-external interface BasicPokemonInfoRProps : RProps {
+external interface BasicPokemonInfoRProps : Props {
     var data: SinglePokemonModel.PokemonStaticInfo
 }

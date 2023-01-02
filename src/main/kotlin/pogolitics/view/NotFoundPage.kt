@@ -7,11 +7,11 @@ import emotion.react.css
 import pogolitics.PageRProps
 import react.RBuilder
 import react.RComponent
-import react.RState
+import react.State
 import react.dom.html.ReactHTML.div
 import react.dom.p
 
-class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : RComponent<PageRProps<NotFoundModel, Unit>, RState>(props) {
+class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : RComponent<PageRProps<NotFoundModel, Unit>, State>(props) {
     override fun RBuilder.render() = renderPage(null) {
         div {
             attrs.css(Styles.pageWrapper) {}

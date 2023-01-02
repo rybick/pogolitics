@@ -7,14 +7,14 @@ import pogolitics.PageRProps
 import pogolitics.model.PokemonListModel
 import react.RBuilder
 import react.RComponent
-import react.RState
+import react.State
 import react.dom.a
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
 
 class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
-    RComponent<PageRProps<PokemonListModel, Unit>, RState>(props) {
+    RComponent<PageRProps<PokemonListModel, Unit>, State>(props) {
 
     override fun RBuilder.render() = renderPage(Page.POKEMON_LIST) {
         div {

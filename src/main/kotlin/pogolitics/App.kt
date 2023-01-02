@@ -13,17 +13,17 @@ import react.router.dom.HashRouter
 import kotlinx.browser.window
 import kotlin.reflect.KClass
 
-external interface AppState : RState {
+external interface AppState : State {
     var controllerResult: ControllerResult<*, *>?
     var url: String?
     var pageState: Any?
     var pageStateChanged: Boolean
 }
 
-class App: RComponent<RProps, AppState>() {
+class App: RComponent<Props, AppState>() {
     val appConfig = AppConfig()
 
-    override fun AppState.init(props: RProps) {
+    override fun AppState.init(props: Props) {
         pageStateChanged = false
     }
 
@@ -68,7 +68,7 @@ class App: RComponent<RProps, AppState>() {
         }
     }
 
-    private fun RBuilder.renderLoadingPage(): ReactElement<RProps> {
+    private fun RBuilder.renderLoadingPage(): ReactElement<Props> {
         return createElement { p { +"loading..." } }!!
     }
 
@@ -97,7 +97,7 @@ class App: RComponent<RProps, AppState>() {
     @Suppress("UNCHECKED_CAST")
     private fun <M, S> RBuilder.renderPage() {
         return if (state.controllerResult!!.isModelAndView) {
-            child(state.controllerResult!!.view as KClass<RComponent<PageRProps<M, S>, RState>>) {
+            child(state.controllerResult!!.view as KClass<RComponent<PageRProps<M, S>, State>>) {
                 attrs.model = state.controllerResult!!.model as M
                 //attrs.state = state.pageState!! as S
                 attrs.updateState = {

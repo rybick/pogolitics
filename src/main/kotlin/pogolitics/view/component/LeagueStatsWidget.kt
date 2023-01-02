@@ -36,7 +36,7 @@ val LeagueStatsWidget = fc<LeagueStatsWidgetRProps> { props ->
     }
 }
 
-external interface LeagueStatsWidgetRProps: RProps {
+external interface LeagueStatsWidgetRProps: Props {
     var name: String;
     var stats: SinglePokemonModel.VariablePokemonStatistics;
     var onClick: () -> Unit

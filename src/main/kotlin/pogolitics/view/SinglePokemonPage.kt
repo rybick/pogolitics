@@ -15,12 +15,12 @@ import pogolitics.model.SinglePokemonModel
 import pogolitics.view.component.*
 import react.RBuilder
 import react.RComponent
-import react.RState
+import react.State
 import react.SwitchSelector
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
 
-class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
+class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, State>(props) {
 
     override fun RBuilder.render() = renderPage(pokemonPage(props.model)) {
         div {

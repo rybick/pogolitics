@@ -2,7 +2,7 @@ package pogolitics
 
 import browser.document
 import dom.Element
-import react.RProps
+import react.Props
 import react.createElement
 import react.dom.client.createRoot
 
@@ -14,7 +14,7 @@ fun main() {
         .also { element: Element ->
             createRoot(element)
                 .render(
-                    createElement<RProps> {
+                    createElement<Props> {
                         child(App::class) {}
                     }
                 )

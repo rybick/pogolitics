@@ -1,8 +1,8 @@
 package pogolitics
 
+import react.Props
 import react.RComponent
-import react.RProps
-import react.RState
+import react.State
 import kotlin.reflect.KClass
 
 class ControllerResult<
@@ -35,13 +35,13 @@ class ControllerResult<
     }
 }
 
-typealias View <M> = KClass<out RComponent<out PageRProps<M, *>, out RState>>
+typealias View <M> = KClass<out RComponent<out PageRProps<M, *>, out State>>
 
-interface PageRProps<M, S> : RProps {
+interface PageRProps<M, S> : Props {
     var model: M
     var updateState: (S) -> Unit
 }
 
-interface PageRState<T> : RState {
+interface PageRState<T> : State {
     var data: T?
 }

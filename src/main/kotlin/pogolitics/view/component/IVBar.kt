@@ -87,7 +87,7 @@ val IVBar = fc<IVBarComponentRProps> { props ->
 
 }
 
-external interface IVBarComponentRProps: RProps {
+external interface IVBarComponentRProps: Props {
     var name: String
     var iv: Int
     var onChange: (Int) -> Unit

@@ -153,7 +153,7 @@ private object IVStatsWidgetStyles {
     }
 }
 
-external interface IVStatsWidgetRProps : RProps {
+external interface IVStatsWidgetRProps : Props {
     var stats: SinglePokemonModel.VariablePokemonStatistics
     var ivs: IVs
     var onChange: (PokemonIndividualValuesState) -> Unit

@@ -11,14 +11,14 @@ import pogolitics.model.*
 import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitics.view.SinglePokemonPage
-import react.RProps
+import react.Props
 import react.router.Params
 import kotlin.math.sqrt
 import kotlin.reflect.KClass
 
 class SinglePokemonController(private val api: Api): Controller<SinglePokemonModel, PokemonIndividualValuesState> {
 
-    interface IdRProps : RProps {
+    interface IdRProps : Props {
         var pokedexNumber: String
     }
 

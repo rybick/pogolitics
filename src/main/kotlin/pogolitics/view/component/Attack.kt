@@ -40,6 +40,6 @@ private object AttackStyles {
     }
 }
 
-external interface AttackProps: RProps {
+external interface AttackProps: Props {
     var attack: Attack
 }
