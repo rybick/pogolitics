@@ -2,6 +2,7 @@ package pogolitics.view.component
 
 import csstype.BoxSizing
 import csstype.Display
+import csstype.Position
 import csstype.number
 import csstype.px
 import emotion.css.ClassName
@@ -15,8 +16,14 @@ import react.dom.html.ReactHTML.a
 import react.SearchInput
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
+import react.dom.html.ReactHTML.span
+import react.useState
+import web.prompts.alert
 
 val Header = FC<HeaderProps> {
+    var term: String by useState("Pikachu")
+    val filtered = data.filter { it.name.contains(term) }
+
     div {
         css(HeaderStyles.headerWrapper) {}
         div {
@@ -28,10 +35,34 @@ val Header = FC<HeaderProps> {
         }
         div {
             css(HeaderStyles.searchInputWrapper) {}
-            SearchInput {}
+            SearchInput {
+                value = term
+                onChange = { newTerm ->
+                    term = newTerm
+                }
+            }
+            div {
+                css(HeaderStyles.searchResultsWrapper) {  }
+                filtered.forEach {
+                    div {
+                        span { +"#${it.id} " }
+                        span { +it.name }
+                    }
+                }
+            }
         }
     }
 }
+
+private val data = listOf<Tmp>(
+    Tmp(1, "Pikachu"),
+    Tmp(2, "Bulbasaur"),
+    Tmp(2, "Charmander")
+)
+
+private data class HeaderState(var term: String)
+
+private data class Tmp(val id: Int, val name: String)
 
 interface HeaderProps: Props
 
@@ -52,4 +83,8 @@ private object HeaderStyles {
     }
 
     val searchInputWrapper = ClassName {}
+
+    val searchResultsWrapper = ClassName {
+        position = Position.absolute
+    }
 }
