@@ -16,13 +16,14 @@ import react.dom.html.ReactHTML.a
 import react.SearchInput
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
+import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
 import web.prompts.alert
 
 val Header = FC<HeaderProps> {
     var term: String by useState("Pikachu")
-    val filtered = data.filter { it.name.contains(term) }
+    val filtered = data.filter { it.name.contains(term, ignoreCase = true) }
 
     div {
         css(HeaderStyles.headerWrapper) {}
@@ -35,10 +36,10 @@ val Header = FC<HeaderProps> {
         }
         div {
             css(HeaderStyles.searchInputWrapper) {}
-            SearchInput {
+            input {
                 value = term
-                onChange = { newTerm ->
-                    term = newTerm
+                onChange = { event ->
+                    term = event.target.value
                 }
             }
             div {
