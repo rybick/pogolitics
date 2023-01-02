@@ -10,17 +10,16 @@ import react.RComponent
 import react.RState
 import react.dom.html.ReactHTML.div
 import react.dom.p
-import styled.styledDiv
 
 class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : RComponent<PageRProps<NotFoundModel, Unit>, RState>(props) {
     override fun RBuilder.render() = renderPage(null) {
         div {
             attrs.css(Styles.pageWrapper) {}
-            styledDiv {
+            div {
                 attrs.css(BasicStylesheet.widgetHeader) {}
                 + ("Page Not Found")
             }
-            styledDiv {
+            div {
                 attrs.css(Styles.contentWrapper) {}
                 p { +props.model.reason }
             }

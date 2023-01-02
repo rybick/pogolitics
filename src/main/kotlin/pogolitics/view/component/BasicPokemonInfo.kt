@@ -12,14 +12,13 @@ import react.*
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
 import react.dom.html.ReactHTML.span
-import styled.*
 
 val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
     div {
         attrs.css(BasicStylesheet.widgetWrapper) {}
         h1 {
             attrs.css(BasicPokemonInfoStyles.wrapper) {}
-            styledSpan {
+            span {
                 attrs.css(BasicPokemonInfoStyles.pokemonId) {}
                 +"#${props.data.pokedexNumber}"
             }
@@ -27,7 +26,7 @@ val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
                 +props.data.name
             }
             props.data.form?.let { form ->
-                styledSpan {
+                span {
                     attrs.css(BasicPokemonInfoStyles.pokemonForm) {}
                     +"(${form.prettyName})"
                 }

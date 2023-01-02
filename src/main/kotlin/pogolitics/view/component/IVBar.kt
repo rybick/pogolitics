@@ -11,7 +11,6 @@ import react.dom.events.MouseEventHandler
 import react.dom.html.InputType
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
-import styled.styledDiv
 import kotlin.math.round
 
 val IVBar = fc<IVBarComponentRProps> { props ->
@@ -32,9 +31,9 @@ val IVBar = fc<IVBarComponentRProps> { props ->
 
     div {
         attrs.css(styles.componentWrapper) {}
-        styledDiv {
+        div {
             attrs.css(styles.labelsWrapper) {}
-            styledDiv {
+            div {
                 attrs.css(
                     styles.label,
                     if (props.iv == MAX_IV) {
@@ -43,7 +42,7 @@ val IVBar = fc<IVBarComponentRProps> { props ->
                 ) {}
                 +props.name
             }
-            styledDiv {
+            div {
                 attrs.css(styles.inputWrapper) {}
                 input {
                     attrs.css(styles.input) {}
@@ -59,7 +58,7 @@ val IVBar = fc<IVBarComponentRProps> { props ->
                 }
             }
         }
-        styledDiv {
+        div {
             attrs.css(styles.wrapper) {}
             div {
                 attrs.css(styles.bar, styles.bg) {
@@ -67,7 +66,7 @@ val IVBar = fc<IVBarComponentRProps> { props ->
                 }
                 attrs.onClick = doOnClick
             }
-            styledDiv {
+            div {
                 attrs.css(
                     styles.bar,
                     styles.content,
@@ -80,7 +79,7 @@ val IVBar = fc<IVBarComponentRProps> { props ->
                     width = styles.barWidth(props.iv)
                 }
             }
-            styledDiv {
+            div {
                 attrs.css(styles.scale) {}
             }
         }

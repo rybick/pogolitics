@@ -8,14 +8,13 @@ import emotion.react.css
 import pogolitics.view.BasicStylesheet
 import react.*
 import react.dom.html.ReactHTML.div
-import styled.styledDiv
 
 val StaticStat = fc<StaticStatComponentRProps>() { props ->
     div {
         attrs.css(StaticStatStyles.wrapper) {}
-        styledDiv {
+        div {
             attrs.css(BasicStylesheet.Table.table) {}
-            styledDiv {
+            div {
                 attrs.css(BasicStylesheet.Table.row, BasicStylesheet.Table.header) {}
                 div {
                     attrs.css(
@@ -27,9 +26,9 @@ val StaticStat = fc<StaticStatComponentRProps>() { props ->
                     +props.name
                 }
             }
-            styledDiv {
+            div {
                 attrs.css(BasicStylesheet.Table.row) {}
-                styledDiv {
+                div {
                     attrs.css(
                         BasicStylesheet.Table.cell,
                         BasicStylesheet.Table.headerCell,

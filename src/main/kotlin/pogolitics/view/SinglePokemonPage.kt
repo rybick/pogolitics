@@ -16,9 +16,9 @@ import pogolitics.view.component.*
 import react.RBuilder
 import react.RComponent
 import react.RState
-import styled.*
 import react.SwitchSelector
 import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.span
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : RComponent<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
 
@@ -31,7 +31,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                    direction = NavigationDirection.PREVIOUS
                }
             }
-            styledSpan {
+            span {
                 attrs.css(Styles.spacer) {}
                 SwitchSelector {
                     attrs {

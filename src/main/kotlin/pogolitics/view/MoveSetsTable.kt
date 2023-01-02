@@ -9,7 +9,6 @@ import react.RBuilder
 import react.RComponent
 import react.RProps
 import react.RState
-import styled.styledDiv
 import react.*
 import react.dom.html.ReactHTML.div
 import kotlin.text.Typography.nbsp
@@ -27,15 +26,15 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
     override fun RBuilder.render() {
         div {
             attrs.css(BasicStylesheet.widgetWrapper) {}
-            styledDiv {
+            div {
                 attrs.css(Table.table) {}
-                styledDiv {
+                div {
                     attrs.css(Table.row, Table.header) {}
-                    styledDiv {
+                    div {
                         attrs.css(Table.cell, Table.headerCell, Table.first) {}
                         +"Moveset"
                     }
-                    styledDiv {
+                    div {
                         attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
                             setState {
@@ -61,7 +60,7 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                         }
                         +("TTFA" + getIcon(state.sort, 2))
                     }
-                    styledDiv {
+                    div {
                         attrs.css(Table.cell, Table.headerCell) {}
                         attrs.onClick = {
                             setState {
@@ -76,23 +75,23 @@ class MovesetsTable(props: MovesetsRProps) : RComponent<MovesetsRProps, Movesets
                     }
                 }
                 sortValues(props.values, state.sort).forEach {
-                    styledDiv {
+                    div {
                         attrs.css(Table.row) {}
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell, Table.first, Table.left) {}
                             Attack { attrs.attack = it.quickAttack }
                             +" + "
                             Attack { attrs.attack = it.chargedAttack }
                         }
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell) {}
                             +it.dps.format(2)
                         }
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell) {}
                             +(it.timeToFirstAttack.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
-                        styledDiv {
+                        div {
                             attrs.css(Table.cell) {}
                             +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }

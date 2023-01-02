@@ -15,7 +15,7 @@ import react.dom.events.SyntheticEvent
 import react.dom.html.InputType
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
-import styled.*
+import react.dom.html.ReactHTML.span
 
 val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
     div {
@@ -23,15 +23,15 @@ val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
             BasicStylesheet.widgetWrapper,
             IVStatsWidgetStyles.outerWrapper
         ) {}
-        styledDiv {
+        div {
             attrs.css(IVStatsWidgetStyles.innerWrapper) {}
-            styledDiv {
+            div {
                 attrs.css(IVStatsWidgetStyles.upperStatsWrapper) {}
-                styledSpan {
-                    styledSpan {
+                span {
+                    span {
                         +"level: "
                     }
-                    styledSpan {
+                    span {
                         input {
                             attrs.type = InputType.number
                             attrs.min = "1"
@@ -72,13 +72,13 @@ val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
                     props.onChange(props.createStateWith { stamina = value })
                 }
             }
-            styledDiv {
+            div {
                 attrs.css(IVStatsWidgetStyles.lowerStatsWrapper) {}
-                styledSpan {
-                    styledSpan {
+                span {
+                    span {
                         +"CP: "
                     }
-                    input() {
+                    input {
                         attrs.css {
                             "&::-webkit-outer-spin-button" {
                                 appearance = None.none

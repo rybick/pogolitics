@@ -12,7 +12,6 @@ import react.dom.a
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
-import styled.styledDiv
 
 class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
     RComponent<PageRProps<PokemonListModel, Unit>, RState>(props) {
@@ -20,14 +19,14 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
     override fun RBuilder.render() = renderPage(Page.POKEMON_LIST) {
         div {
             attrs.css(BasicStylesheet.widgetWrapper) {}
-            styledDiv {
+            div {
                 attrs.css(BasicStylesheet.Table.table) {}
-                styledDiv {
+                div {
                     attrs.css(
                         BasicStylesheet.Table.row,
                         BasicStylesheet.Table.header
                     ) {}
-                    styledDiv {
+                    div {
                         attrs.css(
                             BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell,
@@ -35,14 +34,14 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                         ) {}
                         +"№"
                     }
-                    styledDiv {
+                    div {
                         attrs.css(
                             BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell
                         ) {}
                         +"name"
                     }
-                    styledDiv {
+                    div {
                         attrs.css(
                             BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell
@@ -51,9 +50,9 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                     }
                 }
                 props.model.pokemon.forEach { pokemon ->
-                    styledDiv {
+                    div {
                         attrs.css(BasicStylesheet.Table.row) {}
-                        styledDiv {
+                        div {
                             attrs.css(
                                 BasicStylesheet.Table.cell,
                                 BasicStylesheet.Table.first,
@@ -61,7 +60,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                             ) {}
                             +"#${pokemon.pokedexNumber}"
                         }
-                        styledDiv {
+                        div {
                             attrs.css(
                                 BasicStylesheet.Table.cell,
                                 Styles.pokemonName
@@ -70,7 +69,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                                 +pokemon.name
                             }
                         }
-                        styledDiv {
+                        div {
                             attrs.css(BasicStylesheet.Table.cell) {}
                             pokemon.forms.forEach {
                                 formWidget(pokemon.pokedexNumber, it)
