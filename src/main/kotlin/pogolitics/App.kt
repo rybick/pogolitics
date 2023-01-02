@@ -1,9 +1,7 @@
 package pogolitics
 
-import csstype.Opacity
 import csstype.TextAlign
 import csstype.number
-import csstype.pct
 import emotion.react.css
 import history.Location
 import js.core.jso
@@ -17,12 +15,10 @@ import react.router.*
 import react.router.dom.HashRouter
 import kotlinx.browser.window
 import pogolitics.view.StyleConstants
-import pogolitics.view.component.Header
 import pogolitics.view.loadingImagePath
 import pogolitics.view.renderPage
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
-import react.dom.html.ReactHTML.p
 import kotlin.reflect.KClass
 
 external interface AppState : State {
