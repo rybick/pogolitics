@@ -49,7 +49,7 @@ class App: Component<Props, AppState>() {
     private fun <M, S> ChildrenBuilder.routeToPage(route: AppConfig.Route<M, S>) {
         Route {
             attrs.path = route.path
-            attrs.element = Fragment.create { (FC<Props> { // workaround to be able to call useParams(), perhaps it can be done cleaner
+            attrs.element = wrapInFc {
                 val params: Params = useParams()
                 val location: Location = useLocation()
                 val url = window.location.href
@@ -65,8 +65,12 @@ class App: Component<Props, AppState>() {
                     orderStateReload(route, params, location)
                     renderLoadingPage()
                 }
-            }) {} }
+            }
         }
+    }
+
+    private fun wrapInFc(block: ChildrenBuilder.(props: Props) -> Unit): ReactNode {
+        return FC(block).create() // workaround to be able to call useParams(), perhaps it can be done cleaner
     }
 
     private fun ChildrenBuilder.renderLoadingPage() {
