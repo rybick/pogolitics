@@ -37,8 +37,8 @@ class App: Component<Props, AppState>() {
                     routeToPage(it)
                 }
                 Route {
-                    attrs.path = "/"
-                    attrs.element = Fragment.create {
+                    path = "/"
+                    element = Fragment.create {
                         renderNotFoundPage("Invalid path")
                     }
                 }
@@ -48,8 +48,8 @@ class App: Component<Props, AppState>() {
 
     private fun <M, S> ChildrenBuilder.routeToPage(route: AppConfig.Route<M, S>) {
         Route {
-            attrs.path = route.path
-            attrs.element = wrapInFc {
+            path = route.path
+            element = wrapInFc {
                 val params: Params = useParams()
                 val location: Location = useLocation()
                 val url = window.location.href
@@ -79,7 +79,7 @@ class App: Component<Props, AppState>() {
 
     private fun ChildrenBuilder.renderNotFoundPage(reason: String) {
         NotFoundPage::class.react {
-            attrs.model = NotFoundModel(reason)
+            model = NotFoundModel(reason)
         }
     }
 
@@ -105,9 +105,9 @@ class App: Component<Props, AppState>() {
         return if (state.controllerResult!!.isModelAndView) {
             val component = state.controllerResult!!.view as KClass<Component<PageRProps<M, S>, State>>
             component.react {
-                attrs.model = state.controllerResult!!.model as M
+                model = state.controllerResult!!.model as M
                 //attrs.state = state.pageState!! as S
-                attrs.updateState = {
+                updateState = {
                     setState({state ->
                         state.pageState = it
                         state.pageStateChanged = true

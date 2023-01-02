@@ -7,7 +7,6 @@ import pogolitics.PageRProps
 import pogolitics.model.PokemonListModel
 import react.ChildrenBuilder
 import react.Component
-import react.attrs
 import react.State
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
@@ -18,16 +17,16 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
 
     override fun render() = renderPage(Page.POKEMON_LIST) {
         div {
-            attrs.css(BasicStylesheet.widgetWrapper) {}
+            css(BasicStylesheet.widgetWrapper) {}
             div {
-                attrs.css(BasicStylesheet.Table.table) {}
+                css(BasicStylesheet.Table.table) {}
                 div {
-                    attrs.css(
+                    css(
                         BasicStylesheet.Table.row,
                         BasicStylesheet.Table.header
                     ) {}
                     div {
-                        attrs.css(
+                        css(
                             BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell,
                             BasicStylesheet.Table.first
@@ -35,14 +34,14 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                         +"№"
                     }
                     div {
-                        attrs.css(
+                        css(
                             BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell
                         ) {}
                         +"name"
                     }
                     div {
-                        attrs.css(
+                        css(
                             BasicStylesheet.Table.cell,
                             BasicStylesheet.Table.headerCell
                         ) {}
@@ -51,9 +50,9 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                 }
                 props.model.pokemon.forEach { pokemon ->
                     div {
-                        attrs.css(BasicStylesheet.Table.row) {}
+                        css(BasicStylesheet.Table.row) {}
                         div {
-                            attrs.css(
+                            css(
                                 BasicStylesheet.Table.cell,
                                 BasicStylesheet.Table.first,
                                 BasicStylesheet.Table.left
@@ -61,7 +60,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                             +"#${pokemon.pokedexNumber}"
                         }
                         div {
-                            attrs.css(
+                            css(
                                 BasicStylesheet.Table.cell,
                                 Styles.pokemonName
                             ) {}
@@ -71,7 +70,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                             }
                         }
                         div {
-                            attrs.css(BasicStylesheet.Table.cell) {}
+                            css(BasicStylesheet.Table.cell) {}
                             pokemon.forms.forEach {
                                 formWidget(pokemon.pokedexNumber, it)
                             }
@@ -84,7 +83,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
 
     private fun ChildrenBuilder.formWidget(pokedexNumber: Int, form: PokemonListModel.Form) {
         span {
-            attrs.css(Styles.form) {}
+            css(Styles.form) {}
             a {
                 href = pokemonPagePath(pokedexNumber, form.toPokemonForm())
                 +form.prettyNameOrDefault

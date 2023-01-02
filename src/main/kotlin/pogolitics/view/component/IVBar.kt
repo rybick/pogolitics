@@ -30,11 +30,11 @@ val IVBar = FC<IVBarComponentRProps> { props ->
     }
 
     div {
-        attrs.css(styles.componentWrapper) {}
+        css(styles.componentWrapper) {}
         div {
-            attrs.css(styles.labelsWrapper) {}
+            css(styles.labelsWrapper) {}
             div {
-                attrs.css(
+                css(
                     styles.label,
                     if (props.iv == MAX_IV) {
                         styles.labelIvMax
@@ -43,31 +43,31 @@ val IVBar = FC<IVBarComponentRProps> { props ->
                 +props.name
             }
             div {
-                attrs.css(styles.inputWrapper) {}
+                css(styles.inputWrapper) {}
                 input {
-                    attrs.css(styles.input) {}
-                    attrs.type = InputType.number
-                    attrs.min = "0"
-                    attrs.max = "15"
-                    attrs.pattern = "\\d*"
-                    attrs.key = "${props.iv}"
-                    attrs.defaultValue = "${props.iv}"
-                    attrs.onChange = {
+                    css(styles.input) {}
+                    type = InputType.number
+                    min = "0"
+                    max = "15"
+                    pattern = "\\d*"
+                    key = "${props.iv}"
+                    defaultValue = "${props.iv}"
+                    onChange = {
                         props.onChange(it.target.value.toInt())
                     }
                 }
             }
         }
         div {
-            attrs.css(styles.wrapper) {}
+            css(styles.wrapper) {}
             div {
-                attrs.css(styles.bar, styles.bg) {
+                css(styles.bar, styles.bg) {
                     width = styles.barWidth(MAX_IV)
                 }
-                attrs.onClick = doOnClick
+                onClick = doOnClick
             }
             div {
-                attrs.css(
+                css(
                     styles.bar,
                     styles.content,
                     when (props.iv) {
@@ -80,7 +80,7 @@ val IVBar = FC<IVBarComponentRProps> { props ->
                 }
             }
             div {
-                attrs.css(styles.scale) {}
+                css(styles.scale) {}
             }
         }
     }

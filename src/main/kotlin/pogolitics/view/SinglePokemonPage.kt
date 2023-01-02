@@ -16,7 +16,6 @@ import pogolitics.view.component.*
 import react.Component
 import react.State
 import react.SwitchSelector
-import react.attrs
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
 
@@ -25,13 +24,13 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
 
     override fun render() = renderPage(pokemonPage(props.model)) {
         div {
-            attrs.css(Styles.headerWrapper) {}
+            css(Styles.headerWrapper) {}
             NavigationArrow {
                href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
                direction = NavigationDirection.PREVIOUS
             }
             span {
-                attrs.css(Styles.spacer) {}
+                css(Styles.spacer) {}
                 SwitchSelector {
                     checked = BattleMode.PVP == props.model.mode
                     onlabel = "PvP"
@@ -50,18 +49,18 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                 }
             }
             NavigationArrow {
-                attrs.href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)
-                attrs.direction = NavigationDirection.NEXT
+                href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)
+                direction = NavigationDirection.NEXT
             }
         }
         div {
-            attrs.css(Styles.leftWrapper) {}
+            css(Styles.leftWrapper) {}
             BasicPokemonInfo {
-                attrs.data = props.model.pokemon
+                data = props.model.pokemon
             }
         }
         div {
-            attrs.css(Styles.rightWrapper) {}
+            css(Styles.rightWrapper) {}
             IVStatsWidget {
                 stats = props.model.stats.currentStats
                 ivs = props.model.stats.ivs
@@ -106,13 +105,13 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             }
         }
         div {
-            attrs.css(Styles.leftWrapper) {}
+            css(Styles.leftWrapper) {}
             moveSetsTable {
                 values = props.model.moveSets
             }
         }
         div {
-            attrs.css(Styles.rightWrapper) {}
+            css(Styles.rightWrapper) {}
             /* space for widgets that will always be last */
         }
     }

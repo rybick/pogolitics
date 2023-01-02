@@ -8,7 +8,6 @@ import pogolitics.PageRProps
 import react.Component
 import react.ReactNode
 import react.State
-import react.attrs
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.p
 
@@ -18,11 +17,11 @@ class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : Component<PageRProp
         div {
             css(Styles.pageWrapper) {}
             div {
-                attrs.css(BasicStylesheet.widgetHeader) {}
+                css(BasicStylesheet.widgetHeader) {}
                 + ("Page Not Found")
             }
             div {
-                attrs.css(Styles.contentWrapper) {}
+                css(Styles.contentWrapper) {}
                 p { +props.model.reason }
             }
         }

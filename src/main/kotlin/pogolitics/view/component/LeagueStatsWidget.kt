@@ -18,14 +18,14 @@ import react.dom.html.ReactHTML.span
 
 val LeagueStatsWidget = fc<LeagueStatsWidgetRProps> { props ->
     div {
-        attrs.css(BasicStylesheet.widgetWrapper) {}
+        css(BasicStylesheet.widgetWrapper) {}
         div {
-            attrs.css(BasicStylesheet.widgetHeader) {}
+            css(BasicStylesheet.widgetHeader) {}
             + (props.name + " league")
         }
         div {
-            attrs.onClick = { props.onClick() }
-            attrs.css(LeagueStatsWidgetStyles.contentWrapper) {}
+            onClick = { props.onClick() }
+            css(LeagueStatsWidgetStyles.contentWrapper) {}
             stat("CP", "${props.stats.cp}")
             stat("level", "${props.stats.level}")
             stat("hardiness", props.stats.hardiness.format(2))
@@ -44,13 +44,13 @@ external interface LeagueStatsWidgetRProps: Props {
 
 private fun ChildrenBuilder.stat(label: String, value: String) {
     span {
-        attrs.css(LeagueStatsWidgetStyles.group) {}
+        css(LeagueStatsWidgetStyles.group) {}
         span {
-            attrs.css(LeagueStatsWidgetStyles.label) {}
+            css(LeagueStatsWidgetStyles.label) {}
             +"$label: "
         }
         span {
-            attrs.css(LeagueStatsWidgetStyles.value) {}
+            css(LeagueStatsWidgetStyles.value) {}
             +value
         }
     }

@@ -15,11 +15,11 @@ import react.dom.html.ReactHTML.span
 
 val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
     div {
-        attrs.css(BasicStylesheet.widgetWrapper) {}
+        css(BasicStylesheet.widgetWrapper) {}
         h1 {
-            attrs.css(BasicPokemonInfoStyles.wrapper) {}
+            css(BasicPokemonInfoStyles.wrapper) {}
             span {
-                attrs.css(BasicPokemonInfoStyles.pokemonId) {}
+                css(BasicPokemonInfoStyles.pokemonId) {}
                 +"#${props.data.pokedexNumber}"
             }
             span {
@@ -27,20 +27,20 @@ val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
             }
             props.data.form?.let { form ->
                 span {
-                    attrs.css(BasicPokemonInfoStyles.pokemonForm) {}
+                    css(BasicPokemonInfoStyles.pokemonForm) {}
                     +"(${form.prettyName})"
                 }
             }
         }
         div {
-            attrs.css(BasicPokemonInfoStyles.staticStatsWrapper) {}
-            StaticStat { attrs.name = "Attack";  attrs.value = props.data.baseAttack.toString() }
-            StaticStat { attrs.name = "Defense"; attrs.value = props.data.baseDefense.toString() }
-            StaticStat { attrs.name = "Stamina"; attrs.value = props.data.baseStamina.toString() }
+            css(BasicPokemonInfoStyles.staticStatsWrapper) {}
+            StaticStat { name = "Attack";  value = props.data.baseAttack.toString() }
+            StaticStat { name = "Defense"; value = props.data.baseDefense.toString() }
+            StaticStat { name = "Stamina"; value = props.data.baseStamina.toString() }
             StaticStat {
-                attrs.name = "Hardiness"
-                attrs.value = props.data.hardiness.format(2)
-                attrs.info = "(defense⋅stamina)"
+                name = "Hardiness"
+                value = props.data.hardiness.format(2)
+                info = "(defense⋅stamina)"
             }
         }
     }

@@ -25,18 +25,18 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
 
     override fun render() = Fragment.create {
         div {
-            attrs.css(BasicStylesheet.widgetWrapper) {}
+            css(BasicStylesheet.widgetWrapper) {}
             div {
-                attrs.css(Table.table) {}
+                css(Table.table) {}
                 div {
-                    attrs.css(Table.row, Table.header) {}
+                    css(Table.row, Table.header) {}
                     div {
-                        attrs.css(Table.cell, Table.headerCell, Table.first) {}
+                        css(Table.cell, Table.headerCell, Table.first) {}
                         +"Moveset"
                     }
                     div {
-                        attrs.css(Table.cell, Table.headerCell) {}
-                        attrs.onClick = {
+                        css(Table.cell, Table.headerCell) {}
+                        onClick = {
                             setState({ state ->
                                 val sort = state.sort
                                 state.sort = Sort(
@@ -49,8 +49,8 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         +("DPS" + getIcon(state.sort, 1))
                     }
                     div {
-                        attrs.css(Table.cell, Table.headerCell) {}
-                        attrs.onClick = {
+                        css(Table.cell, Table.headerCell) {}
+                        onClick = {
                             setState({ state ->
                                 val sort = state.sort
                                 state.sort = Sort(
@@ -63,8 +63,8 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         +("TTFA" + getIcon(state.sort, 2))
                     }
                     div {
-                        attrs.css(Table.cell, Table.headerCell) {}
-                        attrs.onClick = {
+                        css(Table.cell, Table.headerCell) {}
+                        onClick = {
                             setState({ state ->
                                 val sort = state.sort
                                 state.sort = Sort(
@@ -79,23 +79,23 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                 }
                 sortValues(props.values, state.sort).forEach {
                     div {
-                        attrs.css(Table.row) {}
+                        css(Table.row) {}
                         div {
-                            attrs.css(Table.cell, Table.first, Table.left) {}
-                            Attack { attrs.attack = it.quickAttack }
+                            css(Table.cell, Table.first, Table.left) {}
+                            Attack { attack = it.quickAttack }
                             +" + "
-                            Attack { attrs.attack = it.chargedAttack }
+                            Attack { attack = it.chargedAttack }
                         }
                         div {
-                            attrs.css(Table.cell) {}
+                            css(Table.cell) {}
                             +it.dps.format(2)
                         }
                         div {
-                            attrs.css(Table.cell) {}
+                            css(Table.cell) {}
                             +(it.timeToFirstAttack.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                         div {
-                            attrs.css(Table.cell) {}
+                            css(Table.cell) {}
                             +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
                     }

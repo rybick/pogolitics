@@ -11,25 +11,25 @@ import react.dom.html.ReactHTML.div
 
 val StaticStat = fc<StaticStatComponentRProps>() { props ->
     div {
-        attrs.css(StaticStatStyles.wrapper) {}
+        css(StaticStatStyles.wrapper) {}
         div {
-            attrs.css(BasicStylesheet.Table.table) {}
+            css(BasicStylesheet.Table.table) {}
             div {
-                attrs.css(BasicStylesheet.Table.row, BasicStylesheet.Table.header) {}
+                css(BasicStylesheet.Table.row, BasicStylesheet.Table.header) {}
                 div {
-                    attrs.css(
+                    css(
                         BasicStylesheet.Table.cell,
                         BasicStylesheet.Table.headerCell,
                         BasicStylesheet.Table.first
                     ) {}
-                    attrs.title = props.info
+                    title = props.info
                     +props.name
                 }
             }
             div {
-                attrs.css(BasicStylesheet.Table.row) {}
+                css(BasicStylesheet.Table.row) {}
                 div {
-                    attrs.css(
+                    css(
                         BasicStylesheet.Table.cell,
                         BasicStylesheet.Table.headerCell,
                         BasicStylesheet.Table.first

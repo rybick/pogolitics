@@ -13,15 +13,14 @@ import emotion.react.css
 import pogolitics.pointer
 import pogolitics.view.StyleConstants
 import react.Props
-import react.attrs
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.span
 import react.fc
 
 val NavigationArrow = fc<ArrowProps> { props ->
     a {
-        attrs.href = props.href
-        attrs.css(props.direction.style) {}
+        href = props.href
+        css(props.direction.style) {}
         span {}
     }
 }

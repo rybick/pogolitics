@@ -14,10 +14,10 @@ import react.dom.html.ReactHTML.span
 
 val Attack = fc<AttackProps> { props ->
     span {
-        attrs.css(if (props.attack.elite) AttackStyles.eliteAttackWrapper else AttackStyles.regularAttackWrapper) {}
+        css(if (props.attack.elite) AttackStyles.eliteAttackWrapper else AttackStyles.regularAttackWrapper) {}
         img {
-            attrs.src = iconPath(props.attack.type)
-            attrs.css {
+            src = iconPath(props.attack.type)
+            css {
                 height = 1.5.rem
                 margin = Margin(StyleConstants.Margin.small, StyleConstants.Margin.small)
             }

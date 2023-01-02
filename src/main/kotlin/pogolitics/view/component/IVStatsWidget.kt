@@ -19,67 +19,67 @@ import react.dom.html.ReactHTML.span
 
 val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
     div {
-        attrs.css(
+        css(
             BasicStylesheet.widgetWrapper,
             IVStatsWidgetStyles.outerWrapper
         ) {}
         div {
-            attrs.css(IVStatsWidgetStyles.innerWrapper) {}
+            css(IVStatsWidgetStyles.innerWrapper) {}
             div {
-                attrs.css(IVStatsWidgetStyles.upperStatsWrapper) {}
+                css(IVStatsWidgetStyles.upperStatsWrapper) {}
                 span {
                     span {
                         +"level: "
                     }
                     span {
                         input {
-                            attrs.type = InputType.number
-                            attrs.min = "1"
-                            attrs.max = "51"
-                            attrs.step = 0.5
-                            attrs.pattern = "\\d*"
-                            attrs.key = "${props.stats.level}"
-                            attrs.defaultValue = "${props.stats.level}"
+                            type = InputType.number
+                            min = "1"
+                            max = "51"
+                            step = 0.5
+                            pattern = "\\d*"
+                            key = "${props.stats.level}"
+                            defaultValue = "${props.stats.level}"
                             val onChangeFunction = { event: SyntheticEvent<*, *> ->
                                 props.onChange(props.createStateWith {
                                     level = (event.target as HTMLInputElement).value.toFloat()
                                 })
                             }
-                            attrs.onBlur = onChangeFunction
-                            attrs.onMouseUp = onChangeFunction
+                            onBlur = onChangeFunction
+                            onMouseUp = onChangeFunction
                         }
                     }
                 }
             }
             IVBar {
-                attrs.name = "Attack"
-                attrs.iv = props.ivs.attack
-                attrs.onChange = { value ->
+                name = "Attack"
+                iv = props.ivs.attack
+                onChange = { value ->
                     props.onChange(props.createStateWith { attack = value })
                 }
             }
             IVBar {
-                attrs.name = "Defense"
-                attrs.iv = props.ivs.defense
-                attrs.onChange = { value ->
+                name = "Defense"
+                iv = props.ivs.defense
+                onChange = { value ->
                     props.onChange(props.createStateWith { defense = value })
                 }
             }
             IVBar {
-                attrs.name = "HP"
-                attrs.iv = props.ivs.stamina
-                attrs.onChange = { value ->
+                name = "HP"
+                iv = props.ivs.stamina
+                onChange = { value ->
                     props.onChange(props.createStateWith { stamina = value })
                 }
             }
             div {
-                attrs.css(IVStatsWidgetStyles.lowerStatsWrapper) {}
+                css(IVStatsWidgetStyles.lowerStatsWrapper) {}
                 span {
                     span {
                         +"CP: "
                     }
                     input {
-                        attrs.css {
+                        css {
                             "&::-webkit-outer-spin-button" {
                                 appearance = None.none
                                 margin = 0.px
@@ -90,11 +90,11 @@ val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
                             }
                             appearance = Appearance.textfield
                         }
-                        attrs.type = InputType.number
-                        attrs.min = "10"
-                        attrs.max = "5000"
-                        attrs.key = "${props.stats.cp}"
-                        attrs.defaultValue = "${props.stats.cp}"
+                        type = InputType.number
+                        min = "10"
+                        max = "5000"
+                        key = "${props.stats.cp}"
+                        defaultValue = "${props.stats.cp}"
                         val onChangeFunction = { event: SyntheticEvent<*, *> ->
                             val value = (event.target as HTMLInputElement).value
                             props.onChange(props.createStateWith {
@@ -102,8 +102,8 @@ val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
                                 cp = value.toInt()
                             })
                         }
-                        attrs.onBlur = onChangeFunction
-                        attrs.onKeyUp = { event: KeyboardEvent<*> ->
+                        onBlur = onChangeFunction
+                        onKeyUp = { event: KeyboardEvent<*> ->
                             if (event.key == "Enter") {
                                 onChangeFunction(event)
                             }
