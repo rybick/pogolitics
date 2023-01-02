@@ -10,7 +10,6 @@ import pogolitics.api.PokemonIndexEntryDto
 import pogolitics.model.PokemonForm
 import pogolitics.model.PokemonListModel
 import pogolitics.view.PokemonListPage
-import react.RProps
 import react.router.Params
 import kotlin.reflect.KClass
 

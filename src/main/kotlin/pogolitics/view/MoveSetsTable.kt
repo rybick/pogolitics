@@ -1,22 +1,25 @@
 package pogolitics.view
 
 import emotion.react.css
+import js.core.jso
 import pogolitics.model.MoveSet
 import pogolitics.format
 import pogolitics.view.BasicStylesheet.Table
 import pogolitics.view.component.Attack
 import react.RProps
 import react.RState
-import styled.styledDiv
 import react.*
 import react.dom.html.ReactHTML.div
 import kotlin.text.Typography.nbsp
 import kotlin.time.DurationUnit
 
 class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsRState>(props) {
-//    override fun MovesetsRState.init(props: MovesetsRProps) {
-//        sort = null
-//    } // TODO later mig
+
+    init {
+        state = jso {
+            sort = null
+        }
+    }
 
     private val UP_ICON = Char(9652) //"&#9652;"
     private val DOWN_ICON = Char(9662) //"&#9662;"

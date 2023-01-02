@@ -1,6 +1,7 @@
 package pogolitics
 
 import history.Location
+import js.core.jso
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
 import org.w3c.dom.url.URLSearchParams
@@ -27,9 +28,11 @@ external interface AppState : RState {
 class App: Component<RProps, AppState>() {
     val appConfig = AppConfig()
 
-//    override fun AppState.init(props: RProps) {
-//        pageStateChanged = false
-//    } // TODO later mig
+    init {
+        state = jso {
+            pageStateChanged = false
+        }
+    }
 
     override fun render() = Fragment.create {
         HashRouter {
