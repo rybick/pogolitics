@@ -1,5 +1,10 @@
 package pogolitics
 
+import csstype.Opacity
+import csstype.TextAlign
+import csstype.number
+import csstype.pct
+import emotion.react.css
 import history.Location
 import js.core.jso
 import kotlinx.coroutines.MainScope
@@ -11,6 +16,12 @@ import react.*
 import react.router.*
 import react.router.dom.HashRouter
 import kotlinx.browser.window
+import pogolitics.view.StyleConstants
+import pogolitics.view.component.Header
+import pogolitics.view.loadingImagePath
+import pogolitics.view.renderPage
+import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.p
 import kotlin.reflect.KClass
 
@@ -63,7 +74,7 @@ class App: Component<Props, AppState>() {
                     state.pageStateChanged = false
                     state.pageState = route.controller.getInitialState(url)
                     orderStateReload(route, params, location)
-                    renderLoadingPage()
+                    +renderLoadingPage()
                 }
             }
         }
@@ -73,8 +84,15 @@ class App: Component<Props, AppState>() {
         return FC(block).create() // workaround to be able to call useParams(), perhaps it can be done cleaner
     }
 
-    private fun ChildrenBuilder.renderLoadingPage() {
-        p { +"loading..." }
+    private fun renderLoadingPage() = renderPage(null) {
+        div {
+            css {
+                padding = StyleConstants.Padding.big
+                textAlign = TextAlign.center
+                opacity = number(0.1)
+            }
+            img { src = loadingImagePath() }
+        }
     }
 
     private fun ChildrenBuilder.renderNotFoundPage(reason: String) {

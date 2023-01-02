@@ -2,6 +2,7 @@ package pogolitics.view.component
 
 import csstype.FontWeight
 import csstype.None
+import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.view.Page
@@ -12,11 +13,12 @@ import react.Props
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
+import kotlin.text.Typography.nbsp
 
 val Breadcrumbs = FC { props: BreadcrumbsProps ->
-    props.page?.let { thePage ->
-        div {
-            css(BreadcrumbsStyles.breadcrumbsWrapper) {}
+    div {
+        css(BreadcrumbsStyles.breadcrumbsWrapper) {}
+        props.page?.let { thePage ->
             thePage.getFullPath().forEachIndexed { index, page ->
                 if (index > 0) {
                     span {
@@ -31,7 +33,7 @@ val Breadcrumbs = FC { props: BreadcrumbsProps ->
                     }
                 }
             }
-        }
+        } ?: +"$nbsp" // to keep the component the same height if there is nothing in it
     }
 }
 

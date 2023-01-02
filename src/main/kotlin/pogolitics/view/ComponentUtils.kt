@@ -11,6 +11,9 @@ fun iconPath(type: PokemonType): String =
 fun logoPath(): String =
     path("/img/logo/116x60.png")
 
+fun loadingImagePath(): String =
+    path("/img/misc/loading.gif")
+
 fun pokemonPagePath(pokedexNumber: Int, form: PokemonForm? = null, mode: BattleMode = BattleMode.default): String =
     pagePath(Page.POKEMON(pokedexNumber, form, mode))
 
