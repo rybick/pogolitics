@@ -17,7 +17,7 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 
-val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
+val IVStatsWidget = FC<IVStatsWidgetRProps> { props ->
     div {
         css(
             BasicStylesheet.widgetWrapper,

@@ -7,13 +7,13 @@ import emotion.react.css
 import pogolitics.view.StyleConstants
 import pogolitics.view.logoPath
 import pogolitics.view.pokemonListPagePath
+import react.FC
 import react.Props
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
-import react.fc
 
-val Header = fc<HeaderProps> {
+val Header = FC<HeaderProps> {
     div {
         css(HeaderStyles.headerWrapper) {}
         a { // TODO lead to main page when there is anything there

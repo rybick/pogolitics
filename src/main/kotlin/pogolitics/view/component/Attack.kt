@@ -12,7 +12,7 @@ import react.dom.html.ReactHTML.img
 import emotion.react.css
 import react.dom.html.ReactHTML.span
 
-val Attack = fc<AttackProps> { props ->
+val Attack = FC<AttackProps> { props ->
     span {
         css(if (props.attack.elite) AttackStyles.eliteAttackWrapper else AttackStyles.regularAttackWrapper) {}
         img {

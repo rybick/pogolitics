@@ -7,13 +7,13 @@ import emotion.react.css
 import pogolitics.view.Page
 import pogolitics.view.StyleConstants
 import pogolitics.view.pagePath
+import react.FC
 import react.Props
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
-import react.fc
 
-val Breadcrumbs = fc<BreadcrumbsProps> { props: BreadcrumbsProps ->
+val Breadcrumbs = FC { props: BreadcrumbsProps ->
     props.page?.let { thePage ->
         div {
             css(BreadcrumbsStyles.breadcrumbsWrapper) {}

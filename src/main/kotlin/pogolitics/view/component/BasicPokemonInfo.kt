@@ -13,7 +13,7 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
 import react.dom.html.ReactHTML.span
 
-val BasicPokemonInfo = fc<BasicPokemonInfoRProps> { props ->
+val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
     div {
         css(BasicStylesheet.widgetWrapper) {}
         h1 {

@@ -16,7 +16,7 @@ import react.*
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
 
-val LeagueStatsWidget = fc<LeagueStatsWidgetRProps> { props ->
+val LeagueStatsWidget = FC<LeagueStatsWidgetRProps> { props ->
     div {
         css(BasicStylesheet.widgetWrapper) {}
         div {

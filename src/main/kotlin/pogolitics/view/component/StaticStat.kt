@@ -9,7 +9,7 @@ import pogolitics.view.BasicStylesheet
 import react.*
 import react.dom.html.ReactHTML.div
 
-val StaticStat = fc<StaticStatComponentRProps>() { props ->
+val StaticStat = FC<StaticStatComponentRProps>() { props ->
     div {
         css(StaticStatStyles.wrapper) {}
         div {
