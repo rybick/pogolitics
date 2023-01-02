@@ -21,7 +21,7 @@ import react.useState
 
 val Header = FC<HeaderProps> {
     var term: String by useState("Pikachu")
-    val filtered = data.filter { it.name.contains(term, ignoreCase = true) }
+    val filtered = getFilteredData(term)
 
     div {
         css(HeaderStyles.headerWrapper) {}
@@ -52,6 +52,13 @@ val Header = FC<HeaderProps> {
         }
     }
 }
+
+private fun getFilteredData(term: String): List<Tmp> =
+    if (term.isBlank()) {
+        emptyList()
+    } else {
+        data.filter { it.name.contains(term, ignoreCase = true) }
+    }
 
 private val data = listOf<Tmp>(
     Tmp(1, "Pikachu"),
