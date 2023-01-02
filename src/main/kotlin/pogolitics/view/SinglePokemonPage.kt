@@ -14,13 +14,14 @@ import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.component.*
 import react.Component
-import react.RState
+import react.State
 import react.SwitchSelector
 import react.attrs
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
 
-class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) : Component<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, RState>(props) {
+class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) :
+    Component<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, State>(props) {
 
     override fun render() = renderPage(pokemonPage(props.model)) {
         div {

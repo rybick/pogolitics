@@ -16,7 +16,6 @@ import react.dom.html.InputType
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
-import styled.*
 
 val IVStatsWidget = fc<IVStatsWidgetRProps> { props ->
     div {
@@ -154,7 +153,7 @@ private object IVStatsWidgetStyles {
     }
 }
 
-external interface IVStatsWidgetRProps : RProps {
+external interface IVStatsWidgetRProps : Props {
     var stats: SinglePokemonModel.VariablePokemonStatistics
     var ivs: IVs
     var onChange: (PokemonIndividualValuesState) -> Unit

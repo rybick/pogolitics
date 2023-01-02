@@ -41,7 +41,7 @@ val StaticStat = fc<StaticStatComponentRProps>() { props ->
     }
 }
 
-external interface StaticStatComponentRProps: RProps {
+external interface StaticStatComponentRProps: Props {
     var name: String
     var value: String
     var info: String

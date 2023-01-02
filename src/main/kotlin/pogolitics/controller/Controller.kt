@@ -4,7 +4,7 @@ import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
 import pogolitics.PageRProps
 import react.Component
-import react.RState
+import react.State
 import react.router.Params
 import kotlin.reflect.KClass
 
@@ -14,5 +14,5 @@ interface Controller<M, S> {
         props: Params,
         params: URLSearchParams,
         state: S
-    ): ControllerResult<M, KClass<out Component<out PageRProps<M, S>, out RState>>>
+    ): ControllerResult<M, KClass<out Component<out PageRProps<M, S>, out State>>>
 }

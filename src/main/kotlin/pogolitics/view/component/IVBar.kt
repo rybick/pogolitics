@@ -11,7 +11,6 @@ import react.dom.events.MouseEventHandler
 import react.dom.html.InputType
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
-import styled.styledDiv
 import kotlin.math.round
 
 val IVBar = FC<IVBarComponentRProps> { props ->
@@ -88,7 +87,7 @@ val IVBar = FC<IVBarComponentRProps> { props ->
 
 }
 
-external interface IVBarComponentRProps: RProps {
+external interface IVBarComponentRProps: Props {
     var name: String
     var iv: Int
     var onChange: (Int) -> Unit

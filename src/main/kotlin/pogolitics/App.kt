@@ -11,21 +11,17 @@ import react.*
 import react.router.*
 import react.router.dom.HashRouter
 import kotlinx.browser.window
-import pogolitics.model.PokemonListModel
-import pogolitics.view.PokemonListPage
-import pogolitics.view.SinglePokemonPage
-import pogolitics.view.component.Header
 import react.dom.html.ReactHTML.p
 import kotlin.reflect.KClass
 
-external interface AppState : RState {
+external interface AppState : State {
     var controllerResult: ControllerResult<*, *>?
     var url: String?
     var pageState: Any?
     var pageStateChanged: Boolean
 }
 
-class App: Component<RProps, AppState>() {
+class App: Component<Props, AppState>() {
     val appConfig = AppConfig()
 
     init {
@@ -103,7 +99,7 @@ class App: Component<RProps, AppState>() {
     @Suppress("UNCHECKED_CAST")
     private fun <M, S> ChildrenBuilder.renderPage() {
         return if (state.controllerResult!!.isModelAndView) {
-            val component = state.controllerResult!!.view as KClass<Component<PageRProps<M, S>, RState>>
+            val component = state.controllerResult!!.view as KClass<Component<PageRProps<M, S>, State>>
             component.react {
                 attrs.model = state.controllerResult!!.model as M
                 //attrs.state = state.pageState!! as S

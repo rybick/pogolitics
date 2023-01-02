@@ -6,8 +6,6 @@ import pogolitics.model.MoveSet
 import pogolitics.format
 import pogolitics.view.BasicStylesheet.Table
 import pogolitics.view.component.Attack
-import react.RProps
-import react.RState
 import react.*
 import react.dom.html.ReactHTML.div
 import kotlin.text.Typography.nbsp
@@ -127,11 +125,11 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
 fun ChildrenBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit): Unit =
     MovesetsTable::class.react(handler)
 
-external interface MovesetsRProps: RProps {
+external interface MovesetsRProps: Props {
     var values: List<MoveSet>
 }
 
-external interface MovesetsRState: RState {
+external interface MovesetsRState: State {
     var sort: Sort?
 }
 
