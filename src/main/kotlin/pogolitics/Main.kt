@@ -3,9 +3,7 @@ package pogolitics
 import browser.document
 import dom.Element
 import react.Fragment
-import react.RProps
 import react.create
-import react.createElement
 import react.dom.client.createRoot
 import react.react
 
@@ -18,7 +16,7 @@ fun main() {
             createRoot(element)
                 .render(
                     Fragment.create {
-                        App::class.react {}
+                        App::class.react { }
                     }
                 )
         }

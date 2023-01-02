@@ -10,6 +10,10 @@ import react.*
 import react.router.*
 import react.router.dom.HashRouter
 import kotlinx.browser.window
+import pogolitics.model.PokemonListModel
+import pogolitics.view.PokemonListPage
+import pogolitics.view.SinglePokemonPage
+import pogolitics.view.component.Header
 import react.dom.html.ReactHTML.p
 import kotlin.reflect.KClass
 
@@ -46,7 +50,7 @@ class App: Component<RProps, AppState>() {
     private fun <M, S> ChildrenBuilder.routeToPage(route: AppConfig.Route<M, S>) {
         Route {
             attrs.path = route.path
-            attrs.element = Fragment.create {
+            attrs.element = Fragment.create { (FC<Props> { // workaround to be able to call useParams(), perhaps it can be done cleaner
                 val params: Params = useParams()
                 val location: Location = useLocation()
                 val url = window.location.href
@@ -62,7 +66,7 @@ class App: Component<RProps, AppState>() {
                     orderStateReload(route, params, location)
                     renderLoadingPage()
                 }
-            }
+            }) {} }
         }
     }
 
