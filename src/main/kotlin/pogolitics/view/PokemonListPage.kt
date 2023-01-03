@@ -4,6 +4,7 @@ import csstype.*
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
+import pogolitics.model.PokemonForm
 import pogolitics.model.PokemonListModel
 import react.ChildrenBuilder
 import react.Component
@@ -15,7 +16,7 @@ import react.dom.html.ReactHTML.span
 class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
     Component<PageRProps<PokemonListModel, Unit>, State>(props) {
 
-    override fun render() = renderPage(Page.POKEMON_LIST) {
+    override fun render() = renderPage(Page.POKEMON_LIST, props.model.pokemon) {
         div {
             css(BasicStylesheet.widgetWrapper) {}
             div {
@@ -81,15 +82,17 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
         }
     }
 
-    private fun ChildrenBuilder.formWidget(pokedexNumber: Int, form: PokemonListModel.Form) {
+    private fun ChildrenBuilder.formWidget(pokedexNumber: Int, form: PokemonForm) {
         span {
             css(Styles.form) {}
             a {
-                href = pokemonPagePath(pokedexNumber, form.toPokemonForm())
+                href = pokemonPagePath(pokedexNumber, form)
                 +form.prettyNameOrDefault
             }
         }
     }
+
+    private val PokemonForm?.prettyNameOrDefault get() = this?.prettyName ?: "Default"
 
     private object Styles {
         val form = ClassName  {

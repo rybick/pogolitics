@@ -11,25 +11,23 @@ import pogolitics.model.*
 import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitics.view.SinglePokemonPage
-import react.Props
 import react.router.Params
 import kotlin.math.sqrt
 import kotlin.reflect.KClass
 
-class SinglePokemonController(private val api: Api): Controller<SinglePokemonModel, PokemonIndividualValuesState> {
-
-    interface IdRProps : Props {
-        var pokedexNumber: String
-    }
+class SinglePokemonController(
+    private val api: Api,
+    private val pokemonIndexService: PokemonIndexService
+): Controller<SinglePokemonModel, PokemonIndividualValuesState> {
 
     override fun getInitialState(url: String) =
-            PokemonIndividualValuesState(
-                level = 40.0F,
-                attack = 15,
-                defense = 15,
-                stamina = 15,
-                cp = null
-            )
+        PokemonIndividualValuesState(
+            level = 40.0F,
+            attack = 15,
+            defense = 15,
+            stamina = 15,
+            cp = null
+        )
 
     override suspend fun get(
         props: Params,
@@ -61,7 +59,8 @@ class SinglePokemonController(private val api: Api): Controller<SinglePokemonMod
                             fastMoves = fastMoves.await(),
                             chargedMoves = chargedMoves.await(),
                             pokemonIvs = pokemonStats
-                        )
+                        ),
+                        pokemonIndex = pokemonIndexService.getPokemonList()
                     )
                 )
             } ?: ControllerResult.notFound("No such pokemon")

@@ -1,15 +1,16 @@
 package pogolitics.model
 
 data class SinglePokemonModel(
-        val mode: BattleMode,
-        val pokemon: PokemonStaticInfo,
-        val stats: PokemonIndividualStatistics,
-        val moveSets: List<MoveSet>
+    val mode: BattleMode,
+    val pokemon: PokemonStaticInfo,
+    val stats: PokemonIndividualStatistics,
+    val moveSets: List<MoveSet>,
+    val pokemonIndex: List<PokemonEntry>
 ) {
     data class PokemonStaticInfo(
         val uniqueId: String,
         val pokedexNumber: Int,
-        val form: PokemonForm?,
+        val form: PokemonForm,
         val name: String,
         val baseAttack: Int,
         val baseDefense: Int,

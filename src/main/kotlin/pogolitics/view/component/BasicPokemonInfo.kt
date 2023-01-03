@@ -25,10 +25,10 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
             span {
                 +props.data.name
             }
-            props.data.form?.let { form ->
+            props.data.form.prettyName?.let { prettyName ->
                 span {
                     css(BasicPokemonInfoStyles.pokemonForm) {}
-                    +"(${form.prettyName})"
+                    +"(${prettyName})"
                 }
             }
         }

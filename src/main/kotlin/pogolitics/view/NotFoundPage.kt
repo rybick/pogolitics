@@ -5,6 +5,7 @@ import csstype.pct
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
+import pogolitics.model.PokemonEntry
 import react.Component
 import react.ReactNode
 import react.State
@@ -13,7 +14,7 @@ import react.dom.html.ReactHTML.p
 
 class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : Component<PageRProps<NotFoundModel, Unit>, State>(props) {
 
-    override fun render(): ReactNode = renderPage(null) {
+    override fun render(): ReactNode = renderPage(null, props.model.pokemonIndex) {
         div {
             css(Styles.pageWrapper) {}
             div {
@@ -40,4 +41,4 @@ class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : Component<PageRProp
     }
 }
 
-data class NotFoundModel(val reason: String)
+data class NotFoundModel(val reason: String, val pokemonIndex: List<PokemonEntry>)
