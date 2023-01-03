@@ -22,7 +22,7 @@ import react.dom.html.ReactHTML.span
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) :
     Component<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, State>(props) {
 
-    override fun render() = renderPage(pokemonPage(props.model)) {
+    override fun render() = renderPage(pokemonPage(props.model), props.model.pokemonIndex) {
         div {
             css(Styles.headerWrapper) {}
             NavigationArrow {

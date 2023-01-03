@@ -7,6 +7,7 @@ import csstype.number
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.model.PokemonEntry
 import pogolitics.view.StyleConstants
 import pogolitics.view.logoPath
 import pogolitics.view.pokemonListPagePath
@@ -19,9 +20,9 @@ import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
 
-val Header = FC<HeaderProps> {
+val Header = FC<HeaderProps> { props ->
     var term: String by useState("Pikachu")
-    val filtered = getFilteredData(term)
+    val filtered = props.getFilteredData(term)
 
     div {
         css(HeaderStyles.headerWrapper) {}
@@ -44,7 +45,7 @@ val Header = FC<HeaderProps> {
                 css(HeaderStyles.searchResultsWrapper) {  }
                 filtered.forEach {
                     div {
-                        span { +"#${it.id} " }
+                        span { +"#${it.pokedexNumber} " }
                         span { +it.name }
                     }
                 }
@@ -53,24 +54,18 @@ val Header = FC<HeaderProps> {
     }
 }
 
-private fun getFilteredData(term: String): List<Tmp> =
+private fun HeaderProps.getFilteredData(term: String): List<PokemonEntry> =
     if (term.isBlank()) {
         emptyList()
     } else {
-        data.filter { it.name.contains(term, ignoreCase = true) }
+        pokemonIndex.filter { it.name.contains(term, ignoreCase = true) }
     }
-
-private val data = listOf<Tmp>(
-    Tmp(1, "Pikachu"),
-    Tmp(2, "Bulbasaur"),
-    Tmp(2, "Charmander")
-)
-
-private data class HeaderState(var term: String)
 
 private data class Tmp(val id: Int, val name: String)
 
-interface HeaderProps: Props
+interface HeaderProps: Props {
+    var pokemonIndex: List<PokemonEntry>
+}
 
 private object HeaderStyles {
     val headerWrapper = ClassName {

@@ -82,7 +82,7 @@ class App: Component<Props, AppState>() {
         return FC(block).create() // workaround to be able to call useParams(), perhaps it can be done cleaner
     }
 
-    private fun renderLoadingPage() = renderPage(null) {
+    private fun renderLoadingPage() = renderPage(null, emptyList()) {
         div {
             css {
                 padding = StyleConstants.Padding.big

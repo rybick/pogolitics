@@ -14,7 +14,7 @@ import react.dom.html.ReactHTML.p
 
 class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : Component<PageRProps<NotFoundModel, Unit>, State>(props) {
 
-    override fun render(): ReactNode = renderPage(null) {
+    override fun render(): ReactNode = renderPage(null, props.model.pokemonIndex) {
         div {
             css(Styles.pageWrapper) {}
             div {

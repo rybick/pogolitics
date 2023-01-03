@@ -10,7 +10,7 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.p
 
 class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<HomePageModel, Unit>, State>(props) {
-    override fun render() = renderPage(Page.HOME) {
+    override fun render() = renderPage(Page.HOME, props.model.pokemonIndex) {
         div {
             css(BasicStylesheet.widgetWrapper) {}
             css {

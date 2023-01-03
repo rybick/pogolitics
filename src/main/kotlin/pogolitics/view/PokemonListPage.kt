@@ -16,7 +16,7 @@ import react.dom.html.ReactHTML.span
 class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
     Component<PageRProps<PokemonListModel, Unit>, State>(props) {
 
-    override fun render() = renderPage(Page.POKEMON_LIST) {
+    override fun render() = renderPage(Page.POKEMON_LIST, props.model.pokemon) {
         div {
             css(BasicStylesheet.widgetWrapper) {}
             div {
