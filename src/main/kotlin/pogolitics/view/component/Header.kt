@@ -4,13 +4,16 @@ import csstype.BoxSizing
 import csstype.Display
 import csstype.Position
 import csstype.number
+import csstype.pct
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.model.PokemonEntry
 import pogolitics.view.StyleConstants
+import pogolitics.view.component.HeaderStyles.entryWrapper
 import pogolitics.view.logoPath
 import pogolitics.view.pokemonListPagePath
+import pogolitics.view.pokemonPagePath
 import react.FC
 import react.Props
 import react.dom.html.ReactHTML.a
@@ -43,11 +46,17 @@ val Header = FC<HeaderProps> { props ->
                 }
             }
             div {
-                css(HeaderStyles.searchResultsWrapper) {  }
+                css(HeaderStyles.searchResultsWrapper) {}
                 filtered.forEach {
                     div {
+                        css(entryWrapper) {}
                         span { +"#${it.pokedexNumber} " }
-                        span { +it.name }
+                        span {
+                            a {
+                                href = pokemonPagePath(it.pokedexNumber, null)
+                                +it.name
+                            }
+                        }
                     }
                 }
             }
@@ -61,8 +70,6 @@ private fun HeaderProps.getFilteredData(term: String): List<PokemonEntry> =
     } else {
         pokemonIndex.filter { it.name.contains(term, ignoreCase = true) }
     }
-
-private data class Tmp(val id: Int, val name: String)
 
 interface HeaderProps: Props {
     var pokemonIndex: List<PokemonEntry>
@@ -88,5 +95,11 @@ private object HeaderStyles {
 
     val searchResultsWrapper = ClassName {
         position = Position.absolute
+        backgroundColor = StyleConstants.Colors.secondary.bg
+        width = 100.pct
+    }
+
+    val entryWrapper = ClassName {
+
     }
 }
