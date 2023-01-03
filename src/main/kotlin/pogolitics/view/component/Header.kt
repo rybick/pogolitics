@@ -21,7 +21,7 @@ import react.dom.html.ReactHTML.span
 import react.useState
 
 val Header = FC<HeaderProps> { props ->
-    var term: String by useState("Pikachu")
+    var term: String by useState("")
     val filtered = props.getFilteredData(term)
 
     div {
@@ -37,6 +37,7 @@ val Header = FC<HeaderProps> { props ->
             css(HeaderStyles.searchInputWrapper) {}
             input {
                 value = term
+                placeholder = "Search for pokemon..."
                 onChange = { event ->
                     term = event.target.value
                 }
