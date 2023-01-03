@@ -11,9 +11,20 @@ class PokemonForm private constructor(val code: String?) {
             .replace("_", " ")
     }
 
+    override fun equals(other: Any?): Boolean =
+        if (other == null || other !is PokemonForm) {
+            false
+        } else {
+            code == other.code
+        }
+
+    override fun hashCode(): Int = code.hashCode()
+
+    override fun toString(): String = "Form($code)"
+
     companion object {
         fun ofNullable(code: String?): PokemonForm = code?.let(::PokemonForm) ?: DEFAULT
 
-        private val DEFAULT = PokemonForm(null)
+        val DEFAULT = PokemonForm(null)
     }
 }
