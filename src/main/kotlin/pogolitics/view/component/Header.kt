@@ -3,6 +3,7 @@ package pogolitics.view.component
 import csstype.BoxSizing
 import csstype.Display
 import csstype.number
+import csstype.pct
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
