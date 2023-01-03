@@ -38,9 +38,7 @@ class PokemonListController(private val api: Api) : Controller<PokemonListModel,
                     pokedexNumber = pokedexNumber,
                     name = entries.first().name,
                     forms = entries
-                        .map {
-                            PokemonListModel.Form(PokemonForm.ofNullable(it.form), it.uniqueId)
-                        }
+                        .map { PokemonForm.ofNullable(it.form) }
                 )
             }
             .values
