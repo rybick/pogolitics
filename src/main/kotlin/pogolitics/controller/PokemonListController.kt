@@ -7,13 +7,14 @@ import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
 import pogolitics.api.Api
 import pogolitics.api.PokemonIndexEntryDto
+import pogolitics.model.PokemonEntry
 import pogolitics.model.PokemonForm
 import pogolitics.model.PokemonListModel
 import pogolitics.view.PokemonListPage
 import react.router.Params
 import kotlin.reflect.KClass
 
-class PokemonListController(private val api: Api) : Controller<PokemonListModel, Unit> {
+class PokemonListController(private val pokemonListService: PokemonListService) : Controller<PokemonListModel, Unit> {
 
     override fun getInitialState(url: String) {}
 
@@ -22,26 +23,11 @@ class PokemonListController(private val api: Api) : Controller<PokemonListModel,
         params: URLSearchParams,
         state: Unit
     ): ControllerResult<PokemonListModel, KClass<PokemonListPage>> =
-        coroutineScope {
-            val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
-            ControllerResult.modelAndView(
-                view = PokemonListPage::class,
-                model = PokemonListModel(mapToPokemonEntries(pokemonIndex.await()))
-            )
-        }
+        ControllerResult.modelAndView(
+            view = PokemonListPage::class,
+            model = PokemonListModel(pokemonListService.getPokemonList())
+        )
 
-    private fun mapToPokemonEntries(pokemonDtos: Array<PokemonIndexEntryDto>): List<PokemonListModel.PokemonEntry> =
-        pokemonDtos
-            .groupBy { it.pokedexNumber }
-            .mapValues { (pokedexNumber, entries) ->
-                PokemonListModel.PokemonEntry(
-                    pokedexNumber = pokedexNumber,
-                    name = entries.first().name,
-                    forms = entries
-                        .map { PokemonForm.ofNullable(it.form) }
-                )
-            }
-            .values
-            .sortedBy { it.pokedexNumber }
+
 
 }
