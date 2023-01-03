@@ -100,15 +100,27 @@ fun SearchBoxProps.getFilteredData(term: String): List<PokemonFormEntry> {
         pokemonIndex
             .toFormEntries()
             .mapNotNull { entry -> entry.matches(searchTerms)?.let { Pair(it, entry) } }
-            .sortedByDescending { (match, _) -> match.order }
+            .sortedByDescending { (match, entry) -> calculateOrder(match, entry) }
             .map { (_, entry) -> entry }
     }
 }
 
-enum class MatchedField(val order: Int) {
-    NAME(100), // Highest
-    POKEDEX_NUMBER(10),
-    FORM(0) // Lowest
+private object Order {
+    val highest = 100
+    val high = 99
+    val lowest = 0
+}
+private fun calculateOrder(match: MatchedField, entry: PokemonFormEntry): Int =
+    when (match) {
+        MatchedField.NAME -> if (entry.form.isDefault()) Order.highest else Order.lowest
+        MatchedField.POKEDEX_NUMBER -> Order.highest
+        MatchedField.FORM -> Order.high
+    }
+
+enum class MatchedField {
+    NAME,
+    POKEDEX_NUMBER,
+    FORM
 }
 
 data class PokemonFormEntry(val pokedexNumber: Int, val name: String, val form: PokemonForm) {

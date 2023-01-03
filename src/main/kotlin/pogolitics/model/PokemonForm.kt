@@ -11,6 +11,8 @@ class PokemonForm private constructor(val code: String?) {
             .replace("_", " ")
     }
 
+    fun isDefault() = code == null
+
     override fun equals(other: Any?): Boolean =
         if (other == null || other !is PokemonForm) {
             false
