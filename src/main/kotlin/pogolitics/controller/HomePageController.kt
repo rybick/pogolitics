@@ -6,7 +6,7 @@ import pogolitics.view.HomePage
 import react.router.Params
 import kotlin.reflect.KClass
 
-class HomePageController: Controller<Unit, Unit> {
+class HomePageController(private val pokemonListService: PokemonListService): Controller<Unit, Unit> {
 
     override fun getInitialState(url: String) {}
 

@@ -11,13 +11,13 @@ class AppConfig {
     private val api = Api()
     private val pokemonListService = PokemonListService(api)
 
-    private val mainPageController = HomePageController()
+    private val homePageController = HomePageController(pokemonListService)
     private val pokemonListController = PokemonListController(pokemonListService)
-    private val pokemonController = SinglePokemonController(api)
+    private val pokemonController = SinglePokemonController(api, pokemonListService)
 
     // TODO later: move path to controller as well
     val routing: List<Route<out Any, out Any>> = listOf(
-        Route("/", true, mainPageController),
+        Route("/", true, homePageController),
         Route("/pokemon", true, pokemonListController),
         Route("/pokemon/:pokedexNumber", false, pokemonController)
     )

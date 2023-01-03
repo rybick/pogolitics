@@ -16,20 +16,19 @@ import react.router.Params
 import kotlin.math.sqrt
 import kotlin.reflect.KClass
 
-class SinglePokemonController(private val api: Api): Controller<SinglePokemonModel, PokemonIndividualValuesState> {
-
-    interface IdRProps : Props {
-        var pokedexNumber: String
-    }
+class SinglePokemonController(
+    private val api: Api,
+    private val pokemonListService: PokemonListService
+): Controller<SinglePokemonModel, PokemonIndividualValuesState> {
 
     override fun getInitialState(url: String) =
-            PokemonIndividualValuesState(
-                level = 40.0F,
-                attack = 15,
-                defense = 15,
-                stamina = 15,
-                cp = null
-            )
+        PokemonIndividualValuesState(
+            level = 40.0F,
+            attack = 15,
+            defense = 15,
+            stamina = 15,
+            cp = null
+        )
 
     override suspend fun get(
         props: Params,
