@@ -14,6 +14,7 @@ import react.*
 import react.router.*
 import react.router.dom.HashRouter
 import kotlinx.browser.window
+import pogolitics.model.PokemonEntry
 import pogolitics.view.StyleConstants
 import pogolitics.view.loadingImagePath
 import pogolitics.view.renderPage
@@ -26,6 +27,7 @@ external interface AppState : State {
     var url: String?
     var pageState: Any?
     var pageStateChanged: Boolean
+    var pokemonIndex: List<PokemonEntry>?
 }
 
 class App: Component<Props, AppState>() {
@@ -46,7 +48,7 @@ class App: Component<Props, AppState>() {
                 Route {
                     path = "/"
                     element = Fragment.create {
-                        renderNotFoundPage("Invalid path")
+                        renderNotFoundPage("Invalid path", listOf()) // TODO later - can we get the pokemon list here?
                     }
                 }
             }
@@ -91,9 +93,9 @@ class App: Component<Props, AppState>() {
         }
     }
 
-    private fun ChildrenBuilder.renderNotFoundPage(reason: String) {
+    private fun ChildrenBuilder.renderNotFoundPage(reason: String, pokemonIndex: List<PokemonEntry>) {
         NotFoundPage::class.react {
-            model = NotFoundModel(reason)
+            model = NotFoundModel(reason, pokemonIndex)
         }
     }
 
@@ -106,9 +108,17 @@ class App: Component<Props, AppState>() {
                     params = URLSearchParams(location.search),
                     state = state.pageState!! as S
                 )
+            val pokemonIndex = if (controllerResult.notFoundReason != null) {
+                // This might not be the most elegant solution
+                // We may think of other approach later
+                appConfig.pokemonIndexService.getPokemonList()
+            } else {
+                emptyList()
+            }
             setState({ state ->
                 state.url = window.location.href
                 state.controllerResult = controllerResult
+                state.pokemonIndex = pokemonIndex
                 state
             })
         }
@@ -130,7 +140,7 @@ class App: Component<Props, AppState>() {
                 }
             }
         } else {
-            renderNotFoundPage(state.controllerResult!!.notFoundReason!!)
+            renderNotFoundPage(state.controllerResult!!.notFoundReason!!, state.pokemonIndex!!)
         }
     }
 

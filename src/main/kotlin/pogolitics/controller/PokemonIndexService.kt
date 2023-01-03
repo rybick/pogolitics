@@ -5,7 +5,7 @@ import pogolitics.api.PokemonIndexEntryDto
 import pogolitics.model.PokemonEntry
 import pogolitics.model.PokemonForm
 
-class PokemonListService(private val api: Api) {
+class PokemonIndexService(private val api: Api) {
 
     suspend fun getPokemonList(): List<PokemonEntry> =
         mapToPokemonEntries(api.fetchPokemonIndex())

@@ -5,6 +5,7 @@ import csstype.pct
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
+import pogolitics.model.PokemonEntry
 import react.Component
 import react.ReactNode
 import react.State
@@ -40,4 +41,4 @@ class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : Component<PageRProp
     }
 }
 
-data class NotFoundModel(val reason: String)
+data class NotFoundModel(val reason: String, val pokemonIndex: List<PokemonEntry>)
