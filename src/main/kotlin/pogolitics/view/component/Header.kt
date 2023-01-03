@@ -1,11 +1,14 @@
 package pogolitics.view.component
 
+import csstype.Border
 import csstype.BoxSizing
 import csstype.Display
+import csstype.LineStyle
 import csstype.Position
 import csstype.number
 import csstype.pct
 import csstype.px
+import csstype.unaryMinus
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.model.PokemonEntry
@@ -24,8 +27,9 @@ import react.dom.html.ReactHTML.span
 import react.useState
 
 val Header = FC<HeaderProps> { props ->
+    val searchResultLimit = 6
     var term: String by useState("")
-    val filtered = props.getFilteredData(term)
+    val filtered = props.getFilteredData(term).take(searchResultLimit)
 
     div {
         css(HeaderStyles.headerWrapper) {}
@@ -47,14 +51,17 @@ val Header = FC<HeaderProps> { props ->
             }
             div {
                 css(HeaderStyles.searchResultsWrapper) {}
-                filtered.forEach {
-                    div {
-                        css(entryWrapper) {}
-                        span { +"#${it.pokedexNumber} " }
-                        span {
-                            a {
-                                href = pokemonPagePath(it.pokedexNumber, null)
-                                +it.name
+                div {
+                    css(HeaderStyles.searchResultsWrapperInner) {}
+                    filtered.forEach {
+                        div {
+                            css(entryWrapper) {}
+                            span { +"#${it.pokedexNumber} " }
+                            span {
+                                a {
+                                    href = pokemonPagePath(it.pokedexNumber, null)
+                                    +it.name
+                                }
                             }
                         }
                     }
@@ -94,9 +101,22 @@ private object HeaderStyles {
     val searchInputWrapper = ClassName {}
 
     val searchResultsWrapper = ClassName {
-        position = Position.absolute
+        position = Position.relative
+        width = 100.pct
+        paddingLeft = 1.px
+        paddingRight = 1.px
+    }
+
+    val searchResultsWrapperInner = ClassName {
         backgroundColor = StyleConstants.Colors.secondary.bg
         width = 100.pct
+        borderLeft = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
+        borderRight = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
+        borderBottom = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
+        borderBottomLeftRadius = StyleConstants.Border.Radius.medium
+        borderBottomRightRadius = StyleConstants.Border.Radius.medium
+        boxSizing = BoxSizing.contentBox
+        marginLeft = -StyleConstants.Border.thick
     }
 
     val entryWrapper = ClassName {

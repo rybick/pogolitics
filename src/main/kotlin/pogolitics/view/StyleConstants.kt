@@ -31,6 +31,8 @@ object StyleConstants {
         val thick = 5.px
         object Radius {
             val small = 5.px
+            val medium = 10.px
+            val big = 20.px
         }
     }
 

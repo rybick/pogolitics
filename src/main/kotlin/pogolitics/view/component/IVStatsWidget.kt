@@ -139,7 +139,7 @@ private object IVStatsWidgetStyles {
         alignItems = AlignItems.center
         border = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
         padding = StyleConstants.Padding.semiBig
-        borderRadius = 20.px
+        borderRadius = StyleConstants.Border.Radius.big
     }
 
     val upperStatsWrapper = ClassName {
