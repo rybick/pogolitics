@@ -170,7 +170,7 @@ private object SearchBoxStyles {
 
     val entryWrapper = ClassName {
         display = Display.block
-        padding = Padding(5.px, 10.px)
+        padding = Padding(StyleConstants.Padding.medium, StyleConstants.Padding.big)
         color = backgroundColor
         hover {
             backgroundColor = StyleConstants.Colors.secondarySpecial.bg
@@ -181,12 +181,11 @@ private object SearchBoxStyles {
     val pokemonId = ClassName {
         color = StyleConstants.Colors.secondary.secondaryText
         marginRight = StyleConstants.Margin.small
-        fontSize = 80.pct
+        fontSize = StyleConstants.Font.small
     }
 
     val pokemonName = ClassName {
         color = StyleConstants.Colors.secondary.text
-        fontWeight = FontWeight.bold
     }
 
     val pokemonForm = ClassName {
