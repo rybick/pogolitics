@@ -1,6 +1,10 @@
 package pogolitics.view
 
+import csstype.Border
+import csstype.BorderStyle
+import csstype.LineStyle
 import csstype.None
+import csstype.px
 import emotion.react.css
 import pogolitics.model.PokemonEntry
 import pogolitics.view.component.Breadcrumbs
@@ -11,6 +15,7 @@ import react.ReactNode
 import react.create
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
+import react.dom.html.ReactHTML.input
 
 fun renderPage(
     page: Page?,
@@ -26,6 +31,9 @@ fun renderPage(
                     color = StyleConstants.Colors.secondaryLinkHovered.text
                     textDecoration = None.none
                 }
+            }
+            input {
+                border = Border(1.px, LineStyle.solid, StyleConstants.Colors.lightBorder)
             }
             ".btn-primary" {
                 backgroundColor = StyleConstants.Colors.primary.bg
