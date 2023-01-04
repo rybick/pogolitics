@@ -10,11 +10,13 @@ import react.create
 
 fun renderPage(
     page: Page?,
-    pokemonIndex: List<PokemonEntry>,
+    pokemonIndex: List<PokemonEntry>?,
     contentRenderer: ChildrenBuilder.() -> Unit
 ): ReactNode = Fragment.create {
-    Header {
-        this.pokemonIndex = pokemonIndex
+    if (pokemonIndex != null) {
+        Header {
+            this.pokemonIndex = pokemonIndex
+        }
     }
     Breadcrumbs { this.page = page }
     contentRenderer()

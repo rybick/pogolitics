@@ -48,7 +48,7 @@ class App: Component<Props, AppState>() {
                 Route {
                     path = "/"
                     element = Fragment.create {
-                        renderNotFoundPage("Invalid path", listOf()) // TODO later - can we get the pokemon list here?
+                        renderNotFoundPage("Invalid path", null)
                     }
                 }
             }
@@ -93,7 +93,7 @@ class App: Component<Props, AppState>() {
         }
     }
 
-    private fun ChildrenBuilder.renderNotFoundPage(reason: String, pokemonIndex: List<PokemonEntry>) {
+    private fun ChildrenBuilder.renderNotFoundPage(reason: String, pokemonIndex: List<PokemonEntry>?) {
         NotFoundPage::class.react {
             model = NotFoundModel(reason, pokemonIndex)
         }

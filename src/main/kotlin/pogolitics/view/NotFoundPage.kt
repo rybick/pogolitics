@@ -41,4 +41,4 @@ class NotFoundPage(props: PageRProps<NotFoundModel, Unit>) : Component<PageRProp
     }
 }
 
-data class NotFoundModel(val reason: String, val pokemonIndex: List<PokemonEntry>)
+data class NotFoundModel(val reason: String, val pokemonIndex: List<PokemonEntry>?)
