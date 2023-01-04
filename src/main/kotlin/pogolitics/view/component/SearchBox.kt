@@ -13,11 +13,14 @@ import csstype.Padding
 import csstype.Position
 import csstype.TextAlign
 import csstype.div
+import csstype.integer
 import csstype.pct
 import csstype.px
 import csstype.unaryMinus
+import dom.html.Window
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.KeyCodes
 import pogolitics.model.PokemonEntry
 import pogolitics.model.PokemonForm
 import pogolitics.view.StyleConstants
@@ -29,11 +32,13 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
+import web.location.location
 
 val SearchBox = FC<SearchBoxProps> { props ->
     val styles = SearchBoxStyles
     val searchResultLimit = 6
     var term: String by useState("")
+    var selected: Int by useState(0)
     val filtered = props.getFilteredData(term).take(searchResultLimit)
 
     div {
@@ -47,16 +52,28 @@ val SearchBox = FC<SearchBoxProps> { props ->
                 onChange = { event ->
                     term = event.target.value
                 }
+                onKeyUp = { event ->
+                    when (event.code) {
+                        KeyCodes.enter -> {
+                            val pokemon = filtered[selected]
+                            val url = pokemonPagePath(pokemon.pokedexNumber, pokemon.form)
+                            location.href = url
+                        }
+                        KeyCodes.arrowUp -> selected = (selected - 1).mod(filtered.size)
+                        KeyCodes.arrowDown -> selected = (selected + 1).mod(filtered.size)
+                        else -> selected = 0
+                    }
+                }
             }
         }
         div {
             css(styles.searchResultsWrapper) {}
             div {
                 css(styles.searchResultsWrapperInner) {}
-                filtered.forEach { (pokedexNumber, name, form) ->
+                filtered.forEachIndexed { index, (pokedexNumber, name, form) ->
                     a {
-                        css(styles.entryWrapper) {}
-                        href = pokemonPagePath(pokedexNumber, null)
+                        css(if (index == selected) styles.selectedEntryWrapper else styles.entryWrapper) {}
+                        href = pokemonPagePath(pokedexNumber, form)
                         span {
                             css(styles.pokemonId) {}
                             +"#${pokedexNumber} "
@@ -153,6 +170,7 @@ private object SearchBoxStyles {
         justifyContent = JustifyContent.flexEnd
         flexDirection = FlexDirection.column
         position = Position.relative
+        zIndex = integer(2)
         width = 100.pct
         paddingLeft = 1.px
         paddingRight = 1.px
@@ -178,6 +196,11 @@ private object SearchBoxStyles {
             backgroundColor = StyleConstants.Colors.secondarySpecial.bg
             textDecoration = None.none
         }
+    }
+
+    val selectedEntryWrapper = ClassName(entryWrapper) {
+        backgroundColor = StyleConstants.Colors.secondarySpecial.bg
+        textDecoration = None.none
     }
 
     val pokemonId = ClassName {

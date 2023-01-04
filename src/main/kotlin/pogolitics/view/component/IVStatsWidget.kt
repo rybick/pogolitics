@@ -4,6 +4,7 @@ import csstype.*
 import dom.html.HTMLInputElement
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.KeyCodes
 import pogolitics.model.IVs
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
@@ -104,7 +105,7 @@ val IVStatsWidget = FC<IVStatsWidgetRProps> { props ->
                         }
                         onBlur = onChangeFunction
                         onKeyUp = { event: KeyboardEvent<*> ->
-                            if (event.key == "Enter") {
+                            if (event.key == KeyCodes.enter) {
                                 onChangeFunction(event)
                             }
                         }
