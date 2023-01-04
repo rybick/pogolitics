@@ -128,7 +128,10 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         const val smallScreenMediaQuery = "screen and (max-width: 700px)"
 
         val headerWrapper = ClassName {
-            paddingTop = StyleConstants.Padding.small
+            paddingTop = StyleConstants.Padding.big
+            paddingLeft = StyleConstants.Padding.medium
+            paddingRight = StyleConstants.Padding.medium
+            paddingBottom = StyleConstants.Padding.medium
             display = Display.flex
             fontSize = 160.pct
         }

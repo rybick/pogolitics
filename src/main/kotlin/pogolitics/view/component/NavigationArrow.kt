@@ -5,8 +5,10 @@ import csstype.Content
 import csstype.Display
 import csstype.None
 import csstype.TextAlign
+import csstype.deg
 import csstype.pct
 import csstype.px
+import csstype.rotate
 import csstype.scale
 import emotion.css.ClassName
 import emotion.react.css
@@ -35,39 +37,48 @@ enum class NavigationDirection(val style: ClassName) {
 }
 
 private object NavigationArrowStyles {
+    private val triangleUp = Char(9662).toString()
+
     private val arrow = ClassName {
         display = Display.inlineBlock
         cursor = pointer
         width = 42.px
         height = 42.px
+        fontSize = 48.px
         textAlign = TextAlign.center
         borderRadius = 50.pct
         marginLeft = StyleConstants.Margin.small
         marginRight = StyleConstants.Margin.small
+        color = StyleConstants.Colors.primary.text
+        backgroundColor = StyleConstants.Colors.primary.bg
         hover {
+            backgroundColor = StyleConstants.Colors.primaryHovered.bg
             color = StyleConstants.Colors.primary.text
-            backgroundColor = StyleConstants.Colors.primary.bg
             textDecoration = None.none
+        }
+        span {
+            marginTop = (-15).px
         }
     }
 
     val arrowPrevious = ClassName(arrow) {
         span {
-            marginLeft = (-3).px
+            marginLeft = 1.px
             display = Display.block
-            transform = scale(-1, 1)
+            transform = rotate(90.deg)
             after {
-                content = Content("➤")
+                content = Content(triangleUp)
             }
         }
     }
 
     val arrowNext = ClassName(arrow) {
         span {
-            marginLeft = 3.px
+            marginLeft = (-1).px
             display = Display.block
+            transform = rotate((-90).deg)
             after {
-                content = Content("➤")
+                content = Content(triangleUp)
             }
         }
     }
