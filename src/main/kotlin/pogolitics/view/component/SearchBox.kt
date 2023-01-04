@@ -172,8 +172,6 @@ private object SearchBoxStyles {
         position = Position.relative
         zIndex = integer(2)
         width = 100.pct
-        paddingLeft = 1.px
-        paddingRight = 1.px
     }
 
     val searchResultsWrapperInner = ClassName {
@@ -225,5 +223,10 @@ private object SearchBoxStyles {
 
     val input = ClassName {
         width = 100.pct
+        border = 0.px
+        padding = StyleConstants.Padding.small
+        focus {
+            outline = None.none
+        }
     }
 }
