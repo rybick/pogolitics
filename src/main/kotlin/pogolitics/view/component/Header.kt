@@ -56,5 +56,6 @@ private object HeaderStyles {
     val searchInputWrapper = ClassName {
         margin = StyleConstants.Padding.big
         paddingRight = StyleConstants.Padding.medium
+        paddingLeft = StyleConstants.Padding.big
     }
 }

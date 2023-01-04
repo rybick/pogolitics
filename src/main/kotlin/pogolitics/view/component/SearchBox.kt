@@ -2,6 +2,7 @@ package pogolitics.view.component
 
 import csstype.Border
 import csstype.BoxSizing
+import csstype.ClassName
 import csstype.Display
 import csstype.FlexDirection
 import csstype.FontWeight
@@ -40,6 +41,7 @@ val SearchBox = FC<SearchBoxProps> { props ->
         div {
             css(styles.inputWrapper) {}
             input {
+                css(styles.input) {}
                 value = term
                 placeholder = "Search for pokemon..."
                 onChange = { event ->
@@ -196,5 +198,9 @@ private object SearchBoxStyles {
 
     val searchResultsFooter = ClassName {
         height = StyleConstants.Border.Radius.medium / 2// so that the content does not interlap with border radius
+    }
+
+    val input = ClassName {
+        width = 100.pct
     }
 }
