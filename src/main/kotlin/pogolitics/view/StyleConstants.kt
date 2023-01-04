@@ -7,9 +7,18 @@ import csstype.px
 
 object StyleConstants {
     object Colors {
-        val primary = ColorGroup(bg = "#0079fb", text = "#ffffff", secondaryText = "#dce8fe")
-        val primaryHovered = ColorGroup(bg = "#5099ff", text = "#ffffff", secondaryText = "#ffffff")
-        val secondary = ColorGroup(bg = "#ffffff", text = "#000000", secondaryText = "#aaaaaa")
+        private val primaryAccent = "#0079fb" //"#f0911d"
+        private val hoveredPrimary = "#5099ff" // "#e18077"
+
+        private val white = "#ffffff"
+        private val black = "#000000"
+
+        private val textPrimary = white
+        private val textPrimarySoft = "#dce8fe" // in between textPrimary and primaryAccent
+
+        val primary = ColorGroup(bg = primaryAccent, text = textPrimary, secondaryText = textPrimarySoft)
+        val primaryHovered = ColorGroup(bg = hoveredPrimary, text = textPrimary, secondaryText = textPrimary)
+        val secondary = ColorGroup(bg = white, text = black, secondaryText = "#aaaaaa")
         val secondarySpecial = ColorGroup(bg = "#ededed", text = "#000000", secondaryText = "#999999")
         val lightBorder = Color("rgba(0, 60, 130, 0.25)")
     }
