@@ -60,7 +60,8 @@ class SinglePokemonController(
                             chargedMoves = chargedMoves.await(),
                             pokemonIvs = pokemonStats
                         ),
-                        pokemonIndex = pokemonIndexService.getPokemonList()
+                        pokemonIndex = pokemonIndexService.getPokemonList(),
+                        focusedElement = state.focus
                     )
                 )
             } ?: ControllerResult.notFound("No such pokemon")

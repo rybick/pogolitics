@@ -46,6 +46,7 @@ val IVBar = FC<IVBarComponentRProps> { props ->
                 css(styles.inputWrapper) {}
                 input {
                     css(styles.input) {}
+                    autoFocus = props.autoFocus
                     type = InputType.number
                     min = "0"
                     max = "15"
@@ -90,6 +91,7 @@ val IVBar = FC<IVBarComponentRProps> { props ->
 external interface IVBarComponentRProps: Props {
     var name: String
     var iv: Int
+    var autoFocus: Boolean
     var onChange: (Int) -> Unit
 }
 

@@ -5,7 +5,8 @@ data class SinglePokemonModel(
     val pokemon: PokemonStaticInfo,
     val stats: PokemonIndividualStatistics,
     val moveSets: List<MoveSet>,
-    val pokemonIndex: List<PokemonEntry>
+    val pokemonIndex: List<PokemonEntry>,
+    val focusedElement: InputElement?
 ) {
     data class PokemonStaticInfo(
         val uniqueId: String,
@@ -34,4 +35,11 @@ data class SinglePokemonModel(
         val stamina : Double,
         val hardiness: Double
     )
+
+    enum class InputElement {
+        IV,
+        ATTACK,
+        DEFENSE,
+        STAMINA
+    }
 }

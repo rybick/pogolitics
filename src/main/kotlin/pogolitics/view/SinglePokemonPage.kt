@@ -64,6 +64,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             IVStatsWidget {
                 stats = props.model.stats.currentStats
                 ivs = props.model.stats.ivs
+                focus = props.model.focusedElement
                 onChange = {
                     props.updateState(it)
                 }

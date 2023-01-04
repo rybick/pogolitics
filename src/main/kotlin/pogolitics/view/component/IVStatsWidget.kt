@@ -8,6 +8,7 @@ import pogolitics.KeyCodes
 import pogolitics.model.IVs
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
+import pogolitics.model.SinglePokemonModel.InputElement
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*
@@ -41,13 +42,14 @@ val IVStatsWidget = FC<IVStatsWidgetRProps> { props ->
                             pattern = "\\d*"
                             key = "${props.stats.level}"
                             defaultValue = "${props.stats.level}"
+                            autoFocus = props.focus == InputElement.IV
                             val onChangeFunction = { event: SyntheticEvent<*, *> ->
                                 props.onChange(props.createStateWith {
+                                    focus = InputElement.IV
                                     level = (event.target as HTMLInputElement).value.toFloat()
                                 })
                             }
-                            onBlur = onChangeFunction
-                            onMouseUp = onChangeFunction
+                            onChange = onChangeFunction
                         }
                     }
                 }
@@ -55,22 +57,25 @@ val IVStatsWidget = FC<IVStatsWidgetRProps> { props ->
             IVBar {
                 name = "Attack"
                 iv = props.ivs.attack
+                autoFocus = props.focus == InputElement.ATTACK
                 onChange = { value ->
-                    props.onChange(props.createStateWith { attack = value })
+                    props.onChange(props.createStateWith { focus = InputElement.ATTACK; attack = value })
                 }
             }
             IVBar {
                 name = "Defense"
                 iv = props.ivs.defense
+                autoFocus = props.focus == InputElement.DEFENSE
                 onChange = { value ->
-                    props.onChange(props.createStateWith { defense = value })
+                    props.onChange(props.createStateWith { focus = InputElement.DEFENSE; defense = value })
                 }
             }
             IVBar {
                 name = "HP"
                 iv = props.ivs.stamina
+                autoFocus = props.focus == InputElement.STAMINA
                 onChange = { value ->
-                    props.onChange(props.createStateWith { stamina = value })
+                    props.onChange(props.createStateWith { focus = InputElement.STAMINA; stamina = value })
                 }
             }
             div {
@@ -158,4 +163,5 @@ external interface IVStatsWidgetRProps : Props {
     var stats: SinglePokemonModel.VariablePokemonStatistics
     var ivs: IVs
     var onChange: (PokemonIndividualValuesState) -> Unit
+    var focus: InputElement?
 }
