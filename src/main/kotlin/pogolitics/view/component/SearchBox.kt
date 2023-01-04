@@ -223,7 +223,7 @@ private object SearchBoxStyles {
 
     val input = ClassName {
         width = 100.pct
-        border = 0.px
+        // border = 0.px // after inputs have been globally made to have soft border it actually looks nice with it
         padding = StyleConstants.Padding.small
         focus {
             outline = None.none
