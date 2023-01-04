@@ -6,6 +6,7 @@ import csstype.Display
 import csstype.None
 import csstype.TextAlign
 import csstype.deg
+import csstype.important
 import csstype.pct
 import csstype.px
 import csstype.rotate
@@ -49,7 +50,7 @@ private object NavigationArrowStyles {
         borderRadius = 50.pct
         marginLeft = StyleConstants.Margin.small
         marginRight = StyleConstants.Margin.small
-        color = StyleConstants.Colors.primary.text
+        color = important(StyleConstants.Colors.primary.text)
         backgroundColor = StyleConstants.Colors.primary.bg
         hover {
             backgroundColor = StyleConstants.Colors.primaryHovered.bg
