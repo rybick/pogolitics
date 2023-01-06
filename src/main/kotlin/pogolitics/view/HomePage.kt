@@ -29,7 +29,7 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
                 """ }
                 p { +"""
                     The main functionality right now is calculating DPS and other stats of each attack set of a given pokémon,
-                    so that you can figure out which one is the best. There are already pages that do it, but all of them
+                    so that you can figure out which one is the best. There already other apps that do it, but all of them
                     work only for PvE. This page does it for both PvE and PvP (and that's the reason I started to work on it at all).
                 """ }
                 p {
