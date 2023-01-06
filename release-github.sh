@@ -1,10 +1,10 @@
-sed -i 's/const val applicationRoot = ""/const val applicationRoot = "\/pogolitics"/g' \
-  ./src/main/kotlin/pogolitics/EnvVariables.kt
+# no longer needed now when the app is deployed to root
+#sed -i 's/const val applicationRoot = ""/const val applicationRoot = "\/pogolitics"/g' \
+#  ./src/main/kotlin/pogolitics/EnvVariables.kt
 
 ./gradlew build
 
-
-cd ../rybick.github.io/  || { echo "rybick.github.io directory not found"; exit 1; }
+cd ../PokeGoDex.github.io/  || { echo "PokeGoDex.github.io directory not found"; exit 1; }
 
 if [[ `git status --porcelain` ]]; then
   echo "CAN'T PROCEED THERE ALREADY ARE UNCOMMITTED CHANGES"
@@ -12,10 +12,10 @@ if [[ `git status --porcelain` ]]; then
 fi
 
 rm -rf ./pogolitics/*
-cp -r ../pogolitics/build/distributions/* ./pogolitics/
+cp -r ../pogolitics/build/distributions/* ./
 
 git add -A
-git commit -m "Release pogolitcs"
+git commit -m "Release PokeGoDex"
 
 git push
 
