@@ -47,7 +47,7 @@ object BasicStylesheet {
         }
 
         val headerCell = ClassName {
-            cursor = pointer
+
         }
 
         val row = ClassName {
@@ -67,6 +67,14 @@ object BasicStylesheet {
 
         val left = ClassName {
             textAlign = TextAlign.left
+        }
+
+        val sortable = ClassName {
+            cursor = pointer
+            hover {
+                color = StyleConstants.Colors.primaryHovered.text
+                backgroundColor = StyleConstants.Colors.primaryHovered.bg
+            }
         }
     }
 }

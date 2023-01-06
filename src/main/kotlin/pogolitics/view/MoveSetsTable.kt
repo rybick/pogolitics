@@ -35,7 +35,7 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         +"Moveset"
                     }
                     div {
-                        css(Table.cell, Table.headerCell) {}
+                        css(Table.cell, Table.headerCell, Table.sortable) {}
                         onClick = {
                             setState({ state ->
                                 val sort = state.sort
@@ -50,7 +50,7 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         title = "Damage per second"
                     }
                     div {
-                        css(Table.cell, Table.headerCell) {}
+                        css(Table.cell, Table.headerCell, Table.sortable) {}
                         onClick = {
                             setState({ state ->
                                 val sort = state.sort
@@ -65,7 +65,7 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         title = "Time to first (charged) attack"
                     }
                     div {
-                        css(Table.cell, Table.headerCell) {}
+                        css(Table.cell, Table.headerCell, Table.sortable) {}
                         onClick = {
                             setState({ state ->
                                 val sort = state.sort
