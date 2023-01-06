@@ -20,11 +20,11 @@ val LeagueStatsWidget = FC<LeagueStatsWidgetRProps> { props ->
     div {
         css(BasicStylesheet.widgetWrapper) {}
         div {
-            css(BasicStylesheet.widgetHeader) {}
+            css(BasicStylesheet.clickableWidgetHeader) {}
+            onClick = { props.onClick() }
             + (props.name + " league")
         }
         div {
-            onClick = { props.onClick() }
             css(LeagueStatsWidgetStyles.contentWrapper) {}
             stat("CP", "${props.stats.cp}")
             stat("level", "${props.stats.level}")
@@ -73,7 +73,6 @@ private object LeagueStatsWidgetStyles {
     }
 
     val contentWrapper = ClassName {
-        cursor = pointer
         display = Display.flex
         flexWrap = FlexWrap.wrap
         flexDirection = FlexDirection.row

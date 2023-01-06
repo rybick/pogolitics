@@ -29,6 +29,16 @@ object BasicStylesheet {
         textTransform = TextTransform.capitalize;
     }
 
+    val clickablePrimary = ClassName {
+        cursor = pointer
+        hover {
+            color = StyleConstants.Colors.primaryHovered.text
+            backgroundColor = StyleConstants.Colors.primaryHovered.bg
+        }
+    }
+
+    val clickableWidgetHeader = ClassName(widgetHeader, clickablePrimary) {}
+
     object Table {
         val table = ClassName {
             display = Display.table
@@ -69,12 +79,6 @@ object BasicStylesheet {
             textAlign = TextAlign.left
         }
 
-        val sortable = ClassName {
-            cursor = pointer
-            hover {
-                color = StyleConstants.Colors.primaryHovered.text
-                backgroundColor = StyleConstants.Colors.primaryHovered.bg
-            }
-        }
+        val sortable = ClassName(clickablePrimary) {}
     }
 }
