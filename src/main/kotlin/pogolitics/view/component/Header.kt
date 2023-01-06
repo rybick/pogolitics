@@ -43,10 +43,10 @@ private object HeaderStyles {
     val headerWrapper = ClassName {
         display = Display.flex
         boxSizing = BoxSizing.contentBox
-        height = 60.px
-        paddingTop = StyleConstants.Padding.medium
-        paddingBottom = StyleConstants.Padding.medium
-        paddingLeft = StyleConstants.Padding.medium
+        height = 50.px
+        paddingTop = StyleConstants.Padding.semiBig
+        paddingBottom = StyleConstants.Padding.small
+        paddingLeft = StyleConstants.Padding.semiBig
         paddingRight = StyleConstants.Padding.medium
         backgroundColor = StyleConstants.Colors.primary.bg
     }
@@ -56,7 +56,7 @@ private object HeaderStyles {
     }
 
     val searchInputWrapper = ClassName {
-        margin = StyleConstants.Padding.big
+        margin = StyleConstants.Padding.medium
         paddingRight = StyleConstants.Padding.medium
         paddingLeft = StyleConstants.Padding.big
     }

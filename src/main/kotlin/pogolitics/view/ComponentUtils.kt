@@ -9,7 +9,7 @@ fun iconPath(type: PokemonType): String =
     path("/img/icon/${type.displayName}.png")
 
 fun logoPath(): String =
-    path("/img/logo/116x60.png")
+    path("/img/logo/120x50.png")
 
 fun loadingImagePath(): String =
     path("/img/misc/loading.gif")

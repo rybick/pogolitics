@@ -43,7 +43,7 @@ interface BreadcrumbsProps: Props {
 
 private object BreadcrumbsStyles {
     val breadcrumbsWrapper = ClassName {
-        paddingLeft = StyleConstants.Padding.medium
+        paddingLeft = StyleConstants.Padding.semiBig
         paddingBottom = StyleConstants.Padding.small
         backgroundColor = StyleConstants.Colors.primary.bg
         color = StyleConstants.Colors.primary.secondaryText
