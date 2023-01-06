@@ -1,6 +1,8 @@
 package pogolitics.view
 
+import csstype.Border
 import csstype.Color
+import csstype.LineStyle
 import csstype.pct
 import csstype.px
 
@@ -33,12 +35,14 @@ object StyleConstants {
         val medium = 10.px
         val semiBig = 15.px
         val big = 20.px
+        val huge = 40.px
     }
 
     object Margin {
         val small = 5.px
         val medium = 10.px
         val big = 20.px
+        val huge = 40.px
     }
 
     object Border {
@@ -48,12 +52,15 @@ object StyleConstants {
             val medium = 10.px
             val big = 20.px
         }
+
+        val thickBorder = Border(thick, LineStyle.solid, Colors.primary.bg)
     }
 
     object Font {
         val bigger = 110.pct
         val smaller = 90.pct
         val small = 80.pct
+        val h3 = 120.pct
     }
 
     class ColorGroup(val bg: Color, val text: Color, val secondaryText: Color) {

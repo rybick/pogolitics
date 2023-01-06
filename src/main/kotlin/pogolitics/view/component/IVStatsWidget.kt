@@ -143,9 +143,9 @@ private object IVStatsWidgetStyles {
         display = Display.flex
         flexDirection = FlexDirection.column
         alignItems = AlignItems.center
-        border = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
-        padding = StyleConstants.Padding.semiBig
+        border = StyleConstants.Border.thickBorder
         borderRadius = StyleConstants.Border.Radius.big
+        padding = StyleConstants.Padding.semiBig
     }
 
     val upperStatsWrapper = ClassName {

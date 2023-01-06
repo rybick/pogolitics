@@ -7,8 +7,10 @@ import csstype.pct
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.view.Page
 import pogolitics.view.StyleConstants
 import pogolitics.view.logoPath
+import pogolitics.view.pagePath
 import pogolitics.view.pokemonListPagePath
 import react.FC
 import react.dom.html.ReactHTML.a
@@ -21,8 +23,8 @@ val Header = FC<HeaderProps> { props ->
         css(HeaderStyles.headerWrapper) {}
         div {
             css(HeaderStyles.logoWrapper) {}
-            a { // TODO lead to main page when there is anything there
-                href = pokemonListPagePath()
+            a {
+                href = pagePath(Page.HOME)
                 img { src = logoPath() }
             }
         }
