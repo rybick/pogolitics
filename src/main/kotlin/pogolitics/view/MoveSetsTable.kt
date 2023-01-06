@@ -47,6 +47,7 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                             })
                         }
                         +("DPS" + getIcon(state.sort, 1))
+                        title = "Damage per second"
                     }
                     div {
                         css(Table.cell, Table.headerCell) {}
@@ -61,6 +62,7 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                             })
                         }
                         +("TTFA" + getIcon(state.sort, 2))
+                        title = "Time to first (charged) attack"
                     }
                     div {
                         css(Table.cell, Table.headerCell) {}
@@ -75,6 +77,7 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                             })
                         }
                         +("MTBA" + getIcon(state.sort, 3))
+                        title = "Mean time between (charged) attacks"
                     }
                 }
                 sortValues(props.values, state.sort).forEach {
