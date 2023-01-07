@@ -39,6 +39,7 @@ val SearchBox = FC<SearchBoxProps> { props ->
     val searchResultLimit = 6
     var term: String by useState("")
     var selected: Int by useState(0)
+    var hideSearchResults: Boolean by useState(true)
     val filtered = props.getFilteredData(term).take(searchResultLimit)
 
     div {
@@ -64,35 +65,39 @@ val SearchBox = FC<SearchBoxProps> { props ->
                         else -> selected = 0
                     }
                 }
+                onFocus = { hideSearchResults = false }
+                onBlur = { hideSearchResults = true }
             }
         }
         div {
             css(styles.searchResultsWrapper) {}
             div {
                 css(styles.searchResultsWrapperInner) {}
-                filtered.forEachIndexed { index, (pokedexNumber, name, form) ->
-                    a {
-                        css(if (index == selected) styles.selectedEntryWrapper else styles.entryWrapper) {}
-                        href = pokemonPagePath(pokedexNumber, form)
-                        span {
-                            css(styles.pokemonId) {}
-                            +"#${pokedexNumber} "
-                        }
-                        span {
-                            css(styles.pokemonName) {}
-                            +name
-                        }
-                        span {
-                            css(styles.pokemonForm) {}
-                            if (form != PokemonForm.DEFAULT) {
-                                +"(${form.prettyName})"
+                if (!hideSearchResults) {
+                    filtered.forEachIndexed { index, (pokedexNumber, name, form) ->
+                        a {
+                            css(if (index == selected) styles.selectedEntryWrapper else styles.entryWrapper) {}
+                            href = pokemonPagePath(pokedexNumber, form)
+                            span {
+                                css(styles.pokemonId) {}
+                                +"#${pokedexNumber} "
+                            }
+                            span {
+                                css(styles.pokemonName) {}
+                                +name
+                            }
+                            span {
+                                css(styles.pokemonForm) {}
+                                if (form != PokemonForm.DEFAULT) {
+                                    +"(${form.prettyName})"
+                                }
                             }
                         }
                     }
                 }
                 div {
                     css(styles.searchResultsFooter) {
-                        display = if (filtered.isEmpty()) None.none else Display.block
+                        display = if (filtered.isEmpty() || hideSearchResults) None.none else Display.block
                     }
                 }
             }

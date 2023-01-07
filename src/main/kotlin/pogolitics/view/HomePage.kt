@@ -2,11 +2,13 @@ package pogolitics.view
 
 import csstype.Auto
 import csstype.FontWeight
+import csstype.Padding
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.PageRProps
 import pogolitics.model.HomePageModel
+import pogolitics.view.component.SearchBox
 import react.Component
 import react.State
 import react.dom.html.ReactHTML.a
@@ -21,7 +23,16 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
         div {
             css(Styles.outerWrapper) { }
             div {
-                css(Styles.innerWrapper) {}
+                css(Styles.searchBoxWrapper) {}
+                div {
+                    css(Styles.searchBoxWrapperInner) {}
+                    SearchBox {
+                        pokemonIndex = props.model.pokemonIndex
+                    }
+                }
+            }
+            div {
+                css(Styles.textWrapper) {}
                 h2 { +"Welcome to Poke-Go-Dex!" }
                 p {+"""
                     The idea of this project is to create one place that contains all data about pokemon, 
@@ -62,15 +73,15 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
 
     object Styles {
         val outerWrapper = ClassName(BasicStylesheet.widgetWrapper) {
-            paddingTop = StyleConstants.Padding.huge
+
         }
 
-        val innerWrapper = ClassName {
+        val textWrapper = ClassName {
             maxWidth = 800.px
+            margin = Auto.auto
             border = StyleConstants.Border.thickBorder
             borderRadius = StyleConstants.Border.Radius.big
             padding = StyleConstants.Padding.huge
-            margin = Auto.auto
 
             h3 {
                 fontSize = StyleConstants.Font.h3
@@ -80,5 +91,21 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
                 fontWeight = FontWeight.bold
             }
         }
+
+        val searchBoxWrapper = ClassName {
+            maxWidth = 600.px
+            margin = Auto.auto
+        }
+
+        val searchBoxWrapperInner = ClassName {
+            border = StyleConstants.Border.thickBorder
+            borderLeft = StyleConstants.Border.thickBorder
+            borderRight = StyleConstants.Border.thickBorder
+            borderTopLeftRadius = StyleConstants.Border.Radius.small
+            borderTopRightRadius = StyleConstants.Border.Radius.small
+            margin = StyleConstants.Margin.huge
+            height = 41.px
+        }
+
     }
 }
