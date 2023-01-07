@@ -3,6 +3,7 @@ package pogolitics.view
 import csstype.Auto
 import csstype.FontWeight
 import csstype.Padding
+import csstype.TextAlign
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
@@ -44,7 +45,7 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
                     work only for PvE. This page does it for both PvE and PvP (and that's the reason I started to work on it at all).
                 """ }
                 p {
-                    strong { +"To try it out just use the search box in the top-right corner of the page and find the pokémon you want, " }
+                    strong { +"To try it out just use the search box above and find the pokémon you want, " }
                     +"or go to the "
                     a { +"the pokemon index page"; href = pokemonListPagePath() }
                     +"."
@@ -61,12 +62,6 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
                     a { +"contribute your own"; href = "https://github.com/rybick/pogolitics/blob/master/docs/FAQ.md" }
                     +"."
                 }
-                h3 { +"What this project is not" }
-                p {
-                    +"It's not supposed to be a service with news about the game. "
-                    +"There is a lot of such pages already and it keeps a lot of effort to keep such pages up to date. "
-                    +"The information that you can find here, is the one that won't change next week. "
-                }
             }
         }
     }
@@ -82,7 +77,10 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
             border = StyleConstants.Border.thickBorder
             borderRadius = StyleConstants.Border.Radius.big
             padding = StyleConstants.Padding.huge
-
+            h2 {
+                marginBottom = StyleConstants.Margin.big
+                textAlign = TextAlign.center
+            }
             h3 {
                 fontSize = StyleConstants.Font.h3
                 paddingTop = StyleConstants.Padding.big
