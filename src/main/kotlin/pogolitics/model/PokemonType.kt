@@ -105,10 +105,10 @@ enum class PokemonType() {
     abstract val weakAgainst: Set<PokemonType>
     abstract val superWeakAgainst: Set<PokemonType>
 
-    val displayName get() = name.toLowerCase().capitalize()
+    val displayName get() = name.lowercase().replaceFirstChar { it.uppercase() }
 
     companion object {
-        fun fromString(value: String): PokemonType = valueOf(value.toUpperCase())
+        fun fromString(value: String): PokemonType = valueOf(value.uppercase())
     }
 
     enum class Effectiveness {

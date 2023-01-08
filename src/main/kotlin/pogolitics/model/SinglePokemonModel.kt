@@ -16,8 +16,11 @@ data class SinglePokemonModel(
         val baseAttack: Int,
         val baseDefense: Int,
         val baseStamina: Int,
-        val hardiness: Double
-    )
+        val hardiness: Double,
+        val types: Types
+    ) {
+        data class Types(val primary: PokemonType, val secondary: PokemonType?)
+    }
 
     data class PokemonIndividualStatistics(
         val ivs: IVs,

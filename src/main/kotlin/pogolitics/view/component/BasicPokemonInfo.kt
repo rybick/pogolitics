@@ -1,16 +1,21 @@
 package pogolitics.view.component
 
+import csstype.Margin
 import csstype.TextAlign
 import csstype.pct
+import csstype.rem
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
+import pogolitics.view.iconPath
 import react.*
+import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
+import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.span
 
 val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
@@ -29,6 +34,30 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
                 span {
                     css(BasicPokemonInfoStyles.pokemonForm) {}
                     +"(${prettyName})"
+                }
+            }
+        }
+        div {
+            css(BasicPokemonInfoStyles.typesWrapper) {}
+            span {
+                css(BasicPokemonInfoStyles.typeIconWrapper) {}
+                img {
+                    src = iconPath(props.data.types.primary)
+                    css {
+                        height = 2.5.rem
+                        margin = Margin(StyleConstants.Margin.small, StyleConstants.Margin.small)
+                    }
+                }
+            }
+            props.data.types.secondary?.let { secondary ->
+                span {
+                    img {
+                        src = iconPath(secondary)
+                        css {
+                            height = 2.5.rem
+                            margin = Margin(StyleConstants.Margin.small, StyleConstants.Margin.small)
+                        }
+                    }
                 }
             }
         }
@@ -65,6 +94,15 @@ private object BasicPokemonInfoStyles {
 
     val staticStatsWrapper = ClassName {
         textAlign = TextAlign.center
+    }
+
+    val typesWrapper = ClassName {
+        textAlign = TextAlign.center
+        margin = StyleConstants.Margin.medium
+    }
+
+    val typeIconWrapper = ClassName {
+        margin = StyleConstants.Margin.small
     }
 }
 

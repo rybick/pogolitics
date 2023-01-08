@@ -81,6 +81,7 @@ class SinglePokemonController(
             pokedexNumber = pokemon.pokedexNumber,
             form = PokemonForm.ofNullable(form),
             name = pokemon.name,
+            types = pokemon.types.toModel(),
             baseAttack = pokemon.baseAttack,
             baseDefense = pokemon.baseDefense,
             baseStamina = pokemon.baseStamina,
@@ -155,4 +156,12 @@ class SinglePokemonController(
             hardiness = calculateHardiness(calculatedStatistics.defense, calculatedStatistics.stamina)
         )
     }
+
+    private fun PokemonDto.TypesDto.toModel(): SinglePokemonModel.PokemonStaticInfo.Types =
+        SinglePokemonModel.PokemonStaticInfo.Types(
+            primary = PokemonType.fromString(primary),
+            secondary = secondary?.let { PokemonType.fromString(it) }
+        )
 }
+
+
