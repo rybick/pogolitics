@@ -77,7 +77,7 @@ private object NavigationArrowStyles {
     val arrowNext = ClassName(arrow) {
         span {
             marginLeft = 4.px
-            marginTop = (-14).px
+            marginTop = (-15).px
             display = Display.block
             transform = rotate((-90).deg)
             after {
