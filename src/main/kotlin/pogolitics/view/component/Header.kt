@@ -18,7 +18,6 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.img
 
 val Header = FC<HeaderProps> { props ->
-
     div {
         css(HeaderStyles.headerWrapper) {}
         div {
