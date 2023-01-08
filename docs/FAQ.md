@@ -1,6 +1,6 @@
 # FAQ
 
-## What does DPS, TTFA, MTBA, PvP and Pve mean?
+## What does DPS, TTFA, MTBA, PvP and PvE mean?
 - **DPS** - **D**amage **P**er **S**econd - this is how much HP an attacked pokémon loses in each second. 
 More specifically Poke-Go-Dex assumes that an attacker performs fast attack as often as possible and
 a charged attack whenever enough energy is gathered. With this assumption DPS is calculated as an
