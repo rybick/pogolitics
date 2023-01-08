@@ -12,6 +12,7 @@ if [[ `git status --porcelain` ]]; then
 fi
 
 rm -r ./*
+git checkout README.md # We don't want to lose README
 cp -r ../pogolitics/build/distributions/* ./
 
 git add -A
