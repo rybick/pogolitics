@@ -2,10 +2,8 @@ package pogolitics.view.component
 
 import csstype.Border
 import csstype.BoxSizing
-import csstype.ClassName
 import csstype.Display
 import csstype.FlexDirection
-import csstype.FontWeight
 import csstype.JustifyContent
 import csstype.LineStyle
 import csstype.None
@@ -15,9 +13,7 @@ import csstype.TextAlign
 import csstype.div
 import csstype.integer
 import csstype.pct
-import csstype.px
 import csstype.unaryMinus
-import dom.html.Window
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.KeyCodes
@@ -74,34 +70,34 @@ val SearchBox = FC<SearchBoxProps> { props ->
             }
         }
         div {
-            css(styles.searchResultsWrapper) {}
+            css(styles.searchResultsWrapper) {
+                display = if (filtered.isEmpty() || hideSearchResults) None.none else Display.block
+            }
             div {
                 css(styles.searchResultsWrapperInner) {}
-                if (!hideSearchResults) {
-                    filtered.forEachIndexed { index, (pokedexNumber, name, form) ->
-                        a {
-                            css(if (index == selected) styles.selectedEntryWrapper else styles.entryWrapper) {}
-                            href = pokemonPagePath(pokedexNumber, form)
-                            span {
-                                css(styles.pokemonId) {}
-                                +"#${pokedexNumber} "
-                            }
-                            span {
-                                css(styles.pokemonName) {}
-                                +name
-                            }
-                            span {
-                                css(styles.pokemonForm) {}
-                                if (form != PokemonForm.DEFAULT) {
-                                    +"(${form.prettyName})"
-                                }
+                filtered.forEachIndexed { index, (pokedexNumber, name, form) ->
+                    a {
+                        css(if (index == selected) styles.selectedEntryWrapper else styles.entryWrapper) {}
+                        href = pokemonPagePath(pokedexNumber, form)
+                        span {
+                            css(styles.pokemonId) {}
+                            +"#${pokedexNumber} "
+                        }
+                        span {
+                            css(styles.pokemonName) {}
+                            +name
+                        }
+                        span {
+                            css(styles.pokemonForm) {}
+                            if (form != PokemonForm.DEFAULT) {
+                                +"(${form.prettyName})"
                             }
                         }
                     }
                 }
                 div {
                     css(styles.searchResultsFooter) {
-                        display = if (filtered.isEmpty() || hideSearchResults) None.none else Display.block
+
                     }
                 }
             }

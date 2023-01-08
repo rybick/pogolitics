@@ -97,12 +97,9 @@ class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<Ho
 
         val searchBoxWrapperInner = ClassName {
             border = StyleConstants.Border.thickBorder
-            borderLeft = StyleConstants.Border.thickBorder
-            borderRight = StyleConstants.Border.thickBorder
-            borderTopLeftRadius = StyleConstants.Border.Radius.small
-            borderTopRightRadius = StyleConstants.Border.Radius.small
+            borderRadius = StyleConstants.Border.Radius.small
             margin = StyleConstants.Margin.huge
-            height = 41.px
+            height = 46.px
         }
 
     }
