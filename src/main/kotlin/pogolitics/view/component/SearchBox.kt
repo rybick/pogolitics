@@ -33,6 +33,7 @@ import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
 import web.location.location
+import web.timers.setTimeout
 
 val SearchBox = FC<SearchBoxProps> { props ->
     val styles = SearchBoxStyles
@@ -66,7 +67,10 @@ val SearchBox = FC<SearchBoxProps> { props ->
                     }
                 }
                 onFocus = { hideSearchResults = false }
-                onBlur = { hideSearchResults = true }
+                onBlur = {
+                    // TODO workaround so that the result list does not hide the moment you want to click a result
+                    setTimeout({ hideSearchResults = true }, 100)
+                }
             }
         }
         div {
