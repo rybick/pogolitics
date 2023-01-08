@@ -41,22 +41,17 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
             css(BasicPokemonInfoStyles.typesWrapper) {}
             span {
                 css(BasicPokemonInfoStyles.typeIconWrapper) {}
-                img {
-                    src = iconPath(props.data.types.primary)
-                    css {
-                        height = 2.5.rem
-                        margin = Margin(StyleConstants.Margin.small, StyleConstants.Margin.small)
-                    }
+                PokemonTypeIcon {
+                    type = props.data.types.primary
+                    size = PokemonTypeIconProps.Size.BIG
                 }
             }
             props.data.types.secondary?.let { secondary ->
                 span {
-                    img {
-                        src = iconPath(secondary)
-                        css {
-                            height = 2.5.rem
-                            margin = Margin(StyleConstants.Margin.small, StyleConstants.Margin.small)
-                        }
+                    css(BasicPokemonInfoStyles.typeIconWrapper) {}
+                    PokemonTypeIcon {
+                        type = secondary
+                        size = PokemonTypeIconProps.Size.BIG
                     }
                 }
             }

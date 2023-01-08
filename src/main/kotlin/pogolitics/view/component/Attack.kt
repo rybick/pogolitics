@@ -15,12 +15,9 @@ import react.dom.html.ReactHTML.span
 val Attack = FC<AttackProps> { props ->
     span {
         css(if (props.attack.elite) AttackStyles.eliteAttackWrapper else AttackStyles.regularAttackWrapper) {}
-        img {
-            src = iconPath(props.attack.type)
-            css {
-                height = 1.5.rem
-                margin = Margin(StyleConstants.Margin.small, StyleConstants.Margin.small)
-            }
+        PokemonTypeIcon {
+            type = props.attack.type
+            size = PokemonTypeIconProps.Size.SMALL
         }
         + props.attack.name
     }
