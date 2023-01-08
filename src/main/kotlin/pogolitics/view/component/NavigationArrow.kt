@@ -3,6 +3,7 @@ package pogolitics.view.component
 import csstype.ClassName
 import csstype.Content
 import csstype.Display
+import csstype.FontFamily
 import csstype.None
 import csstype.TextAlign
 import csstype.deg
@@ -13,6 +14,7 @@ import csstype.rotate
 import csstype.scale
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.arial
 import pogolitics.pointer
 import pogolitics.view.StyleConstants
 import react.FC
@@ -45,6 +47,7 @@ private object NavigationArrowStyles {
         cursor = pointer
         width = 42.px
         height = 42.px
+        fontFamily = arial
         fontSize = 48.px
         textAlign = TextAlign.center
         borderRadius = 50.pct
@@ -57,14 +60,12 @@ private object NavigationArrowStyles {
             color = StyleConstants.Colors.primary.text
             textDecoration = None.none
         }
-        span {
-            marginTop = (-15).px
-        }
     }
 
     val arrowPrevious = ClassName(arrow) {
         span {
-            marginLeft = 1.px
+            marginLeft = (-4).px
+            marginTop = (-15).px
             display = Display.block
             transform = rotate(90.deg)
             after {
@@ -75,7 +76,8 @@ private object NavigationArrowStyles {
 
     val arrowNext = ClassName(arrow) {
         span {
-            marginLeft = (-1).px
+            marginLeft = 4.px
+            marginTop = (-14).px
             display = Display.block
             transform = rotate((-90).deg)
             after {
