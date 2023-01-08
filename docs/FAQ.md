@@ -6,11 +6,11 @@ More specifically Poke-Go-Dex assumes that an attacker performs fast attack as o
 a charged attack whenever enough energy is gathered. With this assumption DPS is calculated as an
 avaraged value that would be dealt over an unlimited amount of time.
 - **TTFA** - **T**ime **T**o **F**irst **A**ttack - The time it takes until a pokémon is able to perform a 
-charged attack (assuming it was executing fast attacks as often as possible)
+charged attack (assuming it is executing fast attacks as often as possible)
 - **MTBA** - **M**ean **T**ime **B**etween **A**ttacks - The avarage time that it takes between two charged
 attacks can be perfomed. It is often not the same as **TTFA**, because after first charged attack is done, some
 energy may be left which caused the next one to be performed sooner. 
-E.g. if fast attacks takes one second and generates 10 energy, while charged attack costs 45 energy, 
+E.g. if a fast attack takes one second and generates 10 energy, while charged attack costs 45 energy, 
 TTFA could be 5s (it takes 5 attacks to gather enough energy), but MTBA would be 4.5s - after 9s you are
 able to do 2 charged attacks. This example is simplified as the charge attack also takes time which makes it 
 more complicated.
@@ -36,14 +36,16 @@ This is an open source project, so you can check them out yourself
 [here](https://github.com/rybick/pogolitics/blob/master/src/main/kotlin/pogolitics/controller/MoveSetStatsCalculator.kt) -
 even if you don't know anything about programming, you should be able to read it just like math equations.
 If you find an error please let me know!
+
 You can also take a look at [this test](https://github.com/rybick/pogolitics/blob/master/src/test/kotlin/MoveSetStatsCalculatorTest.kt#L60)
 that compares the DPS calculated by the `MoveSetStatsCalculator` (linked above) with damage simulated in a number of attacks
 and divided by the time it would take to execute them.
 
 ## I found a bug or an error. Can you fix it?
-This is a project I do in my free time, but I try to fix all bugs that I know of. 
+I only work on this project in my free time, but I try to fix all bugs that I know of. 
 Please report your findings as [an issue in github](https://github.com/rybick/pogolitics/issues), or, 
 since this is an open source project, you can try to fix it yourself and create a pull request. :)
+
 See how to contribute [here](./CONTRIBUTING.md).
 
 ## Are you planning to add functionality Y?
