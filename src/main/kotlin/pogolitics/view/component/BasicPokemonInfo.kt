@@ -94,6 +94,7 @@ private object BasicPokemonInfoStyles {
     val typesWrapper = ClassName {
         textAlign = TextAlign.center
         margin = StyleConstants.Margin.medium
+        marginBottom = StyleConstants.Margin.semiBig
     }
 
     val typeIconWrapper = ClassName {

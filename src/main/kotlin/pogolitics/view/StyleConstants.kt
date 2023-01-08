@@ -41,6 +41,7 @@ object StyleConstants {
     object Margin {
         val small = 5.px
         val medium = 10.px
+        val semiBig = 15.px
         val big = 20.px
         val huge = 40.px
     }
