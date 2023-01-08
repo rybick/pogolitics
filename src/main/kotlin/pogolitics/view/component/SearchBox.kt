@@ -29,7 +29,6 @@ import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
 import web.location.location
-import web.timers.setTimeout
 
 val SearchBox = FC<SearchBoxProps> { props ->
     val styles = SearchBoxStyles
@@ -52,26 +51,29 @@ val SearchBox = FC<SearchBoxProps> { props ->
                 }
                 onKeyUp = { event ->
                     when (event.code) {
-                        KeyCodes.enter -> {
+                        KeyCodes.enter, KeyCodes.numpadEnter -> {
                             val pokemon = filtered[selected]
                             val url = pokemonPagePath(pokemon.pokedexNumber, pokemon.form)
                             location.href = url
                         }
                         KeyCodes.arrowUp -> selected = (selected - 1).mod(filtered.size)
                         KeyCodes.arrowDown -> selected = (selected + 1).mod(filtered.size)
-                        else -> selected = 0
+                        else -> println(event.code) //selected = 0
                     }
                 }
                 onFocus = { hideSearchResults = false }
-                onBlur = {
-                    // TODO workaround so that the result list does not hide the moment you want to click a result
-                    setTimeout({ hideSearchResults = true }, 100)
+                onBlur = { event ->
+                    if (event.relatedTarget == null ) {
+                        hideSearchResults = true
+                    }
                 }
             }
         }
         div {
+            onMouseDown = { it.stopPropagation() }
             css(styles.searchResultsWrapper) {
                 display = if (filtered.isEmpty() || hideSearchResults) None.none else Display.block
+                zIndex = if (props.alwaysOnTop) integer(10) else integer(2)
             }
             div {
                 css(styles.searchResultsWrapperInner) {}
@@ -96,9 +98,7 @@ val SearchBox = FC<SearchBoxProps> { props ->
                     }
                 }
                 div {
-                    css(styles.searchResultsFooter) {
-
-                    }
+                    css(styles.searchResultsFooter) {}
                 }
             }
         }
@@ -114,6 +114,7 @@ private fun List<PokemonEntry>.toFormEntries(): List<PokemonFormEntry> =
 
 interface SearchBoxProps: Props {
     var pokemonIndex: List<PokemonEntry>
+    var alwaysOnTop: Boolean
 }
 
 fun SearchBoxProps.getFilteredData(term: String): List<PokemonFormEntry> {
@@ -175,7 +176,6 @@ private object SearchBoxStyles {
         justifyContent = JustifyContent.flexEnd
         flexDirection = FlexDirection.column
         position = Position.relative
-        zIndex = integer(2)
         width = 100.pct
     }
 

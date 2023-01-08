@@ -32,6 +32,7 @@ val Header = FC<HeaderProps> { props ->
             css(HeaderStyles.searchInputWrapper) {}
             SearchBox {
                 pokemonIndex = props.pokemonIndex
+                alwaysOnTop = true
             }
         }
     }
