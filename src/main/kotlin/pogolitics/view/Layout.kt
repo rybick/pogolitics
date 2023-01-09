@@ -4,8 +4,12 @@ import csstype.Border
 import csstype.BorderStyle
 import csstype.LineStyle
 import csstype.None
+import csstype.PropertiesBuilder
 import csstype.px
+import emotion.css.css
+import emotion.react.Global
 import emotion.react.css
+import js.core.jso
 import pogolitics.model.PokemonEntry
 import pogolitics.view.component.Breadcrumbs
 import pogolitics.view.component.Header
@@ -22,9 +26,8 @@ fun renderPage(
     pokemonIndex: List<PokemonEntry>?,
     contentRenderer: ChildrenBuilder.() -> Unit
 ): ReactNode = Fragment.create {
-    // TODO I think Global should be used here, but I don't know how to use it
-    div {
-        css {
+    Global {
+        styles = jso<PropertiesBuilder> {
             a {
                 color = StyleConstants.Colors.secondaryLink.text
                 hover {
@@ -48,6 +51,8 @@ fun renderPage(
                 borderColor = StyleConstants.Colors.primaryHovered.bg
             }
         }
+    }
+    div {
         if (pokemonIndex != null) {
             Header {
                 this.pokemonIndex = pokemonIndex
