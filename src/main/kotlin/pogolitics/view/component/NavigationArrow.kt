@@ -2,8 +2,6 @@ package pogolitics.view.component
 
 import csstype.Display
 import csstype.None
-import csstype.Position
-import csstype.TextAlign
 import csstype.important
 import csstype.pct
 import csstype.px
@@ -25,23 +23,27 @@ val NavigationArrow = FC<ArrowProps> { props ->
         href = props.href
         css(NavigationArrowStyles.arrow) {}
         span {
-            svgTriangle(20.0, props.direction)
+            svgTriangle(props.direction)
         }
     }
 }
 
-fun ChildrenBuilder.svgTriangle(size: Double, direction: NavigationDirection) {
-    val middle = size / 2
+fun ChildrenBuilder.svgTriangle(direction: NavigationDirection) {
+    val boundingBoxSize: Double = NavigationArrowStyles.sizeInPixels.toDouble()
+    val arrowSize: Double = NavigationArrowStyles.arrowSizeInPixels.toDouble()
+    val halfArrowSize = arrowSize / 2
+    val quarterArrowSize = arrowSize / 4
+    val middle = boundingBoxSize / 2
     val (pointingX, tailX) = when (direction) {
-        NavigationDirection.NEXT -> Pair(size, 0.25*size)
-        NavigationDirection.PREVIOUS -> Pair(0.0, 0.75*size)
+        NavigationDirection.NEXT -> Pair(middle + halfArrowSize, middle - quarterArrowSize)
+        NavigationDirection.PREVIOUS -> Pair(middle - halfArrowSize, middle + quarterArrowSize)
     }
     svg {
-        width = size
-        height = size
+        width = boundingBoxSize
+        height = boundingBoxSize
         polygon {
-            points = "$pointingX,$middle $tailX,${(2 + sqrt3) * size / 4} $tailX,${(2 - sqrt3) * size / 4}"
-            style = js("{\"fill\":\"white\"}") // TODO it uses hardcoded white, because css {} does not support fill
+            points = "$pointingX,$middle $tailX,${middle - sqrt3 * quarterArrowSize} $tailX,${middle + sqrt3 * quarterArrowSize}"
+            fill = StyleConstants.Colors.primary.text.toString()
         }
     }
 }
@@ -58,13 +60,14 @@ enum class NavigationDirection {
 }
 
 private object NavigationArrowStyles {
+    const val sizeInPixels = 43
+    const val arrowSizeInPixels = 21
 
     val arrow = ClassName {
         display = Display.inlineBlock
         cursor = pointer
-        width = 42.px
-        height = 42.px
-        textAlign = TextAlign.center
+        width = sizeInPixels.px
+        height = sizeInPixels.px
         borderRadius = 50.pct
         marginLeft = StyleConstants.Margin.small
         marginRight = StyleConstants.Margin.small
@@ -74,10 +77,6 @@ private object NavigationArrowStyles {
             backgroundColor = StyleConstants.Colors.primaryHovered.bg
             color = StyleConstants.Colors.primary.text
             textDecoration = None.none
-        }
-        span {
-            position = Position.relative
-            top = 1.px
         }
     }
 
