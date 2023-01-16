@@ -127,6 +127,7 @@ class App: Component<Props, AppState>() {
     @Suppress("UNCHECKED_CAST")
     private fun ChildrenBuilder.renderPage() {
         return if (state.controllerResult!!.isModelAndView) {
+            // TODO try to eliminate casting while keeping model and view type safe
             // view must be not null if isModelAndView == true
             val component = state.controllerResult!!.view!! as KClass<out Component<PageRProps<Any?, *>, out State>>
             component.react {
