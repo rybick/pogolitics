@@ -23,7 +23,7 @@ import react.dom.html.ReactHTML.img
 import kotlin.reflect.KClass
 
 external interface AppState : State {
-    var controllerResult: ControllerResult<*, *>?
+    var controllerResult: ControllerResult?
     var url: String?
     var pageState: Any?
     var pageStateChanged: Boolean
@@ -55,7 +55,7 @@ class App: Component<Props, AppState>() {
         }
     }
 
-    private fun <M, S> ChildrenBuilder.routeToPage(route: AppConfig.Route<M, S>) {
+    private fun <S> ChildrenBuilder.routeToPage(route: AppConfig.Route<S>) {
         Route {
             path = route.path
             element = wrapInFc {
@@ -67,7 +67,7 @@ class App: Component<Props, AppState>() {
                         orderStateReload(route, params, location)
                     }
                     state.pageStateChanged = false
-                    renderPage<M, S>()
+                    renderPage()
                 } else {
                     state.pageStateChanged = false
                     state.pageState = route.controller.getInitialState(url)
@@ -100,7 +100,7 @@ class App: Component<Props, AppState>() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <S> orderStateReload(route: AppConfig.Route<*, S>, params: Params, location: Location) {
+    private fun <S> orderStateReload(route: AppConfig.Route<S>, params: Params, location: Location) {
         MainScope().launch {
             val controllerResult =
                 route.controller.get(
@@ -125,12 +125,13 @@ class App: Component<Props, AppState>() {
     }
 
     @Suppress("UNCHECKED_CAST")
-    private fun <M, S> ChildrenBuilder.renderPage() {
+    private fun ChildrenBuilder.renderPage() {
         return if (state.controllerResult!!.isModelAndView) {
-            val component = state.controllerResult!!.view as KClass<Component<PageRProps<M, S>, State>>
+            // TODO try to eliminate casting while keeping model and view type safe
+            // view must be not null if isModelAndView == true
+            val component = state.controllerResult!!.view!! as KClass<out Component<PageRProps<Any?, *>, out State>>
             component.react {
-                model = state.controllerResult!!.model as M
-                //attrs.state = state.pageState!! as S
+                model = state.controllerResult!!.model
                 updateState = {
                     setState({state ->
                         state.pageState = it

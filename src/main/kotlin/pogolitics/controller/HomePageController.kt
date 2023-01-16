@@ -5,9 +5,8 @@ import pogolitics.ControllerResult
 import pogolitics.model.HomePageModel
 import pogolitics.view.HomePage
 import react.router.Params
-import kotlin.reflect.KClass
 
-class HomePageController(private val pokemonIndexService: PokemonIndexService): Controller<HomePageModel, Unit> {
+class HomePageController(private val pokemonIndexService: PokemonIndexService): Controller<Unit> {
 
     override fun getInitialState(url: String) {}
 
@@ -15,7 +14,7 @@ class HomePageController(private val pokemonIndexService: PokemonIndexService): 
         props: Params,
         params: URLSearchParams,
         state: Unit
-    ): ControllerResult<HomePageModel, KClass<HomePage>> {
+    ): ControllerResult {
         return ControllerResult.modelAndView(
             view = HomePage::class,
             model = HomePageModel(pokemonIndexService.getPokemonList())

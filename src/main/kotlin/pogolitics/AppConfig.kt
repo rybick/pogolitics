@@ -16,16 +16,16 @@ class AppConfig {
     private val pokemonController = SinglePokemonController(api, pokemonIndexService)
 
     // TODO later: move path to controller as well
-    val routing: List<Route<out Any, out Any>> = listOf(
+    val routing: List<Route<out Any>> = listOf(
         Route("/", true, homePageController),
         Route("/pokemon", true, pokemonListController),
         Route("/pokemon/:pokedexNumber", false, pokemonController)
     )
 
-    class Route<M, S>(
+    class Route<S>(
         val path: String,
         val exact: Boolean,
-        val controller: Controller<M, S>
+        val controller: Controller<S>
     )
 
 }

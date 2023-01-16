@@ -5,18 +5,15 @@ import react.Props
 import react.State
 import kotlin.reflect.KClass
 
-class ControllerResult<
-    M,
-    out V: View<M>
-> private constructor(
-    val model: M?,
-    val view: V?,
-    val isModelAndView: Boolean,
+interface ControllerResult {
+    val model: Any?
+    val view: View?
+    val isModelAndView: Boolean
     val notFoundReason: String?
-) {
+
     companion object {
-        fun <M, V: View<M>> modelAndView(model: M, view: V): ControllerResult<M, V>  {
-            return ControllerResult(
+        fun <M, V: TypedView<M>> modelAndView(model: M, view: V): ControllerResult  {
+            return TypedControllerResult(
                 model = model,
                 view = view,
                 isModelAndView = true,
@@ -24,8 +21,8 @@ class ControllerResult<
             )
         }
 
-        fun <M, V: View<M>> notFound(reason: String): ControllerResult<M, V> {
-            return ControllerResult(
+        fun notFound(reason: String): ControllerResult {
+            return TypedControllerResult(
                 model = null,
                 view = null,
                 isModelAndView = false,
@@ -33,15 +30,20 @@ class ControllerResult<
             )
         }
     }
+
+    private class TypedControllerResult<M, out V: TypedView<out M>>(
+        override val model: M?,
+        override val view: V?,
+        override val isModelAndView: Boolean,
+        override val notFoundReason: String?
+    ): ControllerResult
 }
 
-typealias View <M> = KClass<out Component<out PageRProps<M, *>, out State>>
+private typealias TypedView<M> = KClass<out Component<out PageRProps<M, *>, out State>>
+
+typealias View = TypedView<out Any?>
 
 interface PageRProps<M, S> : Props {
     var model: M
     var updateState: (S) -> Unit
-}
-
-interface PageRState<T> : State {
-    var data: T?
 }

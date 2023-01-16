@@ -13,12 +13,11 @@ import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitics.view.SinglePokemonPage
 import react.router.Params
 import kotlin.math.sqrt
-import kotlin.reflect.KClass
 
 class SinglePokemonController(
     private val api: Api,
     private val pokemonIndexService: PokemonIndexService
-): Controller<SinglePokemonModel, PokemonIndividualValuesState> {
+): Controller<PokemonIndividualValuesState> {
 
     override fun getInitialState(url: String) =
         PokemonIndividualValuesState(
@@ -33,7 +32,7 @@ class SinglePokemonController(
         props: Params,
         params: URLSearchParams,
         state: PokemonIndividualValuesState
-    ): ControllerResult<SinglePokemonModel, KClass<SinglePokemonPage>> {
+    ): ControllerResult {
         return coroutineScope {
             val form = params.get("form")
             val mode = BattleMode.fromString(params.get("mode") ?: "pvp") // TODO display some kind of error page for invalid values
