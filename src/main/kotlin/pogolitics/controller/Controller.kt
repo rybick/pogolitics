@@ -2,7 +2,6 @@ package pogolitics.controller
 
 import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
-import pogolitics.TypedControllerResult
 import react.router.Params
 
 interface Controller<M, S> {

@@ -5,7 +5,7 @@ import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.w3c.dom.url.URLSearchParams
-import pogolitics.TypedControllerResult
+import pogolitics.ControllerResult
 import pogolitics.api.*
 import pogolitics.model.*
 import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
@@ -32,7 +32,7 @@ class SinglePokemonController(
         props: Params,
         params: URLSearchParams,
         state: PokemonIndividualValuesState
-    ): TypedControllerResult<*, *> {
+    ): ControllerResult {
         return coroutineScope {
             val form = params.get("form")
             val mode = BattleMode.fromString(params.get("mode") ?: "pvp") // TODO display some kind of error page for invalid values
@@ -46,7 +46,7 @@ class SinglePokemonController(
             }
             maybePokemon.await()?.let { pokemon ->
                 val pokemonStats = calculatePokemonStatistics(pokemon, state)
-                TypedControllerResult.modelAndView(
+                ControllerResult.modelAndView(
                     view = SinglePokemonPage::class,
                     model = SinglePokemonModel(
                         mode = mode,
@@ -63,7 +63,7 @@ class SinglePokemonController(
                         focusedElement = state.focus
                     )
                 )
-            } ?: TypedControllerResult.notFound("No such pokemon")
+            } ?: ControllerResult.notFound("No such pokemon")
         }
     }
 
