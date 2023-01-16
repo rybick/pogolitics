@@ -1,11 +1,10 @@
 package pogolitics.controller
 
 import org.w3c.dom.url.URLSearchParams
-import pogolitics.ControllerResult
+import pogolitics.TypedControllerResult
 import pogolitics.model.PokemonListModel
 import pogolitics.view.PokemonListPage
 import react.router.Params
-import kotlin.reflect.KClass
 
 class PokemonListController(private val pokemonIndexService: PokemonIndexService) : Controller<PokemonListModel, Unit> {
 
@@ -15,8 +14,8 @@ class PokemonListController(private val pokemonIndexService: PokemonIndexService
         props: Params,
         params: URLSearchParams,
         state: Unit
-    ): ControllerResult<*, *> =
-        ControllerResult.modelAndView(
+    ): TypedControllerResult<*, *> =
+        TypedControllerResult.modelAndView(
             view = PokemonListPage::class,
             model = PokemonListModel(pokemonIndexService.getPokemonList())
         )

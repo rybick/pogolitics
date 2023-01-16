@@ -5,13 +5,9 @@ import react.Props
 import react.State
 import kotlin.reflect.KClass
 
-typealias LooselyTypedControllerResult = ControllerResult<*, *>
+typealias ControllerResult = TypedControllerResult<*, *>
 
-class WControllerResult {
-
-}
-
-class ControllerResult<
+class TypedControllerResult<
     M,
     out V: View<M>
 > private constructor(
@@ -21,8 +17,8 @@ class ControllerResult<
     val notFoundReason: String?
 ) {
     companion object {
-        fun <M, V: View<M>> modelAndView(model: M, view: V): ControllerResult<*, *>  {
-            return ControllerResult(
+        fun <M, V: View<M>> modelAndView(model: M, view: V): TypedControllerResult<*, *>  {
+            return TypedControllerResult(
                 model = model,
                 view = view,
                 isModelAndView = true,
@@ -30,8 +26,8 @@ class ControllerResult<
             )
         }
 
-        fun notFound(reason: String): ControllerResult<*, *> {
-            return ControllerResult(
+        fun notFound(reason: String): TypedControllerResult<*, *> {
+            return TypedControllerResult(
                 model = null,
                 view = null,
                 isModelAndView = false,

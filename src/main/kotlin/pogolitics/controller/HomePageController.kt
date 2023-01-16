@@ -1,11 +1,10 @@
 package pogolitics.controller
 
 import org.w3c.dom.url.URLSearchParams
-import pogolitics.ControllerResult
+import pogolitics.TypedControllerResult
 import pogolitics.model.HomePageModel
 import pogolitics.view.HomePage
 import react.router.Params
-import kotlin.reflect.KClass
 
 class HomePageController(private val pokemonIndexService: PokemonIndexService): Controller<HomePageModel, Unit> {
 
@@ -15,8 +14,8 @@ class HomePageController(private val pokemonIndexService: PokemonIndexService): 
         props: Params,
         params: URLSearchParams,
         state: Unit
-    ): ControllerResult<*, *> {
-        return ControllerResult.modelAndView(
+    ): TypedControllerResult<*, *> {
+        return TypedControllerResult.modelAndView(
             view = HomePage::class,
             model = HomePageModel(pokemonIndexService.getPokemonList())
         )
