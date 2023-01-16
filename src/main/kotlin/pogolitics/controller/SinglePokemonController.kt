@@ -17,7 +17,7 @@ import kotlin.math.sqrt
 class SinglePokemonController(
     private val api: Api,
     private val pokemonIndexService: PokemonIndexService
-): Controller<Any, PokemonIndividualValuesState> {
+): Controller<PokemonIndividualValuesState> {
 
     override fun getInitialState(url: String) =
         PokemonIndividualValuesState(

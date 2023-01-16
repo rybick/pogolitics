@@ -6,7 +6,7 @@ import pogolitics.model.HomePageModel
 import pogolitics.view.HomePage
 import react.router.Params
 
-class HomePageController(private val pokemonIndexService: PokemonIndexService): Controller<HomePageModel, Unit> {
+class HomePageController(private val pokemonIndexService: PokemonIndexService): Controller<Unit> {
 
     override fun getInitialState(url: String) {}
 

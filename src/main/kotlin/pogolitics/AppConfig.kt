@@ -25,7 +25,7 @@ class AppConfig {
     class Route<M, S>(
         val path: String,
         val exact: Boolean,
-        val controller: Controller<M, S>
+        val controller: Controller<S>
     )
 
 }
