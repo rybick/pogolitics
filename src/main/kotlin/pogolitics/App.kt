@@ -127,8 +127,8 @@ class App: Component<Props, AppState>() {
     @Suppress("UNCHECKED_CAST")
     private fun ChildrenBuilder.renderPage() {
         return if (state.controllerResult!!.isModelAndView) {
-            val component = state.controllerResult!!.view!! as KClass<out Component<PageRProps<Any?, *>, out State>>
             // view must be not null if isModelAndView == true
+            val component = state.controllerResult!!.view!! as KClass<out Component<PageRProps<Any?, *>, out State>>
             component.react {
                 model = state.controllerResult!!.model
                 updateState = {
