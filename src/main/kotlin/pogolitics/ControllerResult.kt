@@ -7,12 +7,12 @@ import kotlin.reflect.KClass
 
 interface ControllerResult {
     val model: Any?
-    val view: Any?
+    val view: View?
     val isModelAndView: Boolean
     val notFoundReason: String?
 
     companion object {
-        fun <M, V: View<M>> modelAndView(model: M, view: V): ControllerResult  {
+        fun <M, V: TypedView<M>> modelAndView(model: M, view: V): ControllerResult  {
             return TypedControllerResult(
                 model = model,
                 view = view,
@@ -31,7 +31,7 @@ interface ControllerResult {
         }
     }
 
-    private class TypedControllerResult<M, out V: View<M>>(
+    private class TypedControllerResult<M, out V: TypedView<out M>>(
         override val model: M?,
         override val view: V?,
         override val isModelAndView: Boolean,
@@ -39,7 +39,9 @@ interface ControllerResult {
     ): ControllerResult
 }
 
-private typealias View <M> = KClass<out Component<out PageRProps<M, *>, out State>>
+private typealias TypedView<M> = KClass<out Component<out PageRProps<M, *>, out State>>
+
+typealias View = TypedView<out Any?>
 
 interface PageRProps<M, S> : Props {
     var model: M
