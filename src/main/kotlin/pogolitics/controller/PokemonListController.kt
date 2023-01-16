@@ -15,7 +15,7 @@ class PokemonListController(private val pokemonIndexService: PokemonIndexService
         props: Params,
         params: URLSearchParams,
         state: Unit
-    ): ControllerResult<PokemonListModel, KClass<PokemonListPage>> =
+    ): ControllerResult<*, *> =
         ControllerResult.modelAndView(
             view = PokemonListPage::class,
             model = PokemonListModel(pokemonIndexService.getPokemonList())

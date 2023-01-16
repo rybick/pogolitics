@@ -14,5 +14,5 @@ interface Controller<M, S> {
         props: Params,
         params: URLSearchParams,
         state: S
-    ): ControllerResult<M, KClass<out Component<out PageRProps<M, S>, out State>>>
+    ): ControllerResult<*, *>
 }

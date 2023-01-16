@@ -23,7 +23,7 @@ import react.dom.html.ReactHTML.img
 import kotlin.reflect.KClass
 
 external interface AppState : State {
-    var controllerResult: ControllerResult<*, *>?
+    var controllerResult: LooselyTypedControllerResult?
     var url: String?
     var pageState: Any?
     var pageStateChanged: Boolean
