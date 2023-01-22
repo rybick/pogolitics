@@ -25,6 +25,7 @@ object StyleConstants {
         val primaryHovered = ColorGroup(bg = hoveredPrimary, text = textPrimary, secondaryText = textPrimary)
         val secondary = ColorGroup(bg = white, text = black, secondaryText = "#aaaaaa")
         val secondarySpecial = ColorGroup(bg = "#ededed", text = "#000000", secondaryText = "#999999")
+        val primaryInactive = secondarySpecial
         val secondaryLink = ColorGroup(bg = white, text = primaryAccent, secondaryText = none)
         val secondaryLinkHovered = ColorGroup(bg = white, text = hoveredPrimary, secondaryText = none)
         val lightBorder = Color(lightPrimary) //Color("rgba(130, 60, 0, 0.25)")

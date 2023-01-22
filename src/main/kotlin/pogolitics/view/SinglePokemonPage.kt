@@ -26,8 +26,9 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
         div {
             css(Styles.headerWrapper) {}
             NavigationArrow {
-               href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
-               direction = NavigationDirection.PREVIOUS
+                active = props.model.pokemon.pokedexNumber > 1
+                href = pokemonPagePath(props.model.pokemon.pokedexNumber - 1, mode = props.model.mode)
+                direction = NavigationDirection.PREVIOUS
             }
             span {
                 css(Styles.spacer) {}
@@ -49,6 +50,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                 }
             }
             NavigationArrow {
+                active = true
                 href = pokemonPagePath(props.model.pokemon.pokedexNumber + 1, mode = props.model.mode)
                 direction = NavigationDirection.NEXT
             }

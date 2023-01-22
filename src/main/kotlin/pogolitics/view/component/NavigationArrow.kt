@@ -7,6 +7,7 @@ import csstype.pct
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
+import pogolitics.default
 import pogolitics.pointer
 import pogolitics.view.StyleConstants
 import react.ChildrenBuilder
@@ -20,8 +21,10 @@ import kotlin.math.sqrt
 
 val NavigationArrow = FC<ArrowProps> { props ->
     a {
-        href = props.href
-        css(NavigationArrowStyles.arrow) {}
+        if (props.active) {
+            href = props.href
+        }
+        css(if (props.active) NavigationArrowStyles.arrow else NavigationArrowStyles.inactiveArrow) {}
         span {
             svgTriangle(props.direction)
         }
@@ -53,6 +56,7 @@ private val sqrt3 = sqrt(3.0)
 interface ArrowProps: Props {
     var direction: NavigationDirection
     var href: String
+    var active: Boolean
 }
 
 enum class NavigationDirection {
@@ -77,6 +81,16 @@ private object NavigationArrowStyles {
             backgroundColor = StyleConstants.Colors.primaryHovered.bg
             color = StyleConstants.Colors.primary.text
             textDecoration = None.none
+        }
+    }
+
+    val inactiveArrow = ClassName(arrow) {
+        cursor = default
+        backgroundColor = StyleConstants.Colors.primaryInactive.bg
+        color = StyleConstants.Colors.primaryInactive.text
+        hover {
+            backgroundColor = StyleConstants.Colors.primaryInactive.bg
+            color = StyleConstants.Colors.primaryInactive.text
         }
     }
 
