@@ -116,13 +116,12 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
         }
     }
 
-    private fun getIcon(sort: Sort?, columnId: Int): Any? {
+    private fun getIcon(sort: Sort?, columnId: Int): Char =
         if (sort != null && sort.columnId == columnId) {
-            return if (sort.ascending) DOWN_ICON else UP_ICON
+            if (sort.ascending) UP_ICON else DOWN_ICON
         } else {
-            return SPACE
+            SPACE
         }
-    }
 }
 
 fun ChildrenBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit): Unit =
@@ -137,7 +136,7 @@ external interface MovesetsRState: State {
 }
 
 data class Sort(val columnId: Int, val ascending: Boolean) {
-    val ascendFactor get() = if (ascending) 1 else -1
+    val ascendFactor get() = if (ascending) -1 else +1
 }
 
 
