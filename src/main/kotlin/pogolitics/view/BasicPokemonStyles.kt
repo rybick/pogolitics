@@ -1,5 +1,7 @@
+import csstype.Margin
 import csstype.TextAlign
 import csstype.pct
+import csstype.px
 import emotion.css.ClassName
 import pogolitics.view.StyleConstants
 
@@ -28,6 +30,14 @@ internal object BasicPokemonInfoStyles {
         textAlign = TextAlign.center
         margin = StyleConstants.Margin.medium
         marginBottom = StyleConstants.Margin.semiBig
+    }
+
+    val pokemonPictureWrapper = ClassName {
+        textAlign = TextAlign.center
+    }
+
+    val pokemonPictureImg = ClassName {
+        margin = Margin(0.px, StyleConstants.Margin.medium)
     }
 
     val typeIconWrapper = ClassName {

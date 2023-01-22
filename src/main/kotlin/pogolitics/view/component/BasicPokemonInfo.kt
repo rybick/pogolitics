@@ -1,12 +1,16 @@
 package pogolitics.view.component
 
+import dom.html.HTMLImageElement
 import emotion.react.css
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.BasicStylesheet
+import pogolitics.view.pokemonImagePath
 import react.*
+import react.dom.events.SyntheticEvent
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
+import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.span
 
 val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
@@ -26,6 +30,21 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
                     css(BasicPokemonInfoStyles.pokemonForm) {}
                     +"(${prettyName})"
                 }
+            }
+        }
+        div {
+            css(BasicPokemonInfoStyles.pokemonPictureWrapper) {}
+            img {
+                css(BasicPokemonInfoStyles.pokemonPictureImg) {}
+                src = pokemonImagePath(props.data.pokedexNumber, props.data.form, false)
+                alt = "basic form"
+                onError = ::hideOnError
+            }
+            img {
+                css(BasicPokemonInfoStyles.pokemonPictureImg) {}
+                src = pokemonImagePath(props.data.pokedexNumber, props.data.form, true)
+                alt = "shiny form"
+                onError = ::hideOnError
             }
         }
         div {
@@ -61,7 +80,13 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
     }
 }
 
-
+// TODO instead of hiding errors about missing images
+// try to base pokemon index on getData(it)["moveSettings"] != null entries
+// probably it should enable us to hide all technical/phantom pokemon like "default form Giratina"
+private fun hideOnError(event: SyntheticEvent<HTMLImageElement, *>) {
+    val target: HTMLImageElement = event.target as HTMLImageElement
+    target.style.display = "none"
+}
 
 external interface BasicPokemonInfoRProps : Props {
     var data: SinglePokemonModel.PokemonStaticInfo

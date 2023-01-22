@@ -122,5 +122,4 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             mode = model.mode
         )
 
-
 }

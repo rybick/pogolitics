@@ -13,6 +13,8 @@ class PokemonForm private constructor(val code: String?) {
 
     fun isDefault() = code == null
 
+    fun isNormal() = code == "NORMAL" // TODO perhaps normal form should be just filtered out and not shown at all?
+
     override fun equals(other: Any?): Boolean =
         if (other == null || other !is PokemonForm) {
             false
