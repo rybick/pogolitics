@@ -1,21 +1,12 @@
 package pogolitics.view.component
 
-import csstype.Margin
-import csstype.TextAlign
-import csstype.pct
-import csstype.rem
-import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
 import pogolitics.view.BasicStylesheet
-import pogolitics.view.StyleConstants
-import pogolitics.view.iconPath
 import react.*
-import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
-import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.span
 
 val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
@@ -70,37 +61,7 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
     }
 }
 
-private object BasicPokemonInfoStyles {
-    val wrapper = ClassName {
-        textAlign = TextAlign.center
-    }
 
-    val pokemonId = ClassName {
-        color = StyleConstants.Colors.secondary.secondaryText
-        marginRight = StyleConstants.Margin.small
-        fontSize = 80.pct
-    }
-
-    val pokemonForm = ClassName {
-        color = StyleConstants.Colors.secondary.secondaryText
-        marginLeft = StyleConstants.Margin.small
-        fontSize = 80.pct
-    }
-
-    val staticStatsWrapper = ClassName {
-        textAlign = TextAlign.center
-    }
-
-    val typesWrapper = ClassName {
-        textAlign = TextAlign.center
-        margin = StyleConstants.Margin.medium
-        marginBottom = StyleConstants.Margin.semiBig
-    }
-
-    val typeIconWrapper = ClassName {
-        margin = StyleConstants.Margin.small
-    }
-}
 
 external interface BasicPokemonInfoRProps : Props {
     var data: SinglePokemonModel.PokemonStaticInfo

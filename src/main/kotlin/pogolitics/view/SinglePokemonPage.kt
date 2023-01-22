@@ -1,11 +1,5 @@
 package pogolitics.view
 
-import csstype.Display
-import csstype.Float
-import csstype.TextAlign
-import csstype.number
-import csstype.pct
-import emotion.css.ClassName
 import emotion.react.css
 import kotlinx.browser.window
 import pogolitics.PageRProps
@@ -18,6 +12,7 @@ import react.State
 import react.SwitchSelector
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.span
+import pogolitics.view.SinglePokemonPageStyles as Styles
 
 class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualValuesState>) :
     Component<PageRProps<SinglePokemonModel, PokemonIndividualValuesState>, State>(props) {
@@ -118,6 +113,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             /* space for widgets that will always be last */
         }
     }
+
     private fun pokemonPage(model: SinglePokemonModel): Page =
         Page.POKEMON(
             pokedexNumber = model.pokemon.pokedexNumber,
@@ -126,38 +122,5 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             mode = model.mode
         )
 
-    private object Styles {
-        const val smallScreenMediaQuery = "screen and (max-width: 700px)"
 
-        val headerWrapper = ClassName {
-            paddingTop = StyleConstants.Padding.big
-            paddingLeft = StyleConstants.Padding.medium
-            paddingRight = StyleConstants.Padding.medium
-            paddingBottom = StyleConstants.Padding.medium
-            display = Display.flex
-            fontSize = 160.pct
-        }
-
-        val spacer = ClassName {
-            flexGrow = number(1.0)
-            textAlign = TextAlign.center
-        }
-
-        val leftWrapper = ClassName {
-            width = 50.pct
-            float = Float.left
-            "@media $smallScreenMediaQuery" {
-                width = 100.pct
-            }
-        }
-
-        val rightWrapper = ClassName {
-            width = 50.pct
-            float = Float.right
-            "@media $smallScreenMediaQuery" {
-                width = 100.pct
-                float = Float.left
-            }
-        }
-    }
 }

@@ -6,11 +6,16 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
+import pogolitics.PageRProps
 import pogolitics.api.*
 import pogolitics.model.*
 import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
+import pogolitics.view.SinglePokemonNotFoundModel
+import pogolitics.view.SinglePokemonNotFoundPage
 import pogolitics.view.SinglePokemonPage
+import react.Component
+import react.State
 import react.router.Params
 import kotlin.math.sqrt
 
@@ -34,14 +39,15 @@ class SinglePokemonController(
         state: PokemonIndividualValuesState
     ): ControllerResult {
         return coroutineScope {
-            val form = params.get("form")
-            val mode = BattleMode.fromString(params.get("mode") ?: "pvp") // TODO display some kind of error page for invalid values
+            val pokedexNumber: Int = props.pokedexNumber
+            val form: String? = params.form
+            val mode = params.mode
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
             val maybePokemon: Deferred<PokemonDto?> = async {
                 pokemonIndex.await()
-                    .findPokemonUniqueId(props["pokedexNumber"]!!, form)
+                    .findPokemonUniqueId(pokedexNumber, form)
                     ?.let { uniqueId -> api.fetchPokemon(uniqueId) }
             }
             maybePokemon.await()?.let { pokemon ->
@@ -63,16 +69,28 @@ class SinglePokemonController(
                         focusedElement = state.focus
                     )
                 )
-            } ?: ControllerResult.notFound("No such pokemon")
+            } ?: ControllerResult.modelAndView(
+                view = SinglePokemonNotFoundPage::class,
+                model = SinglePokemonNotFoundModel(
+                    mode = mode,
+                    pokedexNumber = pokedexNumber,
+                    pokemonIndex = pokemonIndexService.getPokemonList()
+                )
+            )
+
+            //ControllerResult.notFound("No such pokemon")
         }
     }
 
-    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: String, form: String?): String? =
-        pokedexNumber.toInt().let { pokedexNumberInt ->
-            filter { it.pokedexNumber == pokedexNumberInt }
-                .firstOrNull { it.form.equals(form, ignoreCase = true) }
-                ?.uniqueId
-        }
+    private val Params.pokedexNumber: Int get() = get("pokedexNumber")!!.toInt()
+    private val URLSearchParams.form: String? get() = get("form")
+    // TODO display some kind of error page for invalid values
+    private val URLSearchParams.mode: BattleMode get() = BattleMode.fromString(get("mode") ?: "pvp")
+
+    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: Int, form: String?): String? =
+        filter { it.pokedexNumber == pokedexNumber }
+            .firstOrNull { it.form.equals(form, ignoreCase = true) }
+            ?.uniqueId
 
     private fun toPokemonStaticInfo(pokemon: PokemonDto, form: String?): SinglePokemonModel.PokemonStaticInfo {
         return SinglePokemonModel.PokemonStaticInfo(
