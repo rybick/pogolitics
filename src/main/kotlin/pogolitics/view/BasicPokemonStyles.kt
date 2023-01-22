@@ -37,7 +37,7 @@ internal object BasicPokemonInfoStyles {
     }
 
     val pokemonPictureImg = ClassName {
-        margin = Margin(0.px, StyleConstants.Margin.medium)
+        margin = Margin(StyleConstants.Margin.medium, StyleConstants.Margin.medium, 0.px)
     }
 
     val typeIconWrapper = ClassName {

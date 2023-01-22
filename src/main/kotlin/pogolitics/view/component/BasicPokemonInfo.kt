@@ -81,7 +81,7 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
 }
 
 // TODO instead of hiding errors about missing images
-// try to base pokemon index on getData(it)["moveSettings"] != null entries
+// try to base pokemon index on getData(it)["formSettings"] != null entries
 // probably it should enable us to hide all technical/phantom pokemon like "default form Giratina"
 private fun hideOnError(event: SyntheticEvent<HTMLImageElement, *>) {
     val target: HTMLImageElement = event.target as HTMLImageElement
