@@ -1,10 +1,12 @@
 package pogolitics.view
 
+import csstype.TextAlign
 import emotion.react.css
 import kotlinx.browser.window
 import pogolitics.PageRProps
 import pogolitics.model.BattleMode
 import pogolitics.model.PokemonEntry
+import pogolitics.model.PokemonForm
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.view.component.NavigationArrow
 import pogolitics.view.component.NavigationDirection
@@ -15,7 +17,7 @@ import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
 import react.dom.html.ReactHTML.span
-import pogolitics.view.SinglePokemonPageStyles
+import react.dom.html.ReactHTML.h2
 
 class SinglePokemonNotFoundPage :
     Component<PageRProps<SinglePokemonNotFoundModel, PokemonIndividualValuesState>, State>() {
@@ -70,6 +72,22 @@ class SinglePokemonNotFoundPage :
                         +"(yet)"
                     }
                 }
+            }
+        }
+        div {
+            css(BasicPokemonInfoStyles.pokemonPictureWrapper) {}
+            ReactHTML.img {
+                css(BasicPokemonInfoStyles.pokemonPictureImg) {}
+                src = pokemonImagePath(132, PokemonForm.DEFAULT, false)
+                alt = "Ditto"
+            }
+        }
+        div {
+            h2 {
+                css {
+                    textAlign = TextAlign.center
+                }
+                +"But here's a ditto"
             }
         }
     }
