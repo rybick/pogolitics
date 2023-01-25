@@ -1,6 +1,6 @@
 package pogolitics.model
 
-class PokemonForm private constructor(val code: String?) {
+class PokemonForm private constructor(val code: String?, val costume: Boolean?) {
     val prettyName get(): String? = code?.let {
         if (code.startsWith("COPY_")) {
             code.substring(5)
@@ -27,8 +27,9 @@ class PokemonForm private constructor(val code: String?) {
     override fun toString(): String = "Form($code)"
 
     companion object {
-        fun ofNullable(code: String?): PokemonForm = code?.let(::PokemonForm) ?: DEFAULT
+        fun ofNullable(code: String?, costume: Boolean?): PokemonForm =
+            code?.let { PokemonForm(it, costume ?: false) } ?: DEFAULT
 
-        val DEFAULT = PokemonForm(null)
+        val DEFAULT = PokemonForm(null, costume = false)
     }
 }

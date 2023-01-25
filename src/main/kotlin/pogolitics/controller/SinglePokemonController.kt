@@ -53,7 +53,7 @@ class SinglePokemonController(
                     view = SinglePokemonPage::class,
                     model = SinglePokemonModel(
                         mode = mode,
-                        pokemon = toPokemonStaticInfo(dto.pokemon, dto.entry.form),
+                        pokemon = toPokemonStaticInfo(dto.pokemon, dto.entry),
                         stats = pokemonStats,
                         moveSets = calculateMoveSets(
                             mode = mode,
@@ -97,11 +97,11 @@ class SinglePokemonController(
             allPokemonForms.firstOrNull { it.form.equals(form, ignoreCase = true) }
         }
 
-    private fun toPokemonStaticInfo(pokemon: PokemonDto, form: String?): SinglePokemonModel.PokemonStaticInfo {
+    private fun toPokemonStaticInfo(pokemon: PokemonDto, entry: PokemonIndexEntryDto): SinglePokemonModel.PokemonStaticInfo {
         return SinglePokemonModel.PokemonStaticInfo(
             uniqueId = pokemon.uniqueId,
             pokedexNumber = pokemon.pokedexNumber,
-            form = PokemonForm.ofNullable(form),
+            form = PokemonForm.ofNullable(entry.form, entry.formCostume),
             name = pokemon.name,
             types = pokemon.types.toModel(),
             baseAttack = pokemon.baseAttack,
