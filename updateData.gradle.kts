@@ -54,17 +54,20 @@ fun updateData() {
         }
 }
 
-typealias Forms = List<Form>
-
 data class FormsData(
     val pokemonNameCode: String,
     val forms: List<Form>
 ) {
-    fun findFormIndex(formNameCode: String?): Int? =
+    fun findFormAndIndex(formNameCode: String?): Pair<Form?, Int?> =
         if (formNameCode == null) {
-            if (forms.isEmpty()) 0 else null
+            if (forms.isEmpty()) Pair(null, 0) else Pair(null, null)
         } else {
-            forms.indexOfFirst { it.id == "${pokemonNameCode}_${formNameCode}" }
+            val index = forms.indexOfFirst { it.id == "${pokemonNameCode}_${formNameCode}" }
+            if (index != -1) {
+                Pair(forms[index], index)
+            } else {
+                Pair(null, null)
+            }
         }
 }
 
@@ -208,13 +211,15 @@ fun convertToPokemonIndexEntry(
         val nameCode = getString("pokemonId")
         val prettyFormName = convertToPrettyForm(getString("form", null), getString("pokemonId"))
         val formsData: FormsData = formsDataByNameCode[nameCode]!!
+        val (form: Form?, formIndex: Int?) = formsData.findFormAndIndex(prettyFormName)
         json(
             "uniqueId" to templateId,
             "pokedexNumber" to convertToPokedexNumber(templateId),
             "nameCode" to nameCode,
             "name" to convertToPrettyPokemonName(getString("pokemonId")),
             "form" to prettyFormName,
-            "formIndex" to formsData.findFormIndex(prettyFormName)
+            "formIndex" to formIndex,
+            "formCostume" to form?.costume
         )
     }
 
