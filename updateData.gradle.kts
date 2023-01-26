@@ -35,7 +35,6 @@ fun updateData() {
         .partitionLogged(::isFastAttack)
     val forms = gameData
         .filter { getData(it)["formSettings"] != null }
-        //.let { logger.warn("" + it.let(::toJsonArray)); it }
     createPokemonIndex(pokemonData, convertToFormsDataByNameCode(forms))
         .also {
             File("./src/main/resources/data/pokemon/index.json").writeText(it.toString())
