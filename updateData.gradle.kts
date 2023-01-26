@@ -209,15 +209,16 @@ fun convertToPokemonIndexEntry(
 ): JsonObject =
     with(pokemonSettings) {
         val nameCode = getString("pokemonId")
-        val rawFormNameCode = getString("form", null)
+        val formNameCode = getString("form", null)
         val formsData: FormsData = formsDataByNameCode[nameCode]!!
-        val (form: Form?, formIndex: Int?) = formsData.findFormAndIndex(rawFormNameCode)
+        val (form: Form?, formIndex: Int?) = formsData.findFormAndIndex(formNameCode)
         json(
             "uniqueId" to templateId,
             "pokedexNumber" to convertToPokedexNumber(templateId),
             "nameCode" to nameCode,
             "name" to convertToPrettyPokemonName(getString("pokemonId")),
-            "form" to convertToPrettyForm(rawFormNameCode, getString("pokemonId")),
+            "form" to convertToPrettyForm(formNameCode, getString("pokemonId")),
+            "formNameCode" to formNameCode,
             "formIndex" to formIndex,
             "formCostume" to form?.costume
         )
