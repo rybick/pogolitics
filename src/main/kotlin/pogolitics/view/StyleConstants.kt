@@ -14,6 +14,8 @@ object StyleConstants {
         private val lightPrimary = "#fee8dc" // in between textPrimary and primaryAccent
 
         private val white = "#ffffff"
+        private val lightGray = "#aaaaaa"
+        private val darkGray = "#999999"
         private val black = "#000000"
 
         private val textPrimary = white
@@ -23,11 +25,13 @@ object StyleConstants {
 
         val primary = ColorGroup(bg = primaryAccent, text = textPrimary, secondaryText = textPrimarySoft)
         val primaryHovered = ColorGroup(bg = hoveredPrimary, text = textPrimary, secondaryText = textPrimary)
-        val secondary = ColorGroup(bg = white, text = black, secondaryText = "#aaaaaa")
-        val secondarySpecial = ColorGroup(bg = "#ededed", text = "#000000", secondaryText = "#999999")
-        val primaryInactive = secondarySpecial
-        val secondaryLink = ColorGroup(bg = white, text = primaryAccent, secondaryText = none)
-        val secondaryLinkHovered = ColorGroup(bg = white, text = hoveredPrimary, secondaryText = none)
+        val secondary = ColorGroup(bg = darkGray, text = textPrimary, secondaryText = textPrimarySoft)
+        val secondaryHovered = ColorGroup(bg = lightGray, text = textPrimary, secondaryText = textPrimary)
+        val regular = ColorGroup(bg = white, text = black, secondaryText = lightGray)
+        val regularSpecial = ColorGroup(bg = "#ededed", text = black, secondaryText = darkGray)
+        val primaryInactive = regularSpecial
+        val regularLink = ColorGroup(bg = white, text = primaryAccent, secondaryText = none)
+        val regularLinkHovered = ColorGroup(bg = white, text = hoveredPrimary, secondaryText = none)
         val lightBorder = Color(lightPrimary) //Color("rgba(130, 60, 0, 0.25)")
     }
 

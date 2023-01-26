@@ -1,6 +1,6 @@
 package pogolitics.model
 
-class PokemonForm private constructor(val code: String?, val costume: Boolean?) {
+class PokemonForm private constructor(val code: String?, private val costume: Boolean?) {
     val prettyName get(): String? = code?.let {
         if (code.startsWith("COPY_")) {
             code.substring(5)
@@ -14,6 +14,8 @@ class PokemonForm private constructor(val code: String?, val costume: Boolean?) 
     fun isDefault() = code == null
 
     fun isNormal() = code == "NORMAL" // TODO perhaps normal form should be just filtered out and not shown at all?
+
+    fun isCostume() = costume == true
 
     override fun equals(other: Any?): Boolean =
         if (other == null || other !is PokemonForm) {
