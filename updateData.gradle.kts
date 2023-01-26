@@ -35,6 +35,7 @@ fun updateData() {
         .partitionLogged(::isFastAttack)
     val forms = gameData
         .filter { getData(it)["formSettings"] != null }
+        //.let { logger.warn("" + it.let(::toJsonArray)); it }
     createPokemonIndex(pokemonData, convertToFormsDataByNameCode(forms))
         .also {
             File("./src/main/resources/data/pokemon/index.json").writeText(it.toString())
@@ -58,11 +59,11 @@ data class FormsData(
     val pokemonNameCode: String,
     val forms: List<Form>
 ) {
-    fun findFormAndIndex(formNameCode: String?): Pair<Form?, Int?> =
-        if (formNameCode == null) {
+    fun findFormAndIndex(rawFormNameCode: String?): Pair<Form?, Int?> =
+        if (rawFormNameCode == null) {
             if (forms.isEmpty()) Pair(null, 0) else Pair(null, null)
         } else {
-            val index = forms.indexOfFirst { it.id == "${pokemonNameCode}_${formNameCode}" }
+            val index = forms.indexOfFirst { it.id == rawFormNameCode }
             if (index != -1) {
                 Pair(forms[index], index)
             } else {
@@ -209,15 +210,15 @@ fun convertToPokemonIndexEntry(
 ): JsonObject =
     with(pokemonSettings) {
         val nameCode = getString("pokemonId")
-        val prettyFormName = convertToPrettyForm(getString("form", null), getString("pokemonId"))
+        val rawFormNameCode = getString("form", null)
         val formsData: FormsData = formsDataByNameCode[nameCode]!!
-        val (form: Form?, formIndex: Int?) = formsData.findFormAndIndex(prettyFormName)
+        val (form: Form?, formIndex: Int?) = formsData.findFormAndIndex(rawFormNameCode)
         json(
             "uniqueId" to templateId,
             "pokedexNumber" to convertToPokedexNumber(templateId),
             "nameCode" to nameCode,
             "name" to convertToPrettyPokemonName(getString("pokemonId")),
-            "form" to prettyFormName,
+            "form" to convertToPrettyForm(rawFormNameCode, getString("pokemonId")),
             "formIndex" to formIndex,
             "formCostume" to form?.costume
         )
