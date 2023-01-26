@@ -35,10 +35,10 @@ class SearchBoxTest {
         assertEquals(
             actual = result,
             expected = listOf(
-                PokemonFormEntry(25, PIKACHU, DEFAULT),
-                PokemonFormEntry(26, RAICHU, DEFAULT),
-                PokemonFormEntry(25, PIKACHU, POP_STAR),
-                PokemonFormEntry(25, PIKACHU, ROCK_STAR)
+                PokemonFormEntry(25, PIKACHU, 0, DEFAULT),
+                PokemonFormEntry(26, RAICHU, 0, DEFAULT),
+                PokemonFormEntry(25, PIKACHU, 1, POP_STAR),
+                PokemonFormEntry(25, PIKACHU, 2, ROCK_STAR)
             )
         )
     }
