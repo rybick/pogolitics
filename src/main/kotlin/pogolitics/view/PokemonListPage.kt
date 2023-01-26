@@ -84,7 +84,7 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
 
     private fun ChildrenBuilder.formWidget(pokedexNumber: Int, form: PokemonForm) {
         span {
-            css(Styles.form) {}
+            css(if (form.isCostume()) Styles.costumeForm else Styles.form) {}
             a {
                 href = pokemonPagePath(pokedexNumber, form)
                 +form.prettyNameOrDefault
@@ -109,6 +109,18 @@ class PokemonListPage(props: PageRProps<PokemonListModel, Unit>) :
                 hover {
                     backgroundColor = StyleConstants.Colors.primaryHovered.bg
                     color = StyleConstants.Colors.primaryHovered.text
+                    textDecoration = None.none
+                }
+            }
+        }
+
+        val costumeForm = ClassName(form) {
+            a {
+                backgroundColor = StyleConstants.Colors.secondary.bg
+                color = StyleConstants.Colors.secondary.text
+                hover {
+                    backgroundColor = StyleConstants.Colors.secondaryHovered.bg
+                    color = StyleConstants.Colors.secondaryHovered.text
                     textDecoration = None.none
                 }
             }

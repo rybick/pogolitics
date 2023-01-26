@@ -77,7 +77,7 @@ val SearchBox = FC<SearchBoxProps> { props ->
             }
             div {
                 css(styles.searchResultsWrapperInner) {}
-                filtered.forEachIndexed { index, (pokedexNumber, name, form) ->
+                filtered.forEachIndexed { index, (pokedexNumber, name, _, form) ->
                     a {
                         css(if (index == selected) styles.selectedEntryWrapper else styles.entryWrapper) {}
                         href = pokemonPagePath(pokedexNumber, form)
@@ -106,9 +106,9 @@ val SearchBox = FC<SearchBoxProps> { props ->
 }
 
 private fun List<PokemonEntry>.toFormEntries(): List<PokemonFormEntry> =
-    flatMap { entry ->
-        entry.forms.map { form ->
-            PokemonFormEntry(entry.pokedexNumber, entry.name, form)
+    flatMap { entry: PokemonEntry ->
+        entry.forms.mapIndexed { index, form ->
+            PokemonFormEntry(entry.pokedexNumber, entry.name, index, form)
         }
     }
 
@@ -131,16 +131,19 @@ fun SearchBoxProps.getFilteredData(term: String): List<PokemonFormEntry> {
 }
 
 private object Order {
-    val highest = 100
-    val high = 99
-    val lowest = 0
+    val highest = 100000
+    val high =      1000
+    val lowest =       0
 }
 private fun calculateOrder(match: MatchedField, entry: PokemonFormEntry): Int =
     when (match) {
-        MatchedField.NAME -> if (entry.form.isDefault()) Order.highest else Order.lowest
+        MatchedField.NAME -> if (entry.isFirstForm()) Order.highest else Order.lowest
         MatchedField.POKEDEX_NUMBER -> Order.highest
         MatchedField.FORM -> Order.high
-    }
+    } - entry.formIndex - costumeOrderPenalty(entry.form)
+
+fun costumeOrderPenalty(form: PokemonForm): Int =
+    if (form.isCostume()) 10 else 0
 
 enum class MatchedField {
     NAME,
@@ -148,7 +151,7 @@ enum class MatchedField {
     FORM
 }
 
-data class PokemonFormEntry(val pokedexNumber: Int, val name: String, val form: PokemonForm) {
+data class PokemonFormEntry(val pokedexNumber: Int, val name: String, val formIndex: Int, val form: PokemonForm) {
     fun matches(searchTerms: List<String>): MatchedField? {
         return searchTerms.firstNotNullOfOrNull { term ->
             if (name.contains(term, ignoreCase = true)) {
@@ -162,6 +165,8 @@ data class PokemonFormEntry(val pokedexNumber: Int, val name: String, val form: 
             }
         }
     }
+
+    fun isFirstForm(): Boolean = formIndex == 0
 }
 
 private object SearchBoxStyles {
@@ -180,7 +185,7 @@ private object SearchBoxStyles {
     }
 
     val searchResultsWrapperInner = ClassName {
-        backgroundColor = StyleConstants.Colors.secondary.bg
+        backgroundColor = StyleConstants.Colors.regular.bg
         width = 100.pct
         borderLeft = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
         borderRight = Border(StyleConstants.Border.thick, LineStyle.solid, StyleConstants.Colors.primary.bg)
@@ -196,28 +201,28 @@ private object SearchBoxStyles {
         padding = Padding(StyleConstants.Padding.medium, StyleConstants.Padding.big)
         color = backgroundColor
         hover {
-            backgroundColor = StyleConstants.Colors.secondarySpecial.bg
+            backgroundColor = StyleConstants.Colors.regularSpecial.bg
             textDecoration = None.none
         }
     }
 
     val selectedEntryWrapper = ClassName(entryWrapper) {
-        backgroundColor = StyleConstants.Colors.secondarySpecial.bg
+        backgroundColor = StyleConstants.Colors.regularSpecial.bg
         textDecoration = None.none
     }
 
     val pokemonId = ClassName {
-        color = StyleConstants.Colors.secondary.secondaryText
+        color = StyleConstants.Colors.regular.secondaryText
         marginRight = StyleConstants.Margin.small
         fontSize = StyleConstants.Font.small
     }
 
     val pokemonName = ClassName {
-        color = StyleConstants.Colors.secondary.text
+        color = StyleConstants.Colors.regular.text
     }
 
     val pokemonForm = ClassName {
-        color = StyleConstants.Colors.secondary.secondaryText
+        color = StyleConstants.Colors.regular.secondaryText
         marginLeft = StyleConstants.Margin.small
         fontSize = 80.pct
     }

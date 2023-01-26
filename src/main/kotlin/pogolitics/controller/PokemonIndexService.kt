@@ -18,7 +18,10 @@ class PokemonIndexService(private val api: Api) {
                     pokedexNumber = pokedexNumber,
                     name = entries.first().name,
                     forms = entries
-                        .map { PokemonForm.ofNullable(it.form) }
+                        .filter { it.formIndex != null }
+                        .sortedBy { it.formIndex }
+                        .sortedBy { it.formCostume } // costumes last
+                        .map { PokemonForm.ofNullable(it.form, it.formCostume) }
                 )
             }
             .values

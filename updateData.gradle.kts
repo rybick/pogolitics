@@ -33,7 +33,9 @@ fun updateData() {
     val (fastPvpAttacks, chargedPvpAttacks) = gameData
         .filter { getData(it)["combatMove"] != null }
         .partitionLogged(::isFastAttack)
-    createPokemonIndex(pokemonData)
+    val forms = gameData
+        .filter { getData(it)["formSettings"] != null }
+    createPokemonIndex(pokemonData, convertToFormsDataByNameCode(forms))
         .also {
             File("./src/main/resources/data/pokemon/index.json").writeText(it.toString())
         }
@@ -52,11 +54,43 @@ fun updateData() {
         }
 }
 
-fun createPokemonIndex(pokemonData: List<JsonValue>): JsonArray =
+data class FormsData(
+    val pokemonNameCode: String,
+    val forms: List<Form>
+) {
+    fun findFormAndIndex(rawFormNameCode: String?): Pair<Form?, Int?> =
+        if (rawFormNameCode == null) {
+            if (forms.isEmpty()) Pair(null, 0) else Pair(null, null)
+        } else {
+            val index = forms.indexOfFirst { it.id == rawFormNameCode }
+            if (index != -1) {
+                Pair(forms[index], index)
+            } else {
+                Pair(null, null)
+            }
+        }
+}
+
+data class Form(val id: String, val assetBundleSuffix: String?, val costume: Boolean)
+
+fun createPokemonIndex(pokemonData: List<JsonValue>, formsDataByNameCode: Map<String, FormsData>): JsonArray =
     pokemonData
         .map(::getData)
-        .map { convertToPokemonIndexEntry(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
+        .map {
+            convertToPokemonIndexEntry(
+                templateId = it.getString("templateId"),
+                pokemonSettings = it.getJsonObject("pokemonSettings"),
+                formsDataByNameCode = formsDataByNameCode
+            )
+        }
         .let(::toJsonArray)
+
+fun convertToFormsDataByNameCode(forms: List<JsonValue>): Map<String, FormsData> =
+    forms
+        .map(::getData)
+        .map { it.getJsonObject("formSettings") }
+        .map { convertToFormsData(it) }
+        .associateBy { it.pokemonNameCode }
 
 fun convertAllPokemonData(pokemonData: List<JsonValue>): Collection<JsonObject> =
     pokemonData
@@ -168,13 +202,46 @@ fun convertToPrettyNameForChargedAttack(vfxName: String): String =
         .split("_")
         .joinToString(" ") { it.toLowerCase().capitalize() }
 
-fun convertToPokemonIndexEntry(templateId: String, pokemonSettings: JsonObject): JsonObject =
+fun convertToPokemonIndexEntry(
+    templateId: String,
+    pokemonSettings: JsonObject,
+    formsDataByNameCode: Map<String, FormsData>
+): JsonObject =
     with(pokemonSettings) {
+        val nameCode = getString("pokemonId")
+        val rawFormNameCode = getString("form", null)
+        val formsData: FormsData = formsDataByNameCode[nameCode]!!
+        val (form: Form?, formIndex: Int?) = formsData.findFormAndIndex(rawFormNameCode)
         json(
             "uniqueId" to templateId,
             "pokedexNumber" to convertToPokedexNumber(templateId),
+            "nameCode" to nameCode,
             "name" to convertToPrettyPokemonName(getString("pokemonId")),
-            "form" to convertToPrettyForm(getString("form", null), getString("pokemonId"))
+            "form" to convertToPrettyForm(rawFormNameCode, getString("pokemonId")),
+            "formIndex" to formIndex,
+            "formCostume" to form?.costume
+        )
+    }
+
+fun convertToFormsData(formSettings: JsonObject): FormsData =
+    with(formSettings) {
+        FormsData(
+            pokemonNameCode = getString("pokemon"),
+            forms = (getJsonArray("forms") ?: toJsonArray(listOf()))
+                .map { it.asJsonObject() }
+                .mapNotNull {
+                    val id = it.getString("form", null)
+                    if (id != null) {
+                        Form(
+                            id = id,
+                            assetBundleSuffix = it.getString("assetBundleSuffix", null),
+                            costume = it.getBoolean("isCostume", false)
+                        )
+                    } else {
+                        logger.info("Skipping malformed form ($it) from ${getString("pokemon")}.")
+                        null
+                    }
+                }
         )
     }
 

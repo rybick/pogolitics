@@ -1,6 +1,6 @@
 package pogolitics.model
 
-class PokemonForm private constructor(val code: String?) {
+class PokemonForm private constructor(val code: String?, private val costume: Boolean?) {
     val prettyName get(): String? = code?.let {
         if (code.startsWith("COPY_")) {
             code.substring(5)
@@ -15,6 +15,10 @@ class PokemonForm private constructor(val code: String?) {
 
     fun isNormal() = code == "NORMAL" // TODO perhaps normal form should be just filtered out and not shown at all?
 
+    fun isCostume() = costume == true
+
+    //fun isFirst() =
+
     override fun equals(other: Any?): Boolean =
         if (other == null || other !is PokemonForm) {
             false
@@ -27,8 +31,9 @@ class PokemonForm private constructor(val code: String?) {
     override fun toString(): String = "Form($code)"
 
     companion object {
-        fun ofNullable(code: String?): PokemonForm = code?.let(::PokemonForm) ?: DEFAULT
+        fun ofNullable(code: String?, costume: Boolean?): PokemonForm =
+            code?.let { PokemonForm(it, costume ?: false) } ?: DEFAULT
 
-        val DEFAULT = PokemonForm(null)
+        val DEFAULT = PokemonForm(null, costume = false)
     }
 }

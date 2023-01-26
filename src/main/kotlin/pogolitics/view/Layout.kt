@@ -1,14 +1,11 @@
 package pogolitics.view
 
 import csstype.Border
-import csstype.BorderStyle
 import csstype.LineStyle
 import csstype.None
 import csstype.PropertiesBuilder
 import csstype.px
-import emotion.css.css
 import emotion.react.Global
-import emotion.react.css
 import js.core.jso
 import pogolitics.model.PokemonEntry
 import pogolitics.view.component.Breadcrumbs
@@ -29,9 +26,9 @@ fun renderPage(
     Global {
         styles = jso<PropertiesBuilder> {
             a {
-                color = StyleConstants.Colors.secondaryLink.text
+                color = StyleConstants.Colors.regularLink.text
                 hover {
-                    color = StyleConstants.Colors.secondaryLinkHovered.text
+                    color = StyleConstants.Colors.regularLinkHovered.text
                     textDecoration = None.none
                 }
             }

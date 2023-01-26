@@ -47,5 +47,5 @@ class SearchBoxTest {
         pokemonIndex = _pokemonIndex
     }
 
-    private val String.f get() = PokemonForm.ofNullable(this)
+    private val String.f get() = PokemonForm.ofNullable(this, costume = false)
 }

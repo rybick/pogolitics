@@ -1,14 +1,10 @@
 package pogolitics.view.component
 
 import csstype.Display
-import csstype.Margin
-import csstype.rem
 import emotion.css.ClassName
 import pogolitics.model.Attack
 import pogolitics.view.StyleConstants
-import pogolitics.view.iconPath
 import react.*
-import react.dom.html.ReactHTML.img
 import emotion.react.css
 import react.dom.html.ReactHTML.span
 
@@ -32,8 +28,8 @@ private object AttackStyles {
 
     val regularAttackWrapper = ClassName(wrapper) {  }
     val eliteAttackWrapper = ClassName(wrapper) {
-        color = StyleConstants.Colors.secondarySpecial.text
-        backgroundColor = StyleConstants.Colors.secondarySpecial.bg
+        color = StyleConstants.Colors.regularSpecial.text
+        backgroundColor = StyleConstants.Colors.regularSpecial.bg
     }
 }
 

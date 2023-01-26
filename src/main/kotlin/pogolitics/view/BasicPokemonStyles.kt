@@ -11,13 +11,13 @@ internal object BasicPokemonInfoStyles {
     }
 
     val pokemonId = ClassName {
-        color = StyleConstants.Colors.secondary.secondaryText
+        color = StyleConstants.Colors.regular.secondaryText
         marginRight = StyleConstants.Margin.small
         fontSize = 80.pct
     }
 
     val pokemonForm = ClassName {
-        color = StyleConstants.Colors.secondary.secondaryText
+        color = StyleConstants.Colors.regular.secondaryText
         marginLeft = StyleConstants.Margin.small
         fontSize = 80.pct
     }

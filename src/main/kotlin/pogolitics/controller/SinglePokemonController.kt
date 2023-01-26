@@ -6,7 +6,6 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.coroutineScope
 import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
-import pogolitics.PageRProps
 import pogolitics.api.*
 import pogolitics.model.*
 import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
@@ -14,8 +13,6 @@ import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
 import pogolitics.view.SinglePokemonNotFoundModel
 import pogolitics.view.SinglePokemonNotFoundPage
 import pogolitics.view.SinglePokemonPage
-import react.Component
-import react.State
 import react.router.Params
 import kotlin.math.sqrt
 
@@ -40,27 +37,27 @@ class SinglePokemonController(
     ): ControllerResult {
         return coroutineScope {
             val pokedexNumber: Int = props.pokedexNumber
-            val form: String? = params.form
+            val requestedForm: String? = params.form
             val mode = params.mode
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
             val chargedMoves: Deferred<Array<ChargedMoveDto>> = async { api.fetchChargedMoves() }
-            val maybePokemon: Deferred<PokemonDto?> = async {
+            val maybePokemonAndEntry: Deferred<PokemonAndEntryDto?> = async {
                 pokemonIndex.await()
-                    .findPokemonUniqueId(pokedexNumber, form)
-                    ?.let { uniqueId -> api.fetchPokemon(uniqueId) }
+                    .findPokemonIndexEntry(pokedexNumber, requestedForm)
+                    ?.let { entry -> PokemonAndEntryDto(api.fetchPokemon(entry.uniqueId), entry) }
             }
-            maybePokemon.await()?.let { pokemon ->
-                val pokemonStats = calculatePokemonStatistics(pokemon, state)
+            maybePokemonAndEntry.await()?.let { dto ->
+                val pokemonStats = calculatePokemonStatistics(dto.pokemon, state)
                 ControllerResult.modelAndView(
                     view = SinglePokemonPage::class,
                     model = SinglePokemonModel(
                         mode = mode,
-                        pokemon = toPokemonStaticInfo(pokemon, form),
+                        pokemon = toPokemonStaticInfo(dto.pokemon, dto.entry),
                         stats = pokemonStats,
                         moveSets = calculateMoveSets(
                             mode = mode,
-                            pokemon = pokemon,
+                            pokemon = dto.pokemon,
                             fastMoves = fastMoves.await(),
                             chargedMoves = chargedMoves.await(),
                             pokemonIvs = pokemonStats
@@ -77,8 +74,6 @@ class SinglePokemonController(
                     pokemonIndex = pokemonIndexService.getPokemonList()
                 )
             )
-
-            //ControllerResult.notFound("No such pokemon")
         }
     }
 
@@ -87,16 +82,26 @@ class SinglePokemonController(
     // TODO display some kind of error page for invalid values
     private val URLSearchParams.mode: BattleMode get() = BattleMode.fromString(get("mode") ?: "pvp")
 
-    private fun Array<PokemonIndexEntryDto>.findPokemonUniqueId(pokedexNumber: Int, form: String?): String? =
-        filter { it.pokedexNumber == pokedexNumber }
-            .firstOrNull { it.form.equals(form, ignoreCase = true) }
-            ?.uniqueId
+    private fun Array<PokemonIndexEntryDto>.findPokemonIndexEntry(
+        pokedexNumber: Int,
+        form: String?
+    ): PokemonIndexEntryDto? {
+        val allPokemonForms = filter { it.pokedexNumber == pokedexNumber }
+        return findForm(allPokemonForms, form)
+    }
 
-    private fun toPokemonStaticInfo(pokemon: PokemonDto, form: String?): SinglePokemonModel.PokemonStaticInfo {
+    private fun findForm(allPokemonForms: List<PokemonIndexEntryDto>, form: String?): PokemonIndexEntryDto? =
+        if (form == null) {
+            allPokemonForms.firstOrNull { it.formIndex == 0 } // if form not requested take the 1st one
+        } else {
+            allPokemonForms.firstOrNull { it.form.equals(form, ignoreCase = true) }
+        }
+
+    private fun toPokemonStaticInfo(pokemon: PokemonDto, entry: PokemonIndexEntryDto): SinglePokemonModel.PokemonStaticInfo {
         return SinglePokemonModel.PokemonStaticInfo(
             uniqueId = pokemon.uniqueId,
             pokedexNumber = pokemon.pokedexNumber,
-            form = PokemonForm.ofNullable(form),
+            form = PokemonForm.ofNullable(entry.form, entry.formCostume),
             name = pokemon.name,
             types = pokemon.types.toModel(),
             baseAttack = pokemon.baseAttack,
@@ -179,6 +184,8 @@ class SinglePokemonController(
             primary = PokemonType.fromString(primary),
             secondary = secondary?.let { PokemonType.fromString(it) }
         )
+
+    private data class PokemonAndEntryDto(val pokemon: PokemonDto, val entry: PokemonIndexEntryDto)
 }
 
 
