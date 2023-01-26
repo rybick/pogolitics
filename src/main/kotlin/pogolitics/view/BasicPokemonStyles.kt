@@ -1,3 +1,4 @@
+import csstype.Display
 import csstype.Margin
 import csstype.TextAlign
 import csstype.pct
@@ -17,6 +18,7 @@ internal object BasicPokemonInfoStyles {
     }
 
     val pokemonForm = ClassName {
+        display = Display.inlineBlock
         color = StyleConstants.Colors.regular.secondaryText
         marginLeft = StyleConstants.Margin.small
         fontSize = 80.pct
