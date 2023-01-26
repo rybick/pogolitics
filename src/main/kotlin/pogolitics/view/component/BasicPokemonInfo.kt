@@ -37,14 +37,14 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
             img {
                 css(BasicPokemonInfoStyles.pokemonPictureImg) {}
                 src = pokemonImagePath(props.data.pokedexNumber, props.data.form, false)
-                alt = "basic form"
+                alt = props.data.name
                 onError = ::hideOnError
-            }
-            img {
-                css(BasicPokemonInfoStyles.pokemonPictureImg) {}
-                src = pokemonImagePath(props.data.pokedexNumber, props.data.form, true)
-                alt = "shiny form"
-                onError = ::hideOnError
+                onMouseEnter = {
+                    it.targetImage.src = pokemonImagePath(props.data.pokedexNumber, props.data.form, true)
+                }
+                onMouseLeave = {
+                    it.targetImage.src = pokemonImagePath(props.data.pokedexNumber, props.data.form, false)
+                }
             }
         }
         div {
@@ -84,9 +84,10 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
 // try to base pokemon index on getData(it)["formSettings"] != null entries
 // probably it should enable us to hide all technical/phantom pokemon like "default form Giratina"
 private fun hideOnError(event: SyntheticEvent<HTMLImageElement, *>) {
-    val target: HTMLImageElement = event.target as HTMLImageElement
-    target.style.display = "none"
+    event.targetImage.style.display = "none"
 }
+
+val SyntheticEvent<HTMLImageElement, *>.targetImage: HTMLImageElement get() = target as HTMLImageElement
 
 external interface BasicPokemonInfoRProps : Props {
     var data: SinglePokemonModel.PokemonStaticInfo
