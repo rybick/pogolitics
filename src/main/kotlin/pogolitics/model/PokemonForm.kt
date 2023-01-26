@@ -17,6 +17,8 @@ class PokemonForm private constructor(val code: String?, private val costume: Bo
 
     fun isCostume() = costume == true
 
+    //fun isFirst() =
+
     override fun equals(other: Any?): Boolean =
         if (other == null || other !is PokemonForm) {
             false
