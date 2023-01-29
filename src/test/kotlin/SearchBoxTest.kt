@@ -23,7 +23,7 @@ class SearchBoxTest {
         PokemonEntry(26, RAICHU, listOf(DEFAULT)),
     )
 
-    //@Test // TODO later
+    @Test
     fun filtersDataAndOrdersDefaultFormsFirst() {
         // Given
         val props = createProps()
