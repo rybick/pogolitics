@@ -37,7 +37,7 @@ val Header = FC<HeaderProps> { props ->
     }
 }
 
-interface HeaderProps: SearchBoxProps
+external interface HeaderProps: SearchBoxProps
 
 private object HeaderStyles {
     val headerWrapper = ClassName {
