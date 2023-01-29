@@ -19,6 +19,7 @@ import react.dom.html.ReactHTML.h3
 import react.dom.html.ReactHTML.p
 import react.dom.html.ReactHTML.strong
 
+// If you modify this page, copy the rendered content to index.html, for Google to see it.
 class HomePage(props: PageRProps<HomePageModel, Unit>) : Component<PageRProps<HomePageModel, Unit>, State>(props) {
     override fun render() = renderPage(Page.HOME, props.model.pokemonIndex) {
         div {
