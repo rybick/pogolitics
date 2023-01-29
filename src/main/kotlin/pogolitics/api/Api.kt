@@ -4,7 +4,7 @@ import kotlinx.coroutines.await
 import pogolitics.applicationRoot
 import kotlinx.browser.window
 
-class Api() {
+class Api {
     private var index: Array<PokemonIndexEntryDto>? = null
     private var pokemon: PokemonDto? = null
     private var fastMoves: Array<FastMoveDto>? = null
