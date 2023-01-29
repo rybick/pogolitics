@@ -1,3 +1,4 @@
+# powershell.exe -ExecutionPolicy Bypass -Command ./release-github.ps1
 ./gradlew build
 
 try {
