@@ -1,16 +1,21 @@
 package pogolitics.view.component
 
-import csstype.*
+import csstype.AlignItems
+import csstype.Appearance
+import csstype.Display
+import csstype.FlexDirection
+import csstype.None
+import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.KeyCodes
 import pogolitics.model.IVs
 import pogolitics.model.PokemonIndividualValuesState
 import pogolitics.model.SinglePokemonModel
 import pogolitics.model.SinglePokemonModel.InputElement
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
-import react.*
+import react.FC
+import react.Props
 import react.dom.events.KeyboardEvent
 import react.dom.events.SyntheticEvent
 import react.dom.html.ReactHTML.div
@@ -18,6 +23,7 @@ import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import web.html.HTMLInputElement
 import web.html.InputType
+import web.keyboard.Key
 
 val IVStatsWidget = FC<IVStatsWidgetRProps> { props ->
     div {
@@ -110,7 +116,7 @@ val IVStatsWidget = FC<IVStatsWidgetRProps> { props ->
                         }
                         onBlur = onChangeFunction
                         onKeyUp = { event: KeyboardEvent<*> ->
-                            if (event.key == KeyCodes.enter) {
+                            if (event.code == Key.Enter) {
                                 onChangeFunction(event)
                             }
                         }

@@ -16,18 +16,19 @@ import csstype.pct
 import csstype.unaryMinus
 import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.KeyCodes
 import pogolitics.model.PokemonEntry
 import pogolitics.model.PokemonForm
 import pogolitics.view.StyleConstants
 import pogolitics.view.pokemonPagePath
 import react.FC
 import react.Props
+import react.dom.events.KeyboardEvent
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
+import web.html.HTMLInputElement
 import web.keyboard.Key
 import web.location.location
 
@@ -50,7 +51,7 @@ val SearchBox = FC<SearchBoxProps> { props ->
                 onChange = { event ->
                     term = event.target.value
                 }
-                onKeyUp = { event ->
+                onKeyUp = { event: KeyboardEvent<HTMLInputElement> ->
                     when (event.code) {
                         Key.Enter, Key.NumpadEnter -> {
                             val pokemon = filtered[selected]
