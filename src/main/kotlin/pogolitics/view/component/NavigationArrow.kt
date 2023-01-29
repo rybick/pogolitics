@@ -1,5 +1,6 @@
 package pogolitics.view.component
 
+import csstype.Cursor
 import csstype.Display
 import csstype.None
 import csstype.important
@@ -7,8 +8,6 @@ import csstype.pct
 import csstype.px
 import emotion.css.ClassName
 import emotion.react.css
-import pogolitics.default
-import pogolitics.pointer
 import pogolitics.view.StyleConstants
 import react.ChildrenBuilder
 import react.FC
@@ -69,7 +68,7 @@ private object NavigationArrowStyles {
 
     val arrow = ClassName {
         display = Display.inlineBlock
-        cursor = pointer
+        cursor = Cursor.pointer
         width = sizeInPixels.px
         height = sizeInPixels.px
         borderRadius = 50.pct
@@ -85,7 +84,7 @@ private object NavigationArrowStyles {
     }
 
     val inactiveArrow = ClassName(arrow) {
-        cursor = default
+        cursor = Cursor.default
         backgroundColor = StyleConstants.Colors.primaryInactive.bg
         color = StyleConstants.Colors.primaryInactive.text
         hover {

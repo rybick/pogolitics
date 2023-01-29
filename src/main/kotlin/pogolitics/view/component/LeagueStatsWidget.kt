@@ -9,7 +9,6 @@ import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
-import pogolitics.pointer
 import pogolitics.view.BasicStylesheet
 import pogolitics.view.StyleConstants
 import react.*

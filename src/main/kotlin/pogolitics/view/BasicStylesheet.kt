@@ -1,5 +1,6 @@
 package pogolitics.view
 
+import csstype.Cursor
 import csstype.Display
 import csstype.FontWeight
 import csstype.LineStyle
@@ -8,7 +9,6 @@ import csstype.TextTransform
 import csstype.pct
 import csstype.px
 import emotion.css.ClassName
-import pogolitics.pointer
 
 object BasicStylesheet {
 
@@ -30,7 +30,7 @@ object BasicStylesheet {
     }
 
     val clickablePrimary = ClassName {
-        cursor = pointer
+        cursor = Cursor.pointer
         hover {
             color = StyleConstants.Colors.primaryHovered.text
             backgroundColor = StyleConstants.Colors.primaryHovered.bg
