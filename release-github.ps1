@@ -1,5 +1,5 @@
 # powershell.exe -ExecutionPolicy Bypass -Command ./release-github.ps1
-./gradlew build
+./gradlew clean build
 
 try {
     cd ../PokeGoDex.github.io/

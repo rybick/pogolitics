@@ -2,7 +2,7 @@
 #sed -i 's/const val applicationRoot = ""/const val applicationRoot = "\/pogolitics"/g' \
 #  ./src/main/kotlin/pogolitics/EnvVariables.kt
 
-./gradlew build
+./gradlew clean build
 
 cd ../PokeGoDex.github.io/  || { echo "PokeGoDex.github.io directory not found"; exit 1; }
 
