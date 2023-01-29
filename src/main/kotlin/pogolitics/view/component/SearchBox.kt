@@ -59,7 +59,7 @@ val SearchBox = FC<SearchBoxProps> { props ->
                         }
                         Key.ArrowUp -> selected = (selected - 1).mod(filtered.size)
                         Key.ArrowDown -> selected = (selected + 1).mod(filtered.size)
-                        else -> println(event.code) //selected = 0 // TODO later
+                        else -> selected = 0
                     }
                 }
                 onFocus = { hideSearchResults = false }
