@@ -21,12 +21,12 @@ val PokemonTypeIcon = FC<PokemonTypeIconProps> { props ->
     }
 }
 
-interface PokemonTypeIconProps: Props {
+external interface PokemonTypeIconProps: Props {
     var type: PokemonType
-    var size: Size
+    var size: PokemonTypeIconSize
+}
 
-    enum class Size(val dimensions: Length) {
-        SMALL(1.5.rem),
-        BIG(2.5.rem)
-    }
+enum class PokemonTypeIconSize(val dimensions: Length) {
+    SMALL(1.5.rem),
+    BIG(2.5.rem)
 }

@@ -114,7 +114,7 @@ private fun List<PokemonEntry>.toFormEntries(): List<PokemonFormEntry> =
         }
     }
 
-interface SearchBoxProps: Props {
+external interface SearchBoxProps: Props {
     var pokemonIndex: List<PokemonEntry>
     var alwaysOnTop: Boolean
 }

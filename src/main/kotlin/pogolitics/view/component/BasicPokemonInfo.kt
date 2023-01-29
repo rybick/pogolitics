@@ -53,7 +53,7 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
                 css(BasicPokemonInfoStyles.typeIconWrapper) {}
                 PokemonTypeIcon {
                     type = props.data.types.primary
-                    size = PokemonTypeIconProps.Size.BIG
+                    size = PokemonTypeIconSize.BIG
                 }
             }
             props.data.types.secondary?.let { secondary ->
@@ -61,7 +61,7 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
                     css(BasicPokemonInfoStyles.typeIconWrapper) {}
                     PokemonTypeIcon {
                         type = secondary
-                        size = PokemonTypeIconProps.Size.BIG
+                        size = PokemonTypeIconSize.BIG
                     }
                 }
             }

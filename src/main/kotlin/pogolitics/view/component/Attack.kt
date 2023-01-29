@@ -13,7 +13,7 @@ val Attack = FC<AttackProps> { props ->
         css(if (props.attack.elite) AttackStyles.eliteAttackWrapper else AttackStyles.regularAttackWrapper) {}
         PokemonTypeIcon {
             type = props.attack.type
-            size = PokemonTypeIconProps.Size.SMALL
+            size = PokemonTypeIconSize.SMALL
         }
         + props.attack.name
     }

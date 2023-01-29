@@ -37,7 +37,7 @@ val Breadcrumbs = FC { props: BreadcrumbsProps ->
     }
 }
 
-interface BreadcrumbsProps: Props {
+external interface BreadcrumbsProps: Props {
     var page: Page?
 }
 

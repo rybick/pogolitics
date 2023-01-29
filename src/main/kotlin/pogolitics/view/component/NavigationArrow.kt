@@ -53,7 +53,7 @@ fun ChildrenBuilder.svgTriangle(direction: NavigationDirection) {
 
 private val sqrt3 = sqrt(3.0)
 
-interface ArrowProps: Props {
+external interface ArrowProps: Props {
     var direction: NavigationDirection
     var href: String
     var active: Boolean

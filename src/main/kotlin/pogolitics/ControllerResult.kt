@@ -43,7 +43,7 @@ private typealias TypedView<M> = KClass<out Component<out PageRProps<M, *>, out 
 
 typealias View = TypedView<out Any?>
 
-interface PageRProps<M, S> : Props {
+external interface PageRProps<M, S> : Props {
     var model: M
     var updateState: (S) -> Unit
 }
