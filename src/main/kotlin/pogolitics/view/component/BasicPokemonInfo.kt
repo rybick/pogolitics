@@ -74,7 +74,7 @@ val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
             StaticStat {
                 name = "Hardiness"
                 value = props.data.hardiness.format(2)
-                info = "(defense⋅stamina)"
+                info = "Geometric mean of Defense and Stamina"
             }
         }
     }
