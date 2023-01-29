@@ -11,19 +11,19 @@ import web.window.window
 fun main() {
     exportForJs()
     window.onload = {
-        document.body.innerHTML = "" // clear body before rendering
-        document.createElement("div")
-            .apply { id = "root" }
-            .also { document.body.appendChild(it) }
-            .also { element: Element ->
-                createRoot(element)
-                    .render(
-                        Fragment.create {
-                            App::class.react { }
-                        }
-                    )
-            }
+        document.getElementById("pre-rendered-root")?.innerHTML = "" // clear the pre-rendered root
     }
+    document.createElement("div")
+        .apply { id = "root" }
+        .also { document.body.appendChild(it) }
+        .also { element: Element ->
+            createRoot(element)
+                .render(
+                    Fragment.create {
+                        App::class.react { }
+                    }
+                )
+        }
 }
 
 fun exportForJs() {
