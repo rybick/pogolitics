@@ -2,7 +2,7 @@ plugins {
     kotlin("js") version "1.6.21"
 }
 
-val kotlinJS = "pre.464"
+val kotlinWrappersVersion = "1.0.0-pre.464"
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
@@ -15,10 +15,11 @@ repositories {
 
 dependencies {
     testImplementation(kotlin("test"))
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react:18.2.0-${kotlinJS}")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom:18.2.0-${kotlinJS}")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom:6.3.0-${kotlinJS}")
-    implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion:11.10.5-${kotlinJS}")
+    implementation(enforcedPlatform("org.jetbrains.kotlin-wrappers:kotlin-wrappers-bom:$kotlinWrappersVersion"))
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-dom")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-react-router-dom")
+    implementation("org.jetbrains.kotlin-wrappers:kotlin-emotion")
 
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.0")
 
