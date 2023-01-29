@@ -1,7 +1,6 @@
 package pogolitics.view.component
 
 import csstype.*
-import dom.html.HTMLInputElement
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.KeyCodes
@@ -14,10 +13,11 @@ import pogolitics.view.StyleConstants
 import react.*
 import react.dom.events.KeyboardEvent
 import react.dom.events.SyntheticEvent
-import react.dom.html.InputType
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
+import web.html.HTMLInputElement
+import web.html.InputType
 
 val IVStatsWidget = FC<IVStatsWidgetRProps> { props ->
     div {

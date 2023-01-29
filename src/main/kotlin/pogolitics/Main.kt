@@ -1,11 +1,11 @@
 package pogolitics
 
-import browser.document
-import dom.Element
 import react.Fragment
 import react.create
 import react.dom.client.createRoot
 import react.react
+import web.dom.Element
+import web.dom.document
 
 fun main() {
     exportForJs()

@@ -28,6 +28,7 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
 import react.dom.html.ReactHTML.span
 import react.useState
+import web.keyboard.Key
 import web.location.location
 
 val SearchBox = FC<SearchBoxProps> { props ->
@@ -51,14 +52,14 @@ val SearchBox = FC<SearchBoxProps> { props ->
                 }
                 onKeyUp = { event ->
                     when (event.code) {
-                        KeyCodes.enter, KeyCodes.numpadEnter -> {
+                        Key.Enter, Key.NumpadEnter -> {
                             val pokemon = filtered[selected]
                             val url = pokemonPagePath(pokemon.pokedexNumber, pokemon.form)
                             location.href = url
                         }
-                        KeyCodes.arrowUp -> selected = (selected - 1).mod(filtered.size)
-                        KeyCodes.arrowDown -> selected = (selected + 1).mod(filtered.size)
-                        else -> println(event.code) //selected = 0
+                        Key.ArrowUp -> selected = (selected - 1).mod(filtered.size)
+                        Key.ArrowDown -> selected = (selected + 1).mod(filtered.size)
+                        else -> println(event.code) //selected = 0 // TODO later
                     }
                 }
                 onFocus = { hideSearchResults = false }

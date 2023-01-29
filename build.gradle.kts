@@ -1,8 +1,8 @@
 plugins {
-    kotlin("js") version "1.6.21"
+    kotlin("js") version "1.8.0"
 }
 
-val kotlinWrappersVersion = "1.0.0-pre.464"
+val kotlinWrappersVersion = "1.0.0-pre.489"
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
@@ -31,7 +31,7 @@ kotlin {
         binaries.executable()
         browser {
             commonWebpackConfig {
-                cssSupport.enabled = true
+                cssSupport { enabled.set(true) }
             }
         }
     }

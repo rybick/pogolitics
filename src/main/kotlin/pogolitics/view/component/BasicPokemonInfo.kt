@@ -1,6 +1,5 @@
 package pogolitics.view.component
 
-import dom.html.HTMLImageElement
 import emotion.react.css
 import pogolitics.format
 import pogolitics.model.SinglePokemonModel
@@ -12,6 +11,7 @@ import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.h1
 import react.dom.html.ReactHTML.img
 import react.dom.html.ReactHTML.span
+import web.html.HTMLImageElement
 
 val BasicPokemonInfo = FC<BasicPokemonInfoRProps> { props ->
     div {

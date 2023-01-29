@@ -1,16 +1,16 @@
 package pogolitics.view.component
 
 import csstype.*
-import dom.html.HTMLDivElement
 import emotion.css.ClassName
 import emotion.react.css
 import pogolitics.pointer
 import react.*
 import react.dom.events.MouseEvent
 import react.dom.events.MouseEventHandler
-import react.dom.html.InputType
 import react.dom.html.ReactHTML.div
 import react.dom.html.ReactHTML.input
+import web.html.HTMLDivElement
+import web.html.InputType
 import kotlin.math.round
 
 val IVBar = FC<IVBarComponentRProps> { props ->
