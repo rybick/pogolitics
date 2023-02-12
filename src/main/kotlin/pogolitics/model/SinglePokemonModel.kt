@@ -6,7 +6,8 @@ data class SinglePokemonModel(
     val stats: PokemonIndividualStatistics,
     val moveSets: List<MoveSet>,
     val pokemonIndex: List<PokemonEntry>,
-    val focusedElement: InputElement?
+    val focusedElement: InputElement?,
+    val showAdditionalColumns: Boolean
 ) {
     data class PokemonStaticInfo(
         val uniqueId: String,

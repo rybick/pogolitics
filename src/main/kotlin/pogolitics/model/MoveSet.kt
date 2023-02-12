@@ -7,5 +7,6 @@ data class MoveSet(
     val chargedAttack: Attack,
     val dps: Float,
     val timeToFirstAttack: Duration,
-    val meanTimeBetweenAttacks: Duration
+    val meanTimeBetweenAttacks: Duration,
+    val fastAttackDps: Float
 )

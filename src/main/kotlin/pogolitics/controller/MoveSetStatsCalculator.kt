@@ -56,9 +56,10 @@ class MoveSetStatsCalculator(
         return effectiveFastAttackDps ?: throw RuntimeException("Should not happen")
     }
 
+    fun fastAttackDps(): Double = damage(fast) / fast.duration.toDouble(SECONDS)
+
     // all methods below could be private, but it's useful to be able to look into them (see MoveSetStatsCalculatorTest)
     // DPS if only fast attack is used
-   fun fastAttackDps(): Double = damage(fast) / fast.duration.toDouble(SECONDS)
 
     private val expectedDefense get() = 100
 

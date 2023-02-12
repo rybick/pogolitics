@@ -38,6 +38,8 @@ class SinglePokemonController(
         return coroutineScope {
             val pokedexNumber: Int = props.pokedexNumber
             val requestedForm: String? = params.form
+            val showAdditionalColumns: Boolean = params.showAdditionalColumns == true
+            val showRocketAttacks: Boolean = params.showRocketAttacks == true
             val mode = params.mode
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
@@ -60,10 +62,12 @@ class SinglePokemonController(
                             pokemon = dto.pokemon,
                             fastMoves = fastMoves.await(),
                             chargedMoves = chargedMoves.await(),
-                            pokemonIvs = pokemonStats
+                            pokemonIvs = pokemonStats,
+                            includeRocketAttacks = showRocketAttacks
                         ),
                         pokemonIndex = pokemonIndexService.getPokemonList(),
-                        focusedElement = state.focus
+                        focusedElement = state.focus,
+                        showAdditionalColumns = showAdditionalColumns
                     )
                 )
             } ?: ControllerResult.modelAndView(
@@ -79,6 +83,8 @@ class SinglePokemonController(
 
     private val Params.pokedexNumber: Int get() = get("pokedexNumber")!!.toInt()
     private val URLSearchParams.form: String? get() = get("form")
+    private val URLSearchParams.showAdditionalColumns: Boolean? get() = get("ac")?.toBoolean()
+    private val URLSearchParams.showRocketAttacks: Boolean? get() = get("rocket")?.toBoolean()
     // TODO display some kind of error page for invalid values
     private val URLSearchParams.mode: BattleMode get() = BattleMode.fromString(get("mode") ?: "pvp")
 
@@ -123,10 +129,10 @@ class SinglePokemonController(
         fastMoves: Array<FastMoveDto>,
         chargedMoves: Array<ChargedMoveDto>,
         pokemonIvs: PokemonIndividualStatistics,
-    ): List<MoveSet> {
-        return MoveSetsMapper.create(mode, pokemon, fastMoves, chargedMoves)
+        includeRocketAttacks: Boolean
+    ): List<MoveSet> =
+        MoveSetsMapper.create(mode, pokemon, fastMoves, chargedMoves, includeRocketAttacks)
             .getData(pokemonIvs.currentStats.level, pokemonIvs.ivs.attack)
-    }
 
     private fun calculatePokemonStatistics(pokemon: PokemonDto, pokemonIvs: PokemonIndividualValuesState): PokemonIndividualStatistics {
         val calculator = CpCalculator(

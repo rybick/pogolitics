@@ -106,6 +106,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             css(Styles.leftWrapper) {}
             moveSetsTable {
                 values = props.model.moveSets
+                showAdditionalColumns = props.model.showAdditionalColumns
             }
         }
         div {
