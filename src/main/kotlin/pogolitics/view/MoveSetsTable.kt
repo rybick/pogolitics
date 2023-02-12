@@ -79,6 +79,21 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         +("MTBA" + getIcon(state.sort, 3))
                         title = "Mean time between (charged) attacks"
                     }
+                    div {
+                        css(Table.cell, Table.headerCell, Table.sortable) {}
+                        onClick = {
+                            setState({ state ->  // TODO later less copu paste
+                                val sort = state.sort
+                                state.sort = Sort(
+                                    columnId = 4,
+                                    ascending = if (sort?.columnId == 4) !sort.ascending else false
+                                )
+                                state
+                            })
+                        }
+                        +("FDPS" + getIcon(state.sort, 4))
+                        title = "DPS when using only fast attack"
+                    }
                 }
                 sortValues(props.values, state.sort).forEach {
                     div {
@@ -100,6 +115,10 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         div {
                             css(Table.cell) {}
                             +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
+                        }
+                        div {
+                            css(Table.cell) {}
+                            +it.fastAttackDps.format(2)
                         }
                     }
                 }

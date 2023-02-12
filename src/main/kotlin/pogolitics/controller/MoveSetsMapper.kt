@@ -14,8 +14,9 @@ import kotlin.time.Duration.Companion.milliseconds
 private class PvPMoveSetsMapper(
     pokemonDto: PokemonDto,
     fastMoves: Array<FastMoveDto>,
-    chargedMoves: Array<ChargedMoveDto>
-) : MoveSetsMapper(pokemonDto, fastMoves, chargedMoves) {
+    chargedMoves: Array<ChargedMoveDto>,
+    includeRocketAttacks: Boolean
+) : MoveSetsMapper(pokemonDto, fastMoves, chargedMoves, includeRocketAttacks) {
     override fun mapFastMove(moveDto: FastMoveDto): MoveData {
         return MoveData(
             power = moveDto.pvp.power,
@@ -38,8 +39,9 @@ private class PvPMoveSetsMapper(
 private class PvEMoveSetsMapper(
     pokemonDto: PokemonDto,
     fastMoves: Array<FastMoveDto>,
-    chargedMoves: Array<ChargedMoveDto>
-) : MoveSetsMapper(pokemonDto, fastMoves, chargedMoves) {
+    chargedMoves: Array<ChargedMoveDto>,
+    includeRocketAttacks: Boolean
+) : MoveSetsMapper(pokemonDto, fastMoves, chargedMoves, includeRocketAttacks) {
     override fun mapFastMove(moveDto: FastMoveDto): MoveData {
         return MoveData(
             power = moveDto.pve.power,
@@ -62,18 +64,20 @@ private class PvEMoveSetsMapper(
 sealed class MoveSetsMapper constructor(
     private val pokemonDto: PokemonDto,
     fastMoves: Array<FastMoveDto>,
-    chargedMoves: Array<ChargedMoveDto>
+    chargedMoves: Array<ChargedMoveDto>,
+    private val includeRocketAttacks: Boolean
 ) {
     companion object {
         fun create(
             mode: BattleMode,
             pokemonDto: PokemonDto,
             fastMoves: Array<FastMoveDto>,
-            chargedMoves: Array<ChargedMoveDto>
+            chargedMoves: Array<ChargedMoveDto>,
+            includeRocketAttacks: Boolean
         ): MoveSetsMapper = if (mode == BattleMode.PVP) {
-            PvPMoveSetsMapper(pokemonDto, fastMoves, chargedMoves)
+            PvPMoveSetsMapper(pokemonDto, fastMoves, chargedMoves, includeRocketAttacks)
         } else {
-            PvEMoveSetsMapper(pokemonDto, fastMoves, chargedMoves)
+            PvEMoveSetsMapper(pokemonDto, fastMoves, chargedMoves, includeRocketAttacks)
         }
     }
 
@@ -82,7 +86,8 @@ sealed class MoveSetsMapper constructor(
 
     fun getData(pokemonLevel: Float, pokemonAttackIv: Int): List<MoveSet> {
         val pokemon = mapPokemonData(pokemonDto)
-        return combinations(pokemonDto.moves.quick, pokemonDto.moves.charged) { fast, charged ->
+        val chargedAttackDtos = getChargedAttacks(pokemonDto.moves.charged)
+        return combinations(pokemonDto.moves.quick, chargedAttackDtos) { fast, charged ->
             val fastMove = quickAttacks[fast.id] ?: throw MissingDataException("Unknown attack: ${fast.id}")
             val chargedMove = chargedAttacks[charged.id] ?: throw MissingDataException("Unknown attack: ${charged.id}")
             val calculator = MoveSetStatsCalculator(
@@ -96,10 +101,18 @@ sealed class MoveSetsMapper constructor(
                 chargedAttack = Attack(PokemonType.fromString(chargedMove.type), chargedMove.name, charged.elite),
                 dps = calculator.dps().toFloat(),
                 timeToFirstAttack = calculator.timeToFirstAttack(),
-                meanTimeBetweenAttacks = calculator.meanTimeBetweenAttacks()
+                meanTimeBetweenAttacks = calculator.meanTimeBetweenAttacks(),
+                fastAttackDps = calculator.fastAttackDps().toFloat()
             )
         }
     }
+
+    private fun getChargedAttacks(charged: Array<PokemonDto.MoveDto>): Array<PokemonDto.MoveDto> =
+        if (includeRocketAttacks) {
+            charged + MoveDto("FRUSTRATION") + MoveDto("RETURN")
+        } else {
+            charged
+        }
 
     private fun mapPokemonData(pokemonDto: PokemonDto): PokemonData {
         return PokemonData(
@@ -119,4 +132,11 @@ sealed class MoveSetsMapper constructor(
     private fun <T, U, O> combinations(arr1: Array<T>, arr2: Array<U>, mapper: (T, U) -> O): List<O> {
         return arr1.flatMap { a1 -> arr2.map { a2 -> mapper(a1, a2) } }
     }
+
+    private fun MoveDto(id: String) = InternalMoveDto(id, true)
+
+    private data class InternalMoveDto(
+        override val id: String,
+        override val elite: Boolean
+    ): PokemonDto.MoveDto
 }

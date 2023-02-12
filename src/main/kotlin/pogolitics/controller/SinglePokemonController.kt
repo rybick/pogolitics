@@ -60,7 +60,8 @@ class SinglePokemonController(
                             pokemon = dto.pokemon,
                             fastMoves = fastMoves.await(),
                             chargedMoves = chargedMoves.await(),
-                            pokemonIvs = pokemonStats
+                            pokemonIvs = pokemonStats,
+                            includeRocketAttacks = true // TODO later
                         ),
                         pokemonIndex = pokemonIndexService.getPokemonList(),
                         focusedElement = state.focus
@@ -123,10 +124,10 @@ class SinglePokemonController(
         fastMoves: Array<FastMoveDto>,
         chargedMoves: Array<ChargedMoveDto>,
         pokemonIvs: PokemonIndividualStatistics,
-    ): List<MoveSet> {
-        return MoveSetsMapper.create(mode, pokemon, fastMoves, chargedMoves)
+        includeRocketAttacks: Boolean
+    ): List<MoveSet> =
+        MoveSetsMapper.create(mode, pokemon, fastMoves, chargedMoves, includeRocketAttacks)
             .getData(pokemonIvs.currentStats.level, pokemonIvs.ivs.attack)
-    }
 
     private fun calculatePokemonStatistics(pokemon: PokemonDto, pokemonIvs: PokemonIndividualValuesState): PokemonIndividualStatistics {
         val calculator = CpCalculator(
