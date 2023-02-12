@@ -36,61 +36,25 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                     }
                     div {
                         css(Table.cell, Table.headerCell, Table.sortable) {}
-                        onClick = {
-                            setState({ state ->
-                                val sort = state.sort
-                                state.sort = Sort(
-                                        columnId = 1,
-                                        ascending = if (sort?.columnId == 1) !sort.ascending else false
-                                )
-                                state
-                            })
-                        }
+                        onClick = { changeSort(1) }
                         +("DPS" + getIcon(state.sort, 1))
                         title = "Damage per second"
                     }
                     div {
                         css(Table.cell, Table.headerCell, Table.sortable) {}
-                        onClick = {
-                            setState({ state ->
-                                val sort = state.sort
-                                state.sort = Sort(
-                                        columnId = 2,
-                                        ascending = if (sort?.columnId == 2) !sort.ascending else false
-                                )
-                                state
-                            })
-                        }
+                        onClick = { changeSort(2) }
                         +("TTFA" + getIcon(state.sort, 2))
                         title = "Time to first (charged) attack"
                     }
                     div {
                         css(Table.cell, Table.headerCell, Table.sortable) {}
-                        onClick = {
-                            setState({ state ->
-                                val sort = state.sort
-                                state.sort = Sort(
-                                    columnId = 3,
-                                    ascending = if (sort?.columnId == 3) !sort.ascending else false
-                                )
-                                state
-                            })
-                        }
+                        onClick = { changeSort(3) }
                         +("MTBA" + getIcon(state.sort, 3))
                         title = "Mean time between (charged) attacks"
                     }
                     div {
                         css(Table.cell, Table.headerCell, Table.sortable) {}
-                        onClick = {
-                            setState({ state ->  // TODO later less copu paste
-                                val sort = state.sort
-                                state.sort = Sort(
-                                    columnId = 4,
-                                    ascending = if (sort?.columnId == 4) !sort.ascending else false
-                                )
-                                state
-                            })
-                        }
+                        onClick = { changeSort(4) }
                         +("FDPS" + getIcon(state.sort, 4))
                         title = "DPS when using only fast attack"
                     }
@@ -126,11 +90,25 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
         }
     }
 
-    // TODO later make it prettier and more generic
+    private fun changeSort(columnId: Int) {
+        setState({ state ->
+            val sort = state.sort
+            state.sort = Sort(
+                columnId = columnId,
+                ascending = if (sort?.columnId == columnId) !sort.ascending else false
+            )
+            state
+        })
+    }
+
     private fun sortValues(values: List<MoveSet>, sort: Sort?): List<MoveSet> {
+        fun sortBy(valueProducer: (MoveSet) -> Float) = values.sortedBy { -valueProducer(it) * sort!!.ascendFactor }
+
         return when(sort?.columnId) {
-            1 -> values.sortedBy { -it.dps * sort.ascendFactor }
-            2 -> values.sortedBy { -it.timeToFirstAttack * sort.ascendFactor }
+            1 -> sortBy { it.dps }
+            2 -> sortBy { it.timeToFirstAttack.inWholeMilliseconds.toFloat() }
+            3 -> sortBy { it.meanTimeBetweenAttacks.inWholeMilliseconds.toFloat() }
+            4 -> sortBy { it.fastAttackDps }
             else -> values
         }
     }
