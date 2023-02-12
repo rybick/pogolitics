@@ -52,11 +52,13 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                         +("MTBA" + getIcon(state.sort, 3))
                         title = "Mean time between (charged) attacks"
                     }
-                    div {
-                        css(Table.cell, Table.headerCell, Table.sortable) {}
-                        onClick = { changeSort(4) }
-                        +("FDPS" + getIcon(state.sort, 4))
-                        title = "DPS when using only fast attack"
+                    if (props.showAdditionalColumns) {
+                        div {
+                            css(Table.cell, Table.headerCell, Table.sortable) {}
+                            onClick = { changeSort(4) }
+                            +("FADPS" + getIcon(state.sort, 4))
+                            title = "DPS when using only fast attack"
+                        }
                     }
                 }
                 sortValues(props.values, state.sort).forEach {
@@ -80,9 +82,11 @@ class MovesetsTable(props: MovesetsRProps) : Component<MovesetsRProps, MovesetsR
                             css(Table.cell) {}
                             +(it.meanTimeBetweenAttacks.toDouble(DurationUnit.SECONDS).format(2) + "s")
                         }
-                        div {
-                            css(Table.cell) {}
-                            +it.fastAttackDps.format(2)
+                        if (props.showAdditionalColumns) {
+                            div {
+                                css(Table.cell) {}
+                                +it.fastAttackDps.format(2)
+                            }
                         }
                     }
                 }
@@ -126,6 +130,7 @@ fun ChildrenBuilder.moveSetsTable(handler: MovesetsRProps.() -> Unit): Unit =
 
 external interface MovesetsRProps: Props {
     var values: List<MoveSet>
+    var showAdditionalColumns: Boolean
 }
 
 external interface MovesetsRState: State {

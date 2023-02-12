@@ -38,6 +38,8 @@ class SinglePokemonController(
         return coroutineScope {
             val pokedexNumber: Int = props.pokedexNumber
             val requestedForm: String? = params.form
+            val showAdditionalColumns: Boolean = params.showAdditionalColumns == true
+            val showRocketAttacks: Boolean = params.showRocketAttacks == true
             val mode = params.mode
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
@@ -61,10 +63,11 @@ class SinglePokemonController(
                             fastMoves = fastMoves.await(),
                             chargedMoves = chargedMoves.await(),
                             pokemonIvs = pokemonStats,
-                            includeRocketAttacks = true // TODO later
+                            includeRocketAttacks = showRocketAttacks
                         ),
                         pokemonIndex = pokemonIndexService.getPokemonList(),
-                        focusedElement = state.focus
+                        focusedElement = state.focus,
+                        showAdditionalColumns = showAdditionalColumns
                     )
                 )
             } ?: ControllerResult.modelAndView(
@@ -80,6 +83,8 @@ class SinglePokemonController(
 
     private val Params.pokedexNumber: Int get() = get("pokedexNumber")!!.toInt()
     private val URLSearchParams.form: String? get() = get("form")
+    private val URLSearchParams.showAdditionalColumns: Boolean? get() = get("ac")?.toBoolean()
+    private val URLSearchParams.showRocketAttacks: Boolean? get() = get("rocket")?.toBoolean()
     // TODO display some kind of error page for invalid values
     private val URLSearchParams.mode: BattleMode get() = BattleMode.fromString(get("mode") ?: "pvp")
 
