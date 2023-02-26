@@ -3,6 +3,7 @@ import javax.json.Json
 import javax.json.JsonObject
 import javax.json.JsonArray
 import javax.json.JsonValue
+import javax.json.JsonString
 import java.lang.Exception
 
 buildscript {
@@ -39,7 +40,10 @@ fun updateData() {
         .also {
             File("./src/main/resources/data/pokemon/index.json").writeText(it.toString())
         }
-    convertAllPokemonData(pokemonData)
+    convertAllPokemonData(
+        pokemonData = pokemonData,
+        overrides = File("./src/main/resources/data/overrides.json").readText().let(::parseJsonObject)
+    )
         .forEach {
             val uniqueId = it.getString("uniqueId")
             File("./src/main/resources/data/pokemon/${uniqueId}.json").writeText(it.toString())
@@ -92,10 +96,14 @@ fun convertToFormsDataByNameCode(forms: List<JsonValue>): Map<String, FormsData>
         .map { convertToFormsData(it) }
         .associateBy { it.pokemonNameCode }
 
-fun convertAllPokemonData(pokemonData: List<JsonValue>): Collection<JsonObject> =
+fun convertAllPokemonData(pokemonData: List<JsonValue>, overrides: JsonObject): Collection<JsonObject> =
     pokemonData
         .map(::getData)
-        .map { convertPokemonData(it.getString("templateId"), it.getJsonObject("pokemonSettings")) }
+        .map {
+            val templateId = it.getString("templateId")
+            val overridesForPokemon = overrides.getJsonObject(templateId)
+            convertPokemonData(templateId, it.getJsonObject("pokemonSettings"), overridesForPokemon)
+        }
 
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
 
@@ -246,7 +254,7 @@ fun convertToFormsData(formSettings: JsonObject): FormsData =
         )
     }
 
-fun convertPokemonData(templateId: String, pokemonSettings: JsonObject): JsonObject =
+fun convertPokemonData(templateId: String, pokemonSettings: JsonObject, overrides: JsonObject?): JsonObject =
     with(pokemonSettings) {
         json(
             "uniqueId" to templateId,
@@ -261,31 +269,57 @@ fun convertPokemonData(templateId: String, pokemonSettings: JsonObject): JsonObj
                 "secondary" to getString("type2", null)?.let(::convertType)
             ),
             "moves" to json(
-                "quick" to mapMoves(getJsonArray("quickMoves"), getJsonArray("eliteQuickMove")),
-                "charged" to mapMoves(getJsonArray("cinematicMoves"), getJsonArray("eliteCinematicMove"))
+                "quick" to mapMoves(
+                    moves = getJsonArray("quickMoves"),
+                    eliteMoves = getJsonArray("eliteQuickMove"),
+                    overrides = overrides?.getJsonArray("quick"),
+                    uniqueId = templateId
+                ),
+                "charged" to mapMoves(
+                    moves = getJsonArray("cinematicMoves"),
+                    eliteMoves = getJsonArray("eliteCinematicMove"),
+                    overrides = overrides?.getJsonArray("charged"),
+                    uniqueId = templateId
+                )
             )
         )
     }
 
 
-fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?): JsonArray =
-    toJsonArray(
-        (moves?.map(::mapMove) ?: emptyList())
-            + (eliteMoves?.map(::mapEliteMove) ?: emptyList())
-    )
+fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?, overrides: JsonArray?, uniqueId: String): JsonArray {
+    val minedAttacks: List<JsonObject> = (moves?.map(::mapMove) ?: emptyList()) +
+        (eliteMoves?.map(::mapEliteMove) ?: emptyList())
+    val minedAttacksSet = minedAttacks.toSet()
+    val overridesAsList: List<String> = overrides?.map { it as JsonString }?.map { it.getString() } ?: emptyList()
+    logDuplicates(minedAttacksSet, overridesAsList, uniqueId)
+    return toJsonArray(minedAttacksSet + overridesAsList.map(::mapOverride))
+}
 
-fun mapMove(moveId: JsonValue): JsonObject {
-    return json(
+fun logDuplicates(minedAttacks: Set<JsonObject>, overrides: List<String>, uniqueId: String) {
+    val duplicatedOverrides = minedAttacks.map { it.getString("id") }.intersect(overrides)
+    if (!duplicatedOverrides.isEmpty()) {
+        logger.warn(
+            "Unnecessary overrides for $uniqueId: $duplicatedOverrides." +
+                    " Please remove them fro data/overrides.json file!"
+        )
+    }
+}
+
+fun mapMove(moveId: JsonValue): JsonObject =
+    json(
         "id" to moveId,
         "elite" to false
     )
-}
-fun mapEliteMove(moveId: JsonValue): JsonObject {
-    return json(
+fun mapEliteMove(moveId: JsonValue): JsonObject =
+    json(
         "id" to moveId,
         "elite" to true
     )
-}
+fun mapOverride(moveId: String): JsonObject =
+    json(
+        "id" to moveId,
+        "elite" to true
+    )
 
 fun convertToPokedexNumber(templateId: String): Int =
     if (templateId[0] == 'V' && templateId.substring(1, 5).matches("[0-9]*".toRegex())) {
@@ -349,11 +383,15 @@ fun parseNullableJsonObject(s: String): JsonObject? {
     }
 }
 
+fun parseJsonObject(s: String): JsonObject = parseNullableJsonObject(s)!!
+
 fun toJsonArray(list: Collection<JsonValue>): JsonArray {
     val x = Json.createArrayBuilder()
     list.forEach { x.add(it) }
     return x.build()
 }
+
+fun emptyJsonArray() = Json.createArrayBuilder().build()
 
 inline fun <T> Iterable<T>.partitionLogged(predicate: (T) -> Boolean): Pair<List<T>, List<T>> =
     partition {
