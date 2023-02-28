@@ -1,4 +1,3 @@
 {
-    "V0382_POKEMON_KYOGRE": { "charged": [ "ORIGIN_PULSE" ] },
-    "V0383_POKEMON_GROUDON": { "charged": [ "PRECIPICE_BLADES" ] }
+    "[POKEMON_ID]": { "charged": [ ] }
 }
