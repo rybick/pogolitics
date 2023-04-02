@@ -1,3 +1,4 @@
 {
-    "[POKEMON_ID]": { "charged": [ ] }
+    "[POKEMON_ID]": { "charged": [ ] },
+    "V0468_POKEMON_TOGEKISS": { "charged": [ "AURA_SPHERE" ] }
 }
