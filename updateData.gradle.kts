@@ -45,7 +45,7 @@ fun updateData() {
         overrides = File("./src/main/resources/data/overrides.json").readText().let(::parseJsonObject)
     )
         .forEach {
-            val uniqueId = it.getString("uniqueId")
+            val uniqueId = it.getAsString("uniqueId")
             File("./src/main/resources/data/pokemon/${uniqueId}.json").writeText(it.toString())
         }
     combineAndConvertFastMovesData(fastPveAttacks, fastPvpAttacks)
@@ -136,10 +136,10 @@ fun matchPveAndPvpMoves(
 ): List<Pair<JsonObject, JsonObject>> {
     val pveAttacksById: Map<String, JsonObject> = pveAttacks
         .map { getData(it).getJsonObject("moveSettings") }
-        .associateBy { it.getString("movementId") }
+        .associateBy { it.getAsString("movementId") } // "movementId" can be both String or Int
     val pvpAttacksById: Map<String, JsonObject> = pvpAttacks
         .map { getData(it).getJsonObject("combatMove") }
-        .associateBy { it.getString("uniqueId") }
+        .associateBy { it.getAsString("uniqueId") } // "uniqueId" can be both String or Int
     with(pveAttacksById.keys - pvpAttacksById.keys) {
         if (isNotEmpty())
             logger.warn("Following $moveType PvE attacks do not have matching PvP attacks and will be skipped: $this")
@@ -155,7 +155,7 @@ fun matchPveAndPvpMoves(
 fun convertFastMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
     try {
         json(
-            "id" to pve.getString("movementId"),
+            "id" to pve.getAsString("movementId"),
             "name" to convertToPrettyNameForFastAttack(pve.getString("vfxName")),
             "type" to convertType(pve.getString("pokemonType")),
             "pvp" to json(
@@ -188,7 +188,7 @@ fun convertToPrettyNameForFastAttack(vfxName: String): String {
 fun convertChargedMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
     try {
         json(
-            "id" to pve.getString("movementId"),
+            "id" to pve.getAsString("movementId"),
             "name" to convertToPrettyNameForChargedAttack(pve.getString("vfxName")),
             "type" to convertType(pve.getString("pokemonType")),
             "pvp" to json(
@@ -370,7 +370,16 @@ fun json(vararg pairs: Pair<String, Any?>): JsonObject {
 
 fun json(): JsonObject = JsonValue.EMPTY_JSON_OBJECT
 
-fun parseJsonArray(s: String): JsonArray = Json.createReader(s.reader()).use { it.readArray() }
+fun parseJsonArray(s: String): JsonArray = Json.createReader(s.reader()).use {
+    try {
+        val x = it
+        val y = it.readArray()
+        y
+    } catch (e: Throwable) {
+        e.printStackTrace();
+        throw e;
+    }
+}
 
 fun parseNullableJsonObject(s: String): JsonObject? {
     return Json.createReader(s.reader()).use {
@@ -392,6 +401,17 @@ fun toJsonArray(list: Collection<JsonValue>): JsonArray {
 }
 
 fun emptyJsonArray() = Json.createArrayBuilder().build()
+
+// gets a value as String even if it's not a string
+// useful for some fields that sometimes are strings and sometimes ints (for whatever reason)
+fun JsonObject.getAsString(key: String): String {
+    val type = get(key)?.getValueType();
+    return when (type) {
+        JsonValue.ValueType.STRING -> getString(key)
+        JsonValue.ValueType.NUMBER -> getInt(key).toString()
+        else -> throw Exception("Currently only STRING and NUMBER supported by getAsString but got $type")
+    }
+}
 
 inline fun <T> Iterable<T>.partitionLogged(predicate: (T) -> Boolean): Pair<List<T>, List<T>> =
     partition {
