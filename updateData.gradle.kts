@@ -307,12 +307,12 @@ fun logDuplicates(minedAttacks: Set<JsonObject>, overrides: List<String>, unique
 
 fun mapMove(moveId: JsonValue): JsonObject =
     json(
-        "id" to moveId,
+        "id" to moveId.asString(),
         "elite" to false
     )
 fun mapEliteMove(moveId: JsonValue): JsonObject =
     json(
-        "id" to moveId,
+        "id" to moveId.asString(),
         "elite" to true
     )
 fun mapOverride(moveId: String): JsonObject =
@@ -412,6 +412,8 @@ fun JsonObject.getAsString(key: String): String {
         else -> throw Exception("Currently only STRING and NUMBER supported by getAsString but got $type")
     }
 }
+
+fun JsonValue.asString(): String = json("value" to this).getAsString("value")
 
 inline fun <T> Iterable<T>.partitionLogged(predicate: (T) -> Boolean): Pair<List<T>, List<T>> =
     partition {
