@@ -296,11 +296,11 @@ fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?, overrides: JsonArray?, u
 }
 
 fun logDuplicates(minedAttacks: Set<JsonObject>, overrides: List<String>, uniqueId: String) {
-    val duplicatedOverrides = minedAttacks.map { it.getString("id") }.intersect(overrides)
+    val duplicatedOverrides = minedAttacks.map { it.getAsString("id") }.intersect(overrides)
     if (!duplicatedOverrides.isEmpty()) {
         logger.warn(
             "Unnecessary overrides for $uniqueId: $duplicatedOverrides." +
-                    " Please remove them fro data/overrides.json file!"
+                    " Please remove them from data/overrides.json file!"
         )
     }
 }
