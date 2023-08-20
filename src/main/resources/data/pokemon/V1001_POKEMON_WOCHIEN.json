@@ -1,0 +1,1 @@
+{"uniqueId":"V1001_POKEMON_WOCHIEN","pokedexNumber":1001,"name":"Wochien","form":null,"baseAttack":186,"baseDefense":242,"baseStamina":198,"types":{"primary":"dark","secondary":"grass"},"moves":{"quick":[{"id":"SPLASH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
