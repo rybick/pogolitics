@@ -2,9 +2,20 @@
 #sed -i 's/const val applicationRoot = ""/const val applicationRoot = "\/pogolitics"/g' \
 #  ./src/main/kotlin/pogolitics/EnvVariables.kt
 
+if [ -z ${1+x} ]; then
+  DEPLOY_REPO_PATH=../PokeGoDex.github.io/
+else
+  DEPLOY_REPO_PATH=$1
+fi
+
+SOURCES_REPO_PATH=`pwd`
+
+echo "sources repository path: $SOURCES_REPO_PATH"
+echo "deploy repository path: $DEPLOY_REPO_PATH"
+
 ./gradlew clean build
 
-cd ../PokeGoDex.github.io/  || { echo "PokeGoDex.github.io directory not found"; exit 1; }
+cd "$DEPLOY_REPO_PATH"  || { echo "$DEPLOY_REPO_PATH directory not found"; exit 1; }
 
 if [[ `git status --porcelain` ]]; then
   echo "CAN'T PROCEED THERE ALREADY ARE UNCOMMITTED CHANGES"
@@ -13,14 +24,14 @@ fi
 
 rm -r ./*
 git checkout README.md # We don't want to lose README
-cp -r ../pogolitics/build/distributions/* ./
+cp -r ${SOURCES_REPO_PATH}/build/distributions/* ./
 
 git add -A
-git commit -m "Release PokeGoDex"
+git commit -m "Release PokeGoDex TMP"
 
 git push
 
-cd ../pogolitics/
+cd ${SOURCES_REPO_PATH}
 
 #sed -i 's/const val applicationRoot = "\/pogolitics"/const val applicationRoot = ""/g' \
 #  ./src/main/kotlin/pogolitcs/EnvVariables.kt
