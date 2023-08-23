@@ -16,3 +16,12 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
+      - name: Build
+        run: ./gradlew build
+      - name: Checkout PokeGoDex.github.io
+        uses:  actions/checkout@v3
+        with:
+          repository: PokeGoDex/PokeGoDex.github.io
+      - name: Check what came out of this
+        run: ls .
+      - run: ls ${{ github.workspace }}
