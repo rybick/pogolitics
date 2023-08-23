@@ -16,8 +16,8 @@ jobs:
         run: |
           ls ${{ github.workspace }}
       - run: echo "🍏 This job's status is ${{ job.status }}."
-      - name: Build
-        run: ./gradlew build
+      #- name: Build
+      #  run: ./gradlew build
       - name: Checkout PokeGoDex.github.io
         uses:  actions/checkout@v3
         with:
@@ -26,5 +26,7 @@ jobs:
       - name: Check what came out of this
         run: ls .
       - run: ls ${{ github.workspace }}
+      - name: Grant Execute permission to release script
+        run: chmod +x ./release-github.sh
       - name: Release PokeGoDex
         run: ./release-github.sh './PokeGoDex'
