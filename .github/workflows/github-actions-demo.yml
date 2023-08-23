@@ -25,7 +25,7 @@ jobs:
           path: './PokeGoDex'
       - name: Check what came out of this
         run: ls .
-      - run: ls ${{ github.workspace }}
+      - run: ls ${{ github.workspace }} --skipBuild
       - name: Grant Execute permission to release script
         run: chmod +x ./release-github.sh
       - name: Release PokeGoDex

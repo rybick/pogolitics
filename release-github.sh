@@ -13,7 +13,11 @@ SOURCES_REPO_PATH=`pwd`
 echo "sources repository path: $SOURCES_REPO_PATH"
 echo "deploy repository path: $DEPLOY_REPO_PATH"
 
-./gradlew clean build
+if [[ "$2" != "--skipBuild" ]]; then
+  ./gradlew clean build
+else
+  echo "skipping build..."
+fi
 
 cd "$DEPLOY_REPO_PATH"  || { echo "$DEPLOY_REPO_PATH directory not found"; exit 1; }
 
