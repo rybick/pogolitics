@@ -31,7 +31,7 @@ git checkout README.md # We don't want to lose README
 cp -r ${SOURCES_REPO_PATH}/build/distributions/* ./
 
 git add -A
-git commit -m "Release PokeGoDex TMP"
+git commit -m "Release PokeGoDex"
 
 git push
 
