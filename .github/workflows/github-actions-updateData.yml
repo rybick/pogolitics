@@ -2,7 +2,7 @@ name: Update Data
 run-name: Update Data
 on: [workflow_dispatch]
 jobs:
-  Explore-GitHub-Actions:
+  Update-Data:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
@@ -13,3 +13,7 @@ jobs:
         run: ./gradlew updateData
       - run: ls ${{ github.workspace }}
       - run: git status
+      - name: Commit new data
+        uses: EndBug/add-and-commit@v9
+        with:
+          message: update data (github actions)
