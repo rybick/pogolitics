@@ -1,0 +1,1 @@
+        resourcesVersion = "3a3"
