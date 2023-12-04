@@ -18,15 +18,24 @@ buildscript {
 
 tasks.register("updateData") {
     doLast {
-        updateData()
+//        updateData()
         updateVersion()
     }
 }
 
 fun updateVersion() {
-    val unixTime = System.currentTimeMillis().toString(32)
-    File("./src/main/resources/index-html-d/31-properties-resourcesVersion.js")
-        .writeText("""        resourcesVersion = "$unixTime" """)
+    if (gitHasChanges()) {
+        val unixTime = System.currentTimeMillis().toString(32)
+        File("./src/main/resources/index-html-d/31-properties-resourcesVersion.js")
+            .writeText("""        resourcesVersion = "$unixTime" """)
+    }
+}
+
+fun gitHasChanges(): Boolean {
+    val process: Process = ProcessBuilder("git", "status", "--porcelain").start()
+    process.waitFor()
+    val output = String(process.inputStream.readBytes())
+    return !output.isEmpty()
 }
 
 fun updateData() {
