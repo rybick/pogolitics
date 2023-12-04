@@ -38,6 +38,20 @@ kotlin {
 
 apply(from = "updateData.gradle.kts")
 
+tasks.register("generateIndexHtml") {
+    doFirst {
+        val indexHtmlParts = project.fileTree("${project.rootDir}/src/main/resources/index-html-d")
+        val processedIndexDir = "${project.rootDir}/build/processedResources/js/main/"
+        val concatenatedContents = indexHtmlParts
+            .sortedBy { it.name }
+            .joinToString("\n") { it.readText() }
+        File(processedIndexDir, "index.html").writeText(concatenatedContents)
+    }
+}
+
+tasks["packageJson"].dependsOn(tasks["generateIndexHtml"])
+tasks["generateIndexHtml"].dependsOn(tasks["processResources"])
+
 buildscript {
     repositories {
         mavenCentral()

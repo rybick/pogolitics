@@ -3,6 +3,9 @@ package pogolitics.api
 import kotlinx.coroutines.await
 import pogolitics.applicationRoot
 import kotlinx.browser.window
+import org.w3c.fetch.Response
+import pogolitics.resourcesVersion
+import kotlin.js.Promise
 
 class Api {
     private var index: Array<PokemonIndexEntryDto>? = null
@@ -12,7 +15,7 @@ class Api {
 
     suspend fun fetchPokemonIndex(): Array<PokemonIndexEntryDto> {
         if (index == null) {
-            index = fetchResource("/data/pokemon/index.json")
+            index = fetchVersionedResource("/data/pokemon/index.json")
                 .await()
                 .json()
                 .await()
@@ -23,7 +26,7 @@ class Api {
 
     suspend fun fetchPokemon(uniqueId: String): PokemonDto {
         if (pokemon == null || pokemon?.uniqueId != uniqueId) {
-            pokemon = fetchResource("/data/pokemon/$uniqueId.json")
+            pokemon = fetchVersionedResource("/data/pokemon/$uniqueId.json")
                     .await()
                     .json()
                     .await()
@@ -35,7 +38,7 @@ class Api {
 
     suspend fun fetchFastMoves(): Array<FastMoveDto> {
         if (fastMoves == null) {
-            fastMoves = fetchResource("/data/attacks/fast.json")
+            fastMoves = fetchVersionedResource("/data/attacks/fast.json")
                     .await()
                     .json()
                     .await()
@@ -46,7 +49,7 @@ class Api {
 
     suspend fun fetchChargedMoves(): Array<ChargedMoveDto> {
         if (chargedMoves == null) {
-            chargedMoves = fetchResource("/data/attacks/charged.json")
+            chargedMoves = fetchVersionedResource("/data/attacks/charged.json")
                     .await()
                     .json()
                     .await()
@@ -55,5 +58,6 @@ class Api {
         return chargedMoves!!
     }
 
-    fun fetchResource(url: String) = window.fetch(applicationRoot + url)
+    private fun fetchVersionedResource(url: String): Promise<Response> =
+        window.fetch("$applicationRoot$url?ver=$resourcesVersion")
 }
