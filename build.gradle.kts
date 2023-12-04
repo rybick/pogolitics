@@ -38,6 +38,33 @@ kotlin {
 
 apply(from = "updateData.gradle.kts")
 
+//tasks.getByName("processResources") {
+//    doFirst {
+//        val resourcesDir = sourceSets.get("main").output.resourcesDir
+//        resourcesDir!!.mkdirs()
+//        val contents = "<html><body>dupa hahaha</body></html>"
+//        File(resourcesDir, "index.html").writeText(contents)
+//    }
+//}
+//
+//tasks["build"].dependsOn(tasks["processResources"])
+
+
+
+tasks.register("generateIndexHtml") {
+    doFirst {
+        val indexHtmlParts = project.fileTree("${project.rootDir}/src/main/resources/index-html-d")
+        val processedIndexDir = "${project.rootDir}/build/processedResources/js/main/"
+        val concatenatedContents = indexHtmlParts
+            .sortedBy { it.name }
+            .joinToString("\n") { it.readText() }
+        File(processedIndexDir, "index.html").writeText(concatenatedContents)
+    }
+}
+
+tasks["compileKotlinJs"].dependsOn(tasks["generateIndexHtml"])
+tasks["generateIndexHtml"].dependsOn(tasks["processResources"])
+
 buildscript {
     repositories {
         mavenCentral()
