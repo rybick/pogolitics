@@ -19,7 +19,14 @@ buildscript {
 tasks.register("updateData") {
     doLast {
         updateData()
+        updateVersion()
     }
+}
+
+fun updateVersion() {
+    val unixTime = System.currentTimeMillis().toString(32)
+    File("./src/main/resources/index-html-d/31-properties-resourcesVersion.js")
+        .writeText("""        resourcesVersion = "$unixTime" """)
 }
 
 fun updateData() {
