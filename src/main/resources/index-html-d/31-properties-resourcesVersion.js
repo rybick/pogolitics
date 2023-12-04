@@ -1,1 +1,1 @@
-        resourcesVersion = "1hgqtngp7" 
+        resourcesVersion = "1hgqtr57c" 

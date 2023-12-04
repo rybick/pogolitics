@@ -18,7 +18,7 @@ buildscript {
 
 tasks.register("updateData") {
     doLast {
-//        updateData()
+        updateData()
         updateVersion()
     }
 }
@@ -32,7 +32,7 @@ fun updateVersion() {
 }
 
 fun gitHasChanges(): Boolean {
-    val process: Process = ProcessBuilder("git", "status", "--porcelain").start()
+    val process: Process = ProcessBuilder("git", "status", "--porcelain", "src/main/resources/data/").start()
     process.waitFor()
     val output = String(process.inputStream.readBytes())
     return !output.isEmpty()
