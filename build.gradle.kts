@@ -38,19 +38,6 @@ kotlin {
 
 apply(from = "updateData.gradle.kts")
 
-//tasks.getByName("processResources") {
-//    doFirst {
-//        val resourcesDir = sourceSets.get("main").output.resourcesDir
-//        resourcesDir!!.mkdirs()
-//        val contents = "<html><body>dupa hahaha</body></html>"
-//        File(resourcesDir, "index.html").writeText(contents)
-//    }
-//}
-//
-//tasks["build"].dependsOn(tasks["processResources"])
-
-
-
 tasks.register("generateIndexHtml") {
     doFirst {
         val indexHtmlParts = project.fileTree("${project.rootDir}/src/main/resources/index-html-d")
