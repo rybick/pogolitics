@@ -62,7 +62,7 @@ tasks.register("generateIndexHtml") {
     }
 }
 
-tasks["compileKotlinJs"].dependsOn(tasks["generateIndexHtml"])
+tasks["packageJson"].dependsOn(tasks["generateIndexHtml"])
 tasks["generateIndexHtml"].dependsOn(tasks["processResources"])
 
 buildscript {
