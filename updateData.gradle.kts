@@ -26,8 +26,8 @@ tasks.register("updateData") {
 fun updateVersion() {
     if (gitHasChanges()) {
         val unixTime = System.currentTimeMillis().toString(32)
-        File("./src/main/resources/index-html-d/31-properties-resourcesVersion.js")
-            .writeText("""        resourcesVersion = "$unixTime" """)
+        File("./src/main/resources/resourcesVersion.js")
+            .writeText("""resourcesVersion = "$unixTime" """)
     }
 }
 
