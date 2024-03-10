@@ -5,6 +5,7 @@ import javax.json.JsonArray
 import javax.json.JsonValue
 import javax.json.JsonString
 import java.lang.Exception
+import java.util.concurrent.TimeUnit
 
 buildscript {
     repositories {
@@ -24,21 +25,27 @@ tasks.register("updateData") {
 }
 
 fun updateVersion() {
+    logger.info("Started updating version...")
     if (gitHasChanges()) {
         val unixTime = System.currentTimeMillis().toString(32)
         File("./src/main/resources/resourcesVersion.js")
             .writeText("""resourcesVersion = "$unixTime" """)
     }
+    logger.info("Finished updating version...")
 }
 
 fun gitHasChanges(): Boolean {
     val process: Process = ProcessBuilder("git", "status", "--porcelain", "src/main/resources/data/").start()
-    process.waitFor()
+    val exitedGracefully = process.waitFor(10, TimeUnit.SECONDS)
     val output = String(process.inputStream.readBytes())
+    if (!exitedGracefully) {
+        logger.warn("git status timed out. Output is ${output.length} characters long.")
+    }
     return !output.isEmpty()
 }
 
 fun updateData() {
+    logger.info("Started updating data...")
     val gameData = URL("https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json")
         .readText()
         .let(::parseJsonArray)
@@ -72,6 +79,7 @@ fun updateData() {
         .also {
             File("./src/main/resources/data/attacks/charged.json").writeText(it.toString())
         }
+    logger.info("Finished updating data.")
 }
 
 data class FormsData(
@@ -198,7 +206,15 @@ fun convertToPrettyNameForFastAttack(vfxName: String): String {
         vfxName.dropLast(suffix.length)
             .split("_")
             .joinToString(" ") { it.toLowerCase().capitalize() }
-    } else throw Exception("Misformatted vfxName of fast attack: $vfxName")
+    } else {
+        val prettyName = vfxName
+            .split("_")
+            .joinToString(" ") { it.toLowerCase().capitalize() }
+        logger.warn(
+            """Stumbled upon non-standard naming of a fast attack: '$vfxName' - converting it to: $prettyName"""
+        );
+        prettyName
+    }
 }
 
 fun convertChargedMoveData(pve: JsonObject, pvp: JsonObject): JsonObject =
