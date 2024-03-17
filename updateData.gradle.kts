@@ -7,6 +7,86 @@ import javax.json.JsonString
 import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
+// TODO try moving the classes to a separate file[s] for better readability
+// -- final classes (ones that are used in final results)
+
+data class PokemonDto(
+    val uniqueId: String,
+    val pokedexNumber: Int,
+    val name: String,
+    val form: String?,
+    val baseAttack: Int,
+    val baseDefense: Int,
+    val baseStamina: Int,
+    val types: TypesDto,
+    val moves: MovesDto
+) {
+    fun toJson() = json(
+        "uniqueId" to uniqueId,
+        "pokedexNumber" to pokedexNumber,
+        "name" to name,
+        "form" to form,
+        "baseAttack" to baseAttack,
+        "baseDefense" to baseDefense,
+        "baseStamina" to baseStamina,
+        "types" to types.toJson(),
+        "moves" to moves.toJson()
+    )
+}
+
+data class TypesDto(
+    val primary: String,
+    val secondary: String?
+) {
+    fun toJson() = json(
+        "primary" to primary,
+        "secondary" to secondary
+    )
+}
+
+data class MovesDto(
+    val quick: List<MoveDto>,
+    val charged: List<MoveDto>
+) {
+    fun toJson() = json(
+        "quick" to toJsonArray(quick.map { it.toJson() }),
+        "charged" to toJsonArray(charged.map { it.toJson() })
+    )
+}
+
+data class MoveDto(
+    val id: String,
+    val elite: Boolean
+) {
+    fun toJson() = json(
+        "id" to id,
+        "elite" to elite
+    )
+}
+
+// intermidiate classes (that are only used as an intermidiate form)
+
+data class FormsData(
+    val pokemonNameCode: String,
+    val forms: List<Form>
+) {
+    fun findFormAndIndex(rawFormNameCode: String?): Pair<Form?, Int?> =
+        if (rawFormNameCode == null) {
+            if (forms.isEmpty()) Pair(null, 0) else Pair(null, null)
+        } else {
+            val index = forms.indexOfFirst { it.id == rawFormNameCode }
+            if (index != -1) {
+                Pair(forms[index], index)
+            } else {
+                Pair(null, null)
+            }
+        }
+}
+
+data class Form(val id: String, val assetBundleSuffix: String?, val costume: Boolean)
+
+// ----
+
 buildscript {
     repositories {
         mavenCentral()
@@ -82,25 +162,6 @@ fun updateData() {
     logger.info("Finished updating data.")
 }
 
-data class FormsData(
-    val pokemonNameCode: String,
-    val forms: List<Form>
-) {
-    fun findFormAndIndex(rawFormNameCode: String?): Pair<Form?, Int?> =
-        if (rawFormNameCode == null) {
-            if (forms.isEmpty()) Pair(null, 0) else Pair(null, null)
-        } else {
-            val index = forms.indexOfFirst { it.id == rawFormNameCode }
-            if (index != -1) {
-                Pair(forms[index], index)
-            } else {
-                Pair(null, null)
-            }
-        }
-}
-
-data class Form(val id: String, val assetBundleSuffix: String?, val costume: Boolean)
-
 fun createPokemonIndex(pokemonData: List<JsonValue>, formsDataByNameCode: Map<String, FormsData>): JsonArray =
     pokemonData
         .map(::getData)
@@ -126,8 +187,10 @@ fun convertAllPokemonData(pokemonData: List<JsonValue>, overrides: JsonObject): 
         .map {
             val templateId = it.getString("templateId")
             val overridesForPokemon = overrides.getJsonObject(templateId)
+            //convertPokemonMegaForms()
             convertPokemonData(templateId, it.getJsonObject("pokemonSettings"), overridesForPokemon)
         }
+        .map { it.toJson() }
 
 fun getData(element: JsonValue): JsonObject = element.asJsonObject().getJsonObject("data")!!
 
@@ -286,28 +349,28 @@ fun convertToFormsData(formSettings: JsonObject): FormsData =
         )
     }
 
-fun convertPokemonData(templateId: String, pokemonSettings: JsonObject, overrides: JsonObject?): JsonObject =
+fun convertPokemonData(templateId: String, pokemonSettings: JsonObject, overrides: JsonObject?): PokemonDto =
     with(pokemonSettings) {
-        json(
-            "uniqueId" to templateId,
-            "pokedexNumber" to convertToPokedexNumber(templateId),
-            "name" to convertToPrettyPokemonName(getString("pokemonId")),
-            "form" to convertToPrettyForm(getString("form", null), getString("pokemonId")),
-            "baseAttack" to getJsonObject("stats").getInt("baseAttack", 0),
-            "baseDefense" to getJsonObject("stats").getInt("baseDefense", 0),
-            "baseStamina" to getJsonObject("stats").getInt("baseStamina", 0),
-            "types" to json(
-                "primary" to getString("type").let(::convertType),
-                "secondary" to getString("type2", null)?.let(::convertType)
+        PokemonDto(
+            uniqueId = templateId,
+            pokedexNumber = convertToPokedexNumber(templateId),
+            name = convertToPrettyPokemonName(getString("pokemonId")),
+            form = convertToPrettyForm(getString("form", null), getString("pokemonId")),
+            baseAttack = getJsonObject("stats").getInt("baseAttack", 0),
+            baseDefense = getJsonObject("stats").getInt("baseDefense", 0),
+            baseStamina = getJsonObject("stats").getInt("baseStamina", 0),
+            types = TypesDto(
+                primary = getString("type").let(::convertType),
+                secondary = getString("type2", null)?.let(::convertType)
             ),
-            "moves" to json(
-                "quick" to mapMoves(
+            moves = MovesDto(
+                quick = mapMoves(
                     moves = getJsonArray("quickMoves"),
                     eliteMoves = getJsonArray("eliteQuickMove"),
                     overrides = overrides?.getJsonArray("quick"),
                     uniqueId = templateId
                 ),
-                "charged" to mapMoves(
+                charged = mapMoves(
                     moves = getJsonArray("cinematicMoves"),
                     eliteMoves = getJsonArray("eliteCinematicMove"),
                     overrides = overrides?.getJsonArray("charged"),
@@ -318,17 +381,17 @@ fun convertPokemonData(templateId: String, pokemonSettings: JsonObject, override
     }
 
 
-fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?, overrides: JsonArray?, uniqueId: String): JsonArray {
-    val minedAttacks: List<JsonObject> = (moves?.map(::mapMove) ?: emptyList()) +
+fun mapMoves(moves: JsonArray?, eliteMoves: JsonArray?, overrides: JsonArray?, uniqueId: String): List<MoveDto> {
+    val minedAttacks: List<MoveDto> = (moves?.map(::mapMove) ?: emptyList()) +
         (eliteMoves?.map(::mapEliteMove) ?: emptyList())
     val minedAttacksSet = minedAttacks.toSet()
     val overridesAsList: List<String> = overrides?.map { it as JsonString }?.map { it.getString() } ?: emptyList()
     logDuplicates(minedAttacksSet, overridesAsList, uniqueId)
-    return toJsonArray(minedAttacksSet + overridesAsList.map(::mapOverride))
+    return (minedAttacksSet + overridesAsList.map(::mapOverride)).toList()
 }
 
-fun logDuplicates(minedAttacks: Set<JsonObject>, overrides: List<String>, uniqueId: String) {
-    val duplicatedOverrides = minedAttacks.map { it.getAsString("id") }.intersect(overrides)
+fun logDuplicates(minedAttacks: Set<MoveDto>, overrides: List<String>, uniqueId: String) {
+    val duplicatedOverrides = minedAttacks.map { it.id }.intersect(overrides)
     if (!duplicatedOverrides.isEmpty()) {
         logger.warn(
             "Unnecessary overrides for $uniqueId: $duplicatedOverrides." +
@@ -337,20 +400,20 @@ fun logDuplicates(minedAttacks: Set<JsonObject>, overrides: List<String>, unique
     }
 }
 
-fun mapMove(moveId: JsonValue): JsonObject =
-    json(
-        "id" to moveId.asString(),
-        "elite" to false
+fun mapMove(moveId: JsonValue): MoveDto =
+    MoveDto(
+        id = moveId.asString(),
+        elite = false
     )
-fun mapEliteMove(moveId: JsonValue): JsonObject =
-    json(
-        "id" to moveId.asString(),
-        "elite" to true
+fun mapEliteMove(moveId: JsonValue): MoveDto =
+    MoveDto(
+        id = moveId.asString(),
+        elite = true
     )
-fun mapOverride(moveId: String): JsonObject =
-    json(
-        "id" to moveId,
-        "elite" to true
+fun mapOverride(moveId: String): MoveDto =
+    MoveDto(
+        id = moveId,
+        elite = true
     )
 
 fun convertToPokedexNumber(templateId: String): Int =
@@ -365,7 +428,7 @@ fun convertToPrettyPokemonName(pokemonId: String): String =
             it.toLowerCase().capitalize()
         }
 
-fun convertToPrettyForm(maybeForm: String?, pokemonId: String) =
+fun convertToPrettyForm(maybeForm: String?, pokemonId: String): String? =
     maybeForm?.let { form ->
         if (form.startsWith(pokemonId)) {
             form.substring(pokemonId.length + 1)
@@ -455,3 +518,5 @@ inline fun <T> Iterable<T>.partitionLogged(predicate: (T) -> Boolean): Pair<List
             throw Exception("Exception when handling $it", e)
         }
     }
+
+
