@@ -3,5 +3,6 @@
     "V0384_POKEMON_RAYQUAZA": { "charged": [ "DRAGON_ASCENT" ] },
     "V0484_POKEMON_PALKIA_ORIGIN": { "charged": [ "SPACIAL_REND" ] },
     "V0483_POKEMON_DIALGA_ORIGIN": { "charged": [ "ROAR_OF_TIME" ] },
-    "V0071_POKEMON_VICTREEBEL_NORMAL": { "quick": [ "MAGICAL_LEAF_FAST" ] }
+    "V0071_POKEMON_VICTREEBEL_NORMAL": { "quick": [ "MAGICAL_LEAF_FAST" ] },
+    "V0706_POKEMON_GOODRA": { "charged": [ "THUNDER_PUNCH" ] }
 }
