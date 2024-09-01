@@ -9,16 +9,30 @@ class MoveSetStatsCalculator(
         private val pokemon: PokemonData,
         private val fast: MoveData,
         private val charged: MoveData,
-        private val individualPokemonStats: IndividualPokemonStats
+        private val individualPokemonStats: IndividualPokemonStats,
+        private val againstPokemon: PokemonData = PokemonData.Dummy
 ) {
+    private companion object {
+        const val expectedDefense = 100
+    }
+
     data class PokemonData(
         val baseAttack: Int,
         val baseDefense: Int,
         val baseStamina: Int,
-        private val types: PokemonTypes
+        val types: PokemonTypes
     ) {
         fun isOfType(type: PokemonType): Boolean {
             return types.primary == type || types.secondary == type
+        }
+
+        companion object {
+            val Dummy: PokemonData = PokemonData(
+                baseAttack = 0,
+                baseDefense = expectedDefense,
+                baseStamina = 0,
+                types = PokemonTypes(PokemonType.NONE)
+            )
         }
     }
 
@@ -56,13 +70,10 @@ class MoveSetStatsCalculator(
         return effectiveFastAttackDps ?: throw RuntimeException("Should not happen")
     }
 
+    // DPS if only fast attack is used
     fun fastAttackDps(): Double = damage(fast) / fast.duration.toDouble(SECONDS)
 
     // all methods below could be private, but it's useful to be able to look into them (see MoveSetStatsCalculatorTest)
-    // DPS if only fast attack is used
-
-    private val expectedDefense get() = 100
-
     fun fastAttackEnergyGain() = fast.energy / fast.duration.toDouble(SECONDS)
 
     fun chargedAttackDurationPerSecond(): Double =
@@ -80,6 +91,7 @@ class MoveSetStatsCalculator(
    fun damage(move: MoveData): Double {
        val stab = if (pokemon.isOfType(move.type)) 1.2 else 1.0
        val attack = calcStatValue(pokemon.baseAttack, individualPokemonStats.attack, individualPokemonStats.level)
+       //move.type.against(againstPokemon.types)
        return (0.5 * move.power * attack * stab / expectedDefense) + 0.5 // gamepress formula
        //return floor(0.5 * attack.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 1; // original formula
    }
