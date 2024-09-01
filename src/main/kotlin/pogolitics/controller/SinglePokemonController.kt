@@ -7,6 +7,7 @@ import kotlinx.coroutines.coroutineScope
 import org.w3c.dom.url.URLSearchParams
 import pogolitics.ControllerResult
 import pogolitics.api.*
+import pogolitics.controller.MoveSetStatsCalculator.PokemonTypes
 import pogolitics.model.*
 import pogolitics.model.SinglePokemonModel.PokemonIndividualStatistics
 import pogolitics.model.SinglePokemonModel.VariablePokemonStatistics
@@ -40,6 +41,7 @@ class SinglePokemonController(
             val requestedForm: String? = params.form
             val showAdditionalColumns: Boolean = params.showAdditionalColumns == true
             val showRocketAttacks: Boolean = params.showRocketAttacks == true
+            val targetTypes: PokemonTypes? = params.targetTypes
             val mode = params.mode
             val pokemonIndex: Deferred<Array<PokemonIndexEntryDto>> = async { api.fetchPokemonIndex() }
             val fastMoves: Deferred<Array<FastMoveDto>> = async { api.fetchFastMoves() }
@@ -50,7 +52,7 @@ class SinglePokemonController(
                     ?.let { entry -> PokemonAndEntryDto(api.fetchPokemon(entry.uniqueId), entry) }
             }
             maybePokemonAndEntry.await()?.let { dto ->
-                val pokemonStats = calculatePokemonStatistics(dto.pokemon, state)
+                val pokemonStats = calculatePokemonStatistics(dto.pokemon, state, )
                 ControllerResult.modelAndView(
                     view = SinglePokemonPage::class,
                     model = SinglePokemonModel(
@@ -63,7 +65,10 @@ class SinglePokemonController(
                             fastMoves = fastMoves.await(),
                             chargedMoves = chargedMoves.await(),
                             pokemonIvs = pokemonStats,
-                            includeRocketAttacks = showRocketAttacks
+                            includeRocketAttacks = showRocketAttacks,
+                            target = targetTypes
+                                ?.let { MoveSetStatsCalculator.Target(types = it) }
+                                ?: MoveSetStatsCalculator.Target()
                         ),
                         pokemonIndex = pokemonIndexService.getPokemonList(),
                         focusedElement = state.focus,
@@ -85,8 +90,16 @@ class SinglePokemonController(
     private val URLSearchParams.form: String? get() = get("form")
     private val URLSearchParams.showAdditionalColumns: Boolean? get() = get("ac")?.toBoolean()
     private val URLSearchParams.showRocketAttacks: Boolean? get() = get("rocket")?.toBoolean()
+    private val URLSearchParams.targetTypes: PokemonTypes? get() = get("targetTypes")?.let { parseTargetTypes(it) }
     // TODO display some kind of error page for invalid values
     private val URLSearchParams.mode: BattleMode get() = BattleMode.fromString(get("mode") ?: "pvp")
+
+    private fun parseTargetTypes(string: String): PokemonTypes {
+        val types = string.split(",")
+            .also { require(it.size == 1 || it.size == 2) }
+            .map { PokemonType.fromString(it) }
+        return PokemonTypes(types[0], types.getOrNull(1))
+    }
 
     private fun Array<PokemonIndexEntryDto>.findPokemonIndexEntry(
         pokedexNumber: Int,
@@ -129,10 +142,11 @@ class SinglePokemonController(
         fastMoves: Array<FastMoveDto>,
         chargedMoves: Array<ChargedMoveDto>,
         pokemonIvs: PokemonIndividualStatistics,
-        includeRocketAttacks: Boolean
+        includeRocketAttacks: Boolean,
+        target: MoveSetStatsCalculator.Target
     ): List<MoveSet> =
         MoveSetsMapper.create(mode, pokemon, fastMoves, chargedMoves, includeRocketAttacks)
-            .getData(pokemonIvs.currentStats.level, pokemonIvs.ivs.attack)
+            .getData(pokemonIvs.currentStats.level, pokemonIvs.ivs.attack, target)
 
     private fun calculatePokemonStatistics(pokemon: PokemonDto, pokemonIvs: PokemonIndividualValuesState): PokemonIndividualStatistics {
         val calculator = CpCalculator(

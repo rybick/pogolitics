@@ -84,7 +84,7 @@ sealed class MoveSetsMapper constructor(
     private val quickAttacks: Map<String, FastMoveDto> = fastMoves.associateBy { it.id }
     private val chargedAttacks: Map<String, ChargedMoveDto> = chargedMoves.associateBy { it.id }
 
-    fun getData(pokemonLevel: Float, pokemonAttackIv: Int): List<MoveSet> {
+    fun getData(pokemonLevel: Float, pokemonAttackIv: Int, target: Target): List<MoveSet> {
         val pokemon = mapPokemonData(pokemonDto)
         val chargedAttackDtos = getChargedAttacks(pokemonDto.moves.charged)
         return combinations(pokemonDto.moves.quick, chargedAttackDtos) { fast, charged ->
@@ -94,7 +94,8 @@ sealed class MoveSetsMapper constructor(
                 pokemon = pokemon,
                 fast = mapFastMove(fastMove),
                 charged = mapChargedMove(chargedMove),
-                individualPokemonStats = IndividualPokemonStats(pokemonLevel, pokemonAttackIv)
+                individualPokemonStats = IndividualPokemonStats(pokemonLevel, pokemonAttackIv),
+                target = target
             )
             MoveSet(
                 quickAttack = Attack(PokemonType.fromString(fastMove.type), fastMove.name, fast.elite),
