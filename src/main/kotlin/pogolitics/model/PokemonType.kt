@@ -90,6 +90,11 @@ enum class PokemonType() {
         override val strongAgainst get() = setOf(FIRE, GROUND, ROCK)
         override val weakAgainst get() = setOf(DRAGON, GRASS, WATER)
         override val superWeakAgainst get() = setOf<PokemonType>()
+    },
+    NONE { // Technical type with no interactions with others
+        override val strongAgainst get() = setOf<PokemonType>()
+        override val weakAgainst get() = setOf<PokemonType>()
+        override val superWeakAgainst get() = setOf<PokemonType>()
     };
 
     fun against(type: PokemonType): Effectiveness {
