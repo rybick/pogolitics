@@ -3,6 +3,7 @@ import pogolitics.controller.MoveSetStatsCalculator.IndividualPokemonStats
 import pogolitics.controller.MoveSetStatsCalculator.MoveData
 import pogolitics.controller.MoveSetStatsCalculator.PokemonData
 import pogolitics.controller.MoveSetStatsCalculator.PokemonTypes
+import pogolitics.controller.MoveSetStatsCalculator.Target
 import pogolitics.model.PokemonType
 import kotlin.test.Test
 import kotlin.test.assertEquals
@@ -19,6 +20,13 @@ class MoveSetStatsCalculatorTest {
         types = PokemonTypes(PokemonType.DRAGON, PokemonType.FLYING)
     )
 
+    val MACHAMP = PokemonData(
+        baseAttack = 234,
+        baseDefense = 159,
+        baseStamina = 207,
+        types = PokemonTypes(PokemonType.FIGHTING)
+    )
+
     val FAST_DRAGON_TAIL = MoveData(
         power = 15,
         energy = 9,
@@ -26,11 +34,25 @@ class MoveSetStatsCalculatorTest {
         type = PokemonType.DRAGON,
     )
 
+    val FAST_COUNTER = MoveData(
+        power = 12,
+        energy = 8,
+        duration = 900.milliseconds,
+        type = PokemonType.FIGHTING
+    )
+
+    val CHARGED_CLOSE_COMBAT = MoveData(
+        power = 100,
+        energy = 100,
+        duration = 2300.milliseconds,
+        type = PokemonType.FIGHTING
+    )
+
     val CHARGED_OUTRAGE = MoveData(
         power = 110,
         energy = 50,
         duration = 3900.milliseconds,
-        type = PokemonType.DRAGON,
+        type = PokemonType.DRAGON
     )
 
     val CHARGED_OUTRAGE_twice_slower_and_stronger = MoveData(
@@ -68,6 +90,27 @@ class MoveSetStatsCalculatorTest {
         val dracoMeteor = salamanceWithDragonTailAnd(CHARGED_DRACO_METEOR)
 
         assertEquals(dracoMeteor.toCalculator().dps(), calcDpsAfterNTurns(100_000, dracoMeteor), absoluteTolerance = 0.001)
+    }
+
+    @Test
+    fun testEffectiveness() {
+        fun fightingDpsAgainst(types: PokemonTypes) =
+            machampWithFightingAttacks().against(types.toTarget()).toCalculator().dps()
+
+        val baseDps = fightingDpsAgainst(PokemonTypes(PokemonType.DRAGON))
+        val dpsEffective = fightingDpsAgainst(PokemonTypes(PokemonType.ROCK))
+        val dpsDoubleEffective = fightingDpsAgainst(PokemonTypes(PokemonType.ROCK, PokemonType.ICE))
+        val dpsNotEffective = fightingDpsAgainst(PokemonTypes(PokemonType.FLYING))
+        val dpsImmune = fightingDpsAgainst(PokemonTypes(PokemonType.GHOST))
+        val dpsDoubleNotEffective = fightingDpsAgainst(PokemonTypes(PokemonType.FLYING, PokemonType.FAIRY))
+        val dpsNotEffectiveAndImmune = fightingDpsAgainst(PokemonTypes(PokemonType.FLYING, PokemonType.GHOST))
+
+        assertEquals(1.6 * baseDps, dpsEffective)
+        assertEquals(1.6 * 1.6 * baseDps, dpsDoubleEffective)
+        assertEquals(baseDps / 1.6, dpsNotEffective)
+        assertEquals(baseDps / 1.6 / 1.6, dpsImmune)
+        assertEquals(baseDps / 1.6 / 1.6, dpsDoubleNotEffective)
+        assertEquals(baseDps / 1.6 / 1.6 / 1.6, dpsNotEffectiveAndImmune)
     }
 
     // This is not really a test, but a piece of code that allows to take a deeper look into the calculations
@@ -135,12 +178,32 @@ class MoveSetStatsCalculatorTest {
             individualPokemonStats = LEGACY_MAX
         )
 
+    private fun machampWithFightingAttacks() =
+        CalculatorInput(
+            pokemon = MACHAMP,
+            fast = FAST_COUNTER,
+            charged = CHARGED_CLOSE_COMBAT,
+            individualPokemonStats = LEGACY_MAX
+        )
+
     private data class CalculatorInput(
         val pokemon: PokemonData,
         val fast: MoveData,
         val charged: MoveData,
-        val individualPokemonStats: IndividualPokemonStats
+        val individualPokemonStats: IndividualPokemonStats,
+        val target: Target = Target()
     ) {
         fun toCalculator() = MoveSetStatsCalculator(pokemon, fast, charged, individualPokemonStats)
+
+        fun against(target: Target) =
+            CalculatorInput(
+                pokemon = pokemon,
+                fast = fast,
+                charged = charged,
+                individualPokemonStats = individualPokemonStats,
+                target = target
+            )
     }
+
+    fun PokemonTypes.toTarget() = Target(types = this)
 }

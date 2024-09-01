@@ -1,6 +1,10 @@
 package pogolitics.controller
 
 import pogolitics.model.PokemonType
+import pogolitics.model.PokemonType.Effectiveness.REGULAR
+import pogolitics.model.PokemonType.Effectiveness.STRONG
+import pogolitics.model.PokemonType.Effectiveness.SUPER_WEAK
+import pogolitics.model.PokemonType.Effectiveness.WEAK
 import kotlin.math.ceil
 import kotlin.time.Duration
 import kotlin.time.DurationUnit.SECONDS
@@ -10,7 +14,7 @@ class MoveSetStatsCalculator(
         private val fast: MoveData,
         private val charged: MoveData,
         private val individualPokemonStats: IndividualPokemonStats,
-        private val againstPokemon: PokemonData = PokemonData.Dummy
+        private val target: Target = Target()
 ) {
     private companion object {
         const val expectedDefense = 100
@@ -25,18 +29,14 @@ class MoveSetStatsCalculator(
         fun isOfType(type: PokemonType): Boolean {
             return types.primary == type || types.secondary == type
         }
-
-        companion object {
-            val Dummy: PokemonData = PokemonData(
-                baseAttack = 0,
-                baseDefense = expectedDefense,
-                baseStamina = 0,
-                types = PokemonTypes(PokemonType.NONE)
-            )
-        }
     }
 
     data class PokemonTypes(val primary: PokemonType, val secondary: PokemonType? = null)
+
+    data class Target(
+        val defense: Int = expectedDefense,
+        val types: PokemonTypes = PokemonTypes(PokemonType.NONE)
+    )
 
     data class MoveData(
         val power: Int,
@@ -95,4 +95,15 @@ class MoveSetStatsCalculator(
        return (0.5 * move.power * attack * stab / expectedDefense) + 0.5 // gamepress formula
        //return floor(0.5 * attack.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 1; // original formula
    }
+
+    fun typeEffectiveness(attackType: PokemonType, targetTypes: PokemonTypes) {
+        // TODO later
+    }
+
+    fun PokemonType.Effectiveness.multiplier(): Double = when(this) {
+        STRONG -> 1.6
+        REGULAR -> 1.0
+        WEAK -> 0.625 // = (1 / 1.6)
+        SUPER_WEAK -> 0.390625 // = (1 / (1.6)^2)
+    }
 }
