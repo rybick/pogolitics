@@ -90,17 +90,19 @@ class MoveSetStatsCalculator(
 
    fun damage(move: MoveData): Double {
        val stab = if (pokemon.isOfType(move.type)) 1.2 else 1.0
+       val effectiveness = typeEffectivenessMultiplier(move.type, target.types)
        val attack = calcStatValue(pokemon.baseAttack, individualPokemonStats.attack, individualPokemonStats.level)
-       //move.type.against(againstPokemon.types)
-       return (0.5 * move.power * attack * stab / expectedDefense) + 0.5 // gamepress formula
-       //return floor(0.5 * attack.power * statValue(pokemon.baseAttack) * stab / expectedDefense) + 1; // original formula
+       return (0.5 * move.power * attack * stab * effectiveness / expectedDefense) + 0.5 // gamepress formula
+       //return floor(0.5 * attack.power * statValue(pokemon.baseAttack) * stab * effectiveness / expectedDefense) + 1; // original formula
    }
 
-    fun typeEffectiveness(attackType: PokemonType, targetTypes: PokemonTypes) {
-        // TODO later
+    private fun typeEffectivenessMultiplier(moveType: PokemonType, targetTypes: PokemonTypes): Double {
+        val primaryEffectiveness: Double = moveType.against(targetTypes.primary).toMultiplier()
+        val secondaryEffectiveness: Double = targetTypes.secondary?.let { moveType.against(it).toMultiplier() } ?: 1.0
+        return primaryEffectiveness * secondaryEffectiveness
     }
 
-    fun PokemonType.Effectiveness.multiplier(): Double = when(this) {
+    private fun PokemonType.Effectiveness.toMultiplier(): Double = when(this) {
         STRONG -> 1.6
         REGULAR -> 1.0
         WEAK -> 0.625 // = (1 / 1.6)
