@@ -105,12 +105,14 @@ class MoveSetStatsCalculatorTest {
         val dpsDoubleNotEffective = fightingDpsAgainst(PokemonTypes(PokemonType.FLYING, PokemonType.FAIRY))
         val dpsNotEffectiveAndImmune = fightingDpsAgainst(PokemonTypes(PokemonType.FLYING, PokemonType.GHOST))
 
-        assertEquals(1.6 * baseDps, dpsEffective)
-        assertEquals(1.6 * 1.6 * baseDps, dpsDoubleEffective)
-        assertEquals(baseDps / 1.6, dpsNotEffective)
-        assertEquals(baseDps / 1.6 / 1.6, dpsImmune)
-        assertEquals(baseDps / 1.6 / 1.6, dpsDoubleNotEffective)
-        assertEquals(baseDps / 1.6 / 1.6 / 1.6, dpsNotEffectiveAndImmune)
+        // the formula is lineal, but the function does not exactly goes through (0, 0)
+        // so just multiplying will be ignificantly off but still should be close
+        assertEquals(1.6 * baseDps, dpsEffective, absoluteTolerance = 0.8)
+        assertEquals(1.6 * 1.6 * baseDps, dpsDoubleEffective, absoluteTolerance = 1.28)
+        assertEquals(baseDps / 1.6, dpsNotEffective, absoluteTolerance = 0.4)
+        assertEquals(baseDps / 1.6 / 1.6, dpsImmune, absoluteTolerance = 0.4)
+        assertEquals(baseDps / 1.6 / 1.6, dpsDoubleNotEffective, absoluteTolerance = 0.4)
+        assertEquals(baseDps / 1.6 / 1.6 / 1.6, dpsNotEffectiveAndImmune, absoluteTolerance = 0.4)
     }
 
     // This is not really a test, but a piece of code that allows to take a deeper look into the calculations
@@ -193,7 +195,7 @@ class MoveSetStatsCalculatorTest {
         val individualPokemonStats: IndividualPokemonStats,
         val target: Target = Target()
     ) {
-        fun toCalculator() = MoveSetStatsCalculator(pokemon, fast, charged, individualPokemonStats)
+        fun toCalculator() = MoveSetStatsCalculator(pokemon, fast, charged, individualPokemonStats, target)
 
         fun against(target: Target) =
             CalculatorInput(
