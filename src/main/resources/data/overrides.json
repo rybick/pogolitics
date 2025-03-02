@@ -6,5 +6,7 @@
     "V0800_POKEMON_NECROZMA_DAWN_WINGS": { "charged": [ "MOONGEIST_BEAM" ] },
     "V0800_POKEMON_NECROZMA_DUSK_MANE": { "charged": [ "SUNSTEEL_STRIKE" ] },
     "V0617_POKEMON_ACCELGOR": { "charged": [ "ENERGY_BALL" ] },
-    "V0589_POKEMON_ESCAVALIER": { "charged": [ "RAZOR_SHELL" ] }
+    "V0589_POKEMON_ESCAVALIER": { "charged": [ "RAZOR_SHELL" ] }, 
+    "V0646_POKEMON_KYUREM_WHITE": { "charged": [ "ICE_BURN" ] },
+    "V0646_POKEMON_KYUREM_BLACK": { "charged": [ "FREEZE_SHOCK" ] }
 }
