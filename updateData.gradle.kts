@@ -214,7 +214,7 @@ fun combineAndConvertChargedMovesData(
 ): JsonArray =
     matchPveAndPvpMoves(chargedPveAttacks, chargedPvpAttacks, "charged")
         .map { (pve, pvp) -> convertChargedMoveData(pve, pvp) }
-        .let { it + THUNDER_CAGE() } // TMP override
+        .let { it + THUNDER_CAGE() + DRAGON_ENERGY() } // TMP override
         .let(::toJsonArray)
 
 fun matchPveAndPvpMoves(
@@ -534,6 +534,21 @@ fun THUNDER_CAGE() = json(
     "pve" to json(
         "power" to 220,
         "energy" to 100,
+        "duration" to 3300
+    )
+)
+
+fun DRAGON_ENERGY() = json(
+    "id" to "__DRAGON_ENERGY",
+    "name" to "Dragon Energy",
+    "type" to "dragon",
+    "pvp" to json(
+        "power" to 100,
+        "energy" to 45
+    ),
+    "pve" to json(
+        "power" to 155,
+        "energy" to 50,
         "duration" to 3300
     )
 )

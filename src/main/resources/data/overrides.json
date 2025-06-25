@@ -7,6 +7,6 @@
     "V0800_POKEMON_NECROZMA_DUSK_MANE": { "charged": [ "SUNSTEEL_STRIKE" ] },
     "V0646_POKEMON_KYUREM_WHITE": { "charged": [ "ICE_BURN" ] },
     "V0646_POKEMON_KYUREM_BLACK": { "charged": [ "FREEZE_SHOCK" ] },
-    "V0894_POKEMON_REGIELEKI": { "charged": [ "THUNDER_CAGE" ] },
-    "V0895_POKEMON_REGIDRAGO": { "charged": [ "DRAGON_ENERGY" ] }
+    "V0894_POKEMON_REGIELEKI": { "charged": [ "__THUNDER_CAGE" ] },
+    "V0895_POKEMON_REGIDRAGO": { "charged": [ "__DRAGON_ENERGY" ] }
 }
