@@ -5,10 +5,12 @@ import csstype.Float
 import csstype.TextAlign
 import csstype.number
 import csstype.pct
+import csstype.px
 import emotion.css.ClassName
 
 internal object SinglePokemonPageStyles {
-    const val smallScreenMediaQuery = "screen and (max-width: 700px)"
+    private const val smallScreenMediaQuery = "screen and (max-width: 700px)"
+    private const val placeholderHeightInPixels = 200
 
     val headerWrapper = ClassName {
         paddingTop = StyleConstants.Padding.big
@@ -40,4 +42,19 @@ internal object SinglePokemonPageStyles {
             float = Float.left
         }
     }
+
+    val placeholder = ClassName {
+        height = placeholderHeightInPixels.px
+        "@media $smallScreenMediaQuery" {
+            height = 0.px
+        }
+    }
+
+    val lastWrapper = ClassName {
+        marginTop = (-placeholderHeightInPixels).px
+        "@media $smallScreenMediaQuery" {
+            marginTop = 0.px
+        }
+    }
+
 }

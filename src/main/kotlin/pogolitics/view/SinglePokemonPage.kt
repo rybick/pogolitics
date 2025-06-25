@@ -101,6 +101,10 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
                     }
                 }
             }
+            div {
+                // keep next block from getting into the same column when first leftWrapper is bigger than first rightWrapper
+                css(Styles.placeholder) {}
+            }
         }
         div {
             css(Styles.leftWrapper) {}
@@ -110,7 +114,7 @@ class SinglePokemonPage(props: PageRProps<SinglePokemonModel, PokemonIndividualV
             }
         }
         div {
-            css(Styles.rightWrapper) {}
+            css(Styles.rightWrapper, Styles.lastWrapper) {}
             /* space for widgets that will always be last */
         }
     }
