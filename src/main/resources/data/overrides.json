@@ -1,5 +1,5 @@
 {
-    "[POKEMON_ID]": { "charged": [ ] },
+    "[POKEMON_ID]": { "quick": [ ], "charged": [ ] },
     "V0384_POKEMON_RAYQUAZA": { "charged": [ "DRAGON_ASCENT" ] },
     "V0484_POKEMON_PALKIA_ORIGIN": { "charged": [ "SPACIAL_REND" ] },
     "V0483_POKEMON_DIALGA_ORIGIN": { "charged": [ "ROAR_OF_TIME" ] },
@@ -8,5 +8,5 @@
     "V0646_POKEMON_KYUREM_WHITE": { "charged": [ "ICE_BURN" ] },
     "V0646_POKEMON_KYUREM_BLACK": { "charged": [ "FREEZE_SHOCK" ] },
     "V0894_POKEMON_REGIELEKI": { "charged": [ "__THUNDER_CAGE" ] },
-    "V0895_POKEMON_REGIDRAGO": { "charged": [ "__DRAGON_ENERGY" ] }
+    "V0895_POKEMON_REGIDRAGO": { "quick": [ "DRAGON_BREATH_FAST" ], ",charged": [ "__DRAGON_ENERGY" ] }
 }
