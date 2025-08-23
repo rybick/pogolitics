@@ -8,5 +8,7 @@
     "V0646_POKEMON_KYUREM_WHITE": { "charged": [ "ICE_BURN" ] },
     "V0646_POKEMON_KYUREM_BLACK": { "charged": [ "FREEZE_SHOCK" ] },
     "V0894_POKEMON_REGIELEKI": { "charged": [ "__THUNDER_CAGE" ] },
-    "V0895_POKEMON_REGIDRAGO": { "quick": [ "DRAGON_BREATH_FAST" ], ",charged": [ "__DRAGON_ENERGY" ] }
+    "V0895_POKEMON_REGIDRAGO": { "quick": [ "DRAGON_BREATH_FAST" ], ",charged": [ "__DRAGON_ENERGY" ] },
+    "V0890_POKEMON_ETERNATUS_NORMAL": { "charged": [ "482" ] },
+    "V0890_POKEMON_ETERNATUS": { "charged": [ "482" ] }
 }
