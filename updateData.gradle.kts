@@ -126,7 +126,7 @@ fun gitHasChanges(): Boolean {
 
 fun updateData() {
     logger.info("Started updating data...")
-    val gameData = URL("https://raw.githubusercontent.com/PokeMiners/game_masters/master/latest/latest.json")
+    val gameData = URL("https://raw.githubusercontent.com/alexelgt/game_masters/refs/heads/master/GAME_MASTER.json")
         .readText()
         .let(::parseJsonArray)
     val pokemonData =
