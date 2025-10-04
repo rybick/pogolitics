@@ -1,0 +1,1 @@
+{"uniqueId":"V0010_POKEMON_CATERPIE_NORMAL","pokedexNumber":10,"name":"Caterpie","form":"NORMAL","baseAttack":55,"baseDefense":55,"baseStamina":128,"types":{"primary":"bug","secondary":null},"moves":{"quick":[{"id":"BUG_BITE_FAST","elite":false},{"id":"TACKLE_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}
