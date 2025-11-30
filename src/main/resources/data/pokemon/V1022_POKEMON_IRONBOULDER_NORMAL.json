@@ -1,0 +1,1 @@
+{"uniqueId":"V1022_POKEMON_IRONBOULDER_NORMAL","pokedexNumber":1022,"name":"Ironboulder","form":"NORMAL","baseAttack":227,"baseDefense":195,"baseStamina":189,"types":{"primary":"rock","secondary":"psychic"},"moves":{"quick":[{"id":"SPLASH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

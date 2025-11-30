@@ -1,0 +1,1 @@
+{"uniqueId":"V0874_POKEMON_STONJOURNER_NORMAL","pokedexNumber":874,"name":"Stonjourner","form":"NORMAL","baseAttack":222,"baseDefense":182,"baseStamina":225,"types":{"primary":"rock","secondary":null},"moves":{"quick":[{"id":"ROCK_THROW_FAST","elite":false}],"charged":[{"id":"STONE_EDGE","elite":false},{"id":"ROCK_SLIDE","elite":false},{"id":"STOMP","elite":false}]}}

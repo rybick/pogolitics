@@ -1,0 +1,1 @@
+{"uniqueId":"V1010_POKEMON_IRONLEAVES_NORMAL","pokedexNumber":1010,"name":"Ironleaves","form":"NORMAL","baseAttack":236,"baseDefense":194,"baseStamina":189,"types":{"primary":"grass","secondary":"psychic"},"moves":{"quick":[{"id":"SPLASH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

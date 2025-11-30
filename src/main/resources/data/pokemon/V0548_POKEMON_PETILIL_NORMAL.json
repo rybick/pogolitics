@@ -1,0 +1,1 @@
+{"uniqueId":"V0548_POKEMON_PETILIL_NORMAL","pokedexNumber":548,"name":"Petilil","form":"NORMAL","baseAttack":119,"baseDefense":91,"baseStamina":128,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"CHARM_FAST","elite":false},{"id":"HIDDEN_POWER_FAST","elite":false}],"charged":[{"id":"ENERGY_BALL","elite":false},{"id":"SEED_BOMB","elite":false}]}}

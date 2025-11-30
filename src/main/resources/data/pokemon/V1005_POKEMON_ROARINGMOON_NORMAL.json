@@ -1,0 +1,1 @@
+{"uniqueId":"V1005_POKEMON_ROARINGMOON_NORMAL","pokedexNumber":1005,"name":"Roaringmoon","form":"NORMAL","baseAttack":280,"baseDefense":196,"baseStamina":233,"types":{"primary":"dragon","secondary":"dark"},"moves":{"quick":[{"id":"SPLASH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

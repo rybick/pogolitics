@@ -1,0 +1,1 @@
+{"uniqueId":"V0995_POKEMON_IRONTHORNS_NORMAL","pokedexNumber":995,"name":"Ironthorns","form":"NORMAL","baseAttack":250,"baseDefense":200,"baseStamina":225,"types":{"primary":"rock","secondary":"electric"},"moves":{"quick":[{"id":"SPLASH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

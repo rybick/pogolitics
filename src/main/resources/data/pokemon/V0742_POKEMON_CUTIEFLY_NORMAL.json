@@ -1,0 +1,1 @@
+{"uniqueId":"V0742_POKEMON_CUTIEFLY_NORMAL","pokedexNumber":742,"name":"Cutiefly","form":"NORMAL","baseAttack":110,"baseDefense":81,"baseStamina":120,"types":{"primary":"bug","secondary":"fairy"},"moves":{"quick":[{"id":"FAIRY_WIND_FAST","elite":false},{"id":"STRUGGLE_BUG_FAST","elite":false}],"charged":[{"id":"DAZZLING_GLEAM","elite":false},{"id":"BUG_BUZZ","elite":false}]}}

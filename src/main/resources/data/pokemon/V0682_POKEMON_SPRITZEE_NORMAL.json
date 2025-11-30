@@ -1,0 +1,1 @@
+{"uniqueId":"V0682_POKEMON_SPRITZEE_NORMAL","pokedexNumber":682,"name":"Spritzee","form":"NORMAL","baseAttack":110,"baseDefense":113,"baseStamina":186,"types":{"primary":"fairy","secondary":null},"moves":{"quick":[{"id":"CHARM_FAST","elite":false},{"id":"CHARGE_BEAM_FAST","elite":false}],"charged":[{"id":"DRAINING_KISS","elite":false},{"id":"THUNDERBOLT","elite":false}]}}

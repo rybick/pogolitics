@@ -1,0 +1,1 @@
+{"uniqueId":"V0817_POKEMON_DRIZZILE_NORMAL","pokedexNumber":817,"name":"Drizzile","form":"NORMAL","baseAttack":186,"baseDefense":113,"baseStamina":163,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"POUND_FAST","elite":false},{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"WATER_PULSE","elite":false},{"id":"SURF","elite":false}]}}

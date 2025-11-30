@@ -1,0 +1,1 @@
+{"uniqueId":"V0755_POKEMON_MORELULL_NORMAL","pokedexNumber":755,"name":"Morelull","form":"NORMAL","baseAttack":108,"baseDefense":119,"baseStamina":120,"types":{"primary":"grass","secondary":"fairy"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"DAZZLING_GLEAM","elite":false},{"id":"SEED_BOMB","elite":false}]}}

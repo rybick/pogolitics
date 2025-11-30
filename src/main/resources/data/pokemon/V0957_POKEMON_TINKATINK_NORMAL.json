@@ -1,0 +1,1 @@
+{"uniqueId":"V0957_POKEMON_TINKATINK_NORMAL","pokedexNumber":957,"name":"Tinkatink","form":"NORMAL","baseAttack":85,"baseDefense":110,"baseStamina":137,"types":{"primary":"fairy","secondary":"steel"},"moves":{"quick":[{"id":"FAIRY_WIND_FAST","elite":false},{"id":"ROCK_SMASH_FAST","elite":false}],"charged":[{"id":"PLAY_ROUGH","elite":false},{"id":"FLASH_CANNON","elite":false}]}}

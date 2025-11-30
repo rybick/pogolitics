@@ -1,0 +1,1 @@
+{"uniqueId":"V0826_POKEMON_ORBEETLE_NORMAL","pokedexNumber":826,"name":"Orbeetle","form":"NORMAL","baseAttack":156,"baseDefense":240,"baseStamina":155,"types":{"primary":"bug","secondary":"psychic"},"moves":{"quick":[{"id":"STRUGGLE_BUG_FAST","elite":false},{"id":"CONFUSION_FAST","elite":false}],"charged":[{"id":"BUG_BUZZ","elite":false},{"id":"PSYCHIC","elite":false}]}}

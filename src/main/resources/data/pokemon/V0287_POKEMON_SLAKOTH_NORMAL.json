@@ -1,0 +1,1 @@
+{"uniqueId":"V0287_POKEMON_SLAKOTH_NORMAL","pokedexNumber":287,"name":"Slakoth","form":"NORMAL","baseAttack":104,"baseDefense":92,"baseStamina":155,"types":{"primary":"normal","secondary":null},"moves":{"quick":[{"id":"YAWN_FAST","elite":false}],"charged":[{"id":"BODY_SLAM","elite":false},{"id":"NIGHT_SLASH","elite":false},{"id":"BRICK_BREAK","elite":false}]}}

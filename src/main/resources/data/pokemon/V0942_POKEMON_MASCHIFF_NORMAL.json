@@ -1,0 +1,1 @@
+{"uniqueId":"V0942_POKEMON_MASCHIFF_NORMAL","pokedexNumber":942,"name":"Maschiff","form":"NORMAL","baseAttack":140,"baseDefense":108,"baseStamina":155,"types":{"primary":"dark","secondary":null},"moves":{"quick":[{"id":"SNARL_FAST","elite":false},{"id":"BITE_FAST","elite":false}],"charged":[{"id":"CRUNCH","elite":false},{"id":"PAYBACK","elite":false},{"id":"DIG","elite":false}]}}

@@ -1,0 +1,1 @@
+{"uniqueId":"V1021_POKEMON_RAGINGBOLT_NORMAL","pokedexNumber":1021,"name":"Ragingbolt","form":"NORMAL","baseAttack":235,"baseDefense":165,"baseStamina":245,"types":{"primary":"electric","secondary":"dragon"},"moves":{"quick":[{"id":"SPLASH_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

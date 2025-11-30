@@ -1,0 +1,1 @@
+{"uniqueId":"V0672_POKEMON_SKIDDO_NORMAL","pokedexNumber":672,"name":"Skiddo","form":"NORMAL","baseAttack":123,"baseDefense":102,"baseStamina":165,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"ZEN_HEADBUTT_FAST","elite":false},{"id":"ROCK_SMASH_FAST","elite":false}],"charged":[{"id":"BRICK_BREAK","elite":false},{"id":"SEED_BOMB","elite":false}]}}

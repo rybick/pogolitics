@@ -1,0 +1,1 @@
+{"uniqueId":"V0602_POKEMON_TYNAMO_NORMAL","pokedexNumber":602,"name":"Tynamo","form":"NORMAL","baseAttack":105,"baseDefense":78,"baseStamina":111,"types":{"primary":"electric","secondary":null},"moves":{"quick":[{"id":"TACKLE_FAST","elite":false},{"id":"SPARK_FAST","elite":false}],"charged":[{"id":"STRUGGLE","elite":false}]}}

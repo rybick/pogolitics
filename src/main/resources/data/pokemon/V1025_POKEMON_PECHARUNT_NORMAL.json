@@ -1,0 +1,1 @@
+{"uniqueId":"V1025_POKEMON_PECHARUNT_NORMAL","pokedexNumber":1025,"name":"Pecharunt","form":"NORMAL","baseAttack":164,"baseDefense":248,"baseStamina":186,"types":{"primary":"poison","secondary":"ghost"},"moves":{"quick":[{"id":"ASTONISH_FAST","elite":false}],"charged":[{"id":"SHADOW_BALL","elite":false},{"id":"GUNK_SHOT","elite":false},{"id":"POLTERGEIST","elite":false}]}}

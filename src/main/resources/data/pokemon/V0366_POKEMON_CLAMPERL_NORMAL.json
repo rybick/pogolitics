@@ -1,0 +1,1 @@
+{"uniqueId":"V0366_POKEMON_CLAMPERL_NORMAL","pokedexNumber":366,"name":"Clamperl","form":"NORMAL","baseAttack":133,"baseDefense":135,"baseStamina":111,"types":{"primary":"water","secondary":null},"moves":{"quick":[{"id":"WATER_GUN_FAST","elite":false}],"charged":[{"id":"BODY_SLAM","elite":false},{"id":"ICE_BEAM","elite":false},{"id":"WATER_PULSE","elite":false}]}}

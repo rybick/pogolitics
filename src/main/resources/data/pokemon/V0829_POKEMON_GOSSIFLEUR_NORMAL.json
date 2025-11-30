@@ -1,0 +1,1 @@
+{"uniqueId":"V0829_POKEMON_GOSSIFLEUR_NORMAL","pokedexNumber":829,"name":"Gossifleur","form":"NORMAL","baseAttack":70,"baseDefense":104,"baseStamina":120,"types":{"primary":"grass","secondary":null},"moves":{"quick":[{"id":"RAZOR_LEAF_FAST","elite":false},{"id":"BULLET_SEED_FAST","elite":false}],"charged":[{"id":"ENERGY_BALL","elite":false},{"id":"GRASS_KNOT","elite":false}]}}
