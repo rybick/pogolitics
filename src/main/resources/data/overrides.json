@@ -9,5 +9,7 @@
     "V0646_POKEMON_KYUREM_BLACK": { "charged": [ "FREEZE_SHOCK" ] },
     "V0894_POKEMON_REGIELEKI": { "charged": [ "__THUNDER_CAGE" ] },
     "V0890_POKEMON_ETERNATUS_NORMAL": { "charged": [ "482" ] },
-    "V0890_POKEMON_ETERNATUS": { "charged": [ "482" ] }
+    "V0890_POKEMON_ETERNATUS": { "charged": [ "482" ] },
+    "V0733_POKEMON_TOUCANNON_NORMAL": { "charged": [ "BEAK_BLAST" ] },
+    "V0733_POKEMON_TOUCANNON": { "charged": [ "BEAK_BLAST" ] } 
 }
