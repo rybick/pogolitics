@@ -10,6 +10,7 @@
     "V0894_POKEMON_REGIELEKI": { "charged": [ "__THUNDER_CAGE" ] },
     "V0890_POKEMON_ETERNATUS_NORMAL": { "charged": [ "482" ] },
     "V0890_POKEMON_ETERNATUS": { "charged": [ "482" ] },
-    "V0733_POKEMON_TOUCANNON_NORMAL": { "charged": [ "BEAK_BLAST" ] },
-    "V0733_POKEMON_TOUCANNON": { "charged": [ "BEAK_BLAST" ] } 
+    "V0037_POKEMON_VULPIX_ALOLA": { "charged": [ "CHILLING_WATER" ] },
+    "V0037_POKEMON_VULPIX": { "charged":  [ "ENERGY_BALL" ] },
+    "V0037_POKEMON_VULPIX_NORMAL":  { "charged":  [ "ENERGY_BALL" ] }
 }
