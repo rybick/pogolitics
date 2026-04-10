@@ -1,5 +1,4 @@
 {
-    "[POKEMON_ID]": { "quick": [ ], "charged": [ ] },
     "V0384_POKEMON_RAYQUAZA": { "charged": [ "DRAGON_ASCENT" ] },
     "V0484_POKEMON_PALKIA_ORIGIN": { "charged": [ "SPACIAL_REND" ] },
     "V0483_POKEMON_DIALGA_ORIGIN": { "charged": [ "ROAR_OF_TIME" ] },
@@ -12,5 +11,8 @@
     "V0890_POKEMON_ETERNATUS": { "charged": [ "482" ] },
     "V0038_POKEMON_NINETALES_ALOLA": { "charged": [ "CHILLING_WATER" ] },
     "V0038_POKEMON_NINETALES": { "charged":  [ "ENERGY_BALL" ] },
-    "V0038_POKEMON_NINETALES_NORMAL":  { "charged":  [ "ENERGY_BALL" ] }
+    "V0038_POKEMON_NINETALES_NORMAL":  { "charged":  [ "ENERGY_BALL" ] },
+    "V0959_POKEMON_TINKATON": { "charged": [ "GIGATON_HAMMER" ] },
+    "V0959_POKEMON_TINKATON_NORMAL": { "charged": [ "GIGATON_HAMMER" ] },
+    "[POKEMON_ID]": { "quick": [ ], "charged": [ ] }
 }
