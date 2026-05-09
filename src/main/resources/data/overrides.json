@@ -9,10 +9,7 @@
     "V0894_POKEMON_REGIELEKI": { "charged": [ "__THUNDER_CAGE" ] },
     "V0890_POKEMON_ETERNATUS_NORMAL": { "charged": [ "482" ] },
     "V0890_POKEMON_ETERNATUS": { "charged": [ "482" ] },
-    "V0038_POKEMON_NINETALES_ALOLA": { "charged": [ "CHILLING_WATER" ] },
-    "V0038_POKEMON_NINETALES": { "charged":  [ "ENERGY_BALL" ] },
-    "V0038_POKEMON_NINETALES_NORMAL":  { "charged":  [ "ENERGY_BALL" ] },
-    "V0959_POKEMON_TINKATON": { "charged": [ "GIGATON_HAMMER" ] },
-    "V0959_POKEMON_TINKATON_NORMAL": { "charged": [ "GIGATON_HAMMER" ] },
+    "V0915_POKEMON_LECHONK": { "quick":[ "MUD_SLAP_FAST" ] },
+    "V0915_POKEMON_LECHONK_NORMAL": { "quick":[ "MUD_SLAP_FAST" ] },
     "[POKEMON_ID]": { "quick": [ ], "charged": [ ] }
 }
