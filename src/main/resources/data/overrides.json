@@ -9,7 +9,8 @@
     "V0894_POKEMON_REGIELEKI": { "charged": [ "__THUNDER_CAGE" ] },
     "V0890_POKEMON_ETERNATUS_NORMAL": { "charged": [ "482" ] },
     "V0890_POKEMON_ETERNATUS": { "charged": [ "482" ] },
-    "V0915_POKEMON_LECHONK": { "quick":[ "MUD_SLAP_FAST" ] },
-    "V0915_POKEMON_LECHONK_NORMAL": { "quick":[ "MUD_SLAP_FAST" ] },
+    "V0916_POKEMON_OINKOLOGNE": { "quick":[ "MUD_SLAP_FAST" ] },
+    "V0916_POKEMON_OINKOLOGNE_FEMALE": { "quick":[ "MUD_SLAP_FAST" ] },
+    "V0916_POKEMON_OINKOLOGNE_NORMAL": { "quick":[ "MUD_SLAP_FAST" ] },
     "[POKEMON_ID]": { "quick": [ ], "charged": [ ] }
 }
